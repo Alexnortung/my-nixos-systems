@@ -2,16 +2,19 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 let
-  unstable = import <unstable>{};
-  pkgs-ff89 = import (builtins.fetchGit {
-    #name = "pkgs-ff89";
+  #unstable = import <unstable>{
+  #  config = config.nixpkgs.config;
+  #};
+  unstable = import (builtins.fetchGit {
     url = "https://github.com/NixOS/nixpkgs/";
-    ref = "refs/heads/nixpkgs-unstable";
-    rev = "860b56be91fb874d48e23a950815969a7b832fbc";
-  }) {};
+    #ref = "refs/heads/nixpkgs-unstable";
+    rev = "0435e9318dab3a2935ecab9384589833b1392bb3";
+  }) {
+    config = config.nixpkgs.config;
+  };
 in
 {
   imports = [
@@ -81,7 +84,7 @@ in
           # alwaysfullscreen - focus does not drift off when in fullscreen
           (super.fetchpatch {
             url = "https://dwm.suckless.org/patches/alwaysfullscreen/dwm-alwaysfullscreen-6.1.diff";
-            sha256 = "1nfdjjb44c8j96v85zr6f38y7yndz5rh2x17wswyfc9178kvng0d";
+            sha256 = "sha256-pwB5CEU7F6aM9e99x3mjk3CFcWFfE3TPYabBwIioZ4A=";
           })
           #(super.fetchpatch {
           #  url = "https://dwm.suckless.org/patches/anybar/dwm-anybar-20200810-bb2e722.diff";
@@ -206,6 +209,7 @@ in
 
   environment.sessionVariables = {
     MOZ_X11_EGL = "1";
+    "CUDA_PATH" = "${pkgs.cudatoolkit}";
   };
 
   environment.variables = {
@@ -213,6 +217,10 @@ in
   };
 
   environment.systemPackages = with pkgs; [
+    cudatoolkit
+    blender
+    python39Packages.pygments
+    futhark
     zathura
     xorg.xhost
     xpra
@@ -250,7 +258,7 @@ in
     glances
     texlive.combined.scheme-full
     wget
-    pkgs-ff89.firefox
+    unstable.firefox
     ungoogled-chromium
     bitwarden
     unstable.xmrig
@@ -274,7 +282,7 @@ in
     libGL libGLU
     glxinfo
     minecraft
-    discord
+    unstable.discord
     obs-studio
     gimp
     spotify
@@ -327,7 +335,17 @@ in
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "20.09"; # Did you read the comment?
 
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "nvidia-x11"
+    "nvidia-settings"
+    "discord"
+    "spotify" "spotify-unwrapped"
+    "minecraft" "minecraft-launcher"
+    "steam" "steam-original" "steam-runtime"
+    "vscode-extension-ms-vsliveshare-vsliveshare"
+    "cudatoolkit"
+    "zoom"
+  ];
 
   networking.nat.enable = true;
   networking.nat.internalInterfaces = ["ve-+"];

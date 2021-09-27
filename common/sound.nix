@@ -3,10 +3,16 @@
 {
   # Enable sound.
   sound.enable = true;
-  hardware.pulseaudio = {
+  #hardware.pulseaudio = {
+  #  enable = true;
+  #  systemWide = true;
+  #  support32Bit = true;
+  #  #tcp = { enable = true; anonymousClients = { allowedIpRanges = ["127.0.0.1" "192.168.7.0/24"]; }; };
+  #};
+  services.pipewire = {
     enable = true;
-    systemWide = true;
-    support32Bit = true;
-    #tcp = { enable = true; anonymousClients = { allowedIpRanges = ["127.0.0.1" "192.168.7.0/24"]; }; };
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
   };
 }
