@@ -10,7 +10,6 @@ let
   #};
   unstable = import (builtins.fetchGit {
     url = "https://github.com/NixOS/nixpkgs/";
-    #ref = "refs/heads/nixpkgs-unstable";
     rev = "0435e9318dab3a2935ecab9384589833b1392bb3";
   }) {
     config = config.nixpkgs.config;
@@ -74,22 +73,16 @@ in
       dwm = super.dwm.overrideAttrs (oldAttrs: rec {
         configFile = super.writeText "config.h" (builtins.readFile ./config/dwm-config.h);
         patches = [
-
-          #Anybar
-          #(super.fetchpatch {
-          #  url = "https://github.com/mihirlad55/dwm-anybar/releases/download/v1.1.1/dwm-anybar-20200905-bb2e722.diff";
-          #  sha256 = "1rv8395dv79bq7pjgny4m317y68cvlhk7fgfq19nwg17bgpgczas";
-          #})
-
           # alwaysfullscreen - focus does not drift off when in fullscreen
           (super.fetchpatch {
             url = "https://dwm.suckless.org/patches/alwaysfullscreen/dwm-alwaysfullscreen-6.1.diff";
             sha256 = "sha256-pwB5CEU7F6aM9e99x3mjk3CFcWFfE3TPYabBwIioZ4A=";
           })
-          #(super.fetchpatch {
-          #  url = "https://dwm.suckless.org/patches/anybar/dwm-anybar-20200810-bb2e722.diff";
-          #  sha256 = "0n2pqy0lwvkkiz9lc9q4qkbyb1rx8a8mhj51g541n5fri5pv1xb0";
-          #})
+          # Systray
+          (super.fetchpatch {
+            url = "https://dwm.suckless.org/patches/systray/dwm-systray-6.2.diff";
+            sha256 = "1p1hzkm5fa9b51v19w4fqmrphk0nr0wnkih5vsji8r38nmxd4ydp";
+          })
         ];
         postPatch = oldAttrs.postPatch or "" + "\necho 'Using own config file...'\n cp ${configFile} config.def.h";
       });
@@ -110,30 +103,55 @@ in
           # Scrollback
           (super.fetchpatch {
             url = "https://st.suckless.org/patches/scrollback/st-scrollback-0.8.4.diff";
-            sha256 = "0i0fav13sxnsydpllny26139gnzai66222502cplh18iy5fir3j1";
+            sha256 = "bGRSALFWVuk4yoYON8AIxn4NmDQthlJQVAsLp9fcVG0=";
           })
           # Alpha
           (super.fetchpatch {
             url = "https://st.suckless.org/patches/alpha/st-alpha-0.8.2.diff";
-            sha256 = "11dj1z4llqbbki5cz1k1crr7ypnfqsfp7hsyr9wdx06y4d7lnnww";
+            sha256 = "pOHiIBwoTG4N9chOM7ORD1daDHU/z92dVKzmt9ZIE5U=";
           })
-
-          #(fetchpatch {
-          #  url = "https://st.suckless.org/patches/alpha/st-alpha-0.8.2.diff";
-          #  sha256 = "9c5b4b4f23de80de78ca5ec3739dc6ce5e7f72666186cf4a9c6b614ac90fb285";
-          #})
           # Ligatures
           (super.fetchpatch {
             url = "https://st.suckless.org/patches/ligatures/0.8.3/st-ligatures-alpha-scrollback-20200430-0.8.3.diff";
-            sha256 = "1628l6x6a2nginyixvav13f2cbpg9yhj506kbjkwrn4zhhfnicx7";
+            sha256 = "RyjaEwBN+D73YrDJqJ4z7v+AzteRMYD2IHqG78Kgzvg=";
           })
         ];
-
       });
     })
   ];
+
+  fonts.fonts = with pkgs; [
+    hasklig
+    terminus-nerdfont
+  ];
+
   services.xserver.windowManager.dwm.enable = true;
-  #services.xserver.windowManager.awesome.enable = true;
+
+  services.dwm-status = {
+    enable = true;
+    order = [
+      "audio"
+      "cpu_load"
+      "network"
+      "time"
+    ];
+    extraConfig = ''
+      separator = " | "
+ 
+      [audio]
+      icons = [ "奄", "奔", "墳" ]
+      mute = "ﱝ"
+      template = "{ICO} {VOL}%"
+
+      [cpu_load]
+      template = " {CL1}"
+      update_interval = 15
+
+      [network]
+      no_value = "睊 Not connected"
+      template = "直 {IPv4}"
+    '';
+  };
 
   services.xserver.displayManager.lightdm.enable = true;
     
@@ -286,8 +304,6 @@ in
     obs-studio
     gimp
     spotify
-    wine
-    winetricks
     lutris
     vulkan-headers
     xorg.xev
@@ -317,15 +333,6 @@ in
   #   enable = true;
   #   enableSSHSupport = true;
   # };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ 4713 6000 ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
