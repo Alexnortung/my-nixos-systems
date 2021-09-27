@@ -4,6 +4,17 @@
 
 { pkgs, ... }:
 
+let
+  futhark-vim = pkgs.vimUtils.buildVimPlugin {
+    name = "futhark-vim";
+    src = pkgs.fetchFromGitHub {
+      owner = "BeneCollyridam";
+      repo = "futhark-vim";
+      rev = "fd7d053c74f150712eaa73999f44a3f95c8f08ff";
+      sha256 = "17iwpqxkvflcimc066n5ljjbx603hpaqzk271r37qxdvk58jpn0w";
+    };
+  };
+in
 {
   programs.neovim = {
     enable = true;
@@ -23,6 +34,7 @@
           fzf-vim # fuzzy finder through vim
           nerdtree # file structure inside nvim
           rainbow # Color parenthesis
+          futhark-vim
         ];
         opt = [];
       };
