@@ -221,6 +221,11 @@ in
 
 
   environment.systemPackages = with pkgs; [
+    bashmount
+    gparted
+    pcmanfm
+    pavucontrol
+    unstable.tdesktop
     python39Packages.pygments
     xss-lock
     xorg.xev

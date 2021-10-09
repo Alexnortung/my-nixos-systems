@@ -12,5 +12,6 @@
     git
     pciutils
     htop
+    neofetch
   ];
 }
