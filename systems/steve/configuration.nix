@@ -10,7 +10,7 @@ let
   #};
   unstable = import (builtins.fetchGit {
     url = "https://github.com/NixOS/nixpkgs/";
-    rev = "0435e9318dab3a2935ecab9384589833b1392bb3";
+    rev = "0a68ef410b40f49de76aecb5c8b5cc5111bac91d";
   }) {
     config = config.nixpkgs.config;
   };
@@ -87,11 +87,12 @@ in
         postPatch = oldAttrs.postPatch or "" + "\necho 'Using own config file...'\n cp ${configFile} config.def.h";
       });
       dmenu = super.dmenu.overrideAttrs (oldAttrs : rec {
-        #postPatch = "${oldAttrs.postPatch}\ncp ${configFile} config.def.h\n";
+        configFile = super.writeText "config.h" (builtins.readFile ./config/dmenu-config.h);
+        postPatch = "${oldAttrs.postPatch}\ncp ${configFile} config.def.h\n";
         patches = [
           (super.fetchpatch {
             url = "https://tools.suckless.org/dmenu/patches/case-insensitive/dmenu-caseinsensitive-5.0.diff";
-            sha256 = "0ib7m09rpswqlakr55aqg66a1fa0lf2aivm0rrz5541ih8ggfzsc";
+            sha256 = "XqFEBRu+aHaAXrNn+WXnkIuC/vAHDIb/im2UhjaPYC0=";
           })
         ];
       });
@@ -153,7 +154,13 @@ in
     '';
   };
 
-  services.xserver.displayManager.lightdm.enable = true;
+  services.xserver.displayManager = { 
+    lightdm = {
+      enable = true;
+      #background = pkgs.nixos-artwork.wallpapers.simple-red.gnomeFilePath;
+      background = /home/alexander/Pictures/backgrounds/pixel-art-astronaut-6jm0bumas1tmb7hc.jpg;
+    };
+  };
     
   # Redshift
   services.redshift = {
@@ -235,6 +242,8 @@ in
   };
 
   environment.systemPackages = with pkgs; [
+    unstable.mullvad-vpn
+    unstable.session-desktop-appimage
     cudatoolkit
     blender
     python39Packages.pygments
@@ -299,7 +308,7 @@ in
     patchelf
     libGL libGLU
     glxinfo
-    minecraft
+    unstable.minecraft
     unstable.discord
     obs-studio
     gimp
