@@ -7,7 +7,7 @@
 let
   unstable = import (builtins.fetchGit {
     url = "https://github.com/NixOS/nixpkgs/";
-    rev = "b01baaebac95d24a51be0ededd92e3a965569605";
+    rev = "0a68ef410b40f49de76aecb5c8b5cc5111bac91d";
   }) { 
     config = config.nixpkgs.config;
   };
@@ -28,6 +28,7 @@ in
       "nvidia-settings"
       "discord"
       "spotify" "spotify-unwrapped"
+      "minecraft" "minecraft-launcher"
     ];
   };
 
@@ -173,6 +174,7 @@ in
     enable = true;
     windowManager.dwm.enable = true;
     displayManager.lightdm.enable = true;
+    #videoDrivers = [ "nvidia" ];
 
     # Enable touchpad support (enabled default in most desktopManager).
     libinput = {
@@ -221,6 +223,8 @@ in
 
 
   environment.systemPackages = with pkgs; [
+    arandr
+    unstable.minecraft
     bashmount
     gparted
     pcmanfm

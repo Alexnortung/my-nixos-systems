@@ -15,6 +15,16 @@ nnoremap k gk
 let g:tex_flavor = 'latex'
 let g:vimtex_view_method = 'zathura'
 let g:vimtex_syntax_packages = {'minted': {'load': 2}}
+let g:vimtex_compiler_latexmk = {
+    \ 'options' : [
+    \   '-shell-escape',
+    \   '-verbose',
+    \   '-file-line-error',
+    \   '-synctex=1',
+    \   '-interaction=nonstopmode',
+    \ ],
+    \}
+
 
 " Javascript
 "let g:javascript_plugin_jsdoc = 1;
