@@ -5,31 +5,43 @@
 { config, pkgs, lib, ... }:
 
 let
+  allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "nvidia-x11"
+    "nvidia-settings"
+    "discord"
+    "spotify" "spotify-unwrapped"
+    "minecraft" "minecraft-launcher"
+  ];
+in
+let
   unstable = import (builtins.fetchGit {
     url = "https://github.com/NixOS/nixpkgs/";
     rev = "0a68ef410b40f49de76aecb5c8b5cc5111bac91d";
   }) { 
-    config = config.nixpkgs.config;
+    config = {
+      allowUnfreePredicate = allowUnfreePredicate;
+    };
+  };
+  hardware = builtins.fetchGit {
+    url = "https://github.com/NixOS/nixos-hardware.git";
+    rev = "3aabf78bfcae62f5f99474f2ebbbe418f1c6e54f";
   };
 in
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ../../common/nvim.nix
-      ../../common/programming-pkgs.nix
-      ../../common/comfort-packages.nix
-      ../../common/sound.nix
-      ../../common/console.nix
-    ];
+  imports = [
+    "${hardware}/dell/latitude/3480"
+    ../../common/nvim.nix
+    ../../common/programming-pkgs.nix
+    ../../common/comfort-packages.nix
+    ../../common/sound.nix
+    ../../common/console.nix
+  ];
 
   nixpkgs.config = {
-    allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-      "nvidia-x11"
-      "nvidia-settings"
-      "discord"
-      "spotify" "spotify-unwrapped"
-      "minecraft" "minecraft-launcher"
-    ];
+    allowUnfreePredicate = allowUnfreePredicate;
+    packageOverrides = pkgs: {
+      mullvad-vpn = unstable.mullvad-vpn;
+    };
   };
 
   nixpkgs.overlays = [
@@ -39,6 +51,16 @@ in
         configFile = super.writeText "config.h" (builtins.readFile ./config/st-config.h);
         postPatch = "${oldAttrs.postPatch}\ncp ${configFile} config.def.h\n";
         patches = [
+          # Desktop entry - gives an icon
+          (super.fetchpatch {
+            url = "https://st.suckless.org/patches/desktopentry/st-desktopentry-0.8.4.diff";
+            sha256 = "0v0hymybm2yplrvdjqysvcyhl36a5llih8ya9xjim1fpl609hg8y";
+          })
+          # More icon
+          (super.fetchpatch {
+            url = "http://st.suckless.org/patches/netwmicon/st-netwmicon-0.8.4.diff";
+            sha256 = "0gnk4fibqyby6b0fdx86zfwdiwjai86hh8sk9y02z610iimjaj1n";
+          })
           # Scrollback
           (super.fetchpatch {
             url = "https://st.suckless.org/patches/scrollback/st-scrollback-0.8.4.diff";
@@ -54,17 +76,6 @@ in
             url = "https://st.suckless.org/patches/ligatures/0.8.3/st-ligatures-alpha-scrollback-20200430-0.8.3.diff";
             sha256 = "1y6fl31fz1ks43v80ccisz781zzf6fgaijdhcbvkxy2d009xla27";
           })
-          # Desktop entry - gives an icon
-          (super.fetchpatch {
-            url = "https://st.suckless.org/patches/desktopentry/st-desktopentry-0.8.4.diff";
-            sha256 = "0v0hymybm2yplrvdjqysvcyhl36a5llih8ya9xjim1fpl609hg8y";
-          })
-          # More icon
-          (super.fetchpatch {
-            url = "http://st.suckless.org/patches/netwmicon/st-netwmicon-0.8.4.diff";
-            sha256 = "0gnk4fibqyby6b0fdx86zfwdiwjai86hh8sk9y02z610iimjaj1n";
-          })
-
         ];
       });
       dwm = super.dwm.overrideAttrs (oldAttrs : rec {
@@ -102,16 +113,27 @@ in
 
 
   # Use the systemd-boot EFI boot loader.
-  boot.loader = {
-    efi = {
-      canTouchEfiVariables = true;
-      efiSysMountPoint = "/boot";
+  boot = {
+    loader = {
+      efi = {
+        canTouchEfiVariables = true;
+        efiSysMountPoint = "/boot";
+      };
+      grub = {
+        version = 2;
+        configurationLimit = 25;
+        devices = [ "nodev" ];
+        enable = true;
+        efiSupport = true;
+      };
+      # Boot animation
     };
-    grub = {
-      version = 2;
-      devices = [ "nodev" ];
+    plymouth = {
       enable = true;
-      efiSupport = true;
+      theme = "solar";
+      extraConfig = ''
+        ShowDelay=0
+      '';
     };
   };
 
@@ -129,6 +151,12 @@ in
     interfaces.wlp3s0.useDHCP = true;
     networkmanager = {
       enable = true;
+    };
+    wireguard = {
+      enable = true;
+    };
+    firewall = {
+      checkReversePath = "loose";
     };
   };
 
@@ -196,6 +224,13 @@ in
     };
   };
 
+  services.picom = {
+    enable = true;
+    vSync = true;
+    #backend = "glx";
+    #experimentalBackends = true;
+  };
+
   programs.zsh = {
     enable = true;
     ohMyZsh = {
@@ -221,8 +256,11 @@ in
     extraGroups.vboxusers.members = [ "alexander" ];
   };
 
-
   environment.systemPackages = with pkgs; [
+    conky
+    bitwarden
+    unstable.torbrowser
+    unstable.mullvad-vpn
     arandr
     unstable.minecraft
     bashmount
@@ -279,6 +317,8 @@ in
     enable = true;
     temperature.night = 2900;
   };
+
+  services.mullvad-vpn.enable = true;
 
   virtualisation.virtualbox.host.enable = true;
 
