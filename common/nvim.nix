@@ -34,7 +34,8 @@ in
           fzf-vim # fuzzy finder through vim
           nerdtree # file structure inside nvim
           rainbow # Color parenthesis
-          futhark-vim
+          futhark-vim # Futhark programming language
+          pear-tree # smart closing brackets
         ];
         opt = [];
       };
