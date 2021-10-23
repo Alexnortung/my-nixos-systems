@@ -36,6 +36,7 @@ in
     ../../common/sound.nix
     ../../common/console.nix
     ../../common/personal-vpn.nix
+    ../../common/users/alexander-admin.nix
   ];
 
   nixpkgs.config = {
