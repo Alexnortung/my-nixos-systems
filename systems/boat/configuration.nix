@@ -35,6 +35,7 @@ in
     ../../common/comfort-packages.nix
     ../../common/sound.nix
     ../../common/console.nix
+    ../../common/personal-vpn.nix
   ];
 
   nixpkgs.config = {
@@ -156,7 +157,11 @@ in
       enable = true;
     };
     firewall = {
-      checkReversePath = "loose";
+      checkReversePath = lib.mkForce "loose";
+    };
+    wg-quick.interfaces.wg0 = {
+      address = [ "10.100.0.3" ];
+      privateKeyFile = "/etc/nixos/secret/wg-keys/boat-private";
     };
   };
 
