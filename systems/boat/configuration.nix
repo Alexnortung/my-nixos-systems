@@ -11,6 +11,7 @@ let
     "discord"
     "spotify" "spotify-unwrapped"
     "minecraft" "minecraft-launcher"
+    "vscode-extension-ms-vsliveshare-vsliveshare"
   ];
 in
 let
@@ -36,6 +37,7 @@ in
     ../../common/sound.nix
     ../../common/console.nix
     ../../common/personal-vpn.nix
+    ../../common/vscodium.nix
   ];
 
   nixpkgs.config = {

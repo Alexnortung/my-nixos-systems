@@ -21,6 +21,7 @@ in
       ../../common/console.nix
       ../../common/sound.nix
       ../../common/comfort-packages.nix
+      ../../common/vscodium.nix
     ];
 
   nix = {
@@ -263,25 +264,6 @@ in
     dotnet-sdk_5
     steam-run
     godot
-    (pkgs.vscode-with-extensions.override {
-      vscode = pkgs.vscodium;
-      vscodeExtensions = with pkgs.vscode-extensions; [
-        vscodevim.vim
-        bbenoist.Nix
-        james-yu.latex-workshop
-        ms-vsliveshare.vsliveshare
-	#ionide.ionide-fsharp
-        #vsliveshare
-      ]; #
-      #++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-      #  {
-      #    name = "ionide-fsharp";
-      #    publisher = "ionide";
-      #    version = "5.5.5";
-      #    sha256 = "";
-      #  }
-      #];
-    })
     glances
     texlive.combined.scheme-full
     wget
