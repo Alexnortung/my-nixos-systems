@@ -38,6 +38,13 @@ in
     ../../common/console.nix
     ../../common/personal-vpn.nix
     ../../common/vscodium.nix
+    ../../common/battery-notifier.nix
+  ];
+
+  swapDevices = [
+    {
+      label = "swap";
+    }
   ];
 
   nixpkgs.config = {
@@ -171,6 +178,12 @@ in
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
+  services.batteryNotifier = {
+    enable = true;
+    notifyCapacity = 15;
+    hibernateCapacity = 5;
+  };
+
   services.dwm-status = {
     enable = true;
     order = [
@@ -264,6 +277,8 @@ in
   };
 
   environment.systemPackages = with pkgs; [
+    dunst
+    unstable.xmrig
     conky
     bitwarden
     unstable.torbrowser
