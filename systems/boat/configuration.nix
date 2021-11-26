@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
+{ config, lib, ... }:
 
 let
   allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
@@ -15,22 +15,33 @@ let
   ];
 in
 let
+  nixos-version-fetched = builtins.fetchGit {
+    url = "https://github.com/NixOS/nixpkgs/";
+    ref = "refs/tags/22.05-pre";
+    rev = "e96c668072d7c98ddf2062f6d2b37f84909a572b";
+  };
+  nixos-version = import "${nixos-version-fetched}" { 
+    inherit (config.nixpkgs) config overlays localSystem crossSystem;
+  };
   unstable = import (builtins.fetchGit {
     url = "https://github.com/NixOS/nixpkgs/";
-    rev = "0a68ef410b40f49de76aecb5c8b5cc5111bac91d";
+    rev = "931ab058daa7e4cd539533963f95e2bb0dbd41e6";
   }) { 
     config = {
       allowUnfreePredicate = allowUnfreePredicate;
     };
   };
-  hardware = builtins.fetchGit {
+  hardware-rep = builtins.fetchGit {
     url = "https://github.com/NixOS/nixos-hardware.git";
     rev = "3aabf78bfcae62f5f99474f2ebbbe418f1c6e54f";
   };
 in
+let
+  pkgs = nixos-version;
+in
 {
   imports = [
-    "${hardware}/dell/latitude/3480"
+    "${hardware-rep}/dell/latitude/3480"
     ../../common/nvim.nix
     ../../common/programming-pkgs.nix
     ../../common/comfort-packages.nix
@@ -39,12 +50,25 @@ in
     ../../common/personal-vpn.nix
     ../../common/vscodium.nix
     ../../common/battery-notifier.nix
+    ../../common/latex.nix
   ];
+
+  hardware.opengl = {
+    enable = true;
+  };
 
   swapDevices = [
     {
       label = "swap";
     }
+  ];
+
+  nixpkgs.pkgs = nixos-version;
+
+  nix.nixPath = [
+    "nixpkgs=${nixos-version-fetched}"
+    "nixos-config=/etc/nixos/configuration.nix"
+    "/nix/var/nix/profiles/per-user/root/channels"
   ];
 
   nixpkgs.config = {
@@ -277,6 +301,7 @@ in
   };
 
   environment.systemPackages = with pkgs; [
+    godot
     dunst
     unstable.xmrig
     conky
@@ -304,7 +329,6 @@ in
     tmate
     bvi # hex editor with vim bindings
     unstable.session-desktop-appimage
-    texlive.combined.scheme-full
     unstable.discord
     zip unzip
     flameshot

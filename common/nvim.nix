@@ -2,18 +2,14 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ pkgs, ... }:
+{ pkgs, config, lib, ... }:
 
 let
-  futhark-vim = pkgs.vimUtils.buildVimPlugin {
-    name = "futhark-vim";
-    src = pkgs.fetchFromGitHub {
-      owner = "BeneCollyridam";
-      repo = "futhark-vim";
-      rev = "fd7d053c74f150712eaa73999f44a3f95c8f08ff";
-      sha256 = "17iwpqxkvflcimc066n5ljjbx603hpaqzk271r37qxdvk58jpn0w";
-    };
-  };
+  # Unstable
+  unstable = import (builtins.fetchGit {
+    url = "https://github.com/NixOS/nixpkgs/";
+    rev = "931ab058daa7e4cd539533963f95e2bb0dbd41e6";
+  }) { };
 in
 {
   programs.neovim = {
@@ -21,6 +17,8 @@ in
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
+    withNodeJs = true;
+    package = pkgs.neovim-unwrapped;
     configure = {
       customRC = builtins.readFile ./config/init.vim;
       packages.nix = with pkgs.vimPlugins; {
@@ -34,34 +32,15 @@ in
           fzf-vim # fuzzy finder through vim
           nerdtree # file structure inside nvim
           rainbow # Color parenthesis
-          futhark-vim # Futhark programming language
+          unstable.vimPlugins.futhark-vim # Futhark programming language
           pear-tree # smart closing brackets
+          unstable.vimPlugins.jsonc-vim # can show correct syntax for jsonc files
         ];
         opt = [];
       };
     };
   };
   environment.systemPackages = with pkgs; [
-    nodejs
+    #nodejs
   ];
-  #environment.systemPackages = with pkgs; [
-  #  (neovim.override {
-  #    vimAlias = true;
-  #    configure = {
-  #      customRC = builtins.readFile ./config/init.vim;
-  #      packages.myPlugins = with pkgs.vimPlugins; {
-  #        start = [
-  #          vim-surround # Shortcuts for setting () {} etc.
-  #          coc-nvim coc-git coc-highlight coc-python coc-rls coc-vetur coc-vimtex coc-yaml coc-html coc-json # auto completion
-  #          vim-nix # nix highlight
-  #          vimtex # latex stuff
-  #          fzf-vim # fuzzy finder through vim
-  #          nerdtree # file structure inside nvim
-  #          rainbow # Color parenthesis
-  #        ];
-  #        opt = [];
-  #      };
-  #    };
-  #  })
-  #];
 }
