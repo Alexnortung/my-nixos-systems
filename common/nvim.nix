@@ -10,8 +10,22 @@ let
     url = "https://github.com/NixOS/nixpkgs/";
     rev = "931ab058daa7e4cd539533963f95e2bb0dbd41e6";
   }) { };
+  nixos-version-fetched = builtins.fetchGit {
+    url = "https://github.com/NixOS/nixpkgs/";
+    ref = "refs/tags/22.05-pre";
+    rev = "e96c668072d7c98ddf2062f6d2b37f84909a572b";
+  };
+  #nixos-version = import "${nixos-version-fetched}" { 
+  #  inherit (config.nixpkgs) config overlays localSystem crossSystem;
+  #};
 in
 {
+  disabledModules = [
+    "programs/neovim.nix"
+  ];
+  imports = [
+    "${nixos-version-fetched}/nixos/modules/programs/neovim.nix"
+  ];
   programs.neovim = {
     enable = true;
     defaultEditor = true;

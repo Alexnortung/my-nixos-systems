@@ -16,7 +16,7 @@ let
   };
   unstable = import (builtins.fetchGit {
     url = "https://github.com/NixOS/nixpkgs/";
-    rev = "0a68ef410b40f49de76aecb5c8b5cc5111bac91d";
+    rev = "2df15ba83d0510a56f2583fd3481723835acb5a1";
   }) {
     config = config.nixpkgs.config;
   };
@@ -261,6 +261,7 @@ in
   };
 
   environment.systemPackages = with pkgs; [
+    unstable.libreoffice
     (pkgs-steam.steam.override {
       extraLibraries = pkgs: [
         pkgs.pipewire
