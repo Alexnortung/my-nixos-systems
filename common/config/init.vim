@@ -25,6 +25,16 @@ let g:vimtex_compiler_latexmk = {
     \ ],
     \}
 
+let g:Tex_IgnoredWarnings = 
+    \'Underfull'."\n".
+    \'Overfull'."\n".
+    \'specifier changed to'."\n".
+    \'You have requested'."\n".
+    \'Missing number, treated as zero.'."\n".
+    \'There were undefined references'."\n".
+    \'Citation %.%# undefined'."\n".
+    \'Double space found.'."\n".
+    \'package is obsolete'."\n"
 
 " Javascript
 "let g:javascript_plugin_jsdoc = 1;

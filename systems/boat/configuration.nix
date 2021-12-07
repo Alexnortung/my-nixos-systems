@@ -293,14 +293,19 @@ in
         extraGroups = [
           "wheel"
           "vboxusers"
+          "docker"
           "audio"
         ];
       };
     };
     extraGroups.vboxusers.members = [ "alexander" ];
+    extraGroups.docker.members = [ "alexander" ];
   };
 
   environment.systemPackages = with pkgs; [
+    docker-compose
+    ranger
+    unstable.ungoogled-chromium
     godot
     dunst
     unstable.xmrig
@@ -334,7 +339,7 @@ in
     flameshot
     joplin-desktop
     vim
-    firefox
+    unstable.firefox
     zathura
   ];
 
@@ -367,6 +372,9 @@ in
   services.mullvad-vpn.enable = true;
 
   virtualisation.virtualbox.host.enable = true;
+  virtualisation.docker = {
+    enable = true;
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
