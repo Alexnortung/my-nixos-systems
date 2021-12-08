@@ -11,6 +11,7 @@ let
     rev = "931ab058daa7e4cd539533963f95e2bb0dbd41e6";
   }) { };
   nixos-version-fetched = builtins.fetchGit {
+    name = "nixos-neovim-module";
     url = "https://github.com/NixOS/nixpkgs/";
     ref = "refs/tags/22.05-pre";
     rev = "e96c668072d7c98ddf2062f6d2b37f84909a572b";

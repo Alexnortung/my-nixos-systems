@@ -13,6 +13,7 @@ let
     "minecraft" "minecraft-launcher"
     "vscode-extension-ms-vsliveshare-vsliveshare"
   ];
+  slock-command = "/run/wrappers/bin/slock";
 in
 let
   nixos-version-fetched = builtins.fetchGit {
@@ -260,7 +261,7 @@ in
     xautolock = {
       enable = true;
       time = 10;
-      #locker = "${pkgs.slock}/bin/slock";
+      locker = slock-command;
       extraOptions = [
         #"-lockaftersleep"
         "-detectsleep"
@@ -361,7 +362,8 @@ in
 
   programs.xss-lock = {
     enable = true;
-    lockerCommand = "${pkgs.xautolock}/bin/xautolock -locknow";
+    #lockerCommand = "${pkgs.slock}/bin/slock";
+    lockerCommand = slock-command;
   };
 
   services.redshift = {
