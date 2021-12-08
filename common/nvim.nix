@@ -40,6 +40,7 @@ in
         start = [
           vim-surround # Shortcuts for setting () {} etc.
           coc-nvim coc-git coc-highlight coc-python coc-rls coc-vetur coc-vimtex coc-yaml coc-html coc-json # auto completion
+          #coc-phpls
           vim-nix # nix highlight
           vim-javascript # javascript highlight
           vim-yaml # yaml highlight
@@ -50,6 +51,8 @@ in
           unstable.vimPlugins.futhark-vim # Futhark programming language
           pear-tree # smart closing brackets
           unstable.vimPlugins.jsonc-vim # can show correct syntax for jsonc files
+          vim-twig # syntax highlight for twig
+          nord-vim # Nord theme for vim
         ];
         opt = [];
       };

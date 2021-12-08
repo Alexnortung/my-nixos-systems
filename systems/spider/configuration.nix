@@ -12,6 +12,7 @@ let
     "spotify" "spotify-unwrapped"
     "minecraft" "minecraft-launcher"
     "vscode-extension-ms-vsliveshare-vsliveshare"
+    "slack"
   ];
   slock-command = "/run/wrappers/bin/slock";
 in
@@ -55,6 +56,9 @@ in
   ];
 
   hardware.opengl = {
+    enable = true;
+  };
+  hardware.bluetooth = {
     enable = true;
   };
 
@@ -250,7 +254,11 @@ in
     enable = true;
     windowManager.dwm.enable = true;
     displayManager.lightdm.enable = true;
-    #videoDrivers = [ "nvidia" ];
+    desktopManager = {
+      wallpaper = {
+        mode = "center";
+      };
+    };
 
     # Enable touchpad support (enabled default in most desktopManager).
     libinput = {
@@ -278,6 +286,12 @@ in
     #backend = "glx";
     #experimentalBackends = true;
   };
+
+  services.autorandr = {
+    enable = true;
+  };
+
+  services.blueman.enable = true;
 
   programs.zsh = {
     enable = true;
@@ -307,6 +321,9 @@ in
   };
 
   environment.systemPackages = with pkgs; [
+    unstable.dbeaver
+    slack-term
+    slack
     docker-compose
     ranger
     unstable.ungoogled-chromium

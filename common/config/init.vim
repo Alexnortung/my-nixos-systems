@@ -7,6 +7,9 @@ set number relativenumber " Sets line numbers, but relative and sets the line nu
 set expandtab
 set shiftwidth=4
 
+" Use mouse
+set mouse=a
+
 " makes you move up or down as you would see it visually
 nnoremap j gj
 nnoremap k gk
@@ -43,7 +46,7 @@ let g:Tex_IgnoredWarnings =
 nmap <leader>n :NERDTreeToggle<CR>
 let NERDTreeShowHidden = 1
 let g:NERDTreeWinPos = "right"
-let g:NERDTreeWinSize = 25
+let g:NERDTreeWinSize = 35
 
 " Rainbow
 let g:rainbow_active = 1
