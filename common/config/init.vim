@@ -10,6 +10,9 @@ set shiftwidth=4
 " Use mouse
 set mouse=a
 
+" Use system clipboard
+set clipboard=unnamedplus
+
 " makes you move up or down as you would see it visually
 nnoremap j gj
 nnoremap k gk
