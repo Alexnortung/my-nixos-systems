@@ -1,5 +1,8 @@
 let mapleader = ","
 
+" Use Nord color scheme
+colorscheme nord
+
 set nocompatible " for some reason important
 set number relativenumber " Sets line numbers, but relative and sets the line number for the current line
 

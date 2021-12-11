@@ -7,11 +7,12 @@ let
   # Unstable
   pkgs = import (builtins.fetchGit {
     url = "https://github.com/NixOS/nixpkgs/";
-    rev = "931ab058daa7e4cd539533963f95e2bb0dbd41e6";
+    rev = "47f45c8440e2ef1e967aa5aec3528dd976c4a488";
   }) { 
     config = {
       allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
         "vscode-extension-ms-vsliveshare-vsliveshare"
+        "vscode-extension-ms-vscode-cpptools"
       ];
     };
   };
@@ -30,6 +31,8 @@ let
       bbenoist.nix
       james-yu.latex-workshop
       ms-vsliveshare.vsliveshare
+      arcticicestudio.nord-visual-studio-code
+      ms-vscode.cpptools
   ];
 in
 let

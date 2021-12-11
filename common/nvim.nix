@@ -52,7 +52,7 @@ in
           pear-tree # smart closing brackets
           unstable.vimPlugins.jsonc-vim # can show correct syntax for jsonc files
           vim-twig # syntax highlight for twig
-          nord-vim # Nord theme for vim
+          nord-nvim # Nord theme for vim
         ];
         opt = [];
       };

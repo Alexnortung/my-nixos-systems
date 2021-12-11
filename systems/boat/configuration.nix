@@ -52,6 +52,8 @@ in
     ../../common/vscodium.nix
     ../../common/battery-notifier.nix
     ../../common/latex.nix
+    ../../common/nord-lightdm.nix
+    ../../common/nord-gtk.nix
   ];
 
   hardware.opengl = {
@@ -243,10 +245,15 @@ in
     '';
   };
 
+  services.gnome.gnome-keyring = {
+    enable = true;
+  };
   services.xserver = {
     enable = true;
     windowManager.dwm.enable = true;
-    displayManager.lightdm.enable = true;
+    displayManager.lightdm = {
+      enable = true;
+    };
     #videoDrivers = [ "nvidia" ];
 
     # Enable touchpad support (enabled default in most desktopManager).
@@ -304,6 +311,7 @@ in
   };
 
   environment.systemPackages = with pkgs; [
+    gimp
     docker-compose
     ranger
     unstable.ungoogled-chromium
@@ -364,6 +372,10 @@ in
     enable = true;
     #lockerCommand = "${pkgs.slock}/bin/slock";
     lockerCommand = slock-command;
+  };
+
+  programs.dconf = {
+    enable = true;
   };
 
   services.redshift = {
