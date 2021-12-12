@@ -8,7 +8,7 @@ let
   # Unstable
   unstable = import (builtins.fetchGit {
     url = "https://github.com/NixOS/nixpkgs/";
-    rev = "931ab058daa7e4cd539533963f95e2bb0dbd41e6";
+    rev = "e6df26a654b7fdd59a068c57001eab5736b1363c";
   }) { };
   nixos-version-fetched = builtins.fetchGit {
     name = "nixos-neovim-module";
@@ -54,8 +54,9 @@ in
           vim-twig # syntax highlight for twig
           nord-nvim # Nord theme for vim
           #nord-vim # Nord theme for vim
-          indent-blankline-nvim # Shows indentation with small lines
+          unstable.vimPlugins.indent-blankline-nvim # Shows indentation with small lines
           vim-sleuth # Detects indentation
+          unstable.vimPlugins.nvim-treesitter # better syntax highlight
         ];
         opt = [];
       };

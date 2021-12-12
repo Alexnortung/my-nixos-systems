@@ -68,3 +68,33 @@ let g:pear_tree_smart_backspace = 1
 let g:pear_tree_repeatable_expand = 0
 
 " Blank line
+g:indentLine_enabled = v:true
+let g:indent_blankline_show_current_context = v:true
+let g:indent_blankline_show_current_context_start = v:true
+let g:indent_blankline_use_treesitter = v:true
+let g:indent_blankline_context_patterns = [
+    \'class',
+    \'function',
+    \'method',
+    \'^if',
+    \'^while',
+    \'^typedef',
+    \'^for',
+    \'^object',
+    \'^table',
+    \'block',
+    \'arguments',
+    \'typedef',
+    \'while',
+    \'^public',
+    \'return',
+    \'if_statement',
+    \'else_clause',
+    \'jsx_element',
+    \'jsx_self_closing_element',
+    \'try_statement',
+    \'catch_clause',
+    \'import_statement',
+    \'labeled_statement',
+    \'struct'
+    \]
