@@ -53,6 +53,9 @@ in
           unstable.vimPlugins.jsonc-vim # can show correct syntax for jsonc files
           vim-twig # syntax highlight for twig
           nord-nvim # Nord theme for vim
+          #nord-vim # Nord theme for vim
+          indent-blankline-nvim # Shows indentation with small lines
+          vim-sleuth # Detects indentation
         ];
         opt = [];
       };

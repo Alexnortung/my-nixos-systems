@@ -248,6 +248,9 @@ in
   services.gnome.gnome-keyring = {
     enable = true;
   };
+
+  gtk.iconCache.enable = true;
+
   services.xserver = {
     enable = true;
     windowManager.dwm.enable = true;

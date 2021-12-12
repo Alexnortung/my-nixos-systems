@@ -3,6 +3,7 @@
 {
   environment.systemPackages = with pkgs; [
     nordic
+    lxappearance
   ];
 
   environment.etc = {

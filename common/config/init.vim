@@ -2,6 +2,7 @@ let mapleader = ","
 
 " Use Nord color scheme
 colorscheme nord
+let g:nord_borders = 1
 
 set nocompatible " for some reason important
 set number relativenumber " Sets line numbers, but relative and sets the line number for the current line
@@ -65,3 +66,5 @@ let g:pear_tree_smart_openers = 1
 let g:pear_tree_smart_closers = 1
 let g:pear_tree_smart_backspace = 1
 let g:pear_tree_repeatable_expand = 0
+
+" Blank line

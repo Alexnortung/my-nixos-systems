@@ -66,7 +66,7 @@ static const char *colors[][3]      = {
 	//[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
 	[SchemeNorm] = { nord5, nord0, nord1 },
 	//[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
-	[SchemeSel]  = { nord0, nord9,  nord9  },
+	[SchemeSel]  = { nord0, nord8,  nord8  },
 };
 
 // BAR
@@ -114,7 +114,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", nord0, "-nf", nord5, "-sb", nord9, "-sf", nord0, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", nord0, "-nf", nord5, "-sb", nord8, "-sf", nord0, NULL };
 static const char *termcmd[]  = { "st", NULL };
 
 static Key keys[] = {
