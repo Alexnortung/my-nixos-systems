@@ -50,16 +50,24 @@ let g:Tex_IgnoredWarnings =
 "let g:javascript_plugin_jsdoc = 1;
 
 " Nerdtree
-nmap <leader>n :NERDTreeToggle<CR>
-let NERDTreeShowHidden = 1
-let g:NERDTreeWinPos = "right"
-let g:NERDTreeWinSize = 35
+"nmap <leader>n :NERDTreeToggle<CR>
+"let NERDTreeShowHidden = 1
+"let g:NERDTreeWinPos = "right"
+"let g:NERDTreeWinSize = 35
+
+" Nvim tree
+nmap <leader>n :NvimTreeToggle<CR>
+let g:nvim_tree_highlight_opened_files = 1 " will enable folder and file icon highlight for opened files/directories.
 
 " Rainbow
 let g:rainbow_active = 1
 
 " FZF
-nmap <leader>p :FZF<CR>
+"nmap <leader>p :FZF<CR>
+
+" Telescope
+nmap <leader>p <cmd>Telescope find_files<CR>
+nmap <leader>f <cmd>Telescope live_grep<CR>
 
 " Pear tree - smart closing of brackets
 let g:pear_tree_smart_openers = 1
@@ -98,3 +106,82 @@ let g:indent_blankline_context_patterns = [
     \'labeled_statement',
     \'struct'
     \]
+
+" COC
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>'
+
+
+lua <<EOF
+require'nvim-tree'.setup {
+  disable_netrw       = true,
+  hijack_netrw        = true,
+  open_on_setup       = false,
+  ignore_ft_on_setup  = {},
+  auto_close          = false,
+  open_on_tab         = true,
+  hijack_cursor       = false,
+  update_cwd          = false,
+  update_to_buf_dir   = {
+    enable = true,
+    auto_open = true,
+  },
+  diagnostics = {
+    enable = false,
+    icons = {
+      hint = "",
+      info = "",
+      warning = "",
+      error = "",
+    }
+  },
+  update_focused_file = {
+    enable      = false,
+    update_cwd  = false,
+    ignore_list = {}
+  },
+  system_open = {
+    cmd  = nil,
+    args = {}
+  },
+  filters = {
+    dotfiles = false,
+    custom = {}
+  },
+  git = {
+    enable = true,
+    ignore = true,
+    timeout = 500,
+  },
+  view = {
+    width = 30,
+    height = 30,
+    hide_root_folder = false,
+    side = 'right',
+    auto_resize = false,
+    mappings = {
+      custom_only = false,
+      list = {}
+    },
+    number = false,
+    relativenumber = false,
+    signcolumn = "yes"
+  },
+  trash = {
+    cmd = "trash",
+    require_confirm = true
+  }
+}
+
+
+EOF

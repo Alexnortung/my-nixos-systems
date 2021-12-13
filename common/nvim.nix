@@ -10,6 +10,7 @@ let
     url = "https://github.com/NixOS/nixpkgs/";
     rev = "e6df26a654b7fdd59a068c57001eab5736b1363c";
   }) { };
+  uvi = unstable.vimPlugins;
   nixos-version-fetched = builtins.fetchGit {
     name = "nixos-neovim-module";
     url = "https://github.com/NixOS/nixpkgs/";
@@ -39,30 +40,42 @@ in
       packages.nix = with pkgs.vimPlugins; {
         start = [
           vim-surround # Shortcuts for setting () {} etc.
+          # COC
           coc-nvim coc-git coc-highlight coc-python coc-rls coc-vetur coc-vimtex coc-yaml coc-html coc-json # auto completion
+          coc-css
+          coc-emmet
+          coc-tsserver
+          coc-eslint
+          coc-snippets
           #coc-phpls
           vim-nix # nix highlight
           vim-javascript # javascript highlight
           vim-yaml # yaml highlight
           vimtex # latex stuff
-          fzf-vim # fuzzy finder through vim
-          nerdtree # file structure inside nvim
+          #fzf-vim # fuzzy finder through vim
+          telescope-nvim # fzf improved, fuzzy finder
+          #nerdtree # file structure inside nvim
           rainbow # Color parenthesis
-          unstable.vimPlugins.futhark-vim # Futhark programming language
+          uvi.futhark-vim # Futhark programming language
           pear-tree # smart closing brackets
-          unstable.vimPlugins.jsonc-vim # can show correct syntax for jsonc files
+          uvi.jsonc-vim # can show correct syntax for jsonc files
           vim-twig # syntax highlight for twig
           nord-nvim # Nord theme for vim
           #nord-vim # Nord theme for vim
-          unstable.vimPlugins.indent-blankline-nvim # Shows indentation with small lines
+          uvi.indent-blankline-nvim # Shows indentation with small lines
           vim-sleuth # Detects indentation
-          unstable.vimPlugins.nvim-treesitter # better syntax highlight
+          (uvi.nvim-treesitter.withPlugins (plugins: unstable.tree-sitter.allGrammars)) # better syntax highlight
+          uvi.nvim-web-devicons
+          uvi.nvim-tree-lua
         ];
-        opt = [];
+        opt = [
+        ];
       };
     };
   };
   environment.systemPackages = with pkgs; [
     #nodejs
+    ripgrep # used by telescope
   ];
 }
+
