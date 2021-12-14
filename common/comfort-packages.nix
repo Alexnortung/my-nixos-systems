@@ -36,7 +36,7 @@
   };
   programs.htop = {
     enable = true;
-  }
+  };
   environment.systemPackages = with pkgs; [
     bash
     lm_sensors

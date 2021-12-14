@@ -67,7 +67,9 @@ let g:rainbow_active = 1
 
 " Telescope
 nmap <leader>p <cmd>Telescope find_files<CR>
+nmap <leader>hp <cmd>Telescope find_files hidden=true<CR>
 nmap <leader>f <cmd>Telescope live_grep<CR>
+nmap <leader>hf <cmd>Telescope live_grep hidden=true<CR>
 
 " Pear tree - smart closing of brackets
 let g:pear_tree_smart_openers = 1
