@@ -55,11 +55,8 @@ in
     ../../common/nord-lightdm.nix
     ../../common/nord-gtk.nix
     ../../common/basic-desktop.nix
+    ../../common/zsh.nix
   ];
-
-  hardware.opengl = {
-    enable = true;
-  };
 
   swapDevices = [
     {
@@ -149,7 +146,6 @@ in
     terminus-nerdfont
   ];
 
-
   # Use the systemd-boot EFI boot loader.
   boot = {
     loader = {
@@ -174,7 +170,6 @@ in
       '';
     };
   };
-
 
   # Set your time zone.
   time.timeZone = "Europe/Copenhagen";
@@ -287,15 +282,6 @@ in
     #experimentalBackends = true;
   };
 
-  programs.zsh = {
-    enable = true;
-    ohMyZsh = {
-      enable = true;
-      plugins = [ "git" ];
-      theme = "simple";
-    };
-  };
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users = {
     users = {
@@ -337,8 +323,6 @@ in
     xss-lock
     xorg.xev
     xclip
-    i3lock
-    #i3lock-blur
     brightnessctl # Brightness from terminal
     dmenu
     st
@@ -351,7 +335,6 @@ in
     zip unzip
     flameshot
     joplin-desktop
-    vim
     unstable.firefox
     zathura
   ];
