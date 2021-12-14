@@ -54,6 +54,7 @@ in
     ../../common/latex.nix
     ../../common/nord-lightdm.nix
     ../../common/nord-gtk.nix
+    ../../common/basic-desktop.nix
   ];
 
   hardware.opengl = {
