@@ -47,6 +47,7 @@ in
           coc-tsserver
           coc-eslint
           coc-snippets
+          coc-clangd
           #coc-phpls
           vim-nix # nix highlight
           vim-javascript # javascript highlight
@@ -76,6 +77,9 @@ in
   environment.systemPackages = with pkgs; [
     #nodejs
     ripgrep # used by telescope
+    unstable.clang-tools
+    #llvm
+    clang_12
   ];
 }
 
