@@ -53,11 +53,12 @@ in
     ../../common/vscodium.nix
     ../../common/battery-notifier.nix
     ../../common/latex.nix
+    ../../common/nord-lightdm.nix
+    ../../common/nord-gtk.nix
+    ../../common/basic-desktop.nix
+    ../../common/zsh.nix
   ];
 
-  hardware.opengl = {
-    enable = true;
-  };
   hardware.bluetooth = {
     enable = true;
   };
@@ -292,15 +293,6 @@ in
   };
 
   services.blueman.enable = true;
-
-  programs.zsh = {
-    enable = true;
-    ohMyZsh = {
-      enable = true;
-      plugins = [ "git" ];
-      theme = "simple";
-    };
-  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users = {
