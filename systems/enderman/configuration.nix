@@ -76,8 +76,9 @@ in
 
   imports =
     [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
       "${nixos-unstable}/nixos/modules/services/misc/prowlarr.nix"
+      ../../common/nvim.nix
+      ../../common/console.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -278,6 +279,7 @@ in
     openFirewall = true;
     dataDir = "/data/data1/var/lib/deluge/";
     declarative = true;
+    authFile = /etc/nixos/ext-conf/deluge/deluge-auth;
     config = {
       torrentfiles_location = "/data/data1/var/lib/deluge/torrent_files";
       download_location = "/data/data1/var/lib/deluge/Downloads";
