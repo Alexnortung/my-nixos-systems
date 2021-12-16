@@ -8,9 +8,15 @@ let
   #unstable = import <unstable>{
   #  config = config.nixpkgs.config;
   #};
+  pkgs-steam = import (builtins.fetchGit {
+    url = "https://github.com/NixOS/nixpkgs/";
+    rev = "5ac32013ca5f58863e1846621c808c4d2819efcd";
+  }) {
+    config = config.nixpkgs.config;
+  };
   unstable = import (builtins.fetchGit {
     url = "https://github.com/NixOS/nixpkgs/";
-    rev = "0a68ef410b40f49de76aecb5c8b5cc5111bac91d";
+    rev = "2df15ba83d0510a56f2583fd3481723835acb5a1";
   }) {
     config = config.nixpkgs.config;
   };
@@ -21,6 +27,7 @@ in
       ../../common/console.nix
       ../../common/sound.nix
       ../../common/comfort-packages.nix
+      ../../common/vscodium.nix
     ];
 
   nix = {
@@ -44,16 +51,26 @@ in
     nvidia_x11
   ];
 
-  networking.hostName = "steve";
+  networking = {
+    hostName = "steve";
+    # The global useDHCP flag is deprecated, therefore explicitly set to false here.
+    # Per-interface useDHCP will be mandatory in the future, so this generated config
+    # replicates the default behaviour.
+    useDHCP = false;
+    interfaces.enp5s0.useDHCP = true;
+    firewall = {
+      checkReversePath = "loose"; # used by mullvad
+    };
+    nat = {
+      enable = true;
+      internalInterfaces = ["ve-+"];
+      externalInterface = "enp5s0";
+    };
+  };
+  
 
   # Set your time zone.
   time.timeZone = "Europe/Copenhagen";
-
-  # The global useDHCP flag is deprecated, therefore explicitly set to false here.
-  # Per-interface useDHCP will be mandatory in the future, so this generated config
-  # replicates the default behaviour.
-  networking.useDHCP = false;
-  networking.interfaces.enp5s0.useDHCP = true;
 
 
   # Enable the X11 windowing system.
@@ -223,14 +240,16 @@ in
   # $ nix search wget
   programs.steam.enable = true;
   nixpkgs.config.packageOverrides = pkgs: {
-    steam = pkgs.steam.override {
-      extraPkgs = pkgs:  [
-      ];
-      extraLibraries = pkgs: [
-        pkgs.pipewire
-      ];
-    };
+    #steam = pkgs-steam.steam.override {
+    #  extraPkgs = pkgs:  [
+    #  ];
+    #  extraLibraries = pkgs: [
+    #    pkgs.pipewire
+    #  ];
+    #};
   };
+
+  services.mullvad-vpn.enable = true;
 
   environment.sessionVariables = {
     MOZ_X11_EGL = "1";
@@ -242,6 +261,12 @@ in
   };
 
   environment.systemPackages = with pkgs; [
+    unstable.libreoffice
+    (pkgs-steam.steam.override {
+      extraLibraries = pkgs: [
+        pkgs.pipewire
+      ];
+    })
     unstable.mullvad-vpn
     unstable.session-desktop-appimage
     cudatoolkit
@@ -263,25 +288,6 @@ in
     dotnet-sdk_5
     steam-run
     godot
-    (pkgs.vscode-with-extensions.override {
-      vscode = pkgs.vscodium;
-      vscodeExtensions = with pkgs.vscode-extensions; [
-        vscodevim.vim
-        bbenoist.Nix
-        james-yu.latex-workshop
-        ms-vsliveshare.vsliveshare
-	#ionide.ionide-fsharp
-        #vsliveshare
-      ]; #
-      #++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-      #  {
-      #    name = "ionide-fsharp";
-      #    publisher = "ionide";
-      #    version = "5.5.5";
-      #    sha256 = "";
-      #  }
-      #];
-    })
     glances
     texlive.combined.scheme-full
     wget
@@ -363,7 +369,4 @@ in
     "zoom"
   ];
 
-  networking.nat.enable = true;
-  networking.nat.internalInterfaces = ["ve-+"];
-  networking.nat.externalInterface = "enp5s0";
 }

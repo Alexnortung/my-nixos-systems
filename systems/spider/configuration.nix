@@ -12,14 +12,15 @@ let
     "spotify" "spotify-unwrapped"
     "minecraft" "minecraft-launcher"
     "vscode-extension-ms-vsliveshare-vsliveshare"
+    "slack"
   ];
   slock-command = "/run/wrappers/bin/slock";
 in
 let
   nixos-version-fetched = builtins.fetchGit {
     url = "https://github.com/NixOS/nixpkgs/";
-    ref = "refs/tags/22.05-pre";
-    rev = "e96c668072d7c98ddf2062f6d2b37f84909a572b";
+    ref = "refs/heads/nixos-21.11";
+    rev = "1bd4bbd49bef217a3d1adea43498270d6e779d65";
   };
   nixos-version = import "${nixos-version-fetched}" { 
     inherit (config.nixpkgs) config overlays localSystem crossSystem;
@@ -42,13 +43,13 @@ let
 in
 {
   imports = [
-    "${hardware-rep}/dell/latitude/3480"
+    "${hardware-rep}/lenovo/thinkpad/x13"
     ../../common/nvim.nix
     ../../common/programming-pkgs.nix
     ../../common/comfort-packages.nix
     ../../common/sound.nix
     ../../common/console.nix
-    ../../common/personal-vpn.nix
+    #../../common/personal-vpn.nix
     ../../common/vscodium.nix
     ../../common/battery-notifier.nix
     ../../common/latex.nix
@@ -58,6 +59,10 @@ in
     ../../common/zsh.nix
   ];
 
+  hardware.bluetooth = {
+    enable = true;
+  };
+
   swapDevices = [
     {
       label = "swap";
@@ -66,11 +71,11 @@ in
 
   nixpkgs.pkgs = nixos-version;
 
-  nix.nixPath = [
-    "nixpkgs=${nixos-version-fetched}"
-    "nixos-config=/etc/nixos/configuration.nix"
-    "/nix/var/nix/profiles/per-user/root/channels"
-  ];
+  #nix.nixPath = [
+  #  "nixpkgs=${nixos-version-fetched}"
+  #  "nixos-config=/etc/nixos/configuration.nix"
+  #  "/nix/var/nix/profiles/per-user/root/channels"
+  #];
 
   nixpkgs.config = {
     allowUnfreePredicate = allowUnfreePredicate;
@@ -146,6 +151,7 @@ in
     terminus-nerdfont
   ];
 
+
   # Use the systemd-boot EFI boot loader.
   boot = {
     loader = {
@@ -160,16 +166,20 @@ in
         enable = true;
         efiSupport = true;
       };
-      # Boot animation
+      systemd-boot = {
+        enable = true;
+      };
     };
+    # Boot animation
     plymouth = {
-      enable = true;
+      enable = false;
       theme = "solar";
       extraConfig = ''
         ShowDelay=0
       '';
     };
   };
+
 
   # Set your time zone.
   time.timeZone = "Europe/Copenhagen";
@@ -178,10 +188,10 @@ in
   # Per-interface useDHCP will be mandatory in the future, so this generated config
   # replicates the default behaviour.
   networking = {
-    hostName = "boat";
+    hostName = "spider";
     useDHCP = false;
     interfaces.enp0s31f6.useDHCP = true;
-    interfaces.wlp3s0.useDHCP = true;
+    interfaces.wlp0s20f3.useDHCP = true;
     networkmanager = {
       enable = true;
     };
@@ -191,10 +201,10 @@ in
     firewall = {
       checkReversePath = lib.mkForce "loose";
     };
-    wg-quick.interfaces.wg0 = {
-      address = [ "10.100.0.3" ];
-      privateKeyFile = "/etc/nixos/secret/wg-keys/boat-private";
-    };
+    #wg-quick.interfaces.wg0 = {
+    #  address = [ "10.100.0.3" ];
+    #  privateKeyFile = "/etc/nixos/secret/wg-keys/boat-private";
+    #};
   };
 
   # Configure network proxy if necessary
@@ -241,19 +251,15 @@ in
     '';
   };
 
-  services.gnome.gnome-keyring = {
-    enable = true;
-  };
-
-  gtk.iconCache.enable = true;
-
   services.xserver = {
     enable = true;
     windowManager.dwm.enable = true;
-    displayManager.lightdm = {
-      enable = true;
+    displayManager.lightdm.enable = true;
+    desktopManager = {
+      wallpaper = {
+        mode = "center";
+      };
     };
-    #videoDrivers = [ "nvidia" ];
 
     # Enable touchpad support (enabled default in most desktopManager).
     libinput = {
@@ -282,6 +288,12 @@ in
     #experimentalBackends = true;
   };
 
+  services.autorandr = {
+    enable = true;
+  };
+
+  services.blueman.enable = true;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users = {
     users = {
@@ -301,19 +313,19 @@ in
   };
 
   environment.systemPackages = with pkgs; [
-    gimp
+    unstable.dbeaver
+    slack-term
+    slack
     docker-compose
     ranger
     unstable.ungoogled-chromium
-    godot
     dunst
     unstable.xmrig
     conky
     bitwarden
-    unstable.torbrowser
+    #unstable.torbrowser
     unstable.mullvad-vpn
     arandr
-    unstable.minecraft
     bashmount
     gparted
     pcmanfm
@@ -329,12 +341,11 @@ in
     spotify
     libreoffice
     tmate
-    bvi # hex editor with vim bindings
     unstable.session-desktop-appimage
     unstable.discord
     zip unzip
     flameshot
-    joplin-desktop
+    vim
     unstable.firefox
     zathura
   ];
@@ -357,12 +368,8 @@ in
 
   programs.xss-lock = {
     enable = true;
-    #lockerCommand = "${pkgs.slock}/bin/slock";
+    #lockerCommand = "${pkgs.xautolock}/bin/xautolock -locknow";
     lockerCommand = slock-command;
-  };
-
-  programs.dconf = {
-    enable = true;
   };
 
   services.redshift = {
@@ -372,18 +379,8 @@ in
 
   services.mullvad-vpn.enable = true;
 
-  virtualisation.virtualbox.host.enable = true;
   virtualisation.docker = {
     enable = true;
   };
-
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "21.05"; # Did you read the comment?
-
 }
 
