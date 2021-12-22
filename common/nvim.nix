@@ -49,6 +49,7 @@ in
           coc-snippets
           coc-clangd
           #coc-phpls
+          emmet-vim
           vim-nix # nix highlight
           vim-javascript # javascript highlight
           vim-yaml # yaml highlight
