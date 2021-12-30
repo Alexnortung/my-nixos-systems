@@ -11,8 +11,8 @@
     gcc
     # Rust
     rustc
-    rustup
-    rls
+    #rustup
+    #rls
     cargo
     rustfmt
     # Python
