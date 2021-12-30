@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, lib, ... }:
+{ pkgs, config, lib, ... }:
 
 let
   allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
@@ -12,21 +12,23 @@ let
     "spotify" "spotify-unwrapped"
     "minecraft" "minecraft-launcher"
     "vscode-extension-ms-vsliveshare-vsliveshare"
+    "steam" "steam-original"
+    "steam-runtime"
   ];
   slock-command = "/run/wrappers/bin/slock";
 in
 let
   nixos-version-fetched = builtins.fetchGit {
     url = "https://github.com/NixOS/nixpkgs/";
-    ref = "refs/tags/22.05-pre";
-    rev = "e96c668072d7c98ddf2062f6d2b37f84909a572b";
+    ref = "refs/tags/nixos-unstable";
+    rev = "03ec468b14067729a285c2c7cfa7b9434a04816c";
   };
   nixos-version = import "${nixos-version-fetched}" { 
     inherit (config.nixpkgs) config overlays localSystem crossSystem;
   };
   unstable = import (builtins.fetchGit {
     url = "https://github.com/NixOS/nixpkgs/";
-    rev = "931ab058daa7e4cd539533963f95e2bb0dbd41e6";
+    rev = "aada45dcb08c27602c3d78bf13b6e718471c9159";
   }) { 
     config = {
       allowUnfreePredicate = allowUnfreePredicate;
@@ -36,9 +38,15 @@ let
     url = "https://github.com/NixOS/nixos-hardware.git";
     rev = "3aabf78bfcae62f5f99474f2ebbbe418f1c6e54f";
   };
+  local-pkgs = import "/home/alexander/source/nixpkgs" {
+    config.permittedInsecurePackages = [
+      "adoptopenjdk-jre-hotspot-bin-14.0.2"
+      "adoptopenjdk-jre-hotspot-bin-13.0.2"
+    ];
+  };
 in
 let
-  pkgs = nixos-version;
+  #pkgs = nixos-version;
 in
 {
   imports = [
@@ -190,6 +198,10 @@ in
     };
     firewall = {
       checkReversePath = lib.mkForce "loose";
+      allowedTCPPorts = [
+      ];
+      allowedUDPPorts = [
+      ];
     };
     wg-quick.interfaces.wg0 = {
       address = [ "10.100.0.3" ];
@@ -301,11 +313,12 @@ in
   };
 
   environment.systemPackages = with pkgs; [
-    gimp
+    #unstable.steam
+    #gimp
     docker-compose
     ranger
     unstable.ungoogled-chromium
-    godot
+    #godot
     dunst
     unstable.xmrig
     conky
@@ -347,6 +360,8 @@ in
     enableSSHSupport = true;
   };
 
+  programs.steam.enable = true;
+
   programs.slock = {
     enable = true;
   };
@@ -376,6 +391,12 @@ in
   virtualisation.docker = {
     enable = true;
   };
+
+  #services.minecraft-server = {
+  #  enable = true;
+  #  package = local-pkgs.papermc-1_10_x;
+  #  eula = true;
+  #};
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

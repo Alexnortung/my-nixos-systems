@@ -41,7 +41,16 @@ in
         start = [
           vim-surround # Shortcuts for setting () {} etc.
           # COC
-          coc-nvim coc-git coc-highlight coc-python coc-rls coc-vetur coc-vimtex coc-yaml coc-html coc-json # auto completion
+          coc-nvim
+          coc-git
+          coc-highlight
+          coc-python
+          coc-rust-analyzer
+          coc-vetur
+          coc-vimtex
+          coc-yaml
+          coc-html
+          coc-json # auto completion
           coc-css
           coc-emmet
           coc-tsserver
@@ -80,6 +89,7 @@ in
     unstable.clang-tools
     #llvm
     clang_12
+    rust-analyzer
   ];
 }
 

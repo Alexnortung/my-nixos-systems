@@ -11,7 +11,7 @@ in
 let
   my_latex = pkgs.texlive.combine {
     inherit (pkgs.texlive) scheme-full;
-    #inherit sagetex;
+    inherit sagetex;
   };
 in {
   environment.systemPackages = [
