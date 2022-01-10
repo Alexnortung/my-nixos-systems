@@ -1,6 +1,10 @@
 { config, lib, pkgs, ...}:
 
 let
+  nord-wallpaper = (builtins.fetchurl {
+    url = "https://nordthemewallpapers.com/Backgrounds/All/img/daniel-leone-v7daTKlZzaw-unsplash%20[modded].jpg";
+    name = "nord-wallpaper-v7daTKlZzaw";
+  });
   pkgs-cursor = import (builtins.fetchGit {
     url = "https://github.com/NixOS/nixpkgs/";
     ref = "refs/pull/150322/merge";
@@ -9,7 +13,7 @@ let
 in
 {
   services.xserver.displayManager.lightdm = {
-    background = "#000000";
+    background = nord-wallpaper;
     greeters.gtk = {
       enable = true;
       theme = {
