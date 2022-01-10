@@ -14,12 +14,40 @@ let
   nixos-version-fetched = builtins.fetchGit {
     name = "nixos-neovim-module";
     url = "https://github.com/NixOS/nixpkgs/";
-    ref = "refs/tags/22.05-pre";
-    rev = "e96c668072d7c98ddf2062f6d2b37f84909a572b";
+    ref = "refs/heads/nixos-21.11-small";
+    rev = "79c7b6a353e22f0eec342dead0bc69fb7ce846db";
   };
-  #nixos-version = import "${nixos-version-fetched}" { 
-  #  inherit (config.nixpkgs) config overlays localSystem crossSystem;
-  #};
+  nixos-version = import "${nixos-version-fetched}" { 
+    name = "nvim-version";
+    inherit (config.nixpkgs) config overlays localSystem crossSystem;
+  };
+  coc-tailwindcss = nixos-version.vimUtils.buildVimPlugin {
+    name = "coc-tailwindcss";
+    src = pkgs.fetchFromGitHub {
+      owner = "iamcco";
+      repo = "coc-tailwindcss";
+      rev = "5f41aa1feb36e39b95ccd83be6a37ee8c475f9fb";
+      sha256 = "189abl36aj862m5nz8jjdgdfc4s6xbag030hi9m13yd6fbg99f85";
+    };
+  };
+  vim-svelte = nixos-version.vimUtils.buildVimPlugin {
+    name = "vim-svelte";
+    src = pkgs.fetchFromGitHub {
+      owner = "evanleck";
+      repo = "vim-svelte";
+      rev = "5f88e5a0fe7dcece0008dae3453edbd99153a042";
+      sha256 = "1467b0bfnn8scgni405xfsj3zk8vfgj44mnm1lvr9ir696r2gmp0";
+    };
+  };
+  coc-svelte = nixos-version.vimUtils.buildVimPlugin {
+    name = "coc-svelte";
+    src = pkgs.fetchFromGitHub {
+      owner = "coc-extensions";
+      repo = "coc-svelte";
+      rev = "5743da35da727ce8bf8a8b9733ee7ff61d476b4e";
+      sha256 = "1467b0bfnn8scgni405xfsj3zk8vfgj44mnm1lvr9ir696r2gmp0";
+    };
+  };
 in
 {
   disabledModules = [
@@ -37,8 +65,13 @@ in
     package = pkgs.neovim-unwrapped;
     configure = {
       customRC = builtins.readFile ./config/init.vim;
-      packages.nix = with pkgs.vimPlugins; {
+      plug.plugins = [
+      ];
+      packages.nix = with nixos-version.vimPlugins; {
         start = [
+          vim-svelte
+          coc-svelte
+          coc-tailwindcss
           vim-surround # Shortcuts for setting () {} etc.
           # COC
           coc-nvim
@@ -50,14 +83,18 @@ in
           coc-vimtex
           coc-yaml
           coc-html
+          #coc-svelte
           coc-json # auto completion
           coc-css
+          #coc-tailwindcss
           coc-emmet
           coc-tsserver
           coc-eslint
           coc-snippets
           coc-clangd
           #coc-phpls
+          emmet-vim
+          #vim-svelte
           vim-nix # nix highlight
           vim-javascript # javascript highlight
           vim-yaml # yaml highlight
