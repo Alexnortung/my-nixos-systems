@@ -9,7 +9,7 @@ stdenv.mkDerivation {
   passthru.tlType = "run";
   src = pkgs.fetchurl {
     url = "https://github.com/sagemath/sagetex/releases/download/v${version}/sagetex-${version}.tar.gz";
-    sha256 = "sha256:09wa7smwr6j4zid8vd3lqxa90hdhgnx5l0avjf2d5lx6p09xvw01";
+    sha256 = "fzol58VztvRLJHaaMYQ8gmMvSa5Lu2AZJ74buDPle4E=";
   };
 
   installPhase = ''

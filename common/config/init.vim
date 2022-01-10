@@ -78,7 +78,7 @@ let g:pear_tree_smart_backspace = 1
 let g:pear_tree_repeatable_expand = 0
 
 " Blank line
-g:indentLine_enabled = v:true
+let g:indentLine_enabled = v:true
 let g:indent_blankline_show_current_context = v:true
 let g:indent_blankline_show_current_context_start = v:true
 let g:indent_blankline_use_treesitter = v:true
