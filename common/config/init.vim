@@ -1,3 +1,5 @@
+syntax on
+filetype on
 let mapleader = ","
 
 " Use Nord color scheme
