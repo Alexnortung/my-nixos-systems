@@ -313,6 +313,7 @@ in
   };
 
   environment.systemPackages = with pkgs; [
+    qutebrowser
     #unstable.steam
     #gimp
     docker-compose
