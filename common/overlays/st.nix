@@ -5,31 +5,35 @@
     (self: super: {
       st = super.st.overrideAttrs (oldAttrs : rec {
         buildInputs = oldAttrs.buildInputs ++ [ pkgs.harfbuzz ];
-        configFile = super.writeText "config.h" (builtins.readFile ./config/st-config.h);
+        configFile = super.writeText "config.h" (builtins.readFile ../config/st-config.h);
         postPatch = "${oldAttrs.postPatch}\ncp ${configFile} config.def.h\n";
         patches = [
+          # Desktop entry - gives an icon
+          (super.fetchpatch {
+            url = "https://st.suckless.org/patches/desktopentry/st-desktopentry-0.8.4.diff";
+            sha256 = "0v0hymybm2yplrvdjqysvcyhl36a5llih8ya9xjim1fpl609hg8y";
+          })
+          # More icon
+          (super.fetchpatch {
+            url = "http://st.suckless.org/patches/netwmicon/st-netwmicon-0.8.4.diff";
+            sha256 = "0gnk4fibqyby6b0fdx86zfwdiwjai86hh8sk9y02z610iimjaj1n";
+          })
           # Scrollback
           (super.fetchpatch {
             url = "https://st.suckless.org/patches/scrollback/st-scrollback-0.8.4.diff";
-            sha256 = "bGRSALFWVuk4yoYON8AIxn4NmDQthlJQVAsLp9fcVG0=";
+            sha256 = "0valvkbsf2qbai8551id6jc0szn61303f3l6r8wfjmjnn4054r3c";
           })
           # Alpha
           (super.fetchpatch {
             url = "https://st.suckless.org/patches/alpha/st-alpha-0.8.2.diff";
-            sha256 = "pOHiIBwoTG4N9chOM7ORD1daDHU/z92dVKzmt9ZIE5U=";
+            sha256 = "158k93bbgrmcajfxvkrzfl65lmqgj6rk6kn8yl6nwk183hhf5qd4";
           })
-
-          #(fetchpatch {
-          #  url = "https://st.suckless.org/patches/alpha/st-alpha-0.8.2.diff";
-          #  sha256 = "9c5b4b4f23de80de78ca5ec3739dc6ce5e7f72666186cf4a9c6b614ac90fb285";
-          #})
           # Ligatures
           (super.fetchpatch {
             url = "https://st.suckless.org/patches/ligatures/0.8.3/st-ligatures-alpha-scrollback-20200430-0.8.3.diff";
-            sha256 = "RyjaEwBN+D73YrDJqJ4z7v+AzteRMYD2IHqG78Kgzvg=";
+            sha256 = "1y6fl31fz1ks43v80ccisz781zzf6fgaijdhcbvkxy2d009xla27";
           })
         ];
-
       });
     })
   ];

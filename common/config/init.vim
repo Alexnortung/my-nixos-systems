@@ -12,6 +12,7 @@ set number relativenumber " Sets line numbers, but relative and sets the line nu
 " Use spaces on tab
 set expandtab
 set shiftwidth=4
+set tabstop=4
 
 " Use mouse
 set mouse=a

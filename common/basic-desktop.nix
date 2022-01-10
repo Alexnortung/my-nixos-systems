@@ -1,6 +1,11 @@
 { pkgs, ... }:
 
 {
+  imports = [
+    ./overlays/st.nix
+    ./overlays/dmenu.nix
+  ];
+
   hardware.opengl = {
     enable = true;
   };

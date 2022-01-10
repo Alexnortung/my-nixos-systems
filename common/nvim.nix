@@ -21,33 +21,12 @@ let
     name = "nvim-version";
     inherit (config.nixpkgs) config overlays localSystem crossSystem;
   };
-  coc-tailwindcss = nixos-version.vimUtils.buildVimPlugin {
-    name = "coc-tailwindcss";
-    src = pkgs.fetchFromGitHub {
-      owner = "iamcco";
-      repo = "coc-tailwindcss";
-      rev = "5f41aa1feb36e39b95ccd83be6a37ee8c475f9fb";
-      sha256 = "189abl36aj862m5nz8jjdgdfc4s6xbag030hi9m13yd6fbg99f85";
-    };
-  };
-  vim-svelte = nixos-version.vimUtils.buildVimPlugin {
-    name = "vim-svelte";
-    src = pkgs.fetchFromGitHub {
-      owner = "evanleck";
-      repo = "vim-svelte";
-      rev = "5f88e5a0fe7dcece0008dae3453edbd99153a042";
-      sha256 = "1467b0bfnn8scgni405xfsj3zk8vfgj44mnm1lvr9ir696r2gmp0";
-    };
-  };
-  coc-svelte = nixos-version.vimUtils.buildVimPlugin {
-    name = "coc-svelte";
-    src = pkgs.fetchFromGitHub {
-      owner = "coc-extensions";
-      repo = "coc-svelte";
-      rev = "5743da35da727ce8bf8a8b9733ee7ff61d476b4e";
-      sha256 = "1467b0bfnn8scgni405xfsj3zk8vfgj44mnm1lvr9ir696r2gmp0";
-    };
-  };
+  my-pkgs = import (unstable.fetchFromGitHub {
+    owner = "alexnortung";
+    repo = "nixpkgs";
+    rev = "21972788106d85a26ff9c51b2f18eb8b23e2ee0c";
+    sha256 = "zHxkRaCvK83m2y8Zkfggs8PvBsZyK4JsZORvomEnEU4=";
+  }) {};
 in
 {
   disabledModules = [
@@ -69,9 +48,12 @@ in
       ];
       packages.nix = with nixos-version.vimPlugins; {
         start = [
-          vim-svelte
-          coc-svelte
-          coc-tailwindcss
+          # Snippets
+          vim-snippets
+          ultisnips
+          my-pkgs.vimPlugins.vim-svelte
+          my-pkgs.vimPlugins.coc-svelte
+          my-pkgs.vimPlugins.coc-tailwindcss
           vim-surround # Shortcuts for setting () {} etc.
           # COC
           coc-nvim

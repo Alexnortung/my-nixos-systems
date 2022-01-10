@@ -9,6 +9,7 @@ let
 in
 {
   services.xserver.displayManager.lightdm = {
+    background = "#000000";
     greeters.gtk = {
       enable = true;
       theme = {
