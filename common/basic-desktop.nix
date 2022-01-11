@@ -5,6 +5,8 @@
     ./overlays/st.nix
     ./overlays/dmenu.nix
     ./overlays/dwm.nix
+    ./modules/battery-notifier.nix
+    ./modules/bg-setter.nix
   ];
 
   hardware.opengl = {

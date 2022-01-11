@@ -58,7 +58,6 @@ in
     ../../common/console.nix
     ../../common/personal-vpn.nix
     ../../common/vscodium.nix
-    ../../common/battery-notifier.nix
     ../../common/latex.nix
     ../../common/nord-lightdm.nix
     ../../common/nord-gtk.nix
@@ -155,6 +154,15 @@ in
     enable = true;
     notifyCapacity = 15;
     hibernateCapacity = 5;
+  };
+
+  services.bg-setter = {
+    enable = true;
+    wallpaper = lib.lists.elemAt (import ../../common/misc/nord-wallpapers.nix {}) 0;
+  };
+
+  services.autorandr = {
+    enable = true;
   };
 
   services.dwm-status = {
