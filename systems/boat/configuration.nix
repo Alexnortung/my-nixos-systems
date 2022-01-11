@@ -21,7 +21,7 @@ let
   nixos-version-fetched = builtins.fetchGit {
     url = "https://github.com/NixOS/nixpkgs/";
     ref = "refs/tags/nixos-unstable";
-    rev = "03ec468b14067729a285c2c7cfa7b9434a04816c";
+    rev = "386234e2a61e1e8acf94dfa3a3d3ca19a6776efb";
   };
   nixos-version = import "${nixos-version-fetched}" { 
     inherit (config.nixpkgs) config overlays localSystem crossSystem;
@@ -191,19 +191,12 @@ in
     '';
   };
 
-  services.gnome.gnome-keyring = {
-    enable = true;
-  };
-
-  gtk.iconCache.enable = true;
-
   services.xserver = {
     enable = true;
     windowManager.dwm.enable = true;
     displayManager.lightdm = {
       enable = true;
     };
-    #videoDrivers = [ "nvidia" ];
 
     # Enable touchpad support (enabled default in most desktopManager).
     libinput = {

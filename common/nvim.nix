@@ -14,8 +14,8 @@ let
   nixos-version-fetched = builtins.fetchGit {
     name = "nixos-neovim-module";
     url = "https://github.com/NixOS/nixpkgs/";
-    ref = "refs/heads/nixos-21.11-small";
-    rev = "79c7b6a353e22f0eec342dead0bc69fb7ce846db";
+    ref = "refs/heads/nixos-21.11";
+    rev = "386234e2a61e1e8acf94dfa3a3d3ca19a6776efb";
   };
   nixos-version = import "${nixos-version-fetched}" { 
     name = "nvim-version";

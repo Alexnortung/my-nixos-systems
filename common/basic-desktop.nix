@@ -11,6 +11,12 @@
     enable = true;
   };
 
+  services.gnome.gnome-keyring = {
+    enable = true;
+  };
+
+  gtk.iconCache.enable = true;
+
   xdg = {
     mime.enable = true;
     icons.enable = true;
