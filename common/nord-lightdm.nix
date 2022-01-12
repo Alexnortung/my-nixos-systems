@@ -1,10 +1,7 @@
 { config, lib, pkgs, ...}:
 
 let
-  nord-wallpaper = (builtins.fetchurl {
-    url = "https://nordthemewallpapers.com/Backgrounds/All/img/daniel-leone-v7daTKlZzaw-unsplash%20[modded].jpg";
-    name = "nord-wallpaper-v7daTKlZzaw";
-  });
+  nord-wallpaper = lib.lists.elemAt (import ./misc/nord-wallpapers.nix {}) 0;
   pkgs-cursor = import (builtins.fetchGit {
     url = "https://github.com/NixOS/nixpkgs/";
     ref = "refs/pull/150322/merge";

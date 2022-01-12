@@ -6,7 +6,8 @@ let
   cfg = config.services.bg-setter;
   #listOfTargets = [ "multi-user.target" ]
   #  ++ lists.optional config.services.autorandr.enable "autorandr.service";
-  listOfTargets = [ "multi-user.target" "autorandr.service" ];
+  #listOfTargets = [ "multi-user.target" "autorandr.service" ];
+  listOfTargets = [ "autorandr.service" ];
 in
 {
   options = {
@@ -47,8 +48,8 @@ in
         PassEnvironment = "DISPLAY";
         Type = "oneshot";
       };
-      after = listOfTargets;
-      wantedBy = listOfTargets;
+      unitConfig = {
+      };
       # TODO: make sure that the script will check if the .fehbg file is present
       script = ''
         ${pkgs.feh}/bin/feh --bg-${cfg.wallpaperSize} ${optionalString (!cfg.useFehBg) "--no-fehbg"} ${cfg.wallpaper}
