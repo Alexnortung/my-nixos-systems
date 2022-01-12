@@ -255,6 +255,8 @@ in
   };
 
   environment.systemPackages = with pkgs; [
+    gimp
+    imagemagick
     unstable.dbeaver
     slack-term
     slack

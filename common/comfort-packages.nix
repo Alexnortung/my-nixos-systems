@@ -38,6 +38,7 @@
     enable = true;
   };
   environment.systemPackages = with pkgs; [
+    file
     bash
     lm_sensors
     gnumake
