@@ -132,6 +132,12 @@ let g:user_emmet_mode='inv'  "enable all functions, which is equal to
 let g:user_emmet_mode='a'    "enable all function in all mode.
 let g:user_emmet_install_global = 1
 
+" Svelte
+"let g:vim_svelte_plugin_load_full_syntax = 1
+let g:vim_svelte_plugin_use_typescript = 1
+let g:vim_svelte_plugin_use_sass = 1
+let g:vim_svelte_plugin_use_less = 1
+
 lua <<EOF
 require'nvim-tree'.setup {
   disable_netrw       = true,

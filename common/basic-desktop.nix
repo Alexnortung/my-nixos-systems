@@ -27,5 +27,6 @@
 
   environment.systemPackages = with pkgs; [
     playerctl # used by dmw config
+    feh # Image viewer and background setter
   ];
 }

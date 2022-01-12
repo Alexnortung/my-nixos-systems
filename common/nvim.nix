@@ -24,9 +24,10 @@ let
   my-pkgs = import (unstable.fetchFromGitHub {
     owner = "alexnortung";
     repo = "nixpkgs";
-    rev = "21972788106d85a26ff9c51b2f18eb8b23e2ee0c";
-    sha256 = "zHxkRaCvK83m2y8Zkfggs8PvBsZyK4JsZORvomEnEU4=";
+    rev = "1f1704585483e8e334d0975fb17ba918073985e8";
+    sha256 = "16kqjsz7lpr0601lln62abw3gd68qjdgxqn6igd0q42wg2mvchgk";
   }) {};
+  #local-pkgs = import /home/alexander/source/nixpkgs {};
 in
 {
   disabledModules = [
@@ -51,8 +52,8 @@ in
           # Snippets
           vim-snippets
           ultisnips
-          my-pkgs.vimPlugins.vim-svelte
-          my-pkgs.vimPlugins.coc-svelte
+          my-pkgs.vimPlugins.vim-svelte-plugin
+          #my-pkgs.vimPlugins.coc-svelte
           my-pkgs.vimPlugins.coc-tailwindcss
           vim-surround # Shortcuts for setting () {} etc.
           # COC
@@ -79,6 +80,7 @@ in
           #vim-svelte
           vim-nix # nix highlight
           vim-javascript # javascript highlight
+          typescript-vim
           vim-yaml # yaml highlight
           vimtex # latex stuff
           #fzf-vim # fuzzy finder through vim
