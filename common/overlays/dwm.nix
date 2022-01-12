@@ -27,9 +27,10 @@
             url = "https://dwm.suckless.org/patches/pertag/dwm-pertag-6.2.diff";
             sha256 = "8DmooU16+TGu+BzUzxdlbYaB12HSae/RO7fGfsC8IHM=";
           })
+          # Hide vacant tags
           (super.fetchpatch {
             url = "https://dwm.suckless.org/patches/hide_vacant_tags/dwm-hide_vacant_tags-6.2.diff";
-            sha256 = "1a3z9f2hd7602857v99hcyiw4sapsl7x5v612azani1plz6l6vbi";
+            sha256 = "1ngmssh4xiph237ayyh28qjisd5fafjn416r9a8gvlhk1svdw466";
           })
         ];
       });
