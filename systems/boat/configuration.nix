@@ -252,6 +252,7 @@ in
   };
 
   environment.systemPackages = with pkgs; [
+    sage
     qutebrowser
     #unstable.steam
     #gimp
