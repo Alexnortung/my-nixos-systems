@@ -6,60 +6,67 @@
 
 let
   # pass config so that packages use correct allowUnfree for example
-  nixpkgs = builtins.fetchTarball {
-    url = "https://github.com/NixOS/nixpkgs/archive/465daf79b4a23d6e47d2efddece7120da8800c63.tar.gz";
-    sha256 = "0yp8dacjhm632zk6wbiqx69j5xrqz29mvp7cdn2l3asxs0cf85vs";
+  nixos-version-fetched = builtins.fetchGit {
+    url = "https://github.com/NixOS/nixpkgs/";
+    ref = "refs/heads/nixos-21.11";
+    rev = "8588b14a397e045692d0a87192810b6dddf53003";
+  };
+  nixos-version = import "${nixos-version-fetched}" { 
+    inherit (config.nixpkgs) config overlays localSystem crossSystem;
   };
   unfreeConfig = config.nixpkgs.config // {
     allowUnfree = true;
   };
-  pkgs-xmrig = import (builtins.fetchGit {
-      # Descriptive name to make the store path easier to identify                
-      name = "xmrig-rev";
-      url = "https://github.com/NixOS/nixpkgs/";
-      ref = "refs/heads/nixpkgs-unstable";
-      rev = "860b56be91fb874d48e23a950815969a7b832fbc";
-  }) {};
-  pkgs-papermc-1-17-1= import (builtins.fetchGit {
-      # Descriptive name to make the store path easier to identify                
-      name = "papermc-1-17-1-rev";
-      url = "https://github.com/NixOS/nixpkgs/";
-      ref = "refs/heads/nixpkgs-unstable";
-      rev = "08ef0f28e3a41424b92ba1d203de64257a9fca6a";
-  }) { config = unfreeConfig; };                                                                           
-  pkgs-sonarr = import (builtins.fetchGit {
-    name = "sonarr-revision";
+  unstable-fetched = builtins.fetchGit {
+    name = "nixpkgs-unstable";
     url = "https://github.com/nixos/nixpkgs/";
     ref = "refs/heads/nixpkgs-unstable";
-    rev = "860b56be91fb874d48e23a950815969a7b832fbc";
-  }) {};
-  pkgs-jellyfin = import (builtins.fetchGit {
-    name = "jellyfin-revision";
-    url = "https://github.com/nixos/nixpkgs/";
-    #ref = "refs/heads/nixpkgs-unstable";
-    rev = "8a2ec31e224de9461390cdd03e5e0b0290cdad0b";
-  }) {};
-  nixos-unstable = builtins.fetchGit {
-    name = "nixos-unstable";
-    url = "https://github.com/nixos/nixpkgs/";
-    ref = "refs/heads/nixos-unstable";
-    rev = "34ad3ffe08adfca17fcb4e4a47bb5f3b113687be";
+    rev = "5c37ad87222cfc1ec36d6cd1364514a9efc2f7f2";
   };
-  nixos-unstable-imported = import nixos-unstable {};
+  unstable = import unstable-fetched {};
   authorizedKeyFiles = [
     /etc/nixos/ext-conf/.ssh/authorizedKeys
     /etc/nixos/ext-conf/.ssh/authorizedKeysFolder/alexander_boat.pub
   ];
+  nur-fetched = pkgs.fetchFromGitHub {
+    owner = "nix-community";
+    repo = "NUR";
+    rev = "fe98d8f7f63fa43e93a0c86cbaa53b30aec67a91";
+    sha256 = "1vfilzi450rj3h5vh88c83ismyvq1d46s2mbxrlq4zfck1bg0c2w";
+  };
+  nur-alexnortung = import (pkgs.fetchFromGitHub {
+    owner = "alexnortung";
+    repo = "nur-alexnortung";
+    rev = "f570e9faa3a39d5133a6a34a95c305339cce4b1b";
+    sha256 = "1sxb0yyy8la8rczz596yn1hc3aff2qxfz7h9h6mrgy0w1x10dpfl";
+  }) {};
 in
 {
+  imports =
+    [ # Include the results of the hardware scan.
+      #"${nixos-unstable}/nixos/modules/services/misc/prowlarr.nix"
+      ../../common/nvim.nix
+      ../../common/console.nix
+      ../../common/comfort-packages.nix
+      ../../common/programming-pkgs.nix
+    ];
+
+  nixpkgs.pkgs = nixos-version;
+
   nix.nixPath = [
-    "nixpkgs=${nixpkgs}"
+    "nixpkgs=${nixos-version-fetched}"
     "nixos-config=/etc/nixos/configuration.nix"
+    "/nix/var/nix/profiles/per-user/root/channels"
   ];
-  nixpkgs.config = {
-    packageOverrides = pkgs: {
-      sonarr = pkgs-sonarr.sonarr;
-      prowlarr = nixos-unstable-imported.prowlarr;
+
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "minecraft-server"
+  ];
+
+  # Install nur
+  nixpkgs.config.packageOverrides = pkgs: {
+    nur = import (nur-fetched) {
+      inherit pkgs;
     };
   };
 
@@ -74,12 +81,6 @@ in
     ];
   };
 
-  imports =
-    [ # Include the results of the hardware scan.
-      "${nixos-unstable}/nixos/modules/services/misc/prowlarr.nix"
-      ../../common/nvim.nix
-      ../../common/console.nix
-    ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -98,29 +99,7 @@ in
   networking.useDHCP = false;
   networking.interfaces.enp0s31f6.useDHCP = true;
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  #networking.nat.enable = true;
-  #networking.nat.externalInterface = "enp0s31f6";
   networking.nat.internalInterfaces = [ "wg0" ];
-
-  # Select internationalisation properties.
-  # i18n.defaultLocale = "en_US.UTF-8";
-  # console = {
-  #   font = "Lat2-Terminus16";
-  #   keyMap = "us";
-  # };
-
-  # Enable the X11 windowing system.
-  # services.xserver.enable = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  # users.users.jane = {
-  #   isNormalUser = true;
-  #   extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-  # };
 
   environment.systemPackages = with pkgs; [
     nmap
@@ -129,25 +108,15 @@ in
     wireguard
     file
     curl
-    vim
+    #vim
     croc
     lm_sensors
-    pkgs-xmrig.xmrig
+    unstable.xmrig
     htop
     borgbackup
     mcrcon
     bashmount
   ];
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
   services.openssh = {
@@ -262,7 +231,7 @@ in
   };
 
   services.lidarr = {
-    enable = true;
+    enable = false;
     group = "servarr";
     openFirewall = true;
     #dataDir = "/var/lib/radarr";
@@ -313,18 +282,15 @@ in
     enable = true;
     group = "servarr";
     openFirewall = true;
-    package = pkgs-jellyfin.jellyfin;
   };
 
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "minecraft-server"
-  ];
 
   services.minecraft-server = {
     enable = true;
     eula = true;
     declarative = true;
-    package = pkgs-papermc-1-17-1.papermc;
+    package = nur-alexnortung.papermc-1_18_x;
+    #package = custom-papermc;
     dataDir = "/data/data1/var/lib/minecraft";
     openFirewall = true;
     serverProperties = {
@@ -350,7 +316,7 @@ in
       level-name = "world";
       pvp = true;
       generate-structures = true;
-      difficulty = "normal";
+      difficulty = "hard";
       max-players = 10;
       online-mode = true;
       allow-flight = false;
@@ -388,6 +354,9 @@ in
       Mokkamussen = "f893734b-534c-4321-bb91-6eeb662c01ed";
       Null_Boi = "e9fdc0f4-7c45-406d-a2bc-34d059687c22";
       Nanna4478 = "c493e333-ed41-4b29-aef5-4949291faf3b";
+      MrSnoffy = "e2448438-2665-4b75-b6f1-a636d5e73b3c";
+      LanterneFar = "ae1b9823-55db-4101-9a94-5069753d11db";
+      Criller0933 = "93761b36-0b7a-4f87-b605-98273f69063a";
     };
   };
 
