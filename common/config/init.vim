@@ -1,3 +1,5 @@
+syntax on
+filetype on
 let mapleader = ","
 
 " Use Nord color scheme
@@ -10,6 +12,7 @@ set number relativenumber " Sets line numbers, but relative and sets the line nu
 " Use spaces on tab
 set expandtab
 set shiftwidth=4
+set tabstop=4
 
 " Use mouse
 set mouse=a
@@ -123,6 +126,17 @@ endfunction
 
 let g:coc_snippet_next = '<tab>'
 
+" Emmet
+let g:user_emmet_mode='n'    "only enable normal mode functions.
+let g:user_emmet_mode='inv'  "enable all functions, which is equal to
+let g:user_emmet_mode='a'    "enable all function in all mode.
+let g:user_emmet_install_global = 1
+
+" Svelte
+"let g:vim_svelte_plugin_load_full_syntax = 1
+let g:vim_svelte_plugin_use_typescript = 1
+let g:vim_svelte_plugin_use_sass = 1
+let g:vim_svelte_plugin_use_less = 1
 
 lua <<EOF
 require'nvim-tree'.setup {

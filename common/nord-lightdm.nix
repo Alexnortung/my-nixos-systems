@@ -1,6 +1,7 @@
 { config, lib, pkgs, ...}:
 
 let
+  nord-wallpaper = lib.lists.elemAt (import ./misc/nord-wallpapers.nix {}) 0;
   pkgs-cursor = import (builtins.fetchGit {
     url = "https://github.com/NixOS/nixpkgs/";
     ref = "refs/pull/150322/merge";
@@ -9,6 +10,7 @@ let
 in
 {
   services.xserver.displayManager.lightdm = {
+    background = nord-wallpaper;
     greeters.gtk = {
       enable = true;
       theme = {

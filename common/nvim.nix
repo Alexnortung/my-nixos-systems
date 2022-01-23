@@ -14,12 +14,20 @@ let
   nixos-version-fetched = builtins.fetchGit {
     name = "nixos-neovim-module";
     url = "https://github.com/NixOS/nixpkgs/";
-    ref = "refs/tags/22.05-pre";
-    rev = "e96c668072d7c98ddf2062f6d2b37f84909a572b";
+    ref = "refs/heads/nixos-21.11";
+    rev = "386234e2a61e1e8acf94dfa3a3d3ca19a6776efb";
   };
-  #nixos-version = import "${nixos-version-fetched}" { 
-  #  inherit (config.nixpkgs) config overlays localSystem crossSystem;
-  #};
+  nixos-version = import "${nixos-version-fetched}" { 
+    name = "nvim-version";
+    inherit (config.nixpkgs) config overlays localSystem crossSystem;
+  };
+  my-pkgs = import (unstable.fetchFromGitHub {
+    owner = "alexnortung";
+    repo = "nixpkgs";
+    rev = "1f1704585483e8e334d0975fb17ba918073985e8";
+    sha256 = "16kqjsz7lpr0601lln62abw3gd68qjdgxqn6igd0q42wg2mvchgk";
+  }) {};
+  #local-pkgs = import /home/alexander/source/nixpkgs {};
 in
 {
   disabledModules = [
@@ -37,8 +45,16 @@ in
     package = pkgs.neovim-unwrapped;
     configure = {
       customRC = builtins.readFile ./config/init.vim;
-      packages.nix = with pkgs.vimPlugins; {
+      plug.plugins = [
+      ];
+      packages.nix = with nixos-version.vimPlugins; {
         start = [
+          # Snippets
+          vim-snippets
+          ultisnips
+          my-pkgs.vimPlugins.vim-svelte-plugin
+          #my-pkgs.vimPlugins.coc-svelte
+          my-pkgs.vimPlugins.coc-tailwindcss
           vim-surround # Shortcuts for setting () {} etc.
           # COC
           coc-nvim
@@ -50,16 +66,21 @@ in
           coc-vimtex
           coc-yaml
           coc-html
+          #coc-svelte
           coc-json # auto completion
           coc-css
+          #coc-tailwindcss
           coc-emmet
           coc-tsserver
           coc-eslint
           coc-snippets
           coc-clangd
           #coc-phpls
+          emmet-vim
+          #vim-svelte
           vim-nix # nix highlight
           vim-javascript # javascript highlight
+          typescript-vim
           vim-yaml # yaml highlight
           vimtex # latex stuff
           #fzf-vim # fuzzy finder through vim

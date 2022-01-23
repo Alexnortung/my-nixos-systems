@@ -1,11 +1,13 @@
 { pkgs, lib, ... }:
 
 let
-  #sagetex-python = pkgs.callPackage ./latex-packages/sagetex-python.nix {};
-  sagetex-pkg = pkgs.callPackage ./latex-packages/sagetex.nix {};
-  #sagetex-python = pkgs.python3.pkgs.toPythonModule sagetex-pkg;
+  sagetex-pkgs = import (builtins.fetchGit {
+    url = "https://github.com/NixOS/nixpkgs/";
+    ref = "refs/pull/151876/merge";
+    rev = "b9a8932892b37ca8881772d88181637213f404cf";
+  }) {};
   sagetex.pkgs = [
-    sagetex-pkg
+    sagetex-pkgs.sagetex
   ];
 in
 let
@@ -16,6 +18,5 @@ let
 in {
   environment.systemPackages = [
     my_latex
-    #sagetex-python
   ];
 }

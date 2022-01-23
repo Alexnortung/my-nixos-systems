@@ -20,7 +20,7 @@ let
   nixos-version-fetched = builtins.fetchGit {
     url = "https://github.com/NixOS/nixpkgs/";
     ref = "refs/heads/nixos-21.11";
-    rev = "1bd4bbd49bef217a3d1adea43498270d6e779d65";
+    rev = "386234e2a61e1e8acf94dfa3a3d3ca19a6776efb";
   };
   nixos-version = import "${nixos-version-fetched}" { 
     inherit (config.nixpkgs) config overlays localSystem crossSystem;
@@ -51,7 +51,6 @@ in
     ../../common/console.nix
     #../../common/personal-vpn.nix
     ../../common/vscodium.nix
-    ../../common/battery-notifier.nix
     ../../common/latex.nix
     ../../common/nord-lightdm.nix
     ../../common/nord-gtk.nix
@@ -83,68 +82,6 @@ in
       mullvad-vpn = unstable.mullvad-vpn;
     };
   };
-
-  nixpkgs.overlays = [
-    (self: super: {
-      st = super.st.overrideAttrs (oldAttrs : rec {
-        buildInputs = oldAttrs.buildInputs ++ [ pkgs.harfbuzz ];
-        configFile = super.writeText "config.h" (builtins.readFile ./config/st-config.h);
-        postPatch = "${oldAttrs.postPatch}\ncp ${configFile} config.def.h\n";
-        patches = [
-          # Desktop entry - gives an icon
-          (super.fetchpatch {
-            url = "https://st.suckless.org/patches/desktopentry/st-desktopentry-0.8.4.diff";
-            sha256 = "0v0hymybm2yplrvdjqysvcyhl36a5llih8ya9xjim1fpl609hg8y";
-          })
-          # More icon
-          (super.fetchpatch {
-            url = "http://st.suckless.org/patches/netwmicon/st-netwmicon-0.8.4.diff";
-            sha256 = "0gnk4fibqyby6b0fdx86zfwdiwjai86hh8sk9y02z610iimjaj1n";
-          })
-          # Scrollback
-          (super.fetchpatch {
-            url = "https://st.suckless.org/patches/scrollback/st-scrollback-0.8.4.diff";
-            sha256 = "0valvkbsf2qbai8551id6jc0szn61303f3l6r8wfjmjnn4054r3c";
-          })
-          # Alpha
-          (super.fetchpatch {
-            url = "https://st.suckless.org/patches/alpha/st-alpha-0.8.2.diff";
-            sha256 = "158k93bbgrmcajfxvkrzfl65lmqgj6rk6kn8yl6nwk183hhf5qd4";
-          })
-          # Ligatures
-          (super.fetchpatch {
-            url = "https://st.suckless.org/patches/ligatures/0.8.3/st-ligatures-alpha-scrollback-20200430-0.8.3.diff";
-            sha256 = "1y6fl31fz1ks43v80ccisz781zzf6fgaijdhcbvkxy2d009xla27";
-          })
-        ];
-      });
-      dwm = super.dwm.overrideAttrs (oldAttrs : rec {
-        configFile = super.writeText "config.h" (builtins.readFile ./config/dwm-config.h);
-        postPatch = oldAttrs.postPatch or "" + "\necho 'Using own config file...'\n cp ${configFile} config.def.h";
-        patches = [
-          # alwaysfullscreen - focus does not drift off when in fullscreen
-          #(super.fetchpatch {
-          #  url = "https://dwm.suckless.org/patches/alwaysfullscreen/dwm-alwaysfullscreen-6.1.diff";
-          #  sha256 = "1037m24c1hd6c77p84szc5qqaw4kldwwfzggyn6ac5rv8l47j057";
-          #})
-          # Systray
-          (super.fetchpatch {
-            url = "https://dwm.suckless.org/patches/systray/dwm-systray-6.2.diff";
-            sha256 = "1p1hzkm5fa9b51v19w4fqmrphk0nr0wnkih5vsji8r38nmxd4ydp";
-          })
-        ];
-      });
-      dmenu = super.dmenu.overrideAttrs (oldAttrs : rec {
-        #postPatch = "${oldAttrs.postPatch}\ncp ${configFile} config.def.h\n";
-        patches = [
-          (super.fetchpatch {
-            url = "https://tools.suckless.org/dmenu/patches/case-insensitive/dmenu-caseinsensitive-5.0.diff";
-            sha256 = "0bb0iwv8d53dibzqc307y3z852whwxjzjrxkbs07cs5y3c2l98ay";
-          })
-        ];
-      });
-    })
-  ];
 
   fonts.fonts = with pkgs; [
     hasklig
@@ -215,6 +152,11 @@ in
     enable = true;
     notifyCapacity = 15;
     hibernateCapacity = 5;
+  };
+
+  services.bg-setter = {
+    enable = true;
+    wallpaper = lib.lists.elemAt (import ../../common/misc/nord-wallpapers.nix {}) 0;
   };
 
   services.dwm-status = {
@@ -313,6 +255,8 @@ in
   };
 
   environment.systemPackages = with pkgs; [
+    gimp
+    imagemagick
     unstable.dbeaver
     slack-term
     slack

@@ -9,6 +9,7 @@
   };
   environment.systemPackages = with pkgs; [
     git
+    file
     bash
     lm_sensors
     gnumake
