@@ -38,12 +38,13 @@ let
     url = "https://github.com/NixOS/nixos-hardware.git";
     rev = "3aabf78bfcae62f5f99474f2ebbbe418f1c6e54f";
   };
-  local-pkgs = import "/home/alexander/source/nixpkgs" {
-    config.permittedInsecurePackages = [
-      "adoptopenjdk-jre-hotspot-bin-14.0.2"
-      "adoptopenjdk-jre-hotspot-bin-13.0.2"
-    ];
-  };
+  local-pkgs = import "/home/alexander/source/nixpkgs" { };
+  local-nur = import "/home/alexander/source/nur-alexnortung" { };
+  nur-alexnortung = import (builtins.fetchGit {
+    url = "https://github.com/alexnortung/nur-alexnortung/";
+    rev = "3785639862d7436662edac9b17f741a746b0a482";
+    #sha256 = "1037m24c1hd6c87p84szc5qqaw4kldwwfzggyn6ac5rv8l47j057";
+  }) {};
 in
 let
   #pkgs = nixos-version;
@@ -63,7 +64,13 @@ in
     ../../common/nord-gtk.nix
     ../../common/basic-desktop.nix
     ../../common/zsh.nix
+    nur-alexnortung.modules.autorandr
   ];
+
+  disabledModules = [
+    "services/misc/autorandr.nix"
+  ];
+
 
   swapDevices = [
     {
@@ -163,6 +170,37 @@ in
 
   services.autorandr = {
     enable = true;
+    hooks = {
+      postswitch = {
+        "change-background" = "systemctl --user restart bg-setter";
+      };
+    };
+    profiles = {
+      "morgan" = {
+        fingerprint = {
+          HDMI1 = "00ffffffffffff0034a401090000000033160103802c19782ac905a3574b9c25125054bfcf008bc081808140810081c0714f6140454f302a40c86084643018501300bbf91000001c9a29a0d05184223050983600bbf91000001c000000fd00384b1e510c000a202020202020000000fc004d4432303332390a2020202020000b";
+          eDP1 = "00ffffffffffff0006af3d2100000000001a0104951f117802a2b591575894281c505400000001010101010101010101010101010101843a8034713828403064310035ad1000001ad02e8034713828403064310035ad1000001a000000fe00364d4e3737804231343048414e0000000000008102a8001100000a010a2020008e";
+        };
+        config = {
+          eDP1 = {
+            crtc = 0;
+            gamma = "1.0:0.667:0.435";
+            mode = "1920x1080";
+            position = "0x900";
+            primary = true;
+            rate = "60.03";
+          };
+          HDMI1 = {
+            enable = true;
+            crtc = 1;
+            gamma = "1.0:0.667:0.435";
+            mode = "1600x900";
+            position = "0x0";
+            rate = "60.00";
+          };
+        };
+      };
+    };
   };
 
   services.dwm-status = {
