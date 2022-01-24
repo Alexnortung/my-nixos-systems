@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, lib, ... }:
+{ pkgs, config, lib, ... }:
 
 let
   allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
@@ -37,6 +37,11 @@ let
     url = "https://github.com/NixOS/nixos-hardware.git";
     rev = "3aabf78bfcae62f5f99474f2ebbbe418f1c6e54f";
   };
+  nur-alexnortung = import (builtins.fetchGit {
+    url = "https://github.com/alexnortung/nur-alexnortung/";
+    rev = "9a75b9a40a0e47a82724c1dc23add6d877ef226c";
+    #sha256 = "1037m24c1hd6c87p84szc5qqaw4kldwwfzggyn6ac5rv8l47j057";
+  }) {};
 in
 let
   pkgs = nixos-version;
@@ -56,6 +61,11 @@ in
     ../../common/nord-gtk.nix
     ../../common/basic-desktop.nix
     ../../common/zsh.nix
+    nur-alexnortung.modules.autorandr
+  ];
+
+  disabledModules = [
+    "services/misc/autorandr.nix"
   ];
 
   hardware.bluetooth = {
@@ -232,6 +242,11 @@ in
 
   services.autorandr = {
     enable = true;
+    hooks =  {
+      postswitch = {
+        change-bavkground =  "systemctl --user restart bg-setter";
+      };
+    };
   };
 
   services.blueman.enable = true;
@@ -255,6 +270,7 @@ in
   };
 
   environment.systemPackages = with pkgs; [
+    brave
     gimp
     imagemagick
     unstable.dbeaver
