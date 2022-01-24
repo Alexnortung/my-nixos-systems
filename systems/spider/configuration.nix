@@ -147,6 +147,9 @@ in
     };
     firewall = {
       checkReversePath = lib.mkForce "loose";
+      allowedTCPPorts = [
+        3000
+      ];
     };
     #wg-quick.interfaces.wg0 = {
     #  address = [ "10.100.0.3" ];

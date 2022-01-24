@@ -11,6 +11,9 @@
 
   hardware.opengl = {
     enable = true;
+    driSupport = true;
+    #s3tcSupport = true;
+    driSupport32Bit = true;
   };
 
   services.gnome.gnome-keyring = {
