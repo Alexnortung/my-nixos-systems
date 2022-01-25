@@ -5,6 +5,12 @@
 { pkgs, config, lib, ... }:
 
 let
+  moz_overlay = import (unstable.fetchFromGitHub {
+    owner = "mozilla";
+    repo = "nixpkgs-mozilla";
+    rev = "7c1e8b1dd6ed0043fb4ee0b12b815256b0b9de6f";
+    sha256 = "1a71nfw7d36vplf89fp65vgj3s66np1dc0hqnqgj5gbdnpm1bihl";
+  });
   # Unstable
   unstable = import (builtins.fetchGit {
     url = "https://github.com/NixOS/nixpkgs/";
@@ -19,8 +25,16 @@ let
   };
   nixos-version = import "${nixos-version-fetched}" { 
     name = "nvim-version";
-    inherit (config.nixpkgs) config overlays localSystem crossSystem;
+    inherit (config.nixpkgs) config localSystem crossSystem;
+    overlays = config.nixpkgs.overlays ++ [ moz_overlay ];
   };
+  ruststable = (nixos-version.latest.rustChannels.stable.rust.override {
+    extensions = [
+      "rust-src"
+      "rustfmt-preview"
+      "clippy-preview"
+    ];
+  });
   my-pkgs = import (unstable.fetchFromGitHub {
     owner = "alexnortung";
     repo = "nixpkgs";
@@ -77,6 +91,7 @@ in
           coc-clangd
           #coc-phpls
           emmet-vim
+          editorconfig-nvim
           #vim-svelte
           vim-nix # nix highlight
           vim-javascript # javascript highlight
@@ -110,7 +125,8 @@ in
     unstable.clang-tools
     #llvm
     clang_12
-    rust-analyzer
+    nixos-version.rust-analyzer
+    ruststable
   ];
 }
 

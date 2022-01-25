@@ -10,7 +10,7 @@
     # C
     gcc
     # Rust
-    rustc
+    # rustc # use the one in nvim.nix instead
     #rustup
     #rls
     cargo
