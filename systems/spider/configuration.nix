@@ -20,7 +20,7 @@ let
   nixos-version-fetched = builtins.fetchGit {
     url = "https://github.com/NixOS/nixpkgs/";
     ref = "refs/heads/nixos-21.11";
-    rev = "386234e2a61e1e8acf94dfa3a3d3ca19a6776efb";
+    rev = "b3d86c56c786ad9530f1400adbd4dfac3c42877b";
   };
   nixos-version = import "${nixos-version-fetched}" { 
     inherit (config.nixpkgs) config overlays localSystem crossSystem;
