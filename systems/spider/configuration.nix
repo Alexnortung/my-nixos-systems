@@ -6,6 +6,7 @@
 
 let
   allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "postman"
     "nvidia-x11"
     "nvidia-settings"
     "discord"
@@ -276,6 +277,7 @@ in
   };
 
   environment.systemPackages = with pkgs; [
+    postman
     brave
     gimp
     imagemagick
