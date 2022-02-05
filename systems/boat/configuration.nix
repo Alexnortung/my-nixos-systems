@@ -62,6 +62,7 @@ in
     ../../common/latex.nix
     ../../common/nord-lightdm.nix
     ../../common/nord-gtk.nix
+    ../../common/misc/emojipick.nix
     ../../common/basic-desktop.nix
     ../../common/zsh.nix
     nur-alexnortung.modules.autorandr

@@ -33,6 +33,9 @@ static const char *suspend_cmd[] =  { "systemctl", "suspend", NULL };
 static const char *poweroff_cmd[] =  { "poweroff", NULL };
 static const char *reboot_cmd[] =  { "reboot", NULL };
 
+// dmenu
+static const char *emojipick_cmd[] = { "emojipick" };
+
 // Systray
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayspacing = 2;   /* systray spacing */
@@ -174,6 +177,7 @@ static Key keys[] = {
     { MODKEY, XK_F9, spawn, {.v = suspend_cmd } },
     { MODKEY|ShiftMask, XK_F12, spawn, {.v = poweroff_cmd } },
     { MODKEY|ShiftMask, XK_F11, spawn, {.v = reboot_cmd } },
+    { MODKEY|ControlMask, XK_period, spawn, { .v = emojipick_cmd } }
 };
 
 /* button definitions */
