@@ -1,13 +1,12 @@
 { pkgs, lib, ... }:
 
 let
-  sagetex-pkgs = import (builtins.fetchGit {
+  unstable = import (builtins.fetchGit {
     url = "https://github.com/NixOS/nixpkgs/";
-    ref = "refs/pull/151876/merge";
-    rev = "b9a8932892b37ca8881772d88181637213f404cf";
+    rev = "a529f0c125a78343b145a8eb2b915b0295e4f459";
   }) {};
   sagetex.pkgs = [
-    sagetex-pkgs.sagetex
+    unstable.sagetex
   ];
 in
 let
