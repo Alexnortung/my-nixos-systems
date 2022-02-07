@@ -5,6 +5,11 @@
 { pkgs, config, lib, ... }:
 
 let
+  extraPlugins = import (builtins.fetchGit {
+    url = "https://github.com/m15a/nixpkgs-vim-extra-plugins/";
+    rev = "6b9235fc0d9c90bcc1fe7b0cc0cbc2bcd4cde9d2";
+    ref = "refs/pull/57/merge";
+  });
   moz_overlay = import (unstable.fetchFromGitHub {
     owner = "mozilla";
     repo = "nixpkgs-mozilla";
@@ -26,7 +31,10 @@ let
   nixos-version = import "${nixos-version-fetched}" { 
     name = "nvim-version";
     inherit (config.nixpkgs) config localSystem crossSystem;
-    overlays = config.nixpkgs.overlays ++ [ moz_overlay ];
+    overlays = config.nixpkgs.overlays ++ [
+      moz_overlay
+      extraPlugins.overlay
+    ];
   };
   ruststable = (nixos-version.latest.rustChannels.stable.rust.override {
     extensions = [
@@ -35,12 +43,13 @@ let
       "clippy-preview"
     ];
   });
-  my-pkgs = import (unstable.fetchFromGitHub {
-    owner = "alexnortung";
-    repo = "nixpkgs";
-    rev = "1f1704585483e8e334d0975fb17ba918073985e8";
-    sha256 = "16kqjsz7lpr0601lln62abw3gd68qjdgxqn6igd0q42wg2mvchgk";
-  }) {};
+  #my-pkgs = import (unstable.fetchFromGitHub {
+  #  owner = "alexnortung";
+  #  repo = "nixpkgs";
+  #  rev = "1f1704585483e8e334d0975fb17ba918073985e8";
+  #  sha256 = "16kqjsz7lpr0601lln62abw3gd68qjdgxqn6igd0q42wg2mvchgk";
+  #}) {};
+  
   #local-pkgs = import /home/alexander/source/nixpkgs {};
 in
 {
@@ -66,33 +75,27 @@ in
           # Snippets
           vim-snippets
           ultisnips
-          my-pkgs.vimPlugins.vim-svelte-plugin
-          #my-pkgs.vimPlugins.coc-svelte
-          my-pkgs.vimPlugins.coc-tailwindcss
           vim-surround # Shortcuts for setting () {} etc.
+          # LSP
+          nvim-lspconfig
+          # cmp
+          cmp-nvim-lsp
+          cmp-buffer
+          cmp-path
+          cmp-cmdline
+          nvim-cmp
+          nixos-version.vimExtraPlugins.cmp-nvim-ultisnips
           # COC
-          coc-nvim
-          coc-git
-          coc-highlight
-          coc-python
-          coc-rust-analyzer
-          coc-vetur
-          coc-vimtex
-          coc-yaml
-          coc-html
-          #coc-svelte
-          coc-json # auto completion
-          coc-css
-          #coc-tailwindcss
-          coc-emmet
-          coc-tsserver
-          coc-eslint
-          coc-snippets
-          coc-clangd
-          #coc-phpls
+          #coc-yaml
+          #coc-html
+          #coc-css
+          ##coc-tailwindcss
+          #coc-eslint
+          #coc-clangd
           emmet-vim
-          editorconfig-nvim
-          #vim-svelte
+          editorconfig-vim
+          # Syntax highlight
+          nixos-version.vimExtraPlugins.vim-svelte-plugin
           vim-nix # nix highlight
           vim-javascript # javascript highlight
           typescript-vim
@@ -129,6 +132,14 @@ in
     clang_12
     nixos-version.rust-analyzer
     ruststable
+
+    # LSP packages
+    nodePackages.pyright
+    nodePackages.svelte-language-server
+    nodePackages.typescript
+    nodePackages.typescript-language-server
+    #nodePackages.emmet-ls
+    rnix-lsp
   ];
 }
 

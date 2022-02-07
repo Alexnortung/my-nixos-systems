@@ -22,6 +22,9 @@ set mouse=a
 " Use system clipboard
 set clipboard=unnamedplus
 
+" By cmp
+set completeopt=menu,menuone,noselect
+
 " makes you move up or down as you would see it visually
 nnoremap j gj
 nnoremap k gk
@@ -93,7 +96,7 @@ nmap <leader>bcr <cmd>BufferLineCloseRight<CR>
 " Buffers
 nmap <leader>bb <cmd>bprevious<CR>
 nmap <leader>bn <cmd>bnext<CR>
-nmap <A-w> <cmd>bdelete<CR>
+nmap <A-w> <cmd>bdelete %<CR>
 
 " Dashboard
 let g:dashboard_default_executive ='telescope'
@@ -149,24 +152,30 @@ let g:indent_blankline_context_patterns = [
     \]
 
 " COC
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? coc#_select_confirm() :
-      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+" inoremap <silent><expr> <TAB>
+"       \ pumvisible() ? coc#_select_confirm() :
+"       \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+"       \ <SID>check_back_space() ? "\<TAB>" :
+"       \ coc#refresh()
 
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+" function! s:check_back_space() abort
+"   let col = col('.') - 1
+"   return !col || getline('.')[col - 1]  =~# '\s'
+" endfunction
+" 
+" let g:coc_snippet_next = '<tab>'
 
-let g:coc_snippet_next = '<tab>'
+" Snippets
+" let g:UltiSnipsExpandTrigger="<tab>"
+" let g:UltiSnipsJumpForwardTrigger="<c-b>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " Emmet
 let g:user_emmet_mode='n'    "only enable normal mode functions.
 let g:user_emmet_mode='inv'  "enable all functions, which is equal to
 let g:user_emmet_mode='a'    "enable all function in all mode.
 let g:user_emmet_install_global = 1
+let g:user_emmet_leader_key='<C-Z>'
 
 " Svelte
 "let g:vim_svelte_plugin_load_full_syntax = 1
@@ -267,6 +276,83 @@ require('bufferline').setup {
     separator_style = "thin",
     always_show_bufferline = true
   }
+}
+
+local cmp = require('cmp')
+local cmp_ultisnips_mappings = require('cmp_nvim_ultisnips.mappings')
+cmp.setup {
+  snippet = {
+    -- REQUIRED - you must specify a snippet engine
+    expand = function(args)
+      vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+    end,
+  },
+  mapping = {
+    ['<Tab>'] = cmp.mapping(
+      function(fallback)
+        cmp_ultisnips_mappings.expand_or_jump_forwards(fallback)
+      end
+    ),
+    ['<S-Tab>'] = cmp.mapping(
+      function(fallback)
+        cmp_ultisnips_mappings.compose { "jump_backwards" } (fallback)
+      end
+    ),
+    ['<C-Tab>'] = cmp.mapping(
+      function(fallback)
+        cmp_ultisnips_mappings.compose { "jump_forwards" } (fallback)
+      end
+    ),
+    ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+    ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+    ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+    ['<C-e>'] = cmp.mapping({
+      i = cmp.mapping.abort(),
+      c = cmp.mapping.close(),
+    }),
+    --['<C-y>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+  },
+  sources = cmp.config.sources({
+    { name = 'ultisnips' }, -- For ultisnips users.
+  }, {
+    { name = 'buffer' },
+  })
+}
+
+
+-- Setup lspconfig.
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+-- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
+local lspconfig = require('lspconfig')
+
+-- enable language servers
+lspconfig.pyright.setup {
+  capabilities = capabilities
+}
+lspconfig.svelte.setup {
+  capabilities = capabilities
+}
+lspconfig.tsserver.setup {
+  capabilities = capabilities
+}
+lspconfig.emmet_ls.setup {
+  capabilities = capabilities
+}
+lspconfig.gdscript.setup {
+  capabilities = capabilities
+}
+lspconfig.texlab.setup {
+  capabilities = capabilities
+}
+lspconfig.phpactor.setup {
+  capabilities = capabilities
+}
+lspconfig.rnix.setup {
+  capabilities = capabilities
+}
+lspconfig.rust_analyzer.setup {
+  capabilities = capabilities
 }
 
 EOF

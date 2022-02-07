@@ -94,6 +94,13 @@ in
     };
   };
 
+  nix = {
+    package = unstable.nixUnstable; # or versioned attributes like nix_2_4
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+  };
+
   fonts.fonts = with pkgs; [
     hasklig
     terminus-nerdfont
