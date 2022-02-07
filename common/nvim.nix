@@ -114,6 +114,7 @@ in
           uvi.nvim-web-devicons
           uvi.nvim-tree-lua
           bufferline-nvim # Good looking buffer line
+          dashboard-nvim
         ];
         opt = [
         ];

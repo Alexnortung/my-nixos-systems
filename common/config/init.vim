@@ -95,6 +95,21 @@ nmap <leader>bb <cmd>bprevious<CR>
 nmap <leader>bn <cmd>bnext<CR>
 nmap <A-w> <cmd>bdelete<CR>
 
+" Dashboard
+let g:dashboard_default_executive ='telescope'
+
+
+let g:dashboard_custom_header = [
+  \'              ▄▄                               ',
+  \'▀███▄   ▀███▀ ██             ▄▄█▀▀██▄  ▄█▀▀▀█▄█',
+  \'  ███▄    █                ▄██▀    ▀██▄██    ▀█',
+  \'  █ ███   █ ▀███ ▀██▀   ▀██▀█▀      ▀█████▄    ',
+  \'  █  ▀██▄ █   ██   ▀██ ▄█▀ ██        ██ ▀█████▄',
+  \'  █   ▀██▄█   ██     ███   ██▄      ▄██     ▀██',
+  \'  █     ███   ██   ▄█▀ ██▄ ▀██▄    ▄██▀█     ██',
+  \'▄███▄    ██ ▄████▄██▄   ▄██▄ ▀▀████▀▀ █▀█████▀ ',
+    \ ]
+
 " Pear tree - smart closing of brackets
 let g:pear_tree_smart_openers = 1
 let g:pear_tree_smart_closers = 1
