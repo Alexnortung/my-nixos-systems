@@ -113,6 +113,7 @@ in
           (uvi.nvim-treesitter.withPlugins (plugins: unstable.tree-sitter.allGrammars)) # better syntax highlight
           uvi.nvim-web-devicons
           uvi.nvim-tree-lua
+          bufferline-nvim # Good looking buffer line
         ];
         opt = [
         ];

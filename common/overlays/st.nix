@@ -33,6 +33,16 @@
             url = "https://st.suckless.org/patches/ligatures/0.8.3/st-ligatures-alpha-scrollback-20200430-0.8.3.diff";
             sha256 = "1y6fl31fz1ks43v80ccisz781zzf6fgaijdhcbvkxy2d009xla27";
           })
+          # Anysize
+          (super.fetchpatch {
+            url = "https://st.suckless.org/patches/anysize/st-anysize-0.8.4.diff";
+            sha256 = "1w3fjj6i0f8bii5c6gszl5lji3hq8fkqrcpxgxkcd33qks8zfl9q";
+          })
+          # Vercenter
+          (super.fetchpatch {
+            url = "https://st.suckless.org/patches/vertcenter/st-vertcenter-20180320-6ac8c8a.diff";
+            sha256 = "0q1ka6gpxmflsmxy1790pjmvz79p1qjafm1g1ck6ixlkc9ls9rh4";
+          })
         ];
       });
     })

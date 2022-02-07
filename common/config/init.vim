@@ -3,8 +3,10 @@ filetype on
 let mapleader = ","
 
 " Use Nord color scheme
+" !IMPORTANT: set the variables before setting the color scheme
+let g:nord_borders = v:true
+let g:nord_contrast = v:true
 colorscheme nord
-let g:nord_borders = 1
 
 set nocompatible " for some reason important
 set number relativenumber " Sets line numbers, but relative and sets the line number for the current line
@@ -59,7 +61,8 @@ let g:Tex_IgnoredWarnings =
 "let g:NERDTreeWinSize = 35
 
 " Nvim tree
-nmap <leader>n :NvimTreeToggle<CR>
+nmap <leader>nn :NvimTreeToggle<CR>
+nmap <leader>nf :NvimTreeFindFile<CR>
 let g:nvim_tree_highlight_opened_files = 1 " will enable folder and file icon highlight for opened files/directories.
 
 " Rainbow
@@ -70,9 +73,27 @@ let g:rainbow_active = 1
 
 " Telescope
 nmap <leader>p <cmd>Telescope find_files<CR>
-nmap <leader>hp <cmd>Telescope find_files hidden=true<CR>
-nmap <leader>f <cmd>Telescope live_grep<CR>
-nmap <leader>hf <cmd>Telescope live_grep hidden=true<CR>
+nmap <leader>ff <cmd>Telescope find_files<CR>
+nmap <leader>fhf <cmd>Telescope find_files hidden=true<CR>
+nmap <leader>fl <cmd>Telescope live_grep<CR>
+nmap <leader>fhl <cmd>Telescope live_grep hidden=true<CR>
+nmap <leader>fb <cmd>Telescope buffers<CR>
+nmap <leader>fp <cmd>Telescope projects<CR>
+nmap <leader>fgs <cmd>Telescope git_status<CR>
+nmap <leader>fgc <cmd>Telescope git_commits<CR>
+nmap <leader>fgb <cmd>Telescope git_branches<CR>
+
+" Bufferline
+nmap <leader>bp <cmd>BufferLinePick<CR>
+nmap <leader>bmn <cmd>BufferLineMoveNext<CR>
+nmap <leader>bmb <cmd>BufferLineMovePrev<CR>
+nmap <leader>bcl <cmd>BufferLineCloseLeft<CR>
+nmap <leader>bcr <cmd>BufferLineCloseRight<CR>
+
+" Buffers
+nmap <leader>bb <cmd>bprevious<CR>
+nmap <leader>bn <cmd>bnext<CR>
+nmap <A-w> <cmd>bdelete<CR>
 
 " Pear tree - smart closing of brackets
 let g:pear_tree_smart_openers = 1
@@ -199,5 +220,38 @@ require'nvim-tree'.setup {
   }
 }
 
+vim.opt.termguicolors = true -- used by bufferline
+require('bufferline').setup {
+  options = {
+    close_command = "bdelete %d",
+    right_mouse_command = nil,
+    left_mouse_command = "buffer! %d",
+    middle_mouse_command = nil,
+    indicator_icon = '▎',
+    buffer_close_icon = '',
+    modified_icon = '●',
+    close_icon = '',
+    left_trunc_marker = '',
+    right_trunc_marker = '',
+
+    max_name_length = 18,
+    max_prefix_length = 15,
+    tab_size = 18,
+    --diagnostics = false | "nvim_lsp" | "coc",
+    diagnostics = "coc",
+    diagnostics_update_in_insert = false,
+    --diagnostics_indicator = function(count, level, diagnostics_dict, context)
+    --  return "("..count..")"
+    --end,
+    show_buffer_icons = true, -- disable filetype icons for buffers
+    show_buffer_close_icons = true,
+    show_close_icon = true,
+    show_tab_indicators = true,
+    persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
+    -- can also be a table containing 2 custom separators
+    separator_style = "thin",
+    always_show_bufferline = true
+  }
+}
 
 EOF
