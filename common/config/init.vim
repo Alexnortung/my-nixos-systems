@@ -347,6 +347,7 @@ cmp.setup {
   }
 }
 
+require("tailwindcss-colors").setup()
 
 -- Setup lspconfig.
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
@@ -361,12 +362,20 @@ local saga = require 'lspsaga'
 saga.init_lsp_saga()
 
 -- enable language servers
-local servers = { 'pyright', 'svelte', 'rust_analyzer', 'tsserver', 'emmet_ls', 'tailwindcss', 'gdscript', 'texlab', 'phpactor', 'rnix' }
+local servers = { 'pyright', 'svelte', 'rust_analyzer', 'tsserver', 'emmet_ls', 'gdscript', 'texlab', 'phpactor', 'rnix' }
 for _, lsp in pairs(servers) do
   lspconfig[lsp].setup {
     capabilities = capabilities,
     on_attach = on_attach,
   }
 end
+
+lspconfig.tailwindcss.setup {
+  capabilities = capabilities,
+  on_attach = function(client, bufnr)
+    require'lsp_signature'.on_attach()
+    require("tailwindcss-colors").buf_attach(bufnr)
+  end
+}
 
 EOF

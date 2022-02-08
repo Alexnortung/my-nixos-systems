@@ -39,7 +39,7 @@ let
     rev = "3aabf78bfcae62f5f99474f2ebbbe418f1c6e54f";
   };
   #local-pkgs = import "/home/alexander/source/nixpkgs" { };
-  #local-nur = import "/home/alexander/source/nur-alexnortung" { };
+  local-nur = import "/home/alexander/source/nur-alexnortung" { };
   nur-alexnortung = import (builtins.fetchGit {
     url = "https://github.com/alexnortung/nur-alexnortung/";
     rev = "3785639862d7436662edac9b17f741a746b0a482";
@@ -91,6 +91,7 @@ in
     allowUnfreePredicate = allowUnfreePredicate;
     packageOverrides = pkgs: {
       mullvad-vpn = unstable.mullvad-vpn;
+      fsharp-3 = local-nur.fsharp-3;
     };
   };
 
@@ -301,6 +302,7 @@ in
   };
 
   environment.systemPackages = with pkgs; [
+    dotnet-sdk
     sage
     qutebrowser
     #unstable.steam

@@ -7,7 +7,7 @@
 let
   extraPlugins = import (builtins.fetchGit {
     url = "https://github.com/m15a/nixpkgs-vim-extra-plugins/";
-    rev = "6b9235fc0d9c90bcc1fe7b0cc0cbc2bcd4cde9d2";
+    rev = "7d8682f3bd150696f0fd45b1518689d76abfbb63";
     ref = "refs/pull/57/merge";
   });
   # Unstable
@@ -96,6 +96,7 @@ in
           editorconfig-vim
           # Syntax highlight
           nixos-version.vimExtraPlugins.vim-svelte-plugin
+          nixos-version.vimExtraPlugins.tailwindcss-colors-nvim
           vim-nix # nix highlight
           vim-javascript # javascript highlight
           typescript-vim
