@@ -10,17 +10,18 @@ let
     rev = "6b9235fc0d9c90bcc1fe7b0cc0cbc2bcd4cde9d2";
     ref = "refs/pull/57/merge";
   });
+  # Unstable
+  unstable = import (builtins.fetchGit {
+    url = "https://github.com/NixOS/nixpkgs/";
+    ref = "refs/heads/nixpkgs-unstable";
+    rev = "942b0817e898262cc6e3f0a5f706ce09d8f749f1";
+  }) { };
   moz_overlay = import (unstable.fetchFromGitHub {
     owner = "mozilla";
     repo = "nixpkgs-mozilla";
     rev = "7c1e8b1dd6ed0043fb4ee0b12b815256b0b9de6f";
     sha256 = "1a71nfw7d36vplf89fp65vgj3s66np1dc0hqnqgj5gbdnpm1bihl";
   });
-  # Unstable
-  unstable = import (builtins.fetchGit {
-    url = "https://github.com/NixOS/nixpkgs/";
-    rev = "e6df26a654b7fdd59a068c57001eab5736b1363c";
-  }) { };
   uvi = unstable.vimPlugins;
   nixos-version-fetched = builtins.fetchGit {
     name = "nixos-neovim-module";
@@ -118,6 +119,7 @@ in
           uvi.nvim-tree-lua
           bufferline-nvim # Good looking buffer line
           dashboard-nvim
+          uvi.tcomment_vim
         ];
         opt = [
         ];
