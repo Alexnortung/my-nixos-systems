@@ -27,7 +27,7 @@ let
     name = "nixos-neovim-module";
     url = "https://github.com/NixOS/nixpkgs/";
     ref = "refs/heads/nixos-21.11";
-    rev = "386234e2a61e1e8acf94dfa3a3d3ca19a6776efb";
+    rev = "521e4d7d13b09bc0a21976b9d19abd197d4e3b1e";
   };
   nixos-version = import "${nixos-version-fetched}" { 
     name = "nvim-version";
@@ -69,28 +69,27 @@ in
     package = pkgs.neovim-unwrapped;
     configure = {
       customRC = builtins.readFile ./config/init.vim;
-      plug.plugins = [
-      ];
       packages.nix = with nixos-version.vimPlugins; {
         start = [
           # Snippets
-          vim-snippets
-          ultisnips
+          uvi.vim-snippets
+          uvi.ultisnips
           vim-surround # Shortcuts for setting () {} etc.
           # LSP
-          nvim-lspconfig
+          uvi.nvim-lspconfig
+          uvi.lsp_signature-nvim
+          uvi.lspsaga-nvim
           # cmp
-          cmp-nvim-lsp
-          cmp-buffer
-          cmp-path
-          cmp-cmdline
+          uvi.cmp-nvim-lsp
+          uvi.cmp-buffer
+          uvi.cmp-path
+          uvi.cmp-cmdline
           nvim-cmp
           nixos-version.vimExtraPlugins.cmp-nvim-ultisnips
           # COC
           #coc-yaml
           #coc-html
           #coc-css
-          ##coc-tailwindcss
           #coc-eslint
           #coc-clangd
           emmet-vim
@@ -112,9 +111,9 @@ in
           vim-twig # syntax highlight for twig
           nord-nvim # Nord theme for vim
           #nord-vim # Nord theme for vim
-          uvi.indent-blankline-nvim # Shows indentation with small lines
+          #uvi.indent-blankline-nvim # Shows indentation with small lines
           vim-sleuth # Detects indentation
-          (uvi.nvim-treesitter.withPlugins (plugins: unstable.tree-sitter.allGrammars)) # better syntax highlight
+          #(uvi.nvim-treesitter.withPlugins (plugins: unstable.tree-sitter.allGrammars)) # better syntax highlight
           uvi.nvim-web-devicons
           uvi.nvim-tree-lua
           bufferline-nvim # Good looking buffer line
@@ -137,9 +136,11 @@ in
 
     # LSP packages
     nodePackages.pyright
-    nodePackages.svelte-language-server
     nodePackages.typescript
     nodePackages.typescript-language-server
+    #nodePackages.svelte-language-server
+    unstable.nodePackages.svelte-language-server
+    unstable.nodePackages."@tailwindcss/language-server"
     #nodePackages.emmet-ls
     rnix-lsp
   ];

@@ -120,36 +120,36 @@ let g:pear_tree_smart_backspace = 1
 let g:pear_tree_repeatable_expand = 0
 
 " Blank line
-let g:indentLine_enabled = v:true
-let g:indent_blankline_show_current_context = v:true
-let g:indent_blankline_show_current_context_start = v:true
-let g:indent_blankline_use_treesitter = v:true
-let g:indent_blankline_context_patterns = [
-    \'class',
-    \'function',
-    \'method',
-    \'^if',
-    \'^while',
-    \'^typedef',
-    \'^for',
-    \'^object',
-    \'^table',
-    \'block',
-    \'arguments',
-    \'typedef',
-    \'while',
-    \'^public',
-    \'return',
-    \'if_statement',
-    \'else_clause',
-    \'jsx_element',
-    \'jsx_self_closing_element',
-    \'try_statement',
-    \'catch_clause',
-    \'import_statement',
-    \'labeled_statement',
-    \'struct'
-    \]
+" let g:indentLine_enabled = v:true
+" let g:indent_blankline_show_current_context = v:true
+" let g:indent_blankline_show_current_context_start = v:true
+" " let g:indent_blankline_use_treesitter = v:true
+" let g:indent_blankline_context_patterns = [
+"     \'class',
+"     \'function',
+"     \'method',
+"     \'^if',
+"     \'^while',
+"     \'^typedef',
+"     \'^for',
+"     \'^object',
+"     \'^table',
+"     \'block',
+"     \'arguments',
+"     \'typedef',
+"     \'while',
+"     \'^public',
+"     \'return',
+"     \'if_statement',
+"     \'else_clause',
+"     \'jsx_element',
+"     \'jsx_self_closing_element',
+"     \'try_statement',
+"     \'catch_clause',
+"     \'import_statement',
+"     \'labeled_statement',
+"     \'struct'
+"     \]
 
 " COC
 " inoremap <silent><expr> <TAB>
@@ -166,8 +166,8 @@ let g:indent_blankline_context_patterns = [
 " let g:coc_snippet_next = '<tab>'
 
 " Snippets
-" let g:UltiSnipsExpandTrigger="<tab>"
-" let g:UltiSnipsJumpForwardTrigger="<c-b>"
+" let g:UltiSnipsExpandTrigger="<c-tab>"
+" let g:UltiSnipsJumpForwardTrigger="<tab>"
 " let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " Emmet
@@ -178,10 +178,24 @@ let g:user_emmet_install_global = 1
 let g:user_emmet_leader_key='<C-Z>'
 
 " Svelte
-"let g:vim_svelte_plugin_load_full_syntax = 1
+" let g:vim_svelte_plugin_load_full_syntax = 1
 let g:vim_svelte_plugin_use_typescript = 1
 let g:vim_svelte_plugin_use_sass = 1
 let g:vim_svelte_plugin_use_less = 1
+
+" Code actions
+nnoremap <silent><leader>ca <cmd>lua require('lspsaga.codeaction').code_action()<CR>
+vnoremap <silent><leader>ca :<C-U>lua require('lspsaga.codeaction').range_code_action()<CR>
+" Hover
+nnoremap <silent> K <cmd>lua require('lspsaga.hover').render_hover_doc()<CR>
+" scroll down hover doc or scroll in definition preview
+nnoremap <silent> <C-f> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>
+" scroll up hover doc
+nnoremap <silent> <C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>
+" show signature help
+nnoremap <silent> gs <cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>
+" preview definition
+nnoremap <silent> gp <cmd>lua require'lspsaga.provider'.preview_definition()<CR>
 
 lua <<EOF
 require'nvim-tree'.setup {
@@ -262,7 +276,7 @@ require('bufferline').setup {
     max_prefix_length = 15,
     tab_size = 18,
     --diagnostics = false | "nvim_lsp" | "coc",
-    diagnostics = "coc",
+    diagnostics = "nvim_lsp",
     diagnostics_update_in_insert = false,
     --diagnostics_indicator = function(count, level, diagnostics_dict, context)
     --  return "("..count..")"
@@ -290,16 +304,6 @@ cmp.setup {
   mapping = {
     ['<Tab>'] = cmp.mapping(
       function(fallback)
-        cmp_ultisnips_mappings.expand_or_jump_forwards(fallback)
-      end
-    ),
-    ['<S-Tab>'] = cmp.mapping(
-      function(fallback)
-        cmp_ultisnips_mappings.compose { "jump_backwards" } (fallback)
-      end
-    ),
-    ['<C-Tab>'] = cmp.mapping(
-      function(fallback)
         cmp_ultisnips_mappings.compose { "jump_forwards" } (fallback)
       end
     ),
@@ -310,49 +314,44 @@ cmp.setup {
       i = cmp.mapping.abort(),
       c = cmp.mapping.close(),
     }),
-    --['<C-y>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
     ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
   },
-  sources = cmp.config.sources({
+  --sources = cmp.config.sources({
+  --  { name = 'nvim_lsp' },
+  --  { name = 'ultisnips' }, -- For ultisnips users.
+  --}, {
+  --  { name = 'buffer' },
+  --})
+  sources = {
+    { name = 'nvim_lsp' },
     { name = 'ultisnips' }, -- For ultisnips users.
-  }, {
     { name = 'buffer' },
-  })
+  },
+  experimental = {
+    native_menu = true
+  }
 }
 
 
 -- Setup lspconfig.
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
--- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
 local lspconfig = require('lspconfig')
 
+require('lsp_signature').on_attach()
+local on_attach = function(client, bufnr)
+  require'lsp_signature'.on_attach()
+end
+
+local saga = require 'lspsaga'
+saga.init_lsp_saga()
+
 -- enable language servers
-lspconfig.pyright.setup {
-  capabilities = capabilities
-}
-lspconfig.svelte.setup {
-  capabilities = capabilities
-}
-lspconfig.tsserver.setup {
-  capabilities = capabilities
-}
-lspconfig.emmet_ls.setup {
-  capabilities = capabilities
-}
-lspconfig.gdscript.setup {
-  capabilities = capabilities
-}
-lspconfig.texlab.setup {
-  capabilities = capabilities
-}
-lspconfig.phpactor.setup {
-  capabilities = capabilities
-}
-lspconfig.rnix.setup {
-  capabilities = capabilities
-}
-lspconfig.rust_analyzer.setup {
-  capabilities = capabilities
-}
+local servers = { 'pyright', 'svelte', 'rust_analyzer', 'tsserver', 'emmet_ls', 'tailwindcss', 'gdscript', 'texlab', 'phpactor', 'rnix' }
+for _, lsp in pairs(servers) do
+  lspconfig[lsp].setup {
+    capabilities = capabilities,
+    on_attach = on_attach,
+  }
+end
 
 EOF
