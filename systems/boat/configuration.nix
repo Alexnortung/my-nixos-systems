@@ -19,17 +19,17 @@ let
 in
 let
   nixos-version-fetched = builtins.fetchGit {
-    url = "https://github.com/NixOS/nixpkgs/";
-    ref = "refs/tags/nixos-unstable";
-    rev = "386234e2a61e1e8acf94dfa3a3d3ca19a6776efb";
+   url = "https://github.com/NixOS/nixpkgs/";
+   ref = "refs/tags/nixos-unstable";
+   rev = "386234e2a61e1e8acf94dfa3a3d3ca19a6776efb";
   };
-  nixos-version = import "${nixos-version-fetched}" { 
-    inherit (config.nixpkgs) config overlays localSystem crossSystem;
+  nixos-version = import "${nixos-version-fetched}" {
+   inherit (config.nixpkgs) config overlays localSystem crossSystem;
   };
   unstable = import (builtins.fetchGit {
     url = "https://github.com/NixOS/nixpkgs/";
     rev = "aada45dcb08c27602c3d78bf13b6e718471c9159";
-  }) { 
+  }) {
     config = {
       allowUnfreePredicate = allowUnfreePredicate;
     };
@@ -51,6 +51,7 @@ let
 in
 {
   imports = [
+    ./hardware-configuration.nix
     "${hardware-rep}/dell/latitude/3480"
     ../../common/nvim.nix
     ../../common/programming-pkgs.nix
@@ -68,6 +69,13 @@ in
     nur-alexnortung.modules.autorandr
   ];
 
+  location = {
+    latitude = 55.66283136357285;
+    longitude = 12.534913904480344;
+    provider = "manual";
+  };
+
+
   disabledModules = [
     "services/misc/autorandr.nix"
   ];
@@ -79,24 +87,23 @@ in
     }
   ];
 
-  nixpkgs.pkgs = nixos-version;
+  # nixpkgs.pkgs = nixos-version;
 
   nix.nixPath = [
     "nixpkgs=${nixos-version-fetched}"
-    "nixos-config=/etc/nixos/configuration.nix"
+    "nixos-config=/etc/nixos/external-config/boat/configuration.nix"
     "/nix/var/nix/profiles/per-user/root/channels"
   ];
 
   nixpkgs.config = {
-    allowUnfreePredicate = allowUnfreePredicate;
-    packageOverrides = pkgs: {
-      mullvad-vpn = unstable.mullvad-vpn;
-      fsharp-3 = local-nur.fsharp-3;
-    };
+   allowUnfreePredicate = allowUnfreePredicate;
+   packageOverrides = pkgs: {
+     # mullvad-vpn = unstable.mullvad-vpn;
+   };
   };
 
   nix = {
-    package = unstable.nixUnstable; # or versioned attributes like nix_2_4
+    # package = unstable.nixUnstable; # or versioned attributes like nix_2_4
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
@@ -130,6 +137,8 @@ in
         ShowDelay=0
       '';
     };
+
+    binfmt.emulatedSystems = [ "aarch64-linux" ]; # aarch64 emulation
   };
 
   # Set your time zone.
@@ -302,6 +311,7 @@ in
   };
 
   environment.systemPackages = with pkgs; [
+    vlc
     dotnet-sdk
     sage
     qutebrowser
@@ -309,21 +319,21 @@ in
     #gimp
     docker-compose
     ranger
-    unstable.ungoogled-chromium
+    # unstable.ungoogled-chromium
     #godot
     dunst
-    unstable.xmrig
+    # unstable.xmrig
     conky
     bitwarden
-    unstable.torbrowser
-    unstable.mullvad-vpn
+    # unstable.torbrowser
+    # unstable.mullvad-vpn
     arandr
-    unstable.minecraft
+    # unstable.minecraft
     bashmount
     gparted
     pcmanfm
     pavucontrol
-    unstable.tdesktop
+    # unstable.tdesktop
     python39Packages.pygments
     xss-lock
     xorg.xev
@@ -335,12 +345,12 @@ in
     libreoffice
     tmate
     bvi # hex editor with vim bindings
-    unstable.session-desktop-appimage
-    unstable.discord
+    # unstable.session-desktop-appimage
+    # unstable.discord
     zip unzip
     flameshot
     joplin-desktop
-    unstable.firefox
+    # unstable.firefox
     zathura
   ];
 

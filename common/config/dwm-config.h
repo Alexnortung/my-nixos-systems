@@ -21,8 +21,8 @@ static const char *media_playpause_cmd[] = { "playerctl", "play-pause", NULL };
 static const char *media_next_cmd[] = { "playerctl", "next", NULL};
 static const char *media_previous_cmd[] = { "playerctl", "previous", NULL};
 static const char *media_stop_cmd[] = { "playerctl", "stop", NULL};
-static const char *monitor_brightness_up_cmd[] = { "brightnessctl", "set", "+5%" };
-static const char *monitor_brightness_down_cmd[] = { "brightnessctl", "set", "5%-" };
+static const char *monitor_brightness_up_cmd[] = { "brightnessctl", "set", "+5%", NULL };
+static const char *monitor_brightness_down_cmd[] = { "brightnessctl", "set", "5%-", NULL };
 
 // Start programs
 static const char *open_firefox_cmd[] = { "firefox", NULL };
@@ -30,11 +30,12 @@ static const char *open_flameshot_cmd[] = { "flameshot", "gui", NULL };
 
 // Lock, shutdown, suspend, hibernate
 static const char *suspend_cmd[] =  { "systemctl", "suspend", NULL };
+static const char *hibernate_cmd[] =  { "systemctl", "hibernate", NULL };
 static const char *poweroff_cmd[] =  { "poweroff", NULL };
 static const char *reboot_cmd[] =  { "reboot", NULL };
 
 // dmenu
-static const char *emojipick_cmd[] = { "emojipick" };
+static const char *emojipick_cmd[] = { "emojipick", NULL };
 
 // Systray
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
@@ -175,6 +176,7 @@ static Key keys[] = {
     { 0, XK_Print, spawn, {.v = open_flameshot_cmd} },
     // Power
     { MODKEY, XK_F9, spawn, {.v = suspend_cmd } },
+    { MODKEY, XK_F10, spawn, {.v = hibernate_cmd } },
     { MODKEY|ShiftMask, XK_F12, spawn, {.v = poweroff_cmd } },
     { MODKEY|ShiftMask, XK_F11, spawn, {.v = reboot_cmd } },
     { MODKEY|ControlMask, XK_period, spawn, { .v = emojipick_cmd } }
