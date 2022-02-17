@@ -2,32 +2,29 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ inputs, pkgs, config, lib, ... }:
+args@{ inputs, pkgs, config, lib, ... }:
 
 let
   slock-command = "/run/wrappers/bin/slock";
-  unstable = inputs.unstable-boat;
-  nixos-hardware = inputs.nixos-hardware-boat;
   nur-alexnortung = inputs.nur-alexnortung-boat;
 in
 {
   imports = [
     ./hardware-configuration.nix
-    "${nixos-hardware}/dell/latitude/3480"
-    ../../common/nvim.nix
-    ../../common/programming-pkgs.nix
-    ../../common/comfort-packages.nix
-    ../../common/sound.nix
-    ../../common/console.nix
-    ../../common/personal-vpn.nix
-    ../../common/vscodium.nix
-    ../../common/latex.nix
-    ../../common/nord-lightdm.nix
-    ../../common/nord-gtk.nix
-    ../../common/misc/emojipick.nix
+    #../../common/nvim.nix
+    #../../common/programming-pkgs.nix
+    #../../common/comfort-packages.nix
+    #../../common/sound.nix
+    #../../common/console.nix
+    #../../common/personal-vpn.nix
+    #../../common/vscodium.nix
+    #../../common/latex.nix
+    #../../common/nord-lightdm.nix
+    #../../common/nord-gtk.nix
+    #../../common/misc/emojipick.nix
     ../../common/basic-desktop.nix
-    ../../common/zsh.nix
-    nur-alexnortung.modules.autorandr
+    #../../common/zsh.nix
+    #nur-alexnortung.modules.autorandr
   ];
 
   location = {
@@ -47,7 +44,7 @@ in
   ];
 
   nix = {
-    package = unstable.nixUnstable; # or versioned attributes like nix_2_4
+    package = pkgs.nix;
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
@@ -126,40 +123,40 @@ in
     wallpaper = lib.lists.elemAt (import ../../common/misc/nord-wallpapers.nix {}) 0;
   };
 
-  services.autorandr = {
-    enable = true;
-    hooks = {
-      postswitch = {
-        "change-background" = "systemctl --user restart bg-setter";
-      };
-    };
-    profiles = {
-      "morgan" = {
-        fingerprint = {
-          HDMI1 = "00ffffffffffff0034a401090000000033160103802c19782ac905a3574b9c25125054bfcf008bc081808140810081c0714f6140454f302a40c86084643018501300bbf91000001c9a29a0d05184223050983600bbf91000001c000000fd00384b1e510c000a202020202020000000fc004d4432303332390a2020202020000b";
-          eDP1 = "00ffffffffffff0006af3d2100000000001a0104951f117802a2b591575894281c505400000001010101010101010101010101010101843a8034713828403064310035ad1000001ad02e8034713828403064310035ad1000001a000000fe00364d4e3737804231343048414e0000000000008102a8001100000a010a2020008e";
-        };
-        config = {
-          eDP1 = {
-            crtc = 0;
-            gamma = "1.0:0.667:0.435";
-            mode = "1920x1080";
-            position = "0x900";
-            primary = true;
-            rate = "60.03";
-          };
-          HDMI1 = {
-            enable = true;
-            crtc = 1;
-            gamma = "1.0:0.667:0.435";
-            mode = "1600x900";
-            position = "0x0";
-            rate = "60.00";
-          };
-        };
-      };
-    };
-  };
+  # services.autorandr = {
+  #   enable = true;
+  #   hooks = {
+  #     postswitch = {
+  #       "change-background" = "systemctl --user restart bg-setter";
+  #     };
+  #   };
+  #   profiles = {
+  #     "morgan" = {
+  #       fingerprint = {
+  #         HDMI1 = "00ffffffffffff0034a401090000000033160103802c19782ac905a3574b9c25125054bfcf008bc081808140810081c0714f6140454f302a40c86084643018501300bbf91000001c9a29a0d05184223050983600bbf91000001c000000fd00384b1e510c000a202020202020000000fc004d4432303332390a2020202020000b";
+  #         eDP1 = "00ffffffffffff0006af3d2100000000001a0104951f117802a2b591575894281c505400000001010101010101010101010101010101843a8034713828403064310035ad1000001ad02e8034713828403064310035ad1000001a000000fe00364d4e3737804231343048414e0000000000008102a8001100000a010a2020008e";
+  #       };
+  #       config = {
+  #         eDP1 = {
+  #           crtc = 0;
+  #           gamma = "1.0:0.667:0.435";
+  #           mode = "1920x1080";
+  #           position = "0x900";
+  #           primary = true;
+  #           rate = "60.03";
+  #         };
+  #         HDMI1 = {
+  #           enable = true;
+  #           crtc = 1;
+  #           gamma = "1.0:0.667:0.435";
+  #           mode = "1600x900";
+  #           position = "0x0";
+  #           rate = "60.00";
+  #         };
+  #       };
+  #     };
+  #   };
+  # };
 
   services.dwm-status = {
     enable = true;
@@ -255,25 +252,25 @@ in
     dotnet-sdk
     sage
     qutebrowser
-    unstable.steam
+    steam
     #gimp
     docker-compose
     ranger
-    unstable.ungoogled-chromium
+    ungoogled-chromium
     #godot
     dunst
-    # unstable.xmrig
+    # xmrig
     conky
     bitwarden
-    # unstable.torbrowser
+    # torbrowser
     # unstable.mullvad-vpn
     arandr
-    unstable.minecraft
+    minecraft
     bashmount
     gparted
     pcmanfm
     pavucontrol
-    unstable.tdesktop
+    tdesktop
     python39Packages.pygments
     xss-lock
     xorg.xev
@@ -285,12 +282,12 @@ in
     libreoffice
     tmate
     bvi # hex editor with vim bindings
-    unstable.session-desktop-appimage
-    unstable.discord
+    session-desktop-appimage
+    discord
     zip unzip
     flameshot
     joplin-desktop
-    unstable.firefox
+    firefox
     zathura
   ];
 
