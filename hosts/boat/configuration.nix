@@ -248,6 +248,7 @@ in
   };
 
   environment.systemPackages = with pkgs; [
+    emojipick
     vlc
     dotnet-sdk
     #sage

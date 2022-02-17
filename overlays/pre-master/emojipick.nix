@@ -1,4 +1,6 @@
 channel:
 final: prev: {
-  inherit (channel) emojipick;
+  emojipick = channel.emojipick.override {
+    emojipick-font-size = "";
+  };
 }
