@@ -12,5 +12,11 @@ unstable-channel: final: prev: {
     xmrig
     torbrowser
     minecraft
+    clang-tools
+    rust-analyzer
+    nordzy-cursor-theme
+    sagetex
+    vimPlugins # take all vim plugins from unstable by default.
+    nodePackages # take all node packages from unstable by default.
     ;
 }

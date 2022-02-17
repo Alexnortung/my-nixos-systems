@@ -36,7 +36,7 @@
           # Anysize
           (super.fetchpatch {
             url = "https://st.suckless.org/patches/anysize/st-anysize-0.8.4.diff";
-            sha256 = "1w3fjj6i0f8bii5c6gszl5lji3hq8fkqrcpxgxkcd33qks8zfl9q";
+            sha256 = "2uxCn9HtSM44poIVOPm4YwGXynN50OIE/HcsnW2cHyo=";
           })
           # Vercenter
           (super.fetchpatch {

@@ -11,19 +11,19 @@ in
 {
   imports = [
     ./hardware-configuration.nix
-    #../../common/nvim.nix
-    #../../common/programming-pkgs.nix
-    #../../common/comfort-packages.nix
-    #../../common/sound.nix
-    #../../common/console.nix
-    #../../common/personal-vpn.nix
+    ../../common/nvim.nix
+    ../../common/programming-pkgs.nix
+    ../../common/comfort-packages.nix
+    ../../common/sound.nix
+    ../../common/console.nix
+    ../../common/personal-vpn.nix
     #../../common/vscodium.nix
-    #../../common/latex.nix
-    #../../common/nord-lightdm.nix
-    #../../common/nord-gtk.nix
+    ../../common/latex.nix
+    ../../common/nord-lightdm.nix
+    ../../common/nord-gtk.nix
     #../../common/misc/emojipick.nix
     ../../common/basic-desktop.nix
-    #../../common/zsh.nix
+    ../../common/zsh.nix
     #nur-alexnortung.modules.autorandr
   ];
 
@@ -250,7 +250,7 @@ in
   environment.systemPackages = with pkgs; [
     vlc
     dotnet-sdk
-    sage
+    #sage
     qutebrowser
     steam
     #gimp
