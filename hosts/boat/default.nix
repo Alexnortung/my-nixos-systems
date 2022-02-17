@@ -8,7 +8,7 @@
     channelName = "nixos-boat";
     # Relative to flake.nix
     modules = [
-      ./hosts/boat/configuration.nix
+      ./configuration.nix
     ];
   };
 }

@@ -6,8 +6,9 @@
 
 let
   slock-command = "/run/wrappers/bin/slock";
-  untable = inputs.unstable-boat;
+  unstable = inputs.unstable-boat;
   nixos-hardware = inputs.nixos-hardware-boat;
+  nur-alexnortung = inputs.nur-alexnortung-boat;
 in
 {
   imports = [

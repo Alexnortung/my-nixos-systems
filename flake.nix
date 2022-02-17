@@ -10,6 +10,7 @@
     nixos-boat.url = "github:NixOS/nixpkgs/386234e2a61e1e8acf94dfa3a3d3ca19a6776efb";
     nixpkgs-unstable-boat.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixos-hardware-boat.url = "github:NixOS/nixos-hardware";
+    nur-alexnortung-boat.url = "github:Alexnortung/nur-alexnortung";
   }
   #// ((import ./hosts).inputs)
   ;

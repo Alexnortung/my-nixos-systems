@@ -4,6 +4,6 @@ in
 {
   inputs = boat.inputs;
   hosts = inputs@{ self, ... }: {
-    boat = boat.host;
+    boat = boat.host inputs;
   };
 }
