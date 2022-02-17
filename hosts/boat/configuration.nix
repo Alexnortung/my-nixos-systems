@@ -264,7 +264,7 @@ in
     conky
     bitwarden
     # torbrowser
-    # unstable.mullvad-vpn
+    mullvad-vpn
     arandr
     minecraft
     bashmount

@@ -16,6 +16,7 @@ unstable-channel: final: prev: {
     rust-analyzer
     nordzy-cursor-theme
     sagetex
+    mullvad-vpn
     vimPlugins # take all vim plugins from unstable by default.
     nodePackages # take all node packages from unstable by default.
     ;
