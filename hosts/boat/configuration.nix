@@ -2,66 +2,26 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ pkgs, config, lib, ... }:
+{ inputs, pkgs, config, lib, ... }:
 
 let
-  allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "nvidia-x11"
-    "nvidia-settings"
-    "discord"
-    "spotify" "spotify-unwrapped"
-    "minecraft" "minecraft-launcher"
-    "vscode-extension-ms-vsliveshare-vsliveshare"
-    "steam" "steam-original"
-    "steam-runtime"
-  ];
   slock-command = "/run/wrappers/bin/slock";
-in
-let
-  nixos-version-fetched = builtins.fetchGit {
-   url = "https://github.com/NixOS/nixpkgs/";
-   ref = "refs/tags/nixos-unstable";
-   rev = "386234e2a61e1e8acf94dfa3a3d3ca19a6776efb";
-  };
-  nixos-version = import "${nixos-version-fetched}" {
-   inherit (config.nixpkgs) config overlays localSystem crossSystem;
-  };
-  unstable = import (builtins.fetchGit {
-    url = "https://github.com/NixOS/nixpkgs/";
-    rev = "aada45dcb08c27602c3d78bf13b6e718471c9159";
-  }) {
-    config = {
-      allowUnfreePredicate = allowUnfreePredicate;
-    };
-  };
-  hardware-rep = builtins.fetchGit {
-    url = "https://github.com/NixOS/nixos-hardware.git";
-    rev = "3aabf78bfcae62f5f99474f2ebbbe418f1c6e54f";
-  };
-  #local-pkgs = import "/home/alexander/source/nixpkgs" { };
-  local-nur = import "/home/alexander/source/nur-alexnortung" { };
-  nur-alexnortung = import (builtins.fetchGit {
-    url = "https://github.com/alexnortung/nur-alexnortung/";
-    rev = "3785639862d7436662edac9b17f741a746b0a482";
-    #sha256 = "1037m24c1hd6c87p84szc5qqaw4kldwwfzggyn6ac5rv8l47j057";
-  }) {};
-in
-let
-  #pkgs = nixos-version;
+  untable = inputs.unstable-boat;
+  nixos-hardware = inputs.nixos-hardware-boat;
 in
 {
   imports = [
     ./hardware-configuration.nix
-    # "${hardware-rep}/dell/latitude/3480"
-    # ../../common/nvim.nix
-    # ../../common/programming-pkgs.nix
+    "${nixos-hardware}/dell/latitude/3480"
+    ../../common/nvim.nix
+    ../../common/programming-pkgs.nix
     ../../common/comfort-packages.nix
     ../../common/sound.nix
     ../../common/console.nix
     ../../common/personal-vpn.nix
-    # ../../common/vscodium.nix
-    # ../../common/latex.nix
-    # ../../common/nord-lightdm.nix
+    ../../common/vscodium.nix
+    ../../common/latex.nix
+    ../../common/nord-lightdm.nix
     ../../common/nord-gtk.nix
     ../../common/misc/emojipick.nix
     ../../common/basic-desktop.nix
@@ -75,11 +35,9 @@ in
     provider = "manual";
   };
 
-
   disabledModules = [
     "services/misc/autorandr.nix"
   ];
-
 
   swapDevices = [
     {
@@ -87,23 +45,8 @@ in
     }
   ];
 
-  # nixpkgs.pkgs = nixos-version;
-
-  nix.nixPath = [
-    "nixpkgs=${nixos-version-fetched}"
-    "nixos-config=/etc/nixos/external-config/boat/configuration.nix"
-    "/nix/var/nix/profiles/per-user/root/channels"
-  ];
-
-  nixpkgs.config = {
-   allowUnfreePredicate = allowUnfreePredicate;
-   packageOverrides = pkgs: {
-     # mullvad-vpn = unstable.mullvad-vpn;
-   };
-  };
-
   nix = {
-    # package = unstable.nixUnstable; # or versioned attributes like nix_2_4
+    package = unstable.nixUnstable; # or versioned attributes like nix_2_4
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
@@ -170,10 +113,6 @@ in
       privateKeyFile = "/etc/nixos/secret/wg-keys/boat-private";
     };
   };
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   services.batteryNotifier = {
     enable = true;
@@ -315,11 +254,11 @@ in
     dotnet-sdk
     sage
     qutebrowser
-    #unstable.steam
+    unstable.steam
     #gimp
     docker-compose
     ranger
-    # unstable.ungoogled-chromium
+    unstable.ungoogled-chromium
     #godot
     dunst
     # unstable.xmrig
@@ -328,12 +267,12 @@ in
     # unstable.torbrowser
     # unstable.mullvad-vpn
     arandr
-    # unstable.minecraft
+    unstable.minecraft
     bashmount
     gparted
     pcmanfm
     pavucontrol
-    # unstable.tdesktop
+    unstable.tdesktop
     python39Packages.pygments
     xss-lock
     xorg.xev
@@ -345,12 +284,12 @@ in
     libreoffice
     tmate
     bvi # hex editor with vim bindings
-    # unstable.session-desktop-appimage
-    # unstable.discord
+    unstable.session-desktop-appimage
+    unstable.discord
     zip unzip
     flameshot
     joplin-desktop
-    # unstable.firefox
+    unstable.firefox
     zathura
   ];
 
@@ -409,4 +348,3 @@ in
   system.stateVersion = "21.05"; # Did you read the comment?
 
 }
-

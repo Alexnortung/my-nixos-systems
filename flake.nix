@@ -2,27 +2,32 @@
   description = "Alexnortung's system configurations and server configurations";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nixpkgs-boat.url = "github:NixOS/nixpkgs/386234e2a61e1e8acf94dfa3a3d3ca19a6776efb";
-    nixpkgs-enderman.url = "github:NixOS/nixpkgs/8588b14a397e045692d0a87192810b6dddf53003";
-    nixpkgs-spider.url = "github:NixOS/nixpkgs/b3d86c56c786ad9530f1400adbd4dfac3c42877b";
-    #nixpkgs-steve.url = "github:NixOS/nixpkgs/nixos-21.11";
-    unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    utils.url = "github:gytis-ivaskevicius/flake-utils-plus";
+    # Pull request inputs - One commit is fine since there is only one important commit.
+    #nixpkgs-emojipick.url = "github:nixOS/nixpkgs/2325a754e19e40b227b50323acfedca41836fbf9";
 
-    nur-alexnortung.url = "github:alexnortung/nur-alexnortung";
+    # import hosts
+    nixos-boat.url = "github:NixOS/nixpkgs/386234e2a61e1e8acf94dfa3a3d3ca19a6776efb";
+    nixpkgs-unstable-boat.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixos-hardware-boat.url = "github:NixOS/nixos-hardware";
+  }
+  #// ((import ./hosts).inputs)
+  ;
 
-    hardware-rep.url = "github:NixOS/nixos-hardware";
-  };
+  outputs = inputs@{ self, utils, ... }:
+    utils.lib.mkFlake {
+      inherit self inputs;
 
-  outputs = { self, nixpkgs, nixpkgs-boat, ... }@inputs: {
-    nixosConfigurations = import ./systems inputs;
-    # nixosConfigurations.boat = nixpkgs-boat.lib.nixosSystem {
-    #   system = "x86_64-linux";
-    #   modules = [
-    #     ./systems/boat/configuration.nix
-    #   ];
-    # };
+      channelsConfig = {
+        # Default channel configuration
+      };
 
-    lib = import ./lib inputs;
-  };
+      hostDefaults = {
+        extraArgs = {
+          # add utils and inputs to each host.
+          inherit utils inputs;
+        };
+      };
+      hosts = (import ./hosts/default.nix).hosts inputs;
+    };
 }

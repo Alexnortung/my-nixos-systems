@@ -31,7 +31,7 @@ let
   };
   nixos-version = import "${nixos-version-fetched}" { 
     name = "nvim-version";
-    inherit (config.nixpkgs) config localSystem crossSystem;
+    #inherit (config.nixpkgs) config localSystem crossSystem;
     overlays = config.nixpkgs.overlays ++ [
       moz_overlay
       extraPlugins.overlay
