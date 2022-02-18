@@ -5,12 +5,12 @@
     nixos-hardware-boat.url = "github:NixOS/nixos-hardware";
   };
   channels.nixos-boat.overlaysBuilder = import ./package-overlay.nix;
-  host = input@{ nur-alexnortung-boat, nixos-hardware-boat, ... }: {
+  host = input@{ nur-alexnortung-boat, nixos-hardware, ... }: {
     channelName = "nixos-boat";
     # Relative to flake.nix
     modules = [
       nur-alexnortung-boat.nixosModules.autorandr
-      nixos-hardware-boat.nixosModules.dell-latitude-3480
+      nixos-hardware.nixosModules.dell-latitude-3480
       ./configuration.nix
     ];
   };

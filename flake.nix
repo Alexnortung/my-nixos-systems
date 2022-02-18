@@ -3,8 +3,8 @@
 
   inputs = {
     utils.url = "github:gytis-ivaskevicius/flake-utils-plus";
-    # Pull request inputs - One commit is fine since there is only one important commit.
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixos-hardware.url = "github:NixOS/nixos-hardware";
 
     vim-extra-plugins.url = "github:m15a/nixpkgs-vim-extra-plugins/7d8682f3bd150696f0fd45b1518689d76abfbb63";
 
@@ -21,8 +21,11 @@
     # import hosts
     nixos-boat.url = "github:NixOS/nixpkgs/386234e2a61e1e8acf94dfa3a3d3ca19a6776efb";
     nixpkgs-unstable-boat.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nixos-hardware-boat.url = "github:NixOS/nixos-hardware";
     nur-alexnortung-boat.url = "github:Alexnortung/nur-alexnortung";
+
+    nixos-enderman.url = "github:NixOS/nixpkgs/8588b14a397e045692d0a87192810b6dddf53003";
+    nixpkgs-unstable-enderman.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nur-alexnortung-enderman.url = "github:Alexnortung/nur-alexnortung";
 
     # pre master inputs
     emojipick.url = "github:NixOS/nixpkgs/2325a754e19e40b227b50323acfedca41836fbf9";
@@ -52,7 +55,7 @@
         allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) (import ./config/allowed-unfree-packages.nix);
       };
 
-      channels = (import ./hosts/default.nix).channels // {
+      channels = ((import ./hosts/default.nix).channels inputs) // {
       };
 
       hostDefaults = {
