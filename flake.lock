@@ -269,11 +269,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1645181793,
-        "narHash": "sha256-CzRhZFzoPUa7i9sJ/5TA2JbPKGoC8IP4yvdytASwyak=",
+        "lastModified": 1645196559,
+        "narHash": "sha256-63x7MLocxJdTkLImrSj7D+JeBEpXFUR96/at0Cxk3DY=",
         "owner": "Alexnortung",
         "repo": "nur-alexnortung",
-        "rev": "26545dc5569135d7ef010d01fb53dd837c40d568",
+        "rev": "48c65b855acb4ddcc3a4c42f5a1029a7b37aacbf",
         "type": "github"
       },
       "original": {
@@ -287,11 +287,11 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1645191987,
-        "narHash": "sha256-hmucBYBUJa5AXSrZ+3WB1WDjhMniP77hqzFEzZHEXcw=",
+        "lastModified": 1645196559,
+        "narHash": "sha256-63x7MLocxJdTkLImrSj7D+JeBEpXFUR96/at0Cxk3DY=",
         "owner": "Alexnortung",
         "repo": "nur-alexnortung",
-        "rev": "7d2f6de0b14cb47b4fdd25afa852f3896d5d1e91",
+        "rev": "48c65b855acb4ddcc3a4c42f5a1029a7b37aacbf",
         "type": "github"
       },
       "original": {

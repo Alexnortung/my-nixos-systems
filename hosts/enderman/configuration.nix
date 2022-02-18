@@ -2,12 +2,13 @@
 
 let
   authorizedKeyFiles = [
-    "../../config/ssh/alexander@boat.pub"
+    ../../config/ssh/alexander_boat.pub
   ];
 in
 {
   imports =
     [ # Include the results of the hardware scan.
+      ./hardware-configuration.nix
       #"${nixos-unstable}/nixos/modules/services/misc/prowlarr.nix"
       #../../common/nvim.nix
       ../../modules/console.nix
@@ -193,7 +194,7 @@ in
     openFirewall = true;
     dataDir = "/data/data1/var/lib/deluge/";
     declarative = true;
-    authFile = /etc/nixos/ext-conf/deluge/deluge-auth;
+    authFile = ../../config/misc/deluge-authfile.txt;
     config = {
       torrentfiles_location = "/data/data1/var/lib/deluge/torrent_files";
       download_location = "/data/data1/var/lib/deluge/Downloads";
@@ -234,7 +235,7 @@ in
     enable = true;
     eula = true;
     declarative = true;
-    package = papermc-1_18_x;
+    package = pkgs.papermc-1_18_x;
     #package = custom-papermc;
     dataDir = "/data/data1/var/lib/minecraft";
     openFirewall = true;

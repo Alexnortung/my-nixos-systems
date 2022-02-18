@@ -1,10 +1,7 @@
 {
-  inputs = {
-    nixos-boat.url = "github:NixOS/nixpkgs/386234e2a61e1e8acf94dfa3a3d3ca19a6776efb";
-    nixpkgs-unstable-boat.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nixos-hardware-boat.url = "github:NixOS/nixos-hardware";
+  channels = inputs@{ ... }: {
+    nixos-boat.overlaysBuilder = import ./package-overlay.nix inputs;
   };
-  channels.nixos-boat.overlaysBuilder = import ./package-overlay.nix;
   host = input@{ nur-alexnortung-boat, nixos-hardware, ... }: {
     channelName = "nixos-boat";
     # Relative to flake.nix

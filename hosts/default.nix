@@ -4,7 +4,7 @@ let
 in
 {
   #inputs = boat.inputs;
-  channels = inputs: boat.channels //
+  channels = inputs: (boat.channels inputs) //
     (enderman.channels inputs);
   hosts = inputs@{ self, ... }: {
     boat = boat.host inputs;
