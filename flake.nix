@@ -4,7 +4,6 @@
   inputs = {
     utils.url = "github:gytis-ivaskevicius/flake-utils-plus";
     # Pull request inputs - One commit is fine since there is only one important commit.
-    #nixpkgs-emojipick.url = "github:nixOS/nixpkgs/2325a754e19e40b227b50323acfedca41836fbf9";
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     vim-extra-plugins.url = "github:m15a/nixpkgs-vim-extra-plugins/7d8682f3bd150696f0fd45b1518689d76abfbb63";
