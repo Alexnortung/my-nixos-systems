@@ -22,7 +22,7 @@ in
     ../../modules/nord-gtk.nix
     ../../modules/basic-desktop.nix
     ../../modules/zsh.nix
-    #../../common/vscodium.nix
+    ../../modules/vscodium.nix
   ];
 
   location = {

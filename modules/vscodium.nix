@@ -1,22 +1,9 @@
 { lib
+, pkgs
 , config
 , ...
 }:
 
-let
-  # Unstable
-  pkgs = import (builtins.fetchGit {
-    url = "https://github.com/NixOS/nixpkgs/";
-    rev = "47f45c8440e2ef1e967aa5aec3528dd976c4a488";
-  }) { 
-    config = {
-      allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-        "vscode-extension-ms-vsliveshare-vsliveshare"
-        "vscode-extension-ms-vscode-cpptools"
-      ];
-    };
-  };
-in
 let
   marketPlaceExtensions = [
     #{

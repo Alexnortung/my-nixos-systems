@@ -60,6 +60,7 @@
         extraArgs = {
           # add utils and inputs to each host.
           inherit utils inputs;
+          modules = import ./modules; # My extra modules
         };
       };
       hosts = (import ./hosts/default.nix).hosts inputs;
