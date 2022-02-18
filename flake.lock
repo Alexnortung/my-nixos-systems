@@ -221,11 +221,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1644327117,
-        "narHash": "sha256-6phaIEphVgx1nI0lUpygVVl4S64D5NpKmf72cyAhqqU=",
+        "lastModified": 1645181793,
+        "narHash": "sha256-CzRhZFzoPUa7i9sJ/5TA2JbPKGoC8IP4yvdytASwyak=",
         "owner": "Alexnortung",
         "repo": "nur-alexnortung",
-        "rev": "9976f512396690144db9d14e5f708d9857f07545",
+        "rev": "26545dc5569135d7ef010d01fb53dd837c40d568",
         "type": "github"
       },
       "original": {

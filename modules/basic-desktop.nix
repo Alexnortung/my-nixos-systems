@@ -2,11 +2,11 @@
 
 {
   imports = [
-    ./overlays/st.nix
-    ./overlays/dmenu.nix
-    ./overlays/dwm.nix
-    ./modules/battery-notifier.nix
-    ./modules/bg-setter.nix
+    ../overlays/st.nix
+    ../overlays/dmenu.nix
+    ../overlays/dwm.nix
+    ./battery-notifier.nix
+    ./bg-setter.nix
   ];
 
   hardware.opengl = {

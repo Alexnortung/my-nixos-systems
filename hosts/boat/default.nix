@@ -9,6 +9,7 @@
     channelName = "nixos-boat";
     # Relative to flake.nix
     modules = [
+      nur-alexnortung-boat.nixosModules.autorandr
       nixos-hardware-boat.nixosModules.dell-latitude-3480
       ./configuration.nix
     ];

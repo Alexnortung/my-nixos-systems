@@ -14,7 +14,7 @@
     withNodeJs = true;
     package = pkgs.neovim;
     configure = {
-      customRC = builtins.readFile ./config/init.vim;
+      customRC = builtins.readFile ../config/init.vim;
       packages.nix = with pkgs.vimPlugins; with pkgs.vimExtraPlugins; {
         start = [
           # Snippets
