@@ -23,15 +23,15 @@ let
 in
 {
   imports = [
-      ../../common/nvim.nix
-      ../../common/console.nix
-      ../../common/sound.nix
-      ../../common/comfort-packages.nix
-      ../../common/vscodium.nix
+      #../../modules/nvim.nix
+      ../../modules/console.nix
+      ../../modules/sound.nix
+      ../../modules/comfort-packages.nix
+      #../../modules/vscodium.nix
     ];
 
   nix = {
-    package = pkgs.nixUnstable;
+    package = unstable.nix;
     extraOptions = ''
       experimental-features = nix-command flakes
     '';

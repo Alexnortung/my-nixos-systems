@@ -168,6 +168,22 @@
         "type": "github"
       }
     },
+    "nixos-steve": {
+      "locked": {
+        "lastModified": 1645010845,
+        "narHash": "sha256-hO9X4PvxkSLMQnGGB7tOrKPwufhLMiNQMNXNwzLqneo=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "2128d0aa28edef51fd8fef38b132ffc0155595df",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-21.11",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1644972330,
@@ -216,6 +232,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-unstable-steve": {
+      "locked": {
+        "lastModified": 1645013224,
+        "narHash": "sha256-b7OEC8vwzJv3rsz9pwnTX2LQDkeOWz2DbKypkVvNHXc=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "b66b39216b1fef2d8c33cc7a5c72d8da80b79970",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1624561540,
@@ -249,6 +281,22 @@
       }
     },
     "nixpkgs_4": {
+      "locked": {
+        "lastModified": 1624561540,
+        "narHash": "sha256-izJ2PYZMGMsSkg+e7c9A1x3t/yOLT+qzUM6WQsc2tqo=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "c6a049a3d32293b24c0f894a840872cf67fd7c11",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_5": {
       "locked": {
         "lastModified": 1642130244,
         "narHash": "sha256-/5FhZkZFQCRQIRFosUQW1zmDrsNHVOJIB/+XgRPHiPU=",
@@ -300,6 +348,24 @@
         "type": "github"
       }
     },
+    "nur-alexnortung-steve": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_4"
+      },
+      "locked": {
+        "lastModified": 1645196559,
+        "narHash": "sha256-63x7MLocxJdTkLImrSj7D+JeBEpXFUR96/at0Cxk3DY=",
+        "owner": "Alexnortung",
+        "repo": "nur-alexnortung",
+        "rev": "48c65b855acb4ddcc3a4c42f5a1029a7b37aacbf",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Alexnortung",
+        "repo": "nur-alexnortung",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "emojipick": "emojipick",
@@ -308,11 +374,14 @@
         "nixos-boat": "nixos-boat",
         "nixos-enderman": "nixos-enderman",
         "nixos-hardware": "nixos-hardware",
+        "nixos-steve": "nixos-steve",
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable-boat": "nixpkgs-unstable-boat",
         "nixpkgs-unstable-enderman": "nixpkgs-unstable-enderman",
+        "nixpkgs-unstable-steve": "nixpkgs-unstable-steve",
         "nur-alexnortung-boat": "nur-alexnortung-boat",
         "nur-alexnortung-enderman": "nur-alexnortung-enderman",
+        "nur-alexnortung-steve": "nur-alexnortung-steve",
         "utils": "utils",
         "vim-extra-plugins": "vim-extra-plugins"
       }
@@ -356,7 +425,7 @@
       "inputs": {
         "flake-compat": "flake-compat",
         "flake-utils": "flake-utils_3",
-        "nixpkgs": "nixpkgs_4"
+        "nixpkgs": "nixpkgs_5"
       },
       "locked": {
         "lastModified": 1644330243,

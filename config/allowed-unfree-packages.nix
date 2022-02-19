@@ -1,6 +1,7 @@
 [
     # Nvidia
     "nvidia-x11" "nvidia-settings"
+    "cudatoolkit"
     # Discord
     "discord"
     # spotify
