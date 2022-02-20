@@ -13,4 +13,7 @@ in
     enderman = enderman.host inputs;
     steve = steve.host inputs;
   };
+  nodes = inputs: {
+    enderman = enderman.node inputs;
+  };
 }

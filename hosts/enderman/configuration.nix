@@ -1,8 +1,9 @@
-{ config, lib, pkgs, ... }:
+{ inputs, config, lib, pkgs, ... }:
 
 let
+  ssh-keys = import ../../config/ssh;
   authorizedKeyFiles = [
-    ../../config/ssh/alexander_boat.pub
+    ssh-keys.boat
   ];
 in
 {
@@ -48,6 +49,7 @@ in
   networking.nat.internalInterfaces = [ "wg0" ];
 
   environment.systemPackages = with pkgs; [
+    inputs.agenix.defaultPackage.x86_64-linux
     nmap
     git
     zip unzip
