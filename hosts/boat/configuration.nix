@@ -240,6 +240,8 @@ in
   };
 
   environment.systemPackages = with pkgs; [
+    inputs.deploy-rs.defaultPackage.x86_64-linux
+    inputs.agenix.defaultPackage.x86_64-linux
     emojipick
     vlc
     dotnet-sdk

@@ -8,6 +8,9 @@
 
     vim-extra-plugins.url = "github:m15a/nixpkgs-vim-extra-plugins/7d8682f3bd150696f0fd45b1518689d76abfbb63";
 
+    agenix.url = "github:ryantm/agenix"; # for encrypted secrets. such as wireguard keys
+    deploy-rs.url = "github:serokell/deploy-rs";
+
     fenix = {
       url = "github:nix-community/fenix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -44,6 +47,7 @@
   , vim-extra-plugins
   , fenix
   , neovim
+  , agenix
   , ... }:
     utils.lib.mkFlake {
       inherit self inputs;
@@ -52,6 +56,7 @@
         fenix.overlay
         vim-extra-plugins.overlay
         neovim.overlay
+        #agenix.overlay
       ];
 
       channelsConfig = {
@@ -66,9 +71,17 @@
         extraArgs = {
           # add utils and inputs to each host.
           inherit utils inputs;
-          modules = import ./modules; # My extra modules
+          modules = [
+            agenix.nixosModules.age
+            import ./modules # My extra modules
+          ];
         };
       };
       hosts = (import ./hosts/default.nix).hosts inputs;
+
+      # deploy-rs definitions
+      deploy = {
+        nodes = (import ./hosts/default.nix).nodes inputs;
+      };
     };
 }
