@@ -30,7 +30,7 @@
     nixpkgs-unstable-steve.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nur-alexnortung-steve.url = "github:Alexnortung/nur-alexnortung";
 
-    nixos-enderman.url = "github:NixOS/nixpkgs/8588b14a397e045692d0a87192810b6dddf53003";
+    nixos-enderman.url = "github:NixOS/nixpkgs/nixos-21.11";
     nixpkgs-unstable-enderman.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nur-alexnortung-enderman.url = "github:Alexnortung/nur-alexnortung";
 
