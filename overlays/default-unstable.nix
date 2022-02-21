@@ -19,6 +19,7 @@ unstable-channel: final: prev: {
     mullvad-vpn
     libreoffice
     blender
+    dbeaver
     vimPlugins # take all vim plugins from unstable by default.
     nodePackages # take all node packages from unstable by default.
     vscode-extensions

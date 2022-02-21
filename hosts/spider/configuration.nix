@@ -5,51 +5,11 @@
 { pkgs, config, lib, ... }:
 
 let
-  allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "postman"
-    "nvidia-x11"
-    "nvidia-settings"
-    "discord"
-    "spotify" "spotify-unwrapped"
-    "minecraft" "minecraft-launcher"
-    "vscode-extension-ms-vsliveshare-vsliveshare"
-    "slack"
-  ];
   slock-command = "/run/wrappers/bin/slock";
-in
-let
-  nixos-version-fetched = builtins.fetchGit {
-    url = "https://github.com/NixOS/nixpkgs/";
-    ref = "refs/heads/nixos-21.11";
-    rev = "b3d86c56c786ad9530f1400adbd4dfac3c42877b";
-  };
-  nixos-version = import "${nixos-version-fetched}" { 
-    inherit (config.nixpkgs) config overlays localSystem crossSystem;
-  };
-  unstable = import (builtins.fetchGit {
-    url = "https://github.com/NixOS/nixpkgs/";
-    rev = "931ab058daa7e4cd539533963f95e2bb0dbd41e6";
-  }) { 
-    config = {
-      allowUnfreePredicate = allowUnfreePredicate;
-    };
-  };
-  hardware-rep = builtins.fetchGit {
-    url = "https://github.com/NixOS/nixos-hardware.git";
-    rev = "3aabf78bfcae62f5f99474f2ebbbe418f1c6e54f";
-  };
-  nur-alexnortung = import (builtins.fetchGit {
-    url = "https://github.com/alexnortung/nur-alexnortung/";
-    rev = "9a75b9a40a0e47a82724c1dc23add6d877ef226c";
-    #sha256 = "1037m24c1hd6c87p84szc5qqaw4kldwwfzggyn6ac5rv8l47j057";
-  }) {};
-in
-let
-  pkgs = nixos-version;
 in
 {
   imports = [
-    "${hardware-rep}/lenovo/thinkpad/x13"
+    ./hardware-configuration.nix
     ../../modules/nvim.nix
     ../../modules/programming-pkgs.nix
     ../../modules/comfort-packages.nix
@@ -61,8 +21,16 @@ in
     ../../modules/nord-gtk.nix
     ../../modules/basic-desktop.nix
     ../../modules/zsh.nix
-    nur-alexnortung.modules.autorandr
+    ../../modules/location-denmark.nix
   ];
+
+  nix = {
+    package = pkgs.nix;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+  };
+
 
   disabledModules = [
     "services/misc/autorandr.nix"
@@ -77,29 +45,6 @@ in
       label = "swap";
     }
   ];
-
-  nixpkgs.pkgs = nixos-version;
-
-  #nix.nixPath = [
-  #  "nixpkgs=${nixos-version-fetched}"
-  #  "nixos-config=/etc/nixos/configuration.nix"
-  #  "/nix/var/nix/profiles/per-user/root/channels"
-  #];
-
-  nixpkgs.config = {
-    allowUnfreePredicate = allowUnfreePredicate;
-    packageOverrides = pkgs: {
-      mullvad-vpn = unstable.mullvad-vpn;
-    };
-  };
-
-  nix = {
-    package = unstable.nix;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
-  };
-
 
   fonts.fonts = with pkgs; [
     hasklig
@@ -177,7 +122,7 @@ in
 
   services.bg-setter = {
     enable = true;
-    wallpaper = lib.lists.elemAt (import ../../common/misc/nord-wallpapers.nix {}) 0;
+    wallpaper = lib.lists.elemAt (import ../../config/misc/nord-wallpapers.nix {}) 0;
   };
 
   services.dwm-status = {
@@ -288,24 +233,24 @@ in
     brave
     gimp
     imagemagick
-    unstable.dbeaver
+    dbeaver
     slack-term
     slack
     docker-compose
     ranger
-    unstable.ungoogled-chromium
+    ungoogled-chromium
     dunst
-    unstable.xmrig
+    xmrig
     conky
     bitwarden
-    #unstable.torbrowser
-    unstable.mullvad-vpn
+    #torbrowser
+    mullvad-vpn
     arandr
     bashmount
     gparted
     pcmanfm
     pavucontrol
-    unstable.tdesktop
+    tdesktop
     python39Packages.pygments
     xss-lock
     xorg.xev
@@ -316,12 +261,12 @@ in
     spotify
     libreoffice
     tmate
-    unstable.session-desktop-appimage
-    unstable.discord
+    session-desktop-appimage
+    discord
     zip unzip
     flameshot
     vim
-    unstable.firefox
+    firefox
     zathura
   ];
 
