@@ -2,8 +2,9 @@
 
 let
   ssh-keys = import ../../config/ssh;
-  authorizedKeyFiles = [
-    ssh-keys.boat
+  authorizedKeyFiles = with ssh-keys; [
+    boat
+    steve
   ];
 in
 {

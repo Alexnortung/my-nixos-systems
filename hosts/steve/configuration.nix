@@ -41,6 +41,15 @@
     nvidia_x11
   ];
 
+  hardware.nvidia = {
+    modesetting.enable = true;
+    prime = {
+      sync.enable = true;
+      nvidiaBusId = "PCI:1:0:0";
+      intelBusId = "PCI:0:1:0";
+    };
+  };
+
   networking = {
     hostName = "steve";
     # The global useDHCP flag is deprecated, therefore explicitly set to false here.
@@ -58,6 +67,9 @@
     enable = true;
     windowManager.dwm.enable = true;
     videoDrivers = [ "nvidia" ];
+    displayManager.setupCommands = ''
+      autorandr -c >> /tmp/autorandr-log.txt
+    '';
     #serverFlagsSection = ''
     #  Option "IndirectGLX" "on"
     #'';
