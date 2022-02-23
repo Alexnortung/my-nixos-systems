@@ -229,6 +229,7 @@ in
   };
 
   environment.systemPackages = with pkgs; [
+    beekeeper-studio
     postman
     brave
     gimp
