@@ -23,6 +23,7 @@ in
     ../../modules/basic-desktop.nix
     ../../modules/zsh.nix
     ../../modules/vscodium.nix
+    ../../overlays/pidgin-with-plugins.nix
   ];
 
   location = {
@@ -240,6 +241,7 @@ in
   };
 
   environment.systemPackages = with pkgs; [
+    pidgin-with-plugins
     trash-cli
     ncdu
     inputs.deploy-rs.defaultPackage.x86_64-linux
