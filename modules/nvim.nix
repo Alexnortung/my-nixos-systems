@@ -86,6 +86,7 @@
     nodePackages.typescript-language-server
     nodePackages.svelte-language-server
     nodePackages."@tailwindcss/language-server"
+    nodePackages.vls
     #nodePackages.emmet-ls
     rnix-lsp
   ];
