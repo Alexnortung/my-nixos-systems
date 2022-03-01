@@ -66,6 +66,7 @@
           bufferline-nvim # Good looking buffer line
           dashboard-nvim
           tcomment_vim
+          colorizer # gives hex and rgb values a color.
         ];
         opt = [
         ];
