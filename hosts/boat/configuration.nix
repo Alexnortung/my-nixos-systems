@@ -216,12 +216,12 @@ in
     };
   };
 
-  services.picom = {
-    enable = true;
-    vSync = true;
-    #backend = "glx";
-    #experimentalBackends = true;
-  };
+  # services.picom = {
+  #   enable = true;
+  #   vSync = true;
+  #   #backend = "glx";
+  #   #experimentalBackends = true;
+  # };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users = {
