@@ -21,6 +21,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    spicetify.url = "github:PhilTaken/spicetify-nix";
+
     # import hosts
     nixos-boat.url = "github:NixOS/nixpkgs/386234e2a61e1e8acf94dfa3a3d3ca19a6776efb";
     nixpkgs-unstable-boat.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -40,6 +42,7 @@
 
     # pre master inputs
     emojipick.url = "github:NixOS/nixpkgs/2325a754e19e40b227b50323acfedca41836fbf9";
+    spicetified-spotify.url = "github:NixOS/nixpkgs/4ba5b6e107e02abe924b4a04894203705f741a00";
   }
   #// ((import ./hosts).inputs)
   ;

@@ -23,6 +23,7 @@ in
     ../../modules/basic-desktop.nix
     ../../modules/zsh.nix
     ../../modules/vscodium.nix
+    ../../modules/nord-spicetify.nix
     ../../overlays/pidgin-with-plugins.nix
   ];
 
@@ -277,7 +278,7 @@ in
     brightnessctl # Brightness from terminal
     dmenu
     st
-    spotify
+    #spotify
     libreoffice
     tmate
     bvi # hex editor with vim bindings
