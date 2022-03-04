@@ -30,9 +30,11 @@ nnoremap j gj
 nnoremap k gk
 
 " vim-tex
+let g:vimtex_enable = 1
 let g:tex_flavor = 'latex'
 let g:vimtex_view_method = 'zathura'
-let g:vimtex_syntax_packages = {'minted': {'load': 2}}
+" let g:vimtex_syntax_packages = {'minted': {'load': 2}}
+let g:vimtex_compiler_method = 'latexmk'
 let g:vimtex_compiler_latexmk = {
     \ 'options' : [
     \   '-shell-escape',

@@ -88,6 +88,7 @@
     nodePackages.svelte-language-server
     nodePackages."@tailwindcss/language-server"
     nodePackages.vls
+    texlab # For latex
     #nodePackages.emmet-ls
     rnix-lsp
   ];
