@@ -6,7 +6,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
 
-    vim-extra-plugins.url = "github:m15a/nixpkgs-vim-extra-plugins/7d8682f3bd150696f0fd45b1518689d76abfbb63";
+    vim-extra-plugins.url = "github:Alexnortung/nixpkgs-vim-extra-plugins";
 
     agenix.url = "github:ryantm/agenix"; # for encrypted secrets. such as wireguard keys
     deploy-rs.url = "github:serokell/deploy-rs";

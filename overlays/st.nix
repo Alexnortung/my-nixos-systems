@@ -43,6 +43,11 @@
             url = "https://st.suckless.org/patches/vertcenter/st-vertcenter-20180320-6ac8c8a.diff";
             sha256 = "0q1ka6gpxmflsmxy1790pjmvz79p1qjafm1g1ck6ixlkc9ls9rh4";
           })
+          # w3m
+          (super.fetchpatch {
+            url = "https://st.suckless.org/patches/w3m/st-w3m-0.8.3.diff";
+            sha256 = "1cwidwqyg6qv68x8bsnxns2h0gy9crd5hs2z99xcd5m0q3agpmlb";
+          })
         ];
       });
     })

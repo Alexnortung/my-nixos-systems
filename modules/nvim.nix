@@ -67,6 +67,9 @@
           dashboard-nvim
           tcomment_vim
           colorizer # gives hex and rgb values a color.
+          plenary-nvim # required by popup and telescope media
+          popup-nvim
+          telescope-media-files-nvim
         ];
         opt = [
         ];
@@ -91,6 +94,8 @@
     texlab # For latex
     #nodePackages.emmet-ls
     rnix-lsp
+    ueberzug
+    poppler_utils
   ];
 }
 

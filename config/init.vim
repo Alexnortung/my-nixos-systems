@@ -84,6 +84,7 @@ nmap <leader>fl <cmd>Telescope live_grep<CR>
 nmap <leader>fhl <cmd>Telescope live_grep hidden=true<CR>
 nmap <leader>fb <cmd>Telescope buffers<CR>
 nmap <leader>fp <cmd>Telescope projects<CR>
+nmap <leader>fm <cmd>Telescope media_files<CR>
 nmap <leader>fgs <cmd>Telescope git_status<CR>
 nmap <leader>fgc <cmd>Telescope git_commits<CR>
 nmap <leader>fgb <cmd>Telescope git_branches<CR>
@@ -348,6 +349,15 @@ cmp.setup {
     native_menu = true
   }
 }
+
+require'telescope'.setup {
+  extensions = {
+    media_files = {
+      find_cmd = "rg"
+    }
+  },
+}
+require('telescope').load_extension('media_files')
 
 require("tailwindcss-colors").setup()
 
