@@ -40,6 +40,9 @@
     nixpkgs-unstable-enderman.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nur-alexnortung-enderman.url = "github:Alexnortung/nur-alexnortung";
 
+    nix-on-droid.url = "github:t184256/nix-on-droid";
+    nix-on-droid.inputs.nixpkgs.follows = "nixpkgs";
+
     # pre master inputs
     emojipick.url = "github:NixOS/nixpkgs/2325a754e19e40b227b50323acfedca41836fbf9";
     spicetified-spotify.url = "github:NixOS/nixpkgs/4ba5b6e107e02abe924b4a04894203705f741a00";
@@ -55,6 +58,7 @@
   , fenix
   , neovim
   , agenix
+  , nix-on-droid
   , ... }:
     utils.lib.mkFlake {
       inherit self inputs;
@@ -89,6 +93,25 @@
       # deploy-rs definitions
       deploy = {
         nodes = (import ./hosts/default.nix).nodes inputs;
+      };
+      nixOnDroidConfigurations = {
+        bundle = nix-on-droid.lib.nixOnDroidConfiguration {
+          config = ./hosts/droid-devices/bundle/configuration.nix;
+          system = "aarch64-linux";
+          extraSpecialArgs = {
+            inherit inputs;
+          };
+          pkgs = import nixpkgs {
+            overlays = [
+              fenix.overlay
+              vim-extra-plugins.overlay
+              neovim.overlay
+            ];
+          };
+          extraModules = [
+            #(import ./modules/system-packages-to-packages.nix)
+          ];
+        };
       };
     };
 }
