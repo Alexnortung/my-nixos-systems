@@ -374,7 +374,7 @@ local saga = require 'lspsaga'
 saga.init_lsp_saga()
 
 -- enable language servers
-local servers = { 'pyright', 'svelte', 'rust_analyzer', 'tsserver', 'emmet_ls', 'gdscript', 'texlab', 'phpactor', 'rnix', 'vuels' }
+local servers = { 'pyright', 'svelte', 'rust_analyzer', 'tsserver', 'emmet_ls', 'gdscript', 'texlab', 'phpactor', 'rnix', 'vuels', 'cssls', 'html' }
 for _, lsp in pairs(servers) do
   lspconfig[lsp].setup {
     capabilities = capabilities,

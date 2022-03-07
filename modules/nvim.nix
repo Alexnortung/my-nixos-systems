@@ -91,6 +91,7 @@
     nodePackages.svelte-language-server
     nodePackages."@tailwindcss/language-server"
     nodePackages.vls
+    nodePackages.vscode-langservers-extracted
     texlab # For latex
     #nodePackages.emmet-ls
     rnix-lsp
