@@ -46,7 +46,7 @@
           # w3m
           (super.fetchpatch {
             url = "https://st.suckless.org/patches/w3m/st-w3m-0.8.3.diff";
-            sha256 = "1cwidwqyg6qv68x8bsnxns2h0gy9crd5hs2z99xcd5m0q3agpmlb";
+            sha256 = "nVSG8zuRt3oKQCndzm+3ykuRB1NMYyas0Ne3qCG59ok=";
           })
         ];
       });
