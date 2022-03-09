@@ -21,8 +21,5 @@ unstable-channel: final: prev: {
     blender
     dbeaver
     beekeeper-studio
-    vimPlugins # take all vim plugins from unstable by default.
-    nodePackages # take all node packages from unstable by default.
-    vscode-extensions
     ;
 }
