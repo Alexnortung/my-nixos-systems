@@ -242,6 +242,7 @@ in
   };
 
   environment.systemPackages = with pkgs; [
+    swiProlog
     pidgin-with-plugins
     trash-cli
     ncdu
