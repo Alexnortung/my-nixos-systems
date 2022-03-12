@@ -22,8 +22,5 @@ unstable-channel: final: prev: {
     dbeaver
     beekeeper-studio
     futhark
-    vimPlugins # take all vim plugins from unstable by default.
-    nodePackages # take all node packages from unstable by default.
-    vscode-extensions
     ;
 }

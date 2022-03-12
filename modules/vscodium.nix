@@ -19,7 +19,7 @@ let
       james-yu.latex-workshop
       ms-vsliveshare.vsliveshare
       arcticicestudio.nord-visual-studio-code
-      ms-vscode.cpptools
+      #ms-vscode.cpptools
       matklad.rust-analyzer
   ];
 in

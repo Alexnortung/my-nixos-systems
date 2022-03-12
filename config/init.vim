@@ -345,9 +345,7 @@ cmp.setup {
     { name = 'ultisnips' }, -- For ultisnips users.
     { name = 'buffer' },
   },
-  experimental = {
-    native_menu = true
-  }
+  --view.entries = 'native'
 }
 
 require'telescope'.setup {
