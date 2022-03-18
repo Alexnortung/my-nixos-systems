@@ -13,6 +13,6 @@ let
 in {
   environment.systemPackages = [
     my_latex
-    pkgs.python3Packages.pygments
+    # pkgs.python3Packages.pygments
   ];
 }

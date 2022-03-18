@@ -17,7 +17,7 @@
     };
 
     neovim = {
-      url = "github:neovim/neovim/?dir=contrib";
+      url = "github:neovim/neovim/release-0.6?dir=contrib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

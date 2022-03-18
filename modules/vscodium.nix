@@ -20,7 +20,7 @@ let
       ms-vsliveshare.vsliveshare
       arcticicestudio.nord-visual-studio-code
       #ms-vscode.cpptools
-      matklad.rust-analyzer
+      # matklad.rust-analyzer
   ];
 in
 let

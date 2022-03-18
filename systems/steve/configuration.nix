@@ -271,7 +271,7 @@ in
     unstable.session-desktop-appimage
     cudatoolkit
     blender
-    python39Packages.pygments
+    #python39Packages.pygments
     futhark
     zathura
     xorg.xhost
