@@ -7,6 +7,7 @@
     # Relative to flake.nix
     modules = [
       nur-alexnortung-boat.nixosModules.autorandr
+      nur-alexnortung-boat.nixosModules.zathura
       nixos-hardware.nixosModules.dell-latitude-3480
       ./configuration.nix
     ];

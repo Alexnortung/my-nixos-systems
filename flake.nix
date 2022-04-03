@@ -46,6 +46,8 @@
     # pre master inputs
     emojipick.url = "github:NixOS/nixpkgs/2325a754e19e40b227b50323acfedca41836fbf9";
     spicetified-spotify.url = "github:NixOS/nixpkgs/4ba5b6e107e02abe924b4a04894203705f741a00";
+
+    #local-nixpkgs.url = "path:/home/alexander/source/nixpkgs";
   }
   #// ((import ./hosts).inputs)
   ;

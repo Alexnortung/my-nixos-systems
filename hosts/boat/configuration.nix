@@ -27,6 +27,13 @@ in
     ../../overlays/pidgin-with-plugins.nix
   ];
 
+  programs.zathura = {
+    enable = true;
+    options = {
+      default-bg = "#2e3440";
+    };
+  };
+
   location = {
     latitude = 55.66283136357285;
     longitude = 12.534913904480344;
