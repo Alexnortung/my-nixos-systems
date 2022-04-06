@@ -234,15 +234,13 @@ in
     brave
     gimp
     imagemagick
-    dbeaver
     slack-term
     slack
     docker-compose
     ranger
-    ungoogled-chromium
+    #ungoogled-chromium
     dunst
     xmrig
-    conky
     bitwarden
     #torbrowser
     mullvad-vpn
