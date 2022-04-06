@@ -70,6 +70,7 @@
           plenary-nvim # required by popup and telescope media
           popup-nvim
           telescope-media-files-nvim
+          vim-fugitive # Git functionality
         ];
         opt = [
         ];
