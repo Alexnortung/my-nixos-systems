@@ -45,7 +45,7 @@ in
   ];
 
   nix = {
-    package = pkgs.nix;
+    package = pkgs.nixUnstable;
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
@@ -200,8 +200,9 @@ in
       enable = true;
     };
 
-    videoDrivers = [ "modesetting" ];
-    useGlamor = true;
+    # videoDrivers = [ "modesetting" ];
+    # useGlamor = true;
+    videoDrivers = [ "intel" ];
 
     # Enable touchpad support (enabled default in most desktopManager).
     libinput = {
@@ -223,12 +224,12 @@ in
     };
   };
 
-  # services.picom = {
-  #   enable = true;
-  #   vSync = true;
-  #   #backend = "glx";
-  #   #experimentalBackends = true;
-  # };
+  services.picom = {
+    enable = true;
+    vSync = true;
+    #backend = "glx";
+    #experimentalBackends = true;
+  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users = {
@@ -249,7 +250,6 @@ in
   };
 
   environment.systemPackages = with pkgs; [
-    swiProlog
     pidgin-with-plugins
     trash-cli
     ncdu

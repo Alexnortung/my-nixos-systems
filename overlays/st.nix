@@ -36,11 +36,7 @@
           # Anysize
           (super.fetchpatch {
             url = "https://st.suckless.org/patches/anysize/st-anysize-0.8.4.diff";
-<<<<<<< HEAD:common/overlays/st.nix
-            sha256 = "0ahzkinrsb3pzh2f5l3rfg59f0b3p3wkh5c2lqwcwj7ds6gl5v6s";
-=======
             sha256 = "2uxCn9HtSM44poIVOPm4YwGXynN50OIE/HcsnW2cHyo=";
->>>>>>> flake-migration:overlays/st.nix
           })
           # Vercenter
           (super.fetchpatch {
