@@ -24,14 +24,14 @@
             sha256 = "0valvkbsf2qbai8551id6jc0szn61303f3l6r8wfjmjnn4054r3c";
           })
           # Alpha
-          (super.fetchpatch {
-            url = "https://st.suckless.org/patches/alpha/st-alpha-0.8.2.diff";
-            sha256 = "158k93bbgrmcajfxvkrzfl65lmqgj6rk6kn8yl6nwk183hhf5qd4";
-          })
+          # (super.fetchpatch {
+          #   url = "https://st.suckless.org/patches/alpha/st-alpha-0.8.2.diff";
+          #   sha256 = "158k93bbgrmcajfxvkrzfl65lmqgj6rk6kn8yl6nwk183hhf5qd4";
+          # })
           # Ligatures
           (super.fetchpatch {
-            url = "https://st.suckless.org/patches/ligatures/0.8.3/st-ligatures-alpha-scrollback-20200430-0.8.3.diff";
-            sha256 = "1y6fl31fz1ks43v80ccisz781zzf6fgaijdhcbvkxy2d009xla27";
+            url = "https://st.suckless.org/patches/ligatures/0.8.3/st-ligatures-scrollback-20200430-0.8.3.diff";
+            sha256 = "gO6KSsmnns2gD3LTCiKSOJ/vlqg2r0lZ9AoNf9AidX8=";
           })
           # Anysize
           (super.fetchpatch {

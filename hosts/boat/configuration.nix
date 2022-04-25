@@ -203,6 +203,10 @@ in
     # videoDrivers = [ "modesetting" ];
     # useGlamor = true;
     videoDrivers = [ "intel" ];
+    deviceSection = ''
+      Option "DRI" "2"
+      Option "TearFree" "true"
+    '';
 
     # Enable touchpad support (enabled default in most desktopManager).
     libinput = {
@@ -227,8 +231,8 @@ in
   services.picom = {
     enable = true;
     vSync = true;
-    #backend = "glx";
-    #experimentalBackends = true;
+    inactiveOpacity = 0.8;
+    activeOpacity = 1.0;
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
