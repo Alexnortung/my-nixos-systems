@@ -40,11 +40,11 @@ in
     enable = true;
   };
 
-  swapDevices = [
-    {
-      label = "swap";
-    }
-  ];
+  # swapDevices = [
+  #   {
+  #     label = "swap";
+  #   }
+  # ];
 
   fonts.fonts = with pkgs; [
     hasklig
