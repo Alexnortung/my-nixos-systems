@@ -11,6 +11,7 @@ in
 {
   imports = [
     ./hardware-configuration.nix
+    ../../cachix.nix
     ../../modules/nvim.nix
     ../../modules/programming-pkgs.nix
     ../../modules/comfort-packages.nix
@@ -272,7 +273,7 @@ in
     #godot
     dunst
     # xmrig
-    conky
+    # conky
     bitwarden
     # torbrowser
     mullvad-vpn
@@ -282,7 +283,7 @@ in
     gparted
     pcmanfm
     pavucontrol
-    tdesktop
+    # tdesktop
     python39Packages.pygments
     xss-lock
     xorg.xev
@@ -291,7 +292,7 @@ in
     dmenu
     st
     #spotify
-    libreoffice
+    # libreoffice
     tmate
     bvi # hex editor with vim bindings
     session-desktop-appimage

@@ -24,7 +24,7 @@
     spicetify.url = "github:PhilTaken/spicetify-nix";
 
     # import hosts
-    nixos-boat.url = "github:NixOS/nixpkgs/release-21.11";
+    nixos-boat.url = "github:NixOS/nixpkgs/nixos-21.11";
     nixpkgs-unstable-boat.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nur-alexnortung-boat.url = "github:Alexnortung/nur-alexnortung";
 
