@@ -159,6 +159,8 @@
   };
 
   environment.systemPackages = with pkgs; [
+    superTuxKart
+    protonup
     autorandr
     libreoffice
     mullvad-vpn
