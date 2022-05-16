@@ -229,6 +229,8 @@ in
   };
 
   environment.systemPackages = with pkgs; [
+    nodejs
+    nodePackages.npm
     beekeeper-studio
     postman
     brave
