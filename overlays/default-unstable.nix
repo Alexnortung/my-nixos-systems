@@ -17,7 +17,7 @@ unstable-channel: final: prev: {
     nordzy-cursor-theme
     sagetex
     mullvad-vpn
-    libreoffice
+    # libreoffice
     blender
     dbeaver
     beekeeper-studio
