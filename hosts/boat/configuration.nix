@@ -255,6 +255,7 @@ in
   };
 
   environment.systemPackages = with pkgs; [
+    drawio
     pidgin-with-plugins
     trash-cli
     ncdu
