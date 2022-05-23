@@ -229,6 +229,7 @@ in
   };
 
   environment.systemPackages = with pkgs; [
+    lazygit
     nodejs
     nodePackages.npm
     beekeeper-studio
