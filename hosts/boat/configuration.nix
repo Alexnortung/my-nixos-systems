@@ -283,7 +283,7 @@ in
     gparted
     pcmanfm
     pavucontrol
-    # tdesktop
+    tdesktop
     python39Packages.pygments
     xss-lock
     xorg.xev
@@ -292,7 +292,7 @@ in
     dmenu
     st
     #spotify
-    # libreoffice
+    libreoffice
     tmate
     bvi # hex editor with vim bindings
     session-desktop-appimage
