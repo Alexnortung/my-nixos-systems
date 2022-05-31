@@ -3,7 +3,7 @@
 {
   nixpkgs.overlays = [
     (self: super: {
-      pidgin-with-plugins = super.pidgin-with-plugins.override {
+      pidgin-with-plugins = super.pidgin.override {
         plugins = with pkgs; [
           telegram-purple
         ];

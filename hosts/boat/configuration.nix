@@ -46,7 +46,7 @@ in
   ];
 
   nix = {
-    package = pkgs.nixUnstable;
+    package = pkgs.nix;
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
@@ -201,9 +201,9 @@ in
       enable = true;
     };
 
-    # videoDrivers = [ "modesetting" ];
-    # useGlamor = true;
-    videoDrivers = [ "intel" ];
+    videoDrivers = [ "modesetting" ];
+    useGlamor = true;
+    # videoDrivers = [ "intel" ];
     deviceSection = ''
       Option "DRI" "2"
       Option "TearFree" "true"
@@ -256,14 +256,14 @@ in
 
   environment.systemPackages = with pkgs; [
     drawio
-    pidgin-with-plugins
+    # pidgin-with-plugins
     trash-cli
     ncdu
     inputs.deploy-rs.defaultPackage.x86_64-linux
     inputs.agenix.defaultPackage.x86_64-linux
     emojipick
     vlc
-    dotnet-sdk
+    # dotnet-sdk
     #sage
     qutebrowser
     steam

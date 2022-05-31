@@ -5,7 +5,8 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Hasklig:pixelsize=18:antialias=true:autohint=true:style=Regular";
+// static char *font = "Hasklig:pixelsize=18:antialias=true:autohint=true";
+static char *font = "Liberation Mono:pixelsize=18:antialias=true:autohint=true";
 static int borderpx = 2;
 
 /*
@@ -19,7 +20,7 @@ static int borderpx = 2;
 static char *shell = "/bin/sh";
 char *utmp = NULL;
 /* scroll program: to enable use a string like "scroll" */
-char *scroll = NULL;
+char *scroll = NULL; // default NULL
 char *stty_args = "stty raw pass8 nl -echo -iexten -cstopb 38400";
 
 /* identification sequence returned in DA and DECID */
@@ -34,7 +35,7 @@ static float chscale = 1.1;
  *
  * More advanced example: L" `'\"()[]{}"
  */
-wchar_t *worddelimiters = L" ";
+wchar_t *worddelimiters = L" '\"`";
 
 /* selection timeouts (in milliseconds) */
 static unsigned int doubleclicktimeout = 300;
@@ -154,8 +155,8 @@ static const char *colorname[] = {
 //static unsigned int defaultrcs = 257;
 unsigned int defaultfg = 257;
 unsigned int defaultbg = 256;
-static unsigned int defaultcs = 257;
-static unsigned int defaultrcs = 256;
+unsigned int defaultcs = 257;
+unsigned int defaultrcs = 256;
 
 /*
  * Default shape of cursor
@@ -224,8 +225,8 @@ static Shortcut shortcuts[] = {
 	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
 	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
-	{ ShiftMask,            XK_Prior,     kscrollup,      {.i = -1} },
-	{ ShiftMask,            XK_Next,   kscrolldown,    {.i = -1} },
+	// { ShiftMask,            XK_Prior,     kscrollup,      {.i = -1} },
+	// { ShiftMask,            XK_Next,   kscrolldown,    {.i = -1} },
 };
 
 /*

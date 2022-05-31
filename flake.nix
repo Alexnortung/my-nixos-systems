@@ -2,7 +2,7 @@
   description = "Alexnortung's system configurations and server configurations";
 
   inputs = {
-    utils.url = "github:gytis-ivaskevicius/flake-utils-plus";
+    utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus";
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
 
@@ -17,14 +17,14 @@
     };
 
     neovim = {
-      url = "github:neovim/neovim/release-0.6?dir=contrib";
+      url = "github:neovim/neovim?dir=contrib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     spicetify.url = "github:PhilTaken/spicetify-nix";
 
     # import hosts
-    nixos-boat.url = "github:NixOS/nixpkgs/nixos-21.11";
+    nixos-boat.url = "github:NixOS/nixpkgs/nixos-22.05";
     nixpkgs-unstable-boat.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nur-alexnortung-boat.url = "github:Alexnortung/nur-alexnortung";
 
@@ -54,7 +54,7 @@
 
   outputs = inputs@{
     self
-  , utils
+  , utils-plus
   , nixpkgs
   , vim-extra-plugins
   , fenix
@@ -62,7 +62,7 @@
   , agenix
   , nix-on-droid
   , ... }:
-    utils.lib.mkFlake {
+    utils-plus.lib.mkFlake {
       inherit self inputs;
 
       sharedOverlays = [
@@ -83,7 +83,7 @@
       hostDefaults = {
         extraArgs = {
           # add utils and inputs to each host.
-          inherit utils inputs;
+          inherit utils-plus inputs;
           modules = [
             agenix.nixosModules.age
             import ./modules # My extra modules
@@ -96,24 +96,24 @@
       deploy = {
         nodes = (import ./hosts/default.nix).nodes inputs;
       };
-      nixOnDroidConfigurations = {
-        bundle = nix-on-droid.lib.nixOnDroidConfiguration {
-          config = ./hosts/droid-devices/bundle/configuration.nix;
-          system = "aarch64-linux";
-          extraSpecialArgs = {
-            inherit inputs;
-          };
-          pkgs = import nixpkgs {
-            overlays = [
-              fenix.overlay
-              vim-extra-plugins.overlay
-              neovim.overlay
-            ];
-          };
-          extraModules = [
-            #(import ./modules/system-packages-to-packages.nix)
-          ];
-        };
-      };
+      # nixOnDroidConfigurations = {
+      #   bundle = nix-on-droid.lib.nixOnDroidConfiguration {
+      #     config = ./hosts/droid-devices/bundle/configuration.nix;
+      #     system = "aarch64-linux";
+      #     extraSpecialArgs = {
+      #       inherit inputs;
+      #     };
+      #     pkgs = import nixpkgs {
+      #       overlays = [
+      #         fenix.overlay
+      #         vim-extra-plugins.overlay
+      #         neovim.overlay
+      #       ];
+      #     };
+      #     extraModules = [
+      #       #(import ./modules/system-packages-to-packages.nix)
+      #     ];
+      #   };
+      # };
     };
 }
