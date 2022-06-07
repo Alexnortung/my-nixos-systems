@@ -3,6 +3,10 @@
 {
   environment.systemPackages = [
   ];
+
+  fonts.fonts = with pkgs; [
+    fira-code
+  ];
   nixpkgs.overlays = [
     (self: super: {
       st = super.st.overrideAttrs (oldAttrs : rec {
