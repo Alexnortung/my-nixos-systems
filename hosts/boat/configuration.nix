@@ -26,6 +26,7 @@ in
     ../../modules/vscodium.nix
     ../../modules/nord-spicetify.nix
     ../../overlays/pidgin-with-plugins.nix
+    ../../profiles/bluetooth.nix
   ];
 
   programs.zathura = {
