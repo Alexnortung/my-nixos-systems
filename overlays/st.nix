@@ -42,7 +42,7 @@
           # OR
           (super.fetchpatch {
             url = "https://st.suckless.org/patches/ligatures/0.8.4/st-ligatures-20210824-0.8.4.diff";
-            sha256 = "0mh7p3k5fx84n80m639agk838x2pp6628w8sca1xjgv64dfic574";
+            sha256 = "SLevASYfie2tDt2Aln+vNY4GEhB7DIzmrtP/wjxt59c=";
           })
           # Anysize
           (super.fetchpatch {

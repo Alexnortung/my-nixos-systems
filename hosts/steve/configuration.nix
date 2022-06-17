@@ -42,7 +42,7 @@
   ];
 
   hardware.nvidia = {
-    modesetting.enable = true;
+    # modesetting.enable = true;
     prime = {
       sync.enable = true;
       nvidiaBusId = "PCI:1:0:0";
@@ -67,9 +67,9 @@
     enable = true;
     windowManager.dwm.enable = true;
     videoDrivers = [ "nvidia" ];
-    displayManager.setupCommands = ''
-      autorandr -c >> /tmp/autorandr-log.txt
-    '';
+    # displayManager.setupCommands = ''
+    #   autorandr -c >> /tmp/autorandr-log.txt
+    # '';
     #serverFlagsSection = ''
     #  Option "IndirectGLX" "on"
     #'';

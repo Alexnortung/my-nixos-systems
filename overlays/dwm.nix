@@ -20,7 +20,7 @@
           # Systray
           (super.fetchpatch {
             url = "https://dwm.suckless.org/patches/systray/dwm-systray-6.3.diff";
-            sha256 = "1plzfi5l8zwgr8zfjmzilpv43n248n4178j98qdbwpgb4r793mdj";
+            sha256 = "M814rlwlO3ytmN/WjgunBDQBGrrjaMLVBYohng1RMjA=";
           })
           # Pertag - gives each tag its own workspace
           (super.fetchpatch {
@@ -30,7 +30,7 @@
           # Hide vacant tags
           (super.fetchpatch {
             url = "https://dwm.suckless.org/patches/hide_vacant_tags/dwm-hide_vacant_tags-6.3.diff";
-            sha256 = "0c8cf5lm95bbxcirf9hhzkwmc5a690albnxcrg363av32rf2yaa1";
+            sha256 = "GBa4NOZFFQGiSsqgXWkFXzCQDeNmxJG0/g3ZYby0pnc=";
           })
         ];
       });
