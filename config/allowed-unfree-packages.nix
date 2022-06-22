@@ -1,7 +1,7 @@
 [
     # Nvidia
     "nvidia-x11" "nvidia-settings"
-    "cudatoolkit"
+    "cudatoolkit" "cudatoolkit-11-cudnn" "libcublas"
     # Discord
     "discord"
     # spotify

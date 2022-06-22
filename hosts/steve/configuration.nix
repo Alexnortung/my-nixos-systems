@@ -25,7 +25,7 @@
   disabledModules = [
     "services/misc/autorandr.nix"
   ];
-
+  
   nix = {
     package = pkgs.nixUnstable;
     extraOptions = ''
@@ -137,14 +137,18 @@
 
   # List packages installed in system profile. To search, run:
   programs.steam.enable = true;
-  nixpkgs.config.packageOverrides = pkgs: {
-    #steam = pkgs-steam.steam.override {
-    #  extraPkgs = pkgs:  [
-    #  ];
-    #  extraLibraries = pkgs: [
-    #    pkgs.pipewire
-    #  ];
-    #};
+
+  nixpkgs.config = {
+    cudaSupport = true; # enable cuda for all packages that supprot it.
+    packageOverrides = pkgs: {
+      #steam = pkgs-steam.steam.override {
+      #  extraPkgs = pkgs:  [
+      #  ];
+      #  extraLibraries = pkgs: [
+      #    pkgs.pipewire
+      #  ];
+      #};
+    };
   };
 
   services.mullvad-vpn.enable = true;
@@ -159,6 +163,8 @@
   };
 
   environment.systemPackages = with pkgs; [
+    jupyter
+    python3Packages.pytorch
     superTuxKart
     protonup
     autorandr
@@ -171,7 +177,7 @@
     futhark
     zathura
     xorg.xhost
-    xpra
+    # xpra
     socat
     bashmount
     pinta
@@ -179,7 +185,7 @@
     appimage-run
     flameshot
     xclip
-    dotnet-sdk_5
+    # dotnet-sdk_5
     steam-run
     godot
     glances
@@ -213,7 +219,7 @@
     obs-studio
     gimp
     spotify
-    lutris
+    # lutris
     vulkan-headers
     xorg.xev
     gcc
