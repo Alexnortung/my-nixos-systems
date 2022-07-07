@@ -13,6 +13,6 @@
     "vscode-extension-ms-vscode-cpptools"
     # Steam
     "steam" "steam-original" "steam-runtime"
-
+    "blender"
     "postman" "slack"
 ]

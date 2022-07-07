@@ -74,7 +74,8 @@
 
       channelsConfig = {
         # Default channel configuration
-        allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) (import ./config/allowed-unfree-packages.nix);
+        # allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) (import ./config/allowed-unfree-packages.nix);
+        allowUnfree = true;
       };
 
       channels = ((import ./hosts/default.nix).channels inputs) // {

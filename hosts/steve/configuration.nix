@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
+{ inputs, config, pkgs, lib, ... }:
 
 {
   imports = [
@@ -33,22 +33,33 @@
     '';
   };
 
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
 
-  boot.extraModulePackages = with config.boot.kernelPackages; [
-    nvidia_x11
-  ];
-
-  hardware.nvidia = {
-    # modesetting.enable = true;
-    prime = {
-      sync.enable = true;
-      nvidiaBusId = "PCI:1:0:0";
-      intelBusId = "PCI:0:1:0";
+  boot = {
+    # kernelParams = [ "nvidia-drm.modeset=1" ];
+    extraModulePackages = with config.boot.kernelPackages; [
+      # nvidia_x11
+    ];
+    # Use the systemd-boot EFI boot loader.
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
     };
   };
+
+  hardware.opengl.extraPackages = with pkgs; [
+    rocm-opencl-icd
+  ];
+
+  # hardware.nvidia = {
+  #   # modesetting.enable = true;
+  #   package = config.boot.kernelPackages.nvidiaPackages.stable;
+  #   nvidiaPersistenced = true;
+  #   # prime = {
+  #   #   sync.enable = true;
+  #   #   nvidiaBusId = "PCI:1:0:0";
+  #   #   # intelBusId = "PCI:0:1:0";
+  #   # };
+  # };
 
   networking = {
     hostName = "steve";
@@ -56,7 +67,7 @@
     # Per-interface useDHCP will be mandatory in the future, so this generated config
     # replicates the default behaviour.
     useDHCP = false;
-    interfaces.enp5s0.useDHCP = true;
+    interfaces.enp7s0.useDHCP = true;
   };
 
   # Set your time zone.
@@ -66,7 +77,7 @@
   services.xserver = {
     enable = true;
     windowManager.dwm.enable = true;
-    videoDrivers = [ "nvidia" ];
+    # videoDrivers = [ "nvidia" ];
     # displayManager.setupCommands = ''
     #   autorandr -c >> /tmp/autorandr-log.txt
     # '';
@@ -77,6 +88,22 @@
     #  Option "metamodes" "HDMI-0: nvidia-auto-select +1920+0 {ForceCompositionPipeline=On}, DVI-I-0: nvidia-auto-select +0+0 {ForceCompositionPipeline=On}"
     #'';
   };
+
+  services.bg-setter = {
+    enable = true;
+    wallpaper = lib.lists.elemAt (import ../../config/misc/nord-wallpapers.nix {}) 0;
+  };
+
+  services.autorandr = {
+    enable = true;
+    defaultTarget = "horizontal";
+    hooks = {
+      postswitch = {
+        "change-background" = "systemctl --user restart bg-setter";
+      };
+    };
+  };
+
 
   fonts.fonts = with pkgs; [
     hasklig
@@ -139,7 +166,7 @@
   programs.steam.enable = true;
 
   nixpkgs.config = {
-    cudaSupport = true; # enable cuda for all packages that supprot it.
+    # cudaSupport = true; # enable cuda for all packages that supprot it.
     packageOverrides = pkgs: {
       #steam = pkgs-steam.steam.override {
       #  extraPkgs = pkgs:  [
@@ -155,7 +182,7 @@
 
   environment.sessionVariables = {
     MOZ_X11_EGL = "1";
-    "CUDA_PATH" = "${pkgs.cudatoolkit}";
+    # "CUDA_PATH" = "${pkgs.cudatoolkit}";
   };
 
   environment.variables = {
@@ -163,16 +190,19 @@
   };
 
   environment.systemPackages = with pkgs; [
-    jupyter
-    python3Packages.pytorch
+    lazygit
+    # jupyter
+    # python3Packages.pytorch
     superTuxKart
     protonup
     autorandr
     libreoffice
     mullvad-vpn
     session-desktop-appimage
-    cudatoolkit
-    blender
+    # cudatoolkit
+    (blender.override {
+      # cudaSupport = true;
+    })
     python39Packages.pygments
     futhark
     zathura
@@ -209,7 +239,7 @@
     xorg.xrandr
     arandr
     nvtop
-    linuxPackages.nvidia_x11
+    # linuxPackages.nvidia_x11
     #xorg.libpciaccess
     patchelf
     libGL libGLU
