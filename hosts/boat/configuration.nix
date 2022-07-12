@@ -265,7 +265,7 @@ in
     emojipick
     vlc
     # dotnet-sdk
-    #sage
+    sage
     qutebrowser
     steam
     #gimp
