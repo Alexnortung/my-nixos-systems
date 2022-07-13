@@ -10,8 +10,6 @@
     enable = true;
 
     maps = {
-      normal."<leader>p" = "<cmd>Telescope find_files<CR>";
-
       # Better windom navigation
       normal."<C-h>" = "<C-w>h";
       normal."<C-j>" = "<C-w>j";
@@ -39,6 +37,20 @@
       # Nvim tree
       normal."<leader>nn" = ":NvimTreeToggle<CR>";
       normal."<leader>nf" = ":NvimTreeFindFile<CR>";
+
+      # LSP stuff
+      normal."gD" = "<cmd>lua vim.lsp.buf.declaration()<CR>";
+      normal."dg" = "<cmd>lua vim.lsp.buf.definition()<CR>";
+      normal."K" = "<cmd>lua vim.lsp.buf.hover()<CR>";
+      normal."gi" = "<cmd>lua vim.lsp.buf.implementation()<CR>";
+      # normal."<C-k>" = "<cmd>lua vim.lsp.buf.signature_help()<CR>";
+      normal."gr" = "<cmd>lua vim.lsp.buf.references()<CR>";
+      normal."<leader>ca" = "<cmd>lua vim.lsp.buf.code_action()<CR>";
+
+      # Telescope
+      normal."<leader>p" = "<cmd>Telescope find_files<CR>";
+      normal."<leader>ff" = "<cmd>Telescope find_files<CR>";
+      normal."<leader>fl" = "<cmd>Telescope live_grep<CR>";
     };
 
     options = {
@@ -58,6 +70,8 @@
 
     globals = {
       mapleader = " ";
+
+      rainbow_active = 1;
     };
 
     plugins = {
@@ -98,6 +112,10 @@
         enable = true;
       };
 
+      nvim-autopairs = {
+        enable = true;
+      };
+
       bufferline = {
         enable = true;
       };
@@ -115,10 +133,13 @@
       cmp-path
       cmp-buffer
       cmp-cmdline
+      cmp-nvim-lsp
       cmp_luasnip
       luasnip
       friendly-snippets
       vim-sleuth # detects indentation
+      rainbow
+      futhark-vim # Futhark programming language
     ];
 
     # plugins.lightline.enable = true;

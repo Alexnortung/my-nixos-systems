@@ -1,4 +1,6 @@
 local cmp = require'cmp'
+local npairs = require('nvim-autopairs')
+local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 local luasnip = require'luasnip'
 
 local check_backspace = function()
@@ -113,3 +115,12 @@ cmp.setup({
     --     border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
     -- },
 })
+
+npairs.setup {
+    check_ts = true,
+}
+
+cmp.event:on(
+    'confirm_done',
+    cmp_autopairs.on_confirm_done()
+)
