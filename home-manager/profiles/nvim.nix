@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs, pkgs, ... }:
 
 {
   # Requires the following for home manager
@@ -35,6 +35,10 @@
 
       # When pasting in visual mode, do not yank the replaces text
       visual."p" = "_dP";
+
+      # Nvim tree
+      normal."<leader>nn" = ":NvimTreeToggle<CR>";
+      normal."<leader>nf" = ":NvimTreeFindFile<CR>";
     };
 
     options = {
@@ -49,6 +53,7 @@
       shiftwidth = 4;
       tabstop = 4;
       cursorline = true;
+      smartindent = 1;
     };
 
     globals = {
@@ -79,6 +84,10 @@
           timeout = 500;
         };
 
+        view = {
+          side = "right";
+        };
+
         trash = {
           cmd = "trash";
           requireConfirm = true;
@@ -101,11 +110,24 @@
       };
     };
 
+    extraPlugins = with pkgs.vimPlugins; [
+      nvim-cmp
+      cmp-path
+      cmp-buffer
+      cmp-cmdline
+      cmp_luasnip
+      luasnip
+      friendly-snippets
+      vim-sleuth # detects indentation
+    ];
+
     # plugins.lightline.enable = true;
     colorschemes.nord = {
       enable = true;
       borders = true;
       contrast = true;
     };
+
+    extraConfigLua = builtins.readFile ./nvim/main.lua;
   };
 }
