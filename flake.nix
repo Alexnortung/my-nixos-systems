@@ -3,8 +3,13 @@
 
   inputs = {
     utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    # nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixos-stable.url = "github:NixOS/nixpkgs/nixos-22.05";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
+    home-manager = {
+      url = "";
+      inputs.nixpkgs.follows = "nixos-stable";
+    };
 
     vim-extra-plugins.url = "github:Alexnortung/nixpkgs-vim-extra-plugins";
 
@@ -13,15 +18,13 @@
 
     fenix = {
       url = "github:nix-community/fenix";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixos-stable";
     };
 
     neovim = {
       url = "github:neovim/neovim?dir=contrib";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixos-stable";
     };
-
-    spicetify.url = "github:PhilTaken/spicetify-nix";
 
     # import hosts
     nixos-boat.url = "github:NixOS/nixpkgs/nixos-22.05";
@@ -40,12 +43,10 @@
     nixpkgs-unstable-enderman.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nur-alexnortung-enderman.url = "github:Alexnortung/nur-alexnortung";
 
-    nix-on-droid.url = "github:t184256/nix-on-droid";
-    nix-on-droid.inputs.nixpkgs.follows = "nixpkgs";
-
-    # pre master inputs
-    emojipick.url = "github:NixOS/nixpkgs/2325a754e19e40b227b50323acfedca41836fbf9";
-    spicetified-spotify.url = "github:NixOS/nixpkgs/4ba5b6e107e02abe924b4a04894203705f741a00";
+    nix-on-droid = {
+      url = "github:t184256/nix-on-droid";
+      inputs.nixpkgs.follows = "nixos-stable";
+    };
 
     #local-nixpkgs.url = "path:/home/alexander/source/nixpkgs";
   }
@@ -71,6 +72,8 @@
         neovim.overlay
         #agenix.overlay
       ];
+
+      homeConfigurations = utils-plus.eachDefaultSystem (system: (import ./home-manager { inherit inputs system; }).configs);
 
       channelsConfig = {
         # Default channel configuration
