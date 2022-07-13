@@ -7,7 +7,7 @@
     nixos-stable.url = "github:NixOS/nixpkgs/nixos-22.05";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     home-manager = {
-      url = "";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixos-stable";
     };
 
@@ -23,6 +23,12 @@
 
     neovim = {
       url = "github:neovim/neovim?dir=contrib";
+      inputs.nixpkgs.follows = "nixos-stable";
+    };
+
+    nixvim = {
+      # url = "github:pta2002/nixvim";
+      url = "github:Alexnortung/nixvim/nord";
       inputs.nixpkgs.follows = "nixos-stable";
     };
 
@@ -73,7 +79,7 @@
         #agenix.overlay
       ];
 
-      homeConfigurations = utils-plus.eachDefaultSystem (system: (import ./home-manager { inherit inputs system; }).configs);
+      homeConfigurations =(import ./home-manager { inherit inputs; }).configs;
 
       channelsConfig = {
         # Default channel configuration
