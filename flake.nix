@@ -38,7 +38,7 @@
     nixpkgs-unstable-boat.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nur-alexnortung-boat.url = "github:Alexnortung/nur-alexnortung";
 
-    nixos-spider.url = "github:NixOS/nixpkgs/release-21.11";
+    nixos-spider.url = "github:NixOS/nixpkgs/nixos-22.05";
     nixpkgs-unstable-spider.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nur-alexnortung-spider.url = "github:Alexnortung/nur-alexnortung";
 

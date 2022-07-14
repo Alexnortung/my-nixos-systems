@@ -66,9 +66,9 @@ in
         enable = true;
         efiSupport = true;
       };
-      systemd-boot = {
-        enable = true;
-      };
+      # systemd-boot = {
+      #   enable = true;
+      # };
     };
     # Boot animation
     plymouth = {
@@ -304,5 +304,7 @@ in
   virtualisation.docker = {
     enable = true;
   };
+
+  system.stateVersion = "21.11";
 }
 
