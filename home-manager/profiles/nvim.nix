@@ -54,18 +54,20 @@
     };
 
     options = {
-      number = true; # sets numbers in the side
-      relativenumber = true; # makes side numbers relative to the cursor
-      expandtab = true; # nicer default tabs
-      clipboard = "unnamedplus"; # use system clipboard
-      mouse = "a"; # make neovim usable with mouse
-      smartcase = true; # "smart" search
+      number = true;                # sets numbers in the side
+      relativenumber = true;        # makes side numbers relative to the cursor
+      expandtab = true;             # nicer default tabs
+      clipboard = "unnamedplus";    # use system clipboard
+      mouse = "a";                  # make neovim usable with mouse
+      smartcase = true;             # "smart" search
+      ignorecase = true;
       splitbelow = true;
       splitright = true;
       shiftwidth = 4;
       tabstop = 4;
       cursorline = true;
       smartindent = 1;
+      scrolloff = 4;                # keeps lines above and below
     };
 
     globals = {
@@ -108,6 +110,10 @@
         };
       };
 
+      comment-nvim = {
+        enable = true;
+      };
+
       surround = {
         enable = true;
       };
@@ -126,10 +132,46 @@
         indent = true;
         ensureInstalled = "all";
       };
+
+      nvim-cmp = {
+        enable = true;
+        preselect = "None";
+        snippet.expand = ''
+          function(args)
+            require('luasnip').lsp_expand(args.body)
+          end
+        '';
+        mappingPresets = [ "insert" ];
+        mapping = {
+          "<C-b>" = ''cmp.mapping.scroll_docs(-4)'';
+          "<C-f>" = ''cmp.mapping.scroll_docs(4)'';
+          "<C-Space>" = "cmp.mapping.complete()";
+          "<C-e>" = "cmp.mapping.abort()";
+          "<CR>" = "cmp.mapping.confirm({ select = true })";
+          "<Tab>" = {
+            modes = [ "i" "s" ];
+            action = ''
+              function(fallback)
+                if cmp.visible() then
+                  cmp.select_next_item()
+                elseif luasnip.expandable() then
+                  luasnip.expand()
+                elseif luasnip.expand_or_jumpable() then
+                  luasnip.expand_or_jump()
+                elseif check_backspace() then
+                  fallback()
+                else
+                  fallback()
+                end
+              end
+            '';
+          };
+        };
+      };
     };
 
     extraPlugins = with pkgs.vimPlugins; [
-      tcomment_vim
+      # tcomment_vim
       nvim-cmp
       cmp-path
       cmp-buffer
@@ -165,7 +207,7 @@
       # Language servers
       nodePackages.typescript
       nodePackages.typescript-language-server
-      nodePackages.vue-language-server
+      # nodePackages.vue-language-server
     ];
   };
 }
