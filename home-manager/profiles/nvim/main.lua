@@ -124,3 +124,8 @@ cmp.event:on(
     'confirm_done',
     cmp_autopairs.on_confirm_done()
 )
+
+
+--require'lspconfig'.volar.setup{
+--    filetypes = {'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json'},
+--}

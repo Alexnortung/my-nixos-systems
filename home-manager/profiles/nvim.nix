@@ -129,6 +129,7 @@
     };
 
     extraPlugins = with pkgs.vimPlugins; [
+      tcomment_vim
       nvim-cmp
       cmp-path
       cmp-buffer
@@ -149,6 +150,22 @@
       contrast = true;
     };
 
-    extraConfigLua = builtins.readFile ./nvim/main.lua;
+    extraConfigLua = builtins.readFile ./nvim/main.lua + ''
+      require'lspconfig'.volar.setup{
+        filetypes = {'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json'},
+        init_options = {
+          typescript = {
+            serverPath = '${pkgs.nodePackages.typescript}/lib/node_modules/typescript/lib/tsserverlibrary.js'
+          }
+        }
+      }
+    '';
+
+    extraPackages = with pkgs; [
+      # Language servers
+      nodePackages.typescript
+      nodePackages.typescript-language-server
+      nodePackages.vue-language-server
+    ];
   };
 }

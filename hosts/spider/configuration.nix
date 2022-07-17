@@ -22,6 +22,7 @@ in
     ../../modules/basic-desktop.nix
     ../../modules/zsh.nix
     ../../modules/location-denmark.nix
+    ../../profiles/allow-multicast.nix
   ];
 
   nix = {
@@ -101,7 +102,12 @@ in
     firewall = {
       checkReversePath = lib.mkForce "loose";
       allowedTCPPorts = [
-        3000
+        3000 # dev
+        8008 8009 # Chromecast
+        1337
+      ];
+      allowedUDPPorts = [
+        32768 61000 # Chromecast
       ];
     };
     #wg-quick.interfaces.wg0 = {
@@ -229,6 +235,7 @@ in
   };
 
   environment.systemPackages = with pkgs; [
+    mkchromecast
     lazygit
     nodejs
     nodePackages.npm
