@@ -123,7 +123,7 @@
         enable = true;
 
         git = {
-          enable = "true";
+          enable = true;
           ignore = true;
           timeout = 500;
         };
