@@ -112,6 +112,11 @@
           rnix-lsp.enable = true;
           pyright.enable = true;
           rust-analyzer.enable = true;
+          html.enable = true;
+          cssls.enable = true;
+          jsonls.enable = true;
+          eslint.enable = true;
+          gdscript.enable = true;
         };
       };
 

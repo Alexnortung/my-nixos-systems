@@ -539,11 +539,11 @@
         "nmdSrc": "nmdSrc"
       },
       "locked": {
-        "lastModified": 1658606413,
-        "narHash": "sha256-z0WlsootCvoquU0Q1QthcugYyxMC0icUkYDsUl1GkA8=",
+        "lastModified": 1658690679,
+        "narHash": "sha256-UXJScYlLSdHnLbuPn+6fXydcTusbsFrsF793y/IePVc=",
         "owner": "Alexnortung",
         "repo": "nixvim",
-        "rev": "6f55b6ebdad9b37bcb0a1af92bc60c098ba71ea9",
+        "rev": "b35f56c8cad23a0858c16137dbbef2cc07d8555c",
         "type": "github"
       },
       "original": {
