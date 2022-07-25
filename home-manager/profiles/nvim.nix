@@ -250,6 +250,7 @@
       rainbow
       futhark-vim # Futhark programming language
       gitsigns-nvim
+      which-key-nvim
     ];
 
     # plugins.lightline.enable = true;
