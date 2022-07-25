@@ -5,13 +5,14 @@
     utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus";
     # nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixos-stable.url = "github:NixOS/nixpkgs/nixos-22.05";
+    # nixos-stable.url = "path:/home/alexander/source/nixpkgs";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixos-stable";
     };
 
-    vim-extra-plugins.url = "github:Alexnortung/nixpkgs-vim-extra-plugins";
+    vim-extra-plugins.url = "github:m15a/nixpkgs-vim-extra-plugins";
 
     agenix.url = "github:ryantm/agenix"; # for encrypted secrets. such as wireguard keys
     deploy-rs.url = "github:serokell/deploy-rs";
@@ -35,6 +36,7 @@
 
     # import hosts
     nixos-boat.url = "github:NixOS/nixpkgs/nixos-22.05";
+    # nixos-boat.url = "path:/home/alexander/source/nixpkgs";
     nixpkgs-unstable-boat.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nur-alexnortung-boat.url = "github:Alexnortung/nur-alexnortung";
 
@@ -75,7 +77,7 @@
 
       sharedOverlays = [
         fenix.overlay
-        vim-extra-plugins.overlay
+        vim-extra-plugins.overlays.default
         neovim.overlay
         #agenix.overlay
       ];

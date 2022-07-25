@@ -237,11 +237,11 @@
     },
     "nixos-boat": {
       "locked": {
-        "lastModified": 1658500284,
-        "narHash": "sha256-g7vwZ5UF8PvC9f2/7Zf5O6zxgJiMSuh1CiGZVuuOhEQ=",
+        "lastModified": 1658682607,
+        "narHash": "sha256-XZ1fKlEkAQvgocuBYq9lXEP3eNW6gF9JHsPVsvkWMhU=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "e3583ad6e533a9d8dd78f90bfa93812d390ea187",
+        "rev": "d1ca40ea766da1b639937084d18d3e54e4e5da1b",
         "type": "github"
       },
       "original": {
@@ -741,15 +741,15 @@
         "nixpkgs": "nixpkgs_9"
       },
       "locked": {
-        "lastModified": 1646389872,
-        "narHash": "sha256-thGrk5OxvKykxRpv80LNSR7XTzpnYYnKbeRlshTS7To=",
-        "owner": "Alexnortung",
+        "lastModified": 1658672423,
+        "narHash": "sha256-izsUVmAHTTSL6s+J6yyfaxd1cVEUO6VsXJsVwpvZd10=",
+        "owner": "m15a",
         "repo": "nixpkgs-vim-extra-plugins",
-        "rev": "6e8db6e353e405ef3a19f01b73f44930612d3dc9",
+        "rev": "7d14933d961f68d1c569d6673c5be40922fc62df",
         "type": "github"
       },
       "original": {
-        "owner": "Alexnortung",
+        "owner": "m15a",
         "repo": "nixpkgs-vim-extra-plugins",
         "type": "github"
       }

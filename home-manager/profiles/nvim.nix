@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }:
+{ inputs, pkgs, system, ... }:
 
 {
   # Requires the following for home manager
@@ -257,6 +257,9 @@
       futhark-vim # Futhark programming language
       gitsigns-nvim
       which-key-nvim
+      (inputs.vim-extra-plugins.packages.${system}.nvim-ts-context-commentstring.overrideAttrs (oldAttrs: {
+        dependencies = [];
+      }))
     ];
 
     # plugins.lightline.enable = true;
@@ -285,6 +288,7 @@
       nodePackages.typescript
       nodePackages.typescript-language-server
       # nodePackages.vue-language-server
+      ripgrep
     ];
   };
 }
