@@ -51,6 +51,17 @@
       normal."<leader>p" = "<cmd>Telescope find_files<CR>";
       normal."<leader>ff" = "<cmd>Telescope find_files<CR>";
       normal."<leader>fl" = "<cmd>Telescope live_grep<CR>";
+
+      # Gitsigns
+      normal."<leader>hs" = "<cmd>Gitsigns stage_hunk<CR>";
+      visual."<leader>hs" = "<cmd>Gitsigns stage_hunk<CR>";
+      normal."<leader>hr" = "<cmd>Gitsigns reset_hunk<CR>";
+      visual."<leader>hr" = "<cmd>Gitsigns reset_hunk<CR>";
+      normal."<leader>hb" = "<cmd>Gitsigns blame_line<CR>";
+      normal."<leader>hd" = "<cmd>Gitsigns diffthis<CR>";
+      normal."<leader>hp" = "<cmd>Gitsigns preview_hunk<CR>";
+      normal."<leader>hn" = "<cmd>Gitsigns next_hunk<CR>";
+      normal."<leader>hN" = "<cmd>Gitsigns prev_hunk<CR>";
     };
 
     options = {
@@ -74,34 +85,6 @@
       mapleader = " ";
 
       rainbow_active = 1;
-
-      kind_icons = {
-        Text = "";
-        Method = "m";
-        Function = "";
-        Constructor = "";
-        Field = "";
-        Variable = "";
-        Class = "";
-        Interface = "";
-        Module = "";
-        Property = "";
-        Unit = "";
-        Value = "";
-        Enum = "";
-        Keyword = "";
-        Snippet = "";
-        Color = "";
-        File = "";
-        Reference = "";
-        Folder = "";
-        EnumMember = "";
-        Constant = "";
-        Struct = "";
-        Event = "";
-        Operator = "";
-        TypeParameter = "";
-      };
     };
 
     plugins = {
@@ -122,6 +105,13 @@
 
       telescope = {
         enable = true;
+        # extensions = {
+        #   media_files = {
+        #     enable = true;
+        #     find_cmd = "rg";
+        #     # find_cmd = "${pkgs.ripgrep}/bin/rg";
+        #   };
+        # };
       };
 
       nvim-tree = {
@@ -171,7 +161,7 @@
         preselect = "None";
         snippet.expand = ''
           function(args)
-            require('luasnip').lsp_expand(args.body)
+            require("luasnip").lsp_expand(args.body)
           end
         '';
         mappingPresets = [ "insert" ];
@@ -185,6 +175,7 @@
             modes = [ "i" "s" ];
             action = ''
               function(fallback)
+                local luasnip = require("luasnip")
                 if cmp.visible() then
                   cmp.select_next_item()
                 elseif luasnip.expandable() then
@@ -258,6 +249,7 @@
       vim-sleuth # detects indentation
       rainbow
       futhark-vim # Futhark programming language
+      gitsigns-nvim
     ];
 
     # plugins.lightline.enable = true;

@@ -129,3 +129,6 @@ cmp.event:on(
 --require'lspconfig'.volar.setup{
 --    filetypes = {'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json'},
 --}
+
+require('gitsigns').setup {
+}
