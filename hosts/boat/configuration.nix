@@ -12,7 +12,7 @@ in
   imports = [
     ./hardware-configuration.nix
     ../../cachix.nix
-    ../../modules/nvim.nix
+    # ../../modules/nvim.nix
     ../../modules/programming-pkgs.nix
     ../../modules/comfort-packages.nix
     ../../modules/sound.nix
@@ -23,9 +23,9 @@ in
     ../../modules/nord-gtk.nix
     ../../modules/basic-desktop.nix
     ../../modules/zsh.nix
-    ../../modules/vscodium.nix
-    ../../modules/nord-spicetify.nix
-    ../../overlays/pidgin-with-plugins.nix
+    # ../../modules/vscodium.nix
+    # ../../modules/nord-spicetify.nix
+    # ../../overlays/pidgin-with-plugins.nix
     ../../profiles/bluetooth.nix
   ];
 
@@ -256,6 +256,8 @@ in
   };
 
   environment.systemPackages = with pkgs; [
+    spotify
+    lazygit
     drawio
     # pidgin-with-plugins
     trash-cli
@@ -266,7 +268,7 @@ in
     vlc
     # dotnet-sdk
     sage
-    qutebrowser
+    # qutebrowser
     steam
     #gimp
     docker-compose
