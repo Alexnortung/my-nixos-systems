@@ -159,13 +159,13 @@
 
       nvim-cmp = {
         enable = true;
-        preselect = "None";
+        # preselect = "None";
         snippet.expand = ''
           function(args)
-            require("luasnip").lsp_expand(args.body)
+            luasnip.lsp_expand(args.body)
           end
         '';
-        mappingPresets = [ "insert" ];
+        mappingPresets = [ "insert" "cmdline" ];
         mapping = {
           "<C-b>" = ''cmp.mapping.scroll_docs(-4)'';
           "<C-f>" = ''cmp.mapping.scroll_docs(4)'';
@@ -176,7 +176,6 @@
             modes = [ "i" "s" ];
             action = ''
               function(fallback)
-                local luasnip = require("luasnip")
                 if cmp.visible() then
                   cmp.select_next_item()
                 elseif luasnip.expandable() then
@@ -216,7 +215,7 @@
           format = ''
             function(entry, vim_item)
               -- Kind icons
-              vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
+              vim_item.kind = string.format(" %s ", kind_icons[vim_item.kind])
               -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
               vim_item.menu = ({
                 luasnip = "[Snippet]",
@@ -227,6 +226,12 @@
           end
           '';
         };
+
+        # window = {
+        #   # completion = {
+        #   #   side_padding = 0;
+        #   # };
+        # };
 
         sources = [
           { name = "nvim_lsp"; }
@@ -271,6 +276,9 @@
         }
       }
     '';
+
+    extraLuaPreConfig = builtins.readFile ./nvim/pre.lua;
+    extraLuaPostConfig = builtins.readFile ./nvim/post.lua;
 
     extraPackages = with pkgs; [
       # Language servers
