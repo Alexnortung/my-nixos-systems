@@ -37,6 +37,7 @@
       # Nvim tree
       normal."<leader>nn" = ":NvimTreeToggle<CR>";
       normal."<leader>nf" = ":NvimTreeFindFile<CR>";
+      normal."<leader>nr" = ":NvimTreeRefresh<CR>";
 
       # LSP stuff
       normal."gD" = "<cmd>lua vim.lsp.buf.declaration()<CR>";
