@@ -70,6 +70,7 @@
   , fenix
   , neovim
   , agenix
+  , nixvim
   , nix-on-droid
   , ... }:
     utils-plus.lib.mkFlake {
@@ -99,6 +100,7 @@
           inherit utils-plus inputs;
           modules = [
             agenix.nixosModules.age
+            nixvim.nixosModules.nixvim
             import ./modules # My extra modules
           ];
         };

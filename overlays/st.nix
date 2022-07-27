@@ -27,7 +27,7 @@
           # Scrollback
           (super.fetchpatch {
             url = "https://st.suckless.org/patches/scrollback/st-scrollback-0.8.5.diff";
-            sha256 = "0mgsklws6jsrngcsy64zmr604qsdlpd5pqsa3pci7j3gn8im4zyw";
+            sha256 = "ZZAbrWyIaYRtw+nqvXKw8eXRWf0beGNJgoupRKsr2lc=";
           })
           # Alpha
           # (super.fetchpatch {
@@ -42,7 +42,7 @@
           # OR
           (super.fetchpatch {
             url = "https://st.suckless.org/patches/ligatures/0.8.4/st-ligatures-scrollback-20210824-0.8.4.diff";
-            sha256 = "1mxdpjcha2h3bhm033xz0y38d05w32yb1q1qm9f9wwwxzdny8y95";
+            sha256 = "jMcuvJfao4FEyaHCRggzzg655fE8rHP20gXUg/fzjtY=";
           })
           # OR
           # (super.fetchpatch {
