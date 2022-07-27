@@ -1,6 +1,9 @@
 { config, pkgs, ... }:
 
 {
+  imports = [
+    ./ruststable.nix
+  ];
   environment.systemPackages = with pkgs; [
     # Required tools
     git

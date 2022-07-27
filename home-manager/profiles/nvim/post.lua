@@ -7,11 +7,22 @@ cmp.event:on(
     cmp_autopairs.on_confirm_done()
 )
 
-require'nvim-treesitter.configs'.setup {
+require('nvim-treesitter.configs').setup {
+    ['ensure_installed'] = 'all',
+    ['highlight'] = {
+        ['enable'] = true
+    },
+    ['indent'] = {
+        ['enable'] = true
+    },
     context_commentstring = {
         enable = true,
         enable_autocmd = false,
-    }
+    },
+    rainbow = {
+        enable = true,
+        extended_mode = true,
+    },
 }
 
 require('Comment').setup {

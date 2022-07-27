@@ -84,8 +84,6 @@
 
     globals = {
       mapleader = " ";
-
-      rainbow_active = 1;
     };
 
     plugins = {
@@ -253,10 +251,10 @@
       luasnip
       friendly-snippets
       vim-sleuth # detects indentation
-      rainbow
       futhark-vim # Futhark programming language
       gitsigns-nvim
       which-key-nvim
+      nvim-ts-rainbow # treesitter color brackets
       (inputs.vim-extra-plugins.packages.${system}.nvim-ts-context-commentstring.overrideAttrs (oldAttrs: {
         dependencies = [];
       }))
