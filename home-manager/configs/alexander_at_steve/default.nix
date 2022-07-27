@@ -12,4 +12,8 @@ inputs.home-manager.lib.homeManagerConfiguration {
     ../../profiles/nvim.nix
     ./home.nix
   ];
+
+  extraSpecialArgs = {
+    inherit system inputs;
+  };
 }
