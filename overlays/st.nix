@@ -25,10 +25,10 @@
           #   sha256 = "0gnk4fibqyby6b0fdx86zfwdiwjai86hh8sk9y02z610iimjaj1n";
           # })
           # Scrollback
-          # (super.fetchpatch {
-          #   url = "https://st.suckless.org/patches/scrollback/st-scrollback-0.8.4.diff";
-          #   sha256 = "0valvkbsf2qbai8551id6jc0szn61303f3l6r8wfjmjnn4054r3c";
-          # })
+          (super.fetchpatch {
+            url = "https://st.suckless.org/patches/scrollback/st-scrollback-0.8.5.diff";
+            sha256 = "0mgsklws6jsrngcsy64zmr604qsdlpd5pqsa3pci7j3gn8im4zyw";
+          })
           # Alpha
           # (super.fetchpatch {
           #   url = "https://st.suckless.org/patches/alpha/st-alpha-0.8.2.diff";
@@ -41,9 +41,14 @@
           # })
           # OR
           (super.fetchpatch {
-            url = "https://st.suckless.org/patches/ligatures/0.8.4/st-ligatures-20210824-0.8.4.diff";
-            sha256 = "SLevASYfie2tDt2Aln+vNY4GEhB7DIzmrtP/wjxt59c=";
+            url = "https://st.suckless.org/patches/ligatures/0.8.4/st-ligatures-scrollback-20210824-0.8.4.diff";
+            sha256 = "1mxdpjcha2h3bhm033xz0y38d05w32yb1q1qm9f9wwwxzdny8y95";
           })
+          # OR
+          # (super.fetchpatch {
+          #   url = "https://st.suckless.org/patches/ligatures/0.8.4/st-ligatures-20210824-0.8.4.diff";
+          #   sha256 = "uRP9dijVDGjHaLe+kNo1boDGkM/dGonVZIdMwDKb72Y=";
+          # })
           # Anysize
           (super.fetchpatch {
             url = "https://st.suckless.org/patches/anysize/st-anysize-0.8.4.diff";

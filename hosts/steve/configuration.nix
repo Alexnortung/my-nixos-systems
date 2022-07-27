@@ -7,18 +7,18 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/nvim.nix
+    # ../../modules/nvim.nix
     ../../modules/programming-pkgs.nix
     ../../modules/comfort-packages.nix
     ../../modules/sound.nix
     ../../modules/console.nix
     #../../modules/personal-vpn.nix
-    ../../modules/latex.nix
+    # ../../modules/latex.nix
     ../../modules/nord-lightdm.nix
     ../../modules/nord-gtk.nix
     ../../modules/basic-desktop.nix
     ../../modules/zsh.nix
-    ../../modules/vscodium.nix
+    # ../../modules/vscodium.nix
     ../../modules/location-denmark.nix
     ];
 
@@ -190,6 +190,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    inputs.deploy-rs.defaultPackage.x86_64-linux
     lazygit
     # jupyter
     # python3Packages.pytorch

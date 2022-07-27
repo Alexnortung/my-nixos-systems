@@ -39,7 +39,7 @@ in
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Set your time zone.
-  time.timeZone = "Europe/Amsterdam";
+  time.timeZone = "Europe/Copenhagen";
 
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
   # Per-interface useDHCP will be mandatory in the future, so this generated config
@@ -54,7 +54,7 @@ in
     nmap
     git
     zip unzip
-    wireguard
+    wireguard-tools
     file
     curl
     #vim
