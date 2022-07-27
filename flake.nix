@@ -98,12 +98,12 @@
         extraArgs = {
           # add utils and inputs to each host.
           inherit utils-plus inputs;
-          modules = [
-            agenix.nixosModules.age
-            nixvim.nixosModules.nixvim
-            import ./modules # My extra modules
-          ];
         };
+        modules = [
+          agenix.nixosModules.age
+          nixvim.nixosModules.nixvim
+          # import ./modules # My extra modules
+        ];
       };
       hosts = (import ./hosts/default.nix).hosts inputs;
 
