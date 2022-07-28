@@ -248,6 +248,7 @@
     };
 
     extraPlugins = with pkgs.vimPlugins; [
+      editorconfig-nvim
       luasnip
       friendly-snippets
       vim-sleuth # detects indentation
