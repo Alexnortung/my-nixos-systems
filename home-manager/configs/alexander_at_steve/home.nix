@@ -10,6 +10,10 @@
       nodejs
       nodePackages.npm
     ];
+
+    sessionVariables = {
+      EDITOR = "nvim";
+    };
   };
 
   # This value determines the Home Manager release that your
