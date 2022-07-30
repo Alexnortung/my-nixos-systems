@@ -19,5 +19,6 @@
     vim
     pciutils
     neofetch
+    binutils
   ];
 }
