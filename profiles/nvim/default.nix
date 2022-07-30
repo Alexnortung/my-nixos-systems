@@ -22,6 +22,8 @@
       # Move between buffers easily
       normal."<A-l>" = ":bnext<CR>";
       normal."<A-h>" = ":bprevious<CR>";
+      # Close buffer
+      normal."<A-w>" = ":Bdelete!<CR>";
 
       # Indent, stay in visual mode
       visual."<" = "<gv";
@@ -165,8 +167,14 @@
         enable = true;
       };
 
-      bufferline = {
+      bufferline = let
+        closeCommand = "Bdelete! %d";
+      in {
+        inherit closeCommand;
         enable = true;
+        rightMouseCommand = null;
+        middleMouseCommand = closeCommand;
+        indicatorIcon = "▎";
       };
 
       treesitter = {
@@ -279,6 +287,7 @@
       (inputs.vim-extra-plugins.packages.${system}.nvim-ts-context-commentstring.overrideAttrs (oldAttrs: {
         dependencies = [];
       }))
+      vim-bbye
     ];
 
     # plugins.lightline.enable = true;
