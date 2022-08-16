@@ -153,6 +153,10 @@
           cmd = "trash";
           requireConfirm = true;
         };
+
+        diagnostics = {
+          enable = true;
+        };
       };
 
       comment-nvim = {
