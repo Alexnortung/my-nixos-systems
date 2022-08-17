@@ -37,6 +37,8 @@
       visual."p" = "\"_dP";
 
       # Nvim tree
+      normal."<leader>nn" = ":NvimTreeToggle<CR>";
+      normal."<leader>nf" = ":NvimTreeFindFile<CR>";
       normal."<leader>nr" = ":NvimTreeRefresh<CR>";
 
       # LSP stuff
