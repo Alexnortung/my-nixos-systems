@@ -3,7 +3,7 @@
     nixos-spider.overlaysBuilder = import ./package-overlay.nix inputs;
   };
   host = input@{ nixos-hardware, ... }: {
-    channelName = "nixos-spider";
+    channelName = "nixos-stable";
     # Relative to flake.nix
     modules = [
       nixos-hardware.nixosModules.lenovo-thinkpad-x13

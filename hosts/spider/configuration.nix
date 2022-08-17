@@ -10,13 +10,12 @@ in
 {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/nvim.nix
     ../../modules/programming-pkgs.nix
     ../../modules/comfort-packages.nix
     ../../modules/sound.nix
     ../../modules/console.nix
-    ../../modules/vscodium.nix
-    ../../modules/latex.nix
+    # ../../modules/vscodium.nix
+    # ../../modules/latex.nix
     ../../modules/nord-lightdm.nix
     ../../modules/nord-gtk.nix
     ../../modules/basic-desktop.nix
