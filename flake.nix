@@ -3,9 +3,8 @@
 
   inputs = {
     utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus";
-    # nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixos-stable.url = "github:NixOS/nixpkgs/nixos-22.05";
-    # nixos-stable.url = "path:/home/alexander/source/nixpkgs";
+    nixos-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -34,24 +33,6 @@
       inputs.nixpkgs.follows = "nixos-stable";
     };
 
-    # import hosts
-    nixos-boat.url = "github:NixOS/nixpkgs/nixos-22.05";
-    # nixos-boat.url = "path:/home/alexander/source/nixpkgs";
-    nixpkgs-unstable-boat.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nur-alexnortung-boat.url = "github:Alexnortung/nur-alexnortung";
-
-    nixos-spider.url = "github:NixOS/nixpkgs/nixos-22.05";
-    nixpkgs-unstable-spider.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nur-alexnortung-spider.url = "github:Alexnortung/nur-alexnortung";
-
-    nixos-steve.url = "github:NixOS/nixpkgs/nixos-22.05";
-    nixpkgs-unstable-steve.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nur-alexnortung-steve.url = "github:Alexnortung/nur-alexnortung";
-
-    nixos-enderman.url = "github:NixOS/nixpkgs/nixos-22.05";
-    nixpkgs-unstable-enderman.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nur-alexnortung-enderman.url = "github:Alexnortung/nur-alexnortung";
-
     nix-on-droid = {
       url = "github:t184256/nix-on-droid";
       inputs.nixpkgs.follows = "nixos-stable";
@@ -65,7 +46,6 @@
   outputs = inputs@{
     self
   , utils-plus
-  , nixpkgs
   , vim-extra-plugins
   , fenix
   , neovim
@@ -83,7 +63,7 @@
         #agenix.overlay
       ];
 
-      homeConfigurations =(import ./home-manager { inherit inputs; }).configs;
+      homeConfigurations = (import ./home-manager { inherit inputs; }).configs;
 
       channelsConfig = {
         # Default channel configuration

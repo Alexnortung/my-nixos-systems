@@ -6,7 +6,7 @@ args@{ inputs, pkgs, config, lib, ... }:
 
 let
   slock-command = "/run/wrappers/bin/slock";
-  nur-alexnortung = inputs.nur-alexnortung-boat;
+  # nur-alexnortung = inputs.nur-alexnortung-boat;
 in
 {
   imports = [
@@ -28,13 +28,6 @@ in
     # ../../overlays/pidgin-with-plugins.nix
     ../../profiles/bluetooth.nix
   ];
-
-  programs.zathura = {
-    enable = true;
-    options = {
-      default-bg = "#2e3440";
-    };
-  };
 
   location = {
     latitude = 55.66283136357285;

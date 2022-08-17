@@ -32,11 +32,6 @@ in
     '';
   };
 
-
-  disabledModules = [
-    "services/misc/autorandr.nix"
-  ];
-
   hardware.bluetooth = {
     enable = true;
   };

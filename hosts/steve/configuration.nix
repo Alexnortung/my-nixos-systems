@@ -22,12 +22,7 @@
     ../../modules/location-denmark.nix
     ];
 
-  disabledModules = [
-    "services/misc/autorandr.nix"
-  ];
-  
   nix = {
-    package = pkgs.nixUnstable;
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
@@ -77,16 +72,6 @@
   services.xserver = {
     enable = true;
     windowManager.dwm.enable = true;
-    # videoDrivers = [ "nvidia" ];
-    # displayManager.setupCommands = ''
-    #   autorandr -c >> /tmp/autorandr-log.txt
-    # '';
-    #serverFlagsSection = ''
-    #  Option "IndirectGLX" "on"
-    #'';
-    #screenSection = ''
-    #  Option "metamodes" "HDMI-0: nvidia-auto-select +1920+0 {ForceCompositionPipeline=On}, DVI-I-0: nvidia-auto-select +0+0 {ForceCompositionPipeline=On}"
-    #'';
   };
 
   services.bg-setter = {
@@ -103,7 +88,6 @@
       };
     };
   };
-
 
   fonts.fonts = with pkgs; [
     hasklig
@@ -159,7 +143,7 @@
     };
   };
 
-  programs.ssh.forwardX11 = true;
+  # programs.ssh.forwardX11 = true;
   #programs.ssh.startAgent = true;
 
   # List packages installed in system profile. To search, run:
@@ -185,15 +169,9 @@
     # "CUDA_PATH" = "${pkgs.cudatoolkit}";
   };
 
-  environment.variables = {
-    "ZOOM_HOME" = "/home/zoom/zoomus";
-  };
-
   environment.systemPackages = with pkgs; [
     inputs.deploy-rs.defaultPackage.x86_64-linux
     lazygit
-    # jupyter
-    # python3Packages.pytorch
     superTuxKart
     protonup
     autorandr
@@ -205,21 +183,18 @@
       # cudaSupport = true;
     })
     python39Packages.pygments
-    futhark
     zathura
     xorg.xhost
     # xpra
     socat
     bashmount
     pinta
-    plantuml
     appimage-run
     flameshot
     xclip
     # dotnet-sdk_5
     steam-run
     godot
-    glances
     texlive.combined.scheme-full
     wget
     firefox
@@ -239,7 +214,6 @@
     libv4l
     xorg.xrandr
     arandr
-    nvtop
     # linuxPackages.nvidia_x11
     #xorg.libpciaccess
     patchelf

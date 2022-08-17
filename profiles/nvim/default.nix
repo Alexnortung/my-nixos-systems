@@ -34,11 +34,9 @@
       visual."<A-k>" = ":m .-2<CR>==";
 
       # When pasting in visual mode, do not yank the replaces text
-      visual."p" = "_dP";
+      visual."p" = "\"_dP";
 
       # Nvim tree
-      normal."<leader>nn" = ":NvimTreeToggle<CR>";
-      normal."<leader>nf" = ":NvimTreeFindFile<CR>";
       normal."<leader>nr" = ":NvimTreeRefresh<CR>";
 
       # LSP stuff
@@ -49,11 +47,13 @@
       # normal."<C-k>" = "<cmd>lua vim.lsp.buf.signature_help()<CR>";
       normal."gr" = "<cmd>lua vim.lsp.buf.references()<CR>";
       normal."<leader>ca" = "<cmd>lua vim.lsp.buf.code_action()<CR>";
+      normal."<leader>cf" = "<cmd>lua vim.lsp.buf.formatting_sync()<CR>";
 
       # Telescope
       normal."<leader>p" = "<cmd>Telescope find_files<CR>";
       normal."<leader>ff" = "<cmd>Telescope find_files<CR>";
       normal."<leader>fl" = "<cmd>Telescope live_grep<CR>";
+      normal."<leader>fr" = "<cmd>Telescope resume<CR>";
 
       # Gitsigns
       normal."<leader>hs" = "<cmd>Gitsigns stage_hunk<CR>";
