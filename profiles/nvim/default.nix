@@ -278,6 +278,13 @@
 
         experimental.ghost_text = true;
       };
+
+      null-ls = {
+        enable = true;
+        sources.formatting = {
+          prettier.enable = true;
+        };
+      };
     };
 
     extraPlugins = with pkgs.vimPlugins; [

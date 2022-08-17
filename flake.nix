@@ -28,8 +28,8 @@
     };
 
     nixvim = {
-      # url = "github:pta2002/nixvim";
-      url = "github:Alexnortung/nixvim/test-branch";
+      url = "github:pta2002/nixvim";
+      # url = "github:Alexnortung/nixvim/test-branch";
       # url = "path:/home/alexander/source/nixvim/";
       inputs.nixpkgs.follows = "nixos-stable";
     };

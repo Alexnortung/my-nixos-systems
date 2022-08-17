@@ -539,16 +539,15 @@
         "nmdSrc": "nmdSrc"
       },
       "locked": {
-        "lastModified": 1658776124,
-        "narHash": "sha256-5t7xYo4u1a2a5wuT+aFImeSnchp8QUGxun/48z+rkio=",
-        "owner": "Alexnortung",
+        "lastModified": 1659708070,
+        "narHash": "sha256-jLaFDm+E2WgD/0nSJCspU9TK3QLXZlEpePMWewdlkS8=",
+        "owner": "pta2002",
         "repo": "nixvim",
-        "rev": "8d86d45d10a620d6cf94193c3f8337d714d2efb3",
+        "rev": "70dd3446fba2e4f34971015095e8ba6494e8a428",
         "type": "github"
       },
       "original": {
-        "owner": "Alexnortung",
-        "ref": "test-branch",
+        "owner": "pta2002",
         "repo": "nixvim",
         "type": "github"
       }
