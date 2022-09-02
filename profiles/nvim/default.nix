@@ -285,6 +285,7 @@
         enable = true;
         sources.formatting = {
           prettier.enable = true;
+          alejandra.enable = true;
         };
       };
     };

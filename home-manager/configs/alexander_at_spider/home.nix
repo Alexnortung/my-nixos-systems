@@ -8,8 +8,16 @@
     homeDirectory = "/home/alexander";
     packages = with pkgs; [
       nodejs
-      nodePackages.npm
+      # nodePackages.npm
+      nodePackages.pnpm
+      nodePackages.serverless
+      mysql
+      phpPackages.composer
     ];
+
+    shellAliases = {
+      # npm = "pnpm";
+    };
   };
 
   # This value determines the Home Manager release that your

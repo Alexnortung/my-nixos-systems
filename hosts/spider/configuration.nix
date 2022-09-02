@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ pkgs, config, lib, ... }:
+{ pkgs, config, lib, inputs, ... }:
 
 let
   slock-command = "/run/wrappers/bin/slock";
@@ -22,7 +22,13 @@ in
     ../../modules/zsh.nix
     ../../modules/location-denmark.nix
     ../../profiles/allow-multicast.nix
+    ../../profiles/registries.nix
   ];
+
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+  };
 
   nix = {
     package = pkgs.nix;
