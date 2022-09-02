@@ -6,15 +6,10 @@ unstable-channel: final: prev: {
   inherit (unstable-channel) steam
     superTuxKart
     discord
-    tdesktop
-    session-desktop-appimage
-    ungoogled-chromium
-    firefox
+    session-desktop
     xmrig
     torbrowser
     minecraft
-    clang-tools
-    rust-analyzer
     nordzy-cursor-theme
     sagetex
     mullvad-vpn
