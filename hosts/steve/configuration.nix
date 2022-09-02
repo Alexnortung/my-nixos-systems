@@ -20,7 +20,7 @@
     ../../modules/zsh.nix
     # ../../modules/vscodium.nix
     ../../modules/location-denmark.nix
-    ];
+  ];
 
   nix = {
     extraOptions = ''
@@ -76,7 +76,7 @@
 
   services.bg-setter = {
     enable = true;
-    wallpaper = lib.lists.elemAt (import ../../config/misc/nord-wallpapers.nix {}) 0;
+    wallpaper = lib.lists.elemAt (import ../../config/misc/nord-wallpapers.nix { }) 0;
   };
 
   services.autorandr = {
@@ -124,7 +124,7 @@
   services.redshift = {
     enable = true;
   };
-  
+
   # Configure keymap in X11
   services.xserver.layout = "dk";
 
@@ -148,6 +148,10 @@
 
   # List packages installed in system profile. To search, run:
   programs.steam.enable = true;
+
+  programs.kdeconnect = {
+    enable = true;
+  };
 
   nixpkgs.config = {
     # cudaSupport = true; # enable cuda for all packages that supprot it.
@@ -217,7 +221,8 @@
     # linuxPackages.nvidia_x11
     #xorg.libpciaccess
     patchelf
-    libGL libGLU
+    libGL
+    libGLU
     glxinfo
     minecraft
     discord

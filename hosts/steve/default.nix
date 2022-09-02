@@ -1,7 +1,4 @@
 {
-  channels = inputs@{ ... }: {
-    nixos-steve.overlaysBuilder = import ./package-overlay.nix inputs;
-  };
   host = input@{ nixos-hardware, ... }: {
     channelName = "nixos-stable";
     # Relative to flake.nix

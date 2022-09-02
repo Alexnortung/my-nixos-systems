@@ -71,9 +71,6 @@
         allowUnfree = true;
       };
 
-      channels = ((import ./hosts/default.nix).channels inputs) // {
-      };
-
       hostDefaults = {
         extraArgs = {
           # add utils and inputs to each host.
