@@ -303,6 +303,7 @@
         dependencies = [];
       }))
       vim-bbye
+      Jenkinsfile-vim-syntax
     ];
 
     # plugins.lightline.enable = true;
