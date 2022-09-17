@@ -23,6 +23,8 @@
     python3
     openssl
     pkg-config
+    nodejs
+    nodePackages.pnpm
   ];
 }
 

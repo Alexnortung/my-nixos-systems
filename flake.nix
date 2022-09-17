@@ -4,7 +4,7 @@
   inputs = {
     utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus";
     nixos-stable.url = "github:NixOS/nixpkgs/nixos-22.05";
-    nixos-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -60,6 +60,7 @@
         fenix.overlay
         vim-extra-plugins.overlays.default
         neovim.overlay
+        # (import ./overlays/default-unstable.nix inputs.nixos-unstable)
         #agenix.overlay
       ];
 
@@ -70,6 +71,10 @@
         # allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) (import ./config/allowed-unfree-packages.nix);
         allowUnfree = true;
       };
+
+      channels.nixos-stable.overlaysBuidler = channels: [
+        (import ./overlays/default-unstable.nix channels.nixpkgs-unstable)
+      ];
 
       hostDefaults = {
         extraArgs = {

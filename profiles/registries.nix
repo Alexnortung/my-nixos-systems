@@ -3,6 +3,6 @@
 {
   nix.registry = {
     nixpkgs.flake = inputs.nixos-stable;
-    unstable.flake = inputs.nixos-unstable;
+    unstable.flake = inputs.nixpkgs-unstable;
   };
 }

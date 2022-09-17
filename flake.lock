@@ -252,32 +252,16 @@
     },
     "nixos-stable": {
       "locked": {
-        "lastModified": 1660581366,
-        "narHash": "sha256-et+bi9/jlSF/pHx5AYB9ZP2XDdZEQ0vnF7xlvs4503Y=",
+        "lastModified": 1662025319,
+        "narHash": "sha256-ZJlBQ7jXynq4+Jg9+DgOe8FJG8sDIeFFYP3V3K98KUs=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "3d47bbaa26e7a771059d828eecf3bd8bf28a8b0f",
+        "rev": "b82ccafb54163ab9024e893e578d840577785fea",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
         "ref": "nixos-22.05",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixos-unstable": {
-      "locked": {
-        "lastModified": 1661628722,
-        "narHash": "sha256-oR/7NhG7pPkACToUtaaT6hH+rONE2z5/4NzjoUwEZt8=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "324c8aaf25b2f2027af7798e5582ce3040a793b6",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -293,6 +277,22 @@
       "original": {
         "id": "nixpkgs",
         "type": "indirect"
+      }
+    },
+    "nixpkgs-unstable": {
+      "locked": {
+        "lastModified": 1661590344,
+        "narHash": "sha256-+lQECwzC8qqFqaKTJVZVafy0HO/dXzT9JhhWtVyj9sA=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "ed0fab06cc1ca9799e6dda30529c963b95c4dc2a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
       }
     },
     "nixpkgs_2": {
@@ -388,7 +388,7 @@
         "nix-on-droid": "nix-on-droid",
         "nixos-hardware": "nixos-hardware",
         "nixos-stable": "nixos-stable",
-        "nixos-unstable": "nixos-unstable",
+        "nixpkgs-unstable": "nixpkgs-unstable",
         "nixvim": "nixvim",
         "utils-plus": "utils-plus",
         "vim-extra-plugins": "vim-extra-plugins"

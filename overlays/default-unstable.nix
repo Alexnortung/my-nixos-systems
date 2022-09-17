@@ -7,11 +7,13 @@ unstable-channel: final: prev: {
     superTuxKart
     discord
     session-desktop
+    session-desktop-appimage
     xmrig
     torbrowser
     minecraft
     nordzy-cursor-theme
     sagetex
+    mullvad
     mullvad-vpn
     # libreoffice
     blender
