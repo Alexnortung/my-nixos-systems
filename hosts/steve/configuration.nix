@@ -4,6 +4,10 @@
 
 { inputs, config, pkgs, lib, ... }:
 
+let
+  system = "x86_64-linux";
+  # unstable-overlay = import ../../overlays/unstable.nix inputs system;
+in
 {
   imports = [
     ./hardware-configuration.nix
@@ -21,6 +25,10 @@
     # ../../modules/vscodium.nix
     ../../modules/location-denmark.nix
   ];
+
+  # nixpkgs.overlays = [
+  #   unstable-overlay
+  # ];
 
   nix = {
     extraOptions = ''
@@ -153,19 +161,6 @@
     enable = true;
   };
 
-  nixpkgs.config = {
-    # cudaSupport = true; # enable cuda for all packages that supprot it.
-    packageOverrides = pkgs: {
-      #steam = pkgs-steam.steam.override {
-      #  extraPkgs = pkgs:  [
-      #  ];
-      #  extraLibraries = pkgs: [
-      #    pkgs.pipewire
-      #  ];
-      #};
-    };
-  };
-
   services.mullvad-vpn.enable = true;
 
   environment.sessionVariables = {
@@ -181,7 +176,10 @@
     autorandr
     libreoffice
     mullvad-vpn
-    session-desktop-appimage
+    # session-desktop-appimage
+    unstable.session-desktop
+    # session-desktop
+    # krita
     # cudatoolkit
     (blender.override {
       # cudaSupport = true;

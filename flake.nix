@@ -2,7 +2,7 @@
   description = "Alexnortung's system configurations and server configurations";
 
   inputs = {
-    utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus";
+    utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus/v1.3.1";
     nixos-stable.url = "github:NixOS/nixpkgs/nixos-22.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
@@ -40,19 +40,20 @@
 
     #local-nixpkgs.url = "path:/home/alexander/source/nixpkgs";
   }
-  #// ((import ./hosts).inputs)
+    #// ((import ./hosts).inputs)
   ;
 
-  outputs = inputs@{
-    self
-  , utils-plus
-  , vim-extra-plugins
-  , fenix
-  , neovim
-  , agenix
-  , nixvim
-  , nix-on-droid
-  , ... }:
+  outputs =
+    inputs@{ self
+    , utils-plus
+    , vim-extra-plugins
+    , fenix
+    , neovim
+    , agenix
+    , nixvim
+    , nix-on-droid
+    , ...
+    }:
     utils-plus.lib.mkFlake {
       inherit self inputs;
 
@@ -72,8 +73,13 @@
         allowUnfree = true;
       };
 
-      channels.nixos-stable.overlaysBuidler = channels: [
-        (import ./overlays/default-unstable.nix channels.nixpkgs-unstable)
+      channels.nixos-stable.overlaysBuilder = channels: [
+        # (import ./overlays/default-unstable.nix channels.nixpkgs-unstable)
+        (final: prev: {
+          unstable = channels.nixpkgs-unstable;
+        })
+        # (import ./overlays/unstable.nix inputs)
+        # (final: prev: { inherit (channels.nixpkgs-unstable) session-desktop krita; })
       ];
 
       hostDefaults = {
