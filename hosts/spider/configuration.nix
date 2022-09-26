@@ -102,6 +102,7 @@ in
       enable = true;
     };
     firewall = {
+      # enable = false;
       checkReversePath = lib.mkForce "loose";
       allowedTCPPorts = [
         3000 # dev
