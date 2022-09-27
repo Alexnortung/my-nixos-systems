@@ -65,6 +65,12 @@ in
   # };
 
   networking = {
+    # dhcpcd.enable = false;
+    enableIPv6 = false;
+    dhcpcd = {
+      # enable = true;
+      extraConfig = '''';
+      };
     hostName = "steve";
     # The global useDHCP flag is deprecated, therefore explicitly set to false here.
     # Per-interface useDHCP will be mandatory in the future, so this generated config
@@ -107,12 +113,11 @@ in
     order = [
       "audio"
       "cpu_load"
-      "network"
       "time"
     ];
     extraConfig = ''
       separator = " | "
- 
+
       [audio]
       icons = [ "奄", "奔", "墳" ]
       mute = "ﱝ"
@@ -121,10 +126,6 @@ in
       [cpu_load]
       template = " {CL1}"
       update_interval = 15
-
-      [network]
-      no_value = "睊 Not connected"
-      template = "直 {IPv4}"
     '';
   };
 
@@ -161,7 +162,7 @@ in
     enable = true;
   };
 
-  services.mullvad-vpn.enable = true;
+  # services.mullvad-vpn.enable = true;
 
   environment.sessionVariables = {
     MOZ_X11_EGL = "1";

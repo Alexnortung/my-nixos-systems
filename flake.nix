@@ -2,7 +2,7 @@
   description = "Alexnortung's system configurations and server configurations";
 
   inputs = {
-    utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus/v1.3.1";
+    utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus/";
     nixos-stable.url = "github:NixOS/nixpkgs/nixos-22.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
