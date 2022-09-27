@@ -30,6 +30,8 @@ in
     defaultEditor = true;
   };
 
+  programs.steam.enable = true;
+
   nix = {
     package = pkgs.nix;
     extraOptions = ''
@@ -100,6 +102,7 @@ in
       enable = true;
     };
     firewall = {
+      # enable = false;
       checkReversePath = lib.mkForce "loose";
       allowedTCPPorts = [
         3000 # dev
@@ -110,6 +113,11 @@ in
         32768 61000 # Chromecast
       ];
     };
+    extraHosts = ''
+      192.168.49.2 minikube
+      192.168.49.2 oak-site-backend.minikube
+      192.168.49.2 oak-site-frontend.minikube
+    '';
     #wg-quick.interfaces.wg0 = {
     #  address = [ "10.100.0.3" ];
     #  privateKeyFile = "/etc/nixos/secret/wg-keys/boat-private";
@@ -235,6 +243,11 @@ in
   };
 
   environment.systemPackages = with pkgs; [
+    postgresql
+    kubernetes-helm
+    ungoogled-chromium
+    minikube
+    kubectl
     mkchromecast
     lazygit
     nodejs

@@ -303,6 +303,8 @@
         dependencies = [];
       }))
       vim-bbye
+      Jenkinsfile-vim-syntax
+      toggleterm-nvim
     ];
 
     # plugins.lightline.enable = true;
@@ -322,6 +324,8 @@
         }
       }
     '';
+
+    extraConfigVim = builtins.readFile ./main.vim;
 
     extraLuaPreConfig = builtins.readFile ./pre.lua;
     extraLuaPostConfig = builtins.readFile ./post.lua;

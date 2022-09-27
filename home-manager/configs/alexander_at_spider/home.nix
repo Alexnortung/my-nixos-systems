@@ -13,6 +13,8 @@
       nodePackages.serverless
       mysql
       phpPackages.composer
+      fluxcd
+      neovide
     ];
 
     shellAliases = {

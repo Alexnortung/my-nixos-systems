@@ -1,4 +1,13 @@
 
+require("toggleterm").setup{
+    open_mapping = [[<c-0>]],
+    hide_numbers = true, -- hide the number column in toggleterm buffers
+    insert_mappings = true, -- whether or not the open mapping applies in insert mode
+    terminal_mappings = true, -- whether or not the open mapping applies in the opened terminals}
+    direction = 'float',
+    auto_scroll = true,
+}
+
 -- cmp.setup({
 --     snippet = {
 --         -- REQUIRED - you must specify a snippet engine
