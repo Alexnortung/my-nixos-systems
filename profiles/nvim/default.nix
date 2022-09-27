@@ -106,6 +106,10 @@
         };
       };
 
+      lsp-lines = {
+        # enable = true;
+      };
+
       telescope = {
         enable = true;
         # extensions = {
