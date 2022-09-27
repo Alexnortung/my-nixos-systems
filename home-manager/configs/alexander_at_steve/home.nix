@@ -11,6 +11,7 @@
       nodePackages.npm
       lmms
       krita
+      neovide
     ];
 
     sessionVariables = {
