@@ -344,7 +344,7 @@
     "nixvim": {
       "inputs": {
         "nixpkgs": [
-          "nixos-stable"
+          "nixpkgs-unstable"
         ],
         "nmdSrc": "nmdSrc"
       },
