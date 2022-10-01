@@ -24,6 +24,7 @@ in
     ../../modules/zsh.nix
     # ../../modules/vscodium.nix
     ../../modules/location-denmark.nix
+    ../../profiles/registries.nix
   ];
 
   # nixpkgs.overlays = [
