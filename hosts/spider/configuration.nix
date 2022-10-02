@@ -209,7 +209,7 @@ in
   services.picom = {
     enable = true;
     vSync = true;
-    #backend = "glx";
+    backend = "glx";
     #experimentalBackends = true;
   };
 
