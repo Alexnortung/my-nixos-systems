@@ -1,9 +1,6 @@
 {
-  channels = inputs@{ ... }: {
-    nixos-enderman.overlaysBuilder = import ./package-overlay.nix inputs;
-  };
   host = input@{ ... }: {
-    channelName = "nixos-enderman";
+    channelName = "nixos-stable";
     # Relative to flake.nix
     modules = [
       ./configuration.nix

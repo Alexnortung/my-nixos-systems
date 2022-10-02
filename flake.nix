@@ -34,6 +34,11 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
+    minecraft-servers = {
+      url = "github:jyooru/nix-minecraft-servers";
+      inputs.nixpkgs.follows = "nixos-stable";
+    };
+
     nix-on-droid = {
       url = "github:t184256/nix-on-droid";
       inputs.nixpkgs.follows = "nixos-stable";

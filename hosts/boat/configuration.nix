@@ -35,10 +35,6 @@ in
     provider = "manual";
   };
 
-  disabledModules = [
-    "services/misc/autorandr.nix"
-  ];
-
   nix = {
     package = pkgs.nix;
     extraOptions = ''

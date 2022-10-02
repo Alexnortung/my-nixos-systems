@@ -1,6 +1,7 @@
 { inputs, config, lib, pkgs, ... }:
 
 let
+  system = "x86_64-linux";
   ssh-keys = import ../../config/ssh;
   authorizedKeyFiles = with ssh-keys; [
     boat
@@ -11,11 +12,8 @@ in
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      #"${nixos-unstable}/nixos/modules/services/misc/prowlarr.nix"
-      #../../common/nvim.nix
       ../../modules/console.nix
       ../../modules/comfort-packages.nix
-      ../../modules/programming-pkgs.nix
     ];
 
   fileSystems."/data/data1" = {
@@ -165,6 +163,13 @@ in
     };
   };
 
+  services.xserver = {
+    enable = true;
+    desktopManager.retroarch = {
+      enable = true;
+    };
+  };
+
   services.sonarr = {
     enable = true;
     group = "servarr";
@@ -238,7 +243,7 @@ in
     enable = true;
     eula = true;
     declarative = true;
-    package = pkgs.papermc-1_18_x;
+    package = inputs.minecraft-servers.packages.${system}.paper;
     #package = custom-papermc;
     dataDir = "/data/data1/var/lib/minecraft";
     openFirewall = true;
