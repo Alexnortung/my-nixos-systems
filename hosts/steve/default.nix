@@ -1,5 +1,5 @@
 {
-  host = input@{ nixos-hardware, ... }: {
+  host = inputs@{ nixos-hardware, ... }: {
     channelName = "nixos-stable";
     # Relative to flake.nix
     modules = [
