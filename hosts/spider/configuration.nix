@@ -243,6 +243,7 @@ in
   };
 
   environment.systemPackages = with pkgs; [
+    inputs.deploy-rs.defaultPackage.x86_64-linux
     postgresql
     kubernetes-helm
     ungoogled-chromium
