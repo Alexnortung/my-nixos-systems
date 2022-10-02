@@ -3,10 +3,7 @@
 let
   system = "x86_64-linux";
   ssh-keys = import ../../config/ssh;
-  authorizedKeyFiles = with ssh-keys; [
-    boat
-    steve
-  ];
+  authorizedKeyFiles = with ssh-keys; all;
 in
 {
   imports =
