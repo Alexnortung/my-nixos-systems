@@ -12,6 +12,8 @@ in
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./secrets
+      ./wireguard.nix
       ../../modules/console.nix
       ../../modules/comfort-packages.nix
     ];
@@ -66,12 +68,11 @@ in
     21
     22
     50001
-    51820 # wireguard
   ];
   networking.firewall.allowedUDPPorts = [
     51820 # wireguard
   ];
 
-  # TODO: setup wireguard
+  system.stateVersion = "22.05";
 }
 

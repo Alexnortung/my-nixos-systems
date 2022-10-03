@@ -10,6 +10,8 @@ in
 {
   imports = [
     ./hardware-configuration.nix
+    ./secrets
+    ../../modules/personal-vpn.nix
     ../../modules/programming-pkgs.nix
     ../../modules/comfort-packages.nix
     ../../modules/sound.nix
@@ -25,6 +27,20 @@ in
     ../../profiles/registries.nix
   ];
 
+  age.identityPaths = [
+    "/etc/ssh/ssh_host_rsa_key"
+    "/home/alexander/.ssh/id_rsa"
+  ];
+
+  networking.wg-quick.interfaces.wg0 = {
+    privateKeyFile = config.age.secrets.wireguard-key.path;
+    address = [ "10.100.0.6/32" ];
+  };
+  networking.wg-quick.interfaces.end-portal = {
+    privateKeyFile = config.age.secrets.wireguard-key.path;
+    address = [ "10.101.0.6/32" ];
+  };
+
   programs.neovim = {
     enable = true;
     defaultEditor = true;
@@ -34,9 +50,9 @@ in
 
   nix = {
     package = pkgs.nix;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
+    # extraOptions = ''
+    #   experimental-features = nix-command flakes
+    # '';
   };
 
   hardware.bluetooth = {
@@ -111,6 +127,7 @@ in
       ];
       allowedUDPPorts = [
         32768 61000 # Chromecast
+        51820 # wireguard
       ];
     };
     extraHosts = ''
@@ -118,15 +135,13 @@ in
       192.168.49.2 oak-site-backend.minikube
       192.168.49.2 oak-site-frontend.minikube
     '';
-    #wg-quick.interfaces.wg0 = {
-    #  address = [ "10.100.0.3" ];
-    #  privateKeyFile = "/etc/nixos/secret/wg-keys/boat-private";
-    #};
   };
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+
+  # services.openssh.enable = true;
 
   services.batteryNotifier = {
     enable = true;
@@ -243,6 +258,7 @@ in
   };
 
   environment.systemPackages = with pkgs; [
+    inputs.agenix.defaultPackage.x86_64-linux
     inputs.deploy-rs.defaultPackage.x86_64-linux
     postgresql
     kubernetes-helm

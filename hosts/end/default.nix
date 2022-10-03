@@ -8,7 +8,7 @@
   };
   # deploy-rs node
   node = inputs@{ self, deploy-rs, ... }: {
-    # hostname = "10.100.0.1";
+    hostname = "86.48.0.131";
     profiles.system = {
       path =
         deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.end;

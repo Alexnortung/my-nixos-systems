@@ -102,6 +102,10 @@ in
       address = [ "10.100.0.3" ];
       privateKeyFile = "/etc/nixos/secret/wg-keys/boat-private";
     };
+    wg-quick.interfaces.end-portal = {
+      address = [ "10.100.1.3" ];
+      privateKeyFile = "/etc/nixos/secret/wg-keys/boat-private";
+    };
   };
 
   services.batteryNotifier = {
