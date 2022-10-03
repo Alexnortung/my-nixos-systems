@@ -3,6 +3,11 @@
 
   networking.wireguard.enable = true;
 
+  networking.firewall.allowedUDPPorts = [
+    51820
+    51821
+  ];
+
   networking.wg-quick.interfaces = {
     end-portal = {
       # set address on each system.

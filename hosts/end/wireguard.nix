@@ -1,6 +1,7 @@
 { config, ... }:
 
 {
+  networking.nat.enable = true;
   networking.nat.internalInterfaces = [ "end-poral" ];
 
   networking.wg-quick = {
