@@ -44,6 +44,12 @@
       inputs.nixpkgs.follows = "nixos-stable";
     };
 
+    mail-server = {
+      url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs-22_05.follows = "nixos-stable";
+    };
+
     #local-nixpkgs.url = "path:/home/alexander/source/nixpkgs";
   }
     #// ((import ./hosts).inputs)
@@ -96,6 +102,7 @@
         modules = [
           agenix.nixosModules.age
           nixvim.nixosModules.nixvim
+          inputs.mail-server.nixosModule
           # import ./modules # My extra modules
         ];
       };

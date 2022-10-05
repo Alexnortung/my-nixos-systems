@@ -1,8 +1,9 @@
 {
-  host = input@{ ... }: {
+  host = inputs@{ ... }: {
     channelName = "nixos-stable";
     # Relative to flake.nix
     modules = [
+      # inputs.mail-server.nixosModule
       ./configuration.nix
     ];
   };

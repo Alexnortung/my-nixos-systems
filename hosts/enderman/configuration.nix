@@ -12,6 +12,7 @@ in
       ../../modules/console.nix
       ../../modules/comfort-packages.nix
       ../../modules/personal-vpn.nix
+      ../../profiles/registries.nix
     ];
 
   fileSystems."/data/data1" = {

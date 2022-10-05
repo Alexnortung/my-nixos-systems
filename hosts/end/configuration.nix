@@ -14,8 +14,11 @@ in
       ./hardware-configuration.nix
       ./secrets
       ./wireguard.nix
+      ./nginx.nix
+      ./mail-server.nix
       ../../modules/console.nix
       ../../modules/comfort-packages.nix
+      ../../profiles/registries.nix
     ];
 
   networking.hostName = "end"; # Define your hostname.
