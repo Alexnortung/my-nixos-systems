@@ -290,6 +290,7 @@
         sources.formatting = {
           prettier.enable = true;
           alejandra.enable = true;
+          phpcbf.enable = true;
         };
       };
     };
