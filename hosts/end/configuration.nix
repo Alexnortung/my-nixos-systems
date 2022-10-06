@@ -16,6 +16,7 @@ in
       ./wireguard.nix
       ./nginx.nix
       ./mail-server.nix
+      ./vaultwarden.nix
       ../../modules/console.nix
       ../../modules/comfort-packages.nix
       ../../profiles/registries.nix
