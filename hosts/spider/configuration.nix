@@ -331,6 +331,10 @@ in
     lockerCommand = slock-command;
   };
 
+  programs.git = {
+    config.user.email = "alexander.nortung@oakdigital.dk";
+  };
+
   services.redshift = {
     enable = true;
     temperature.night = 2900;

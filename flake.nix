@@ -28,8 +28,8 @@
     };
 
     nixvim = {
-      # url = "github:pta2002/nixvim";
-      url = "github:Alexnortung/nixvim/alexnortung-test";
+      url = "github:pta2002/nixvim";
+      # url = "github:Alexnortung/nixvim/alexnortung-test";
       # url = "path:/home/alexander/source/nixvim/";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
@@ -101,7 +101,7 @@
         };
         modules = [
           agenix.nixosModules.age
-          nixvim.nixosModules.nixvim
+          # nixvim.nixosModules.nixvim
           inputs.mail-server.nixosModule
           # import ./modules # My extra modules
         ];

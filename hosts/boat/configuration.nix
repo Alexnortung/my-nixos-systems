@@ -12,7 +12,7 @@ in
   imports = [
     ./hardware-configuration.nix
     ../../cachix.nix
-    ../../profiles/nvim-nixos.nix
+    # ../../profiles/nvim-nixos.nix
     ../../modules/programming-pkgs.nix
     ../../modules/comfort-packages.nix
     ../../modules/sound.nix

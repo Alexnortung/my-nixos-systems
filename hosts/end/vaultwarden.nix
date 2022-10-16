@@ -26,7 +26,7 @@ in
       rocketPort = 8812;
       websocketsEnabled = true;
       signupsAllowed = true;
-      adminToken = "todo";
+      # adminToken = "";
       #websocketPort = 3012;
     };
   };

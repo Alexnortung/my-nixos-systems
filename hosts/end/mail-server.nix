@@ -16,6 +16,9 @@
       "admin@northwing.games" = {
         hashedPasswordFile = config.age.secrets.mail-pass-an.path;
       };
+      "bitwarden@northwing.games" = {
+        hashedPasswordFile = config.age.secrets.mail-pass-bitwarden.path;
+      };
       "an@northwing.games" = {
         hashedPasswordFile = config.age.secrets.mail-pass-admin.path;
         aliases = ["alexander@northwing.games"];

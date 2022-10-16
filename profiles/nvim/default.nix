@@ -91,6 +91,9 @@
     };
 
     plugins = {
+      # lsp-lines = {
+      #   enable = true;
+      # };
       lsp = {
         enable = true;
         servers = {
@@ -332,8 +335,8 @@
 
     extraConfigVim = builtins.readFile ./main.vim;
 
-    extraLuaPreConfig = builtins.readFile ./pre.lua;
-    extraLuaPostConfig = builtins.readFile ./post.lua;
+    extraConfigLuaPre= builtins.readFile ./pre.lua;
+    extraConfigLuaPost = builtins.readFile ./post.lua;
 
     extraPackages = with pkgs; [
       # Language servers

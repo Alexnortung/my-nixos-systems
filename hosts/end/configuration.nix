@@ -13,6 +13,8 @@ in
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./secrets
+      ./db.nix
+      # ./nextcloud.nix
       ./wireguard.nix
       ./nginx.nix
       ./mail-server.nix
@@ -27,9 +29,17 @@ in
   # Set your time zone.
   time.timeZone = "Europe/Copenhagen";
 
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = true;
+    dockerSocket.enable = true;
+  };
+
   # networking.nat.internalInterfaces = [ "wg0" ];
 
   environment.systemPackages = with pkgs; [
+    docker-compose
+    neovim
     inputs.agenix.defaultPackage.x86_64-linux
     nmap
     git
