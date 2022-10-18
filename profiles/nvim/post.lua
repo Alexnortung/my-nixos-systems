@@ -2,7 +2,7 @@ npairs.setup {
     check_ts = true,
 }
 
-cmp.event:on(
+mycmp.event:on(
     'confirm_done',
     cmp_autopairs.on_confirm_done()
 )
