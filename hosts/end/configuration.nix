@@ -29,10 +29,14 @@ in
   # Set your time zone.
   time.timeZone = "Europe/Copenhagen";
 
-  virtualisation.podman = {
+  # virtualisation.podman = {
+  #   enable = true;
+  #   dockerCompat = true;
+  #   dockerSocket.enable = true;
+  # };
+
+  virtualisation.docker = {
     enable = true;
-    dockerCompat = true;
-    dockerSocket.enable = true;
   };
 
   # networking.nat.internalInterfaces = [ "wg0" ];

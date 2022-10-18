@@ -35,6 +35,14 @@ in {
     '';
     virtualHosts = {
       "jellyfin.northwing.games" = baseForwardSettings 8096;
+      # "nextcloud.northwing.games" = baseForwardSettings 3005;
+      "nextcloud.northwing.games" = {
+        forceSSL = true;
+        enableACME = true;
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:3005";
+        };
+      };
       # "mc.northwing.games" = baseForwardSettings 25565;
     };
   };
