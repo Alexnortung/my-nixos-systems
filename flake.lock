@@ -461,11 +461,11 @@
         "nmdSrc": "nmdSrc"
       },
       "locked": {
-        "lastModified": 1665150844,
-        "narHash": "sha256-Brjyw2ztssU/BfDuVhc1pwwj+MD4BKP/m0zpgG9sh3Y=",
+        "lastModified": 1666099269,
+        "narHash": "sha256-EDkGiso4MDeCnWtt+5zw9LZIP/k/s4x/ile+u8rL/fo=",
         "owner": "pta2002",
         "repo": "nixvim",
-        "rev": "1fe6ab0e083b50b6c24f0fd73bade130ae7dc36d",
+        "rev": "928e7f2673f8af73fd7fc01f572b5873ee7bd4dc",
         "type": "github"
       },
       "original": {
@@ -477,11 +477,11 @@
     "nmdSrc": {
       "flake": false,
       "locked": {
-        "lastModified": 1637239786,
-        "narHash": "sha256-l2KsnY537mz0blZdqALZKrWXn9PD39CpvotgPnxyIP4=",
+        "lastModified": 1654807200,
+        "narHash": "sha256-RNLq09vfj21TyYuUCeD6BNTNC6Ew8bLhQULZytN4Xx8=",
         "owner": "rycee",
         "repo": "nmd",
-        "rev": "527245ff605bde88c2dd2ddae21c6479bb7cf8aa",
+        "rev": "91dee681dd1c478d6040a00835d73c0f4a4c5c29",
         "type": "gitlab"
       },
       "original": {
