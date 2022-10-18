@@ -1,5 +1,7 @@
-local cmp = require'cmp'
-local luasnip = require'luasnip'
+cmp = require'cmp'
+luasnip = require'luasnip'
+npairs = require('nvim-autopairs')
+cmp_autopairs = require('nvim-autopairs.completion.cmp')
 
 local check_backspace = function()
     local col = vim.fn.col "." - 1
@@ -7,7 +9,7 @@ local check_backspace = function()
 end
 
 --   פּ ﯟ   some other good icons
-local kind_icons = {
+kind_icons = {
   Text = "",
   Method = "m",
   Function = "",
