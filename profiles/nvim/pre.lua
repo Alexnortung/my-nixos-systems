@@ -1,4 +1,6 @@
 local cmp = require'cmp'
+local npairs = require('nvim-autopairs')
+local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 local luasnip = require'luasnip'
 
 local check_backspace = function()
