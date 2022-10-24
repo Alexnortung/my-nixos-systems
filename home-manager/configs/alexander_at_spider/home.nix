@@ -38,7 +38,9 @@
   programs.zsh = {
     enable = true;
     initExtra = ''
-      PATH=$PATH:~/mutable_node_modules/bin/
+      export PNPM_HOME="/home/alexander/.local/share/pnpm"
+      export PATH="$PATH:$PNPM_HOME"
+      export PATH=$PATH:~/mutable_node_modules/bin/
     '';
   };
 }
