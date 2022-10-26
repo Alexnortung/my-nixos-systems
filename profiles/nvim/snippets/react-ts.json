@@ -1,0 +1,42 @@
+{
+  "Create component": {
+    "prefix": "cc",
+    "body": [
+      "type Props = {",
+      "};",
+      "",
+      "const ${1:componentName} = ({}: Props) => {",
+      "\treturn (",
+      "\t\t<>",
+      "\t\t\t$0",
+      "\t\t</>",
+      "\t);",
+      "};",
+      "",
+      "export default ${1:componentName};"
+    ]
+  },
+  "Create page": {
+    "prefix": "cp",
+    "body": [
+      "import { NextPage } from 'next';",
+      "",
+      "type Props = {",
+      "};",
+      "",
+      "const ${1:PageName}: NextPage<Props> = ({}) => {",
+      "\treturn (",
+      "\t\t<>",
+      "\t\t\t$0",
+      "\t\t</>",
+      "\t);",
+      "};",
+      "",
+      "export default ${1:PageName};"
+    ]
+  },
+  "Create barrel": {
+    "prefix": "bar",
+    "body": "export { default${0:, } } from './$1';"
+  }
+}

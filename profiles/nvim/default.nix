@@ -1,4 +1,4 @@
-{ inputs, pkgs, system, ... }:
+{ inputs, pkgs, system, config, ... }:
 
 {
   # Requires the following for home manager
@@ -56,6 +56,7 @@
       normal."<leader>ff" = "<cmd>Telescope find_files<CR>";
       normal."<leader>fl" = "<cmd>Telescope live_grep<CR>";
       normal."<leader>fr" = "<cmd>Telescope resume<CR>";
+      normal."<leader>fp" = "<cmd>Telescope projects<CR>";
 
       # Gitsigns
       normal."<leader>hs" = "<cmd>Gitsigns stage_hunk<CR>";
@@ -91,9 +92,6 @@
     };
 
     plugins = {
-      # lsp-lines = {
-      #   enable = true;
-      # };
       lsp = {
         enable = true;
         servers = {
@@ -106,6 +104,7 @@
           jsonls.enable = true;
           eslint.enable = true;
           gdscript.enable = true;
+          tsserver.enable = true;
         };
       };
 
@@ -113,15 +112,22 @@
         # enable = true;
       };
 
+      project-nvim = {
+        enable = true;
+      };
+
       telescope = {
         enable = true;
-        # extensions = {
+        extensions = {
+          project-nvim = {
+            enable = true;
+          };
         #   media_files = {
         #     enable = true;
         #     find_cmd = "rg";
         #     # find_cmd = "${pkgs.ripgrep}/bin/rg";
         #   };
-        # };
+        };
       };
 
       nvim-tree = {
@@ -129,6 +135,15 @@
 
         disableNetrw = true;
         hijackNetrw = true;
+
+        # syncRootWithCwd = true;
+        updateCwd = true;
+        # respectBufCwd = true;
+        updateFocusedFile = {
+          enable = true;
+          # updateRoot = true;
+          updateCwd = true;
+        };
 
         git = {
           enable = true;
@@ -209,14 +224,25 @@
         mapping = {
           "<C-b>" = ''cmp.mapping.scroll_docs(-4)'';
           "<C-f>" = ''cmp.mapping.scroll_docs(4)'';
-          "<C-Space>" = "cmp.mapping.complete()";
+          "<C-Space>" = ''cmp.mapping.complete({
+            config = {
+              sources = {
+                { name = "nvim_lsp" },
+                { name = "luasnip" },
+                { name = "path" },
+                { name = "buffer" },
+              }
+            }
+          })'';
           "<C-e>" = "cmp.mapping.abort()";
           "<CR>" = "cmp.mapping.confirm({ select = true })";
           "<Tab>" = {
             modes = [ "i" "s" ];
             action = ''
               function(fallback)
-                if cmp.visible() then
+                if luasnip.jumpable(1) then
+                  luasnip.jump(1)
+                elseif cmp.visible() then
                   cmp.select_next_item()
                 elseif luasnip.expandable() then
                   luasnip.expand()
@@ -258,6 +284,7 @@
               vim_item.kind = string.format(" %s ", kind_icons[vim_item.kind])
               -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
               vim_item.menu = ({
+                nvim_lsp = "[LSP]",
                 luasnip = "[Snippet]",
                 buffer = "[Buffer]",
                 path = "[Path]",
@@ -274,8 +301,8 @@
         # };
 
         sources = [
-          { name = "nvim_lsp"; }
           { name = "luasnip"; } #-- For luasnip users.
+          { name = "nvim_lsp"; }
           { name = "path"; }
           { name = "buffer"; }
         ];
@@ -295,6 +322,37 @@
           alejandra.enable = true;
           phpcbf.enable = true;
         };
+      };
+
+      luasnip = {
+        enable = true;
+
+        fromVscode = [
+          {
+            lazyLoad = true;
+          }
+          {
+            lazyLoad = true;
+            paths = [
+              ./snippets
+            ];
+          }
+        ];
+
+        # fromVscode = {
+        #   enable = true;
+        #   lazyLoad = true;
+        #   paths = [
+        #     ./snippets
+        #   ];
+        #   # paths = let snippetsPath = "${./snippets}" ; in 
+        #   # { __raw = ''"${snippetsPath}," .. vim.api.nvim_get_option("runtimepath")''; };
+        #
+        #   # [
+        #   #   # "./"
+        #   #   { __raw = ''''; }
+        #   # ];
+        # };
       };
     };
 
@@ -322,16 +380,18 @@
       contrast = true;
     };
 
-    extraConfigLua = builtins.readFile ./main.lua + ''
-      require'lspconfig'.volar.setup{
-        filetypes = {'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json'},
-        init_options = {
-          typescript = {
-            serverPath = '${pkgs.nodePackages.typescript}/lib/node_modules/typescript/lib/tsserverlibrary.js'
-          }
-        }
-      }
-    '';
+    extraConfigLua = builtins.readFile ./main.lua 
+    # + ''
+    #   require'lspconfig'.volar.setup{
+    #     filetypes = {'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json'},
+    #     init_options = {
+    #       typescript = {
+    #         serverPath = '${pkgs.nodePackages.typescript}/lib/node_modules/typescript/lib/tsserverlibrary.js'
+    #       }
+    #     }
+    #   }
+    # ''
+    ;
 
     extraConfigVim = builtins.readFile ./main.vim;
 
