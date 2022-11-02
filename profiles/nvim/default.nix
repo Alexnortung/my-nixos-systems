@@ -105,6 +105,7 @@
           eslint.enable = true;
           gdscript.enable = true;
           tsserver.enable = true;
+          vuels.enable = true;
         };
       };
 
@@ -114,6 +115,7 @@
 
       project-nvim = {
         enable = true;
+        manualMode = true;
       };
 
       telescope = {
@@ -338,39 +340,28 @@
             ];
           }
         ];
-
-        # fromVscode = {
-        #   enable = true;
-        #   lazyLoad = true;
-        #   paths = [
-        #     ./snippets
-        #   ];
-        #   # paths = let snippetsPath = "${./snippets}" ; in 
-        #   # { __raw = ''"${snippetsPath}," .. vim.api.nvim_get_option("runtimepath")''; };
-        #
-        #   # [
-        #   #   # "./"
-        #   #   { __raw = ''''; }
-        #   # ];
-        # };
       };
     };
 
-    extraPlugins = with pkgs.vimPlugins; [
+    extraPlugins = with inputs.nixpkgs-unstable.legacyPackages.${system}.vimPlugins; [
+      yuck-vim
       editorconfig-nvim
-      luasnip
       friendly-snippets
       vim-sleuth # detects indentation
       futhark-vim # Futhark programming language
-      gitsigns-nvim
+      # gitsigns-nvim
+      pkgs.vimPlugins.gitsigns-nvim
       which-key-nvim
       nvim-ts-rainbow # treesitter color brackets
+      nvim-ts-autotag
       (inputs.vim-extra-plugins.packages.${system}.nvim-ts-context-commentstring.overrideAttrs (oldAttrs: {
         dependencies = [];
       }))
       vim-bbye
       Jenkinsfile-vim-syntax
       toggleterm-nvim
+      template-string-nvim
+      nvim-rename-state
     ];
 
     # plugins.lightline.enable = true;
@@ -402,7 +393,6 @@
       # Language servers
       nodePackages.typescript
       nodePackages.typescript-language-server
-      # nodePackages.vue-language-server
       ripgrep
     ];
   };

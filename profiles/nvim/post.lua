@@ -23,7 +23,12 @@ require('nvim-treesitter.configs').setup {
         enable = true,
         extended_mode = true,
     },
+    -- autotag = {
+    --     enable = true,
+    -- },
 }
+
+require('nvim-ts-autotag').setup()
 
 require('Comment').setup {
     pre_hook = function(ctx)
