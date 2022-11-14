@@ -29,8 +29,8 @@
 
     nixvim = {
       # url = "github:pta2002/nixvim";
-      url = "github:Alexnortung/nixvim/alexnortung-main";
-      # url = "path:/home/alexander/source/nixvim/";
+      # url = "github:Alexnortung/nixvim/alexnortung-main";
+      url = "path:/home/alexander/source/nixvim/";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 

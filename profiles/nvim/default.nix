@@ -43,11 +43,12 @@
 
       # LSP stuff
       normal."gD" = "<cmd>lua vim.lsp.buf.declaration()<CR>";
-      normal."dg" = "<cmd>lua vim.lsp.buf.definition()<CR>";
+      normal."gd" = "<cmd>lua vim.lsp.buf.definition()<CR>";
       normal."K" = "<cmd>lua vim.lsp.buf.hover()<CR>";
       normal."gi" = "<cmd>lua vim.lsp.buf.implementation()<CR>";
       # normal."<C-k>" = "<cmd>lua vim.lsp.buf.signature_help()<CR>";
       normal."gr" = "<cmd>lua vim.lsp.buf.references()<CR>";
+      normal."<leader>ck" = "<cmd>lua vim.diagnostic.open_float()<CR>";
       normal."<leader>ca" = "<cmd>lua vim.lsp.buf.code_action()<CR>";
       normal."<leader>cf" = "<cmd>lua vim.lsp.buf.formatting_sync()<CR>";
 
@@ -106,6 +107,7 @@
           gdscript.enable = true;
           tsserver.enable = true;
           vuels.enable = true;
+          elixirls.enable = true;
         };
       };
 
@@ -120,6 +122,22 @@
 
       telescope = {
         enable = true;
+        defaultsConfig = {
+          # path_display = "smart";
+          winblend = 5;
+          borderchars = [ " " " " " " " " " " " " " " " " ];
+          border = [];
+          prompt_prefix = " 🤓 ";
+          entry_prefix = "   ";
+          selection_caret = "🤌 ";
+          layout_config = {
+            horizontal = {
+              prompt_position = "top";
+              results_width = 0.5;
+              preview_width = 0.5;
+            };
+          };
+        };
         extensions = {
           project-nvim = {
             enable = true;
@@ -362,6 +380,7 @@
       toggleterm-nvim
       template-string-nvim
       nvim-rename-state
+      lsp_signature-nvim
     ];
 
     # plugins.lightline.enable = true;
