@@ -32,19 +32,23 @@ in
   boot.loader.efi.canTouchEfiVariables = true;
   #boot.extraModulePackages = [ config.boot.kernelPackages.wireguard ];
 
-  networking.hostName = "enderman"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Set your time zone.
   time.timeZone = "Europe/Copenhagen";
 
-  # The global useDHCP flag is deprecated, therefore explicitly set to false here.
-  # Per-interface useDHCP will be mandatory in the future, so this generated config
-  # replicates the default behaviour.
-  networking.useDHCP = false;
-  networking.interfaces.enp0s31f6.useDHCP = true;
+  networking = {
+    hostName = "enderman"; # Define your hostname.
 
-  networking.nat.internalInterfaces = [ "wg0" ];
+    # The global useDHCP flag is deprecated, therefore explicitly set to false here.
+    # Per-interface useDHCP will be mandatory in the future, so this generated config
+    # replicates the default behaviour.
+    useDHCP = false;
+    interfaces.enp0s31f6.useDHCP = true;
+
+    nat.internalInterfaces = [ "wg0" ];
+
+    stevenBlackHosts.enable = true;
+  };
 
   environment.systemPackages = with pkgs; [
     inputs.agenix.defaultPackage.x86_64-linux
@@ -100,6 +104,17 @@ in
  .'                     `.
     '';
   };
+
+  services.dnsmasq = {
+    enable = true;
+    extraConfig = ''
+      port=53
+      # Never forward plain names (without a dot or domain part)
+      domain-needed
+      # Never forward addresses in the non-routed address spaces.
+      bogus-priv
+    '';
+  };
   
   users = {
     groups = {
@@ -122,6 +137,7 @@ in
   networking.firewall.allowedTCPPorts = [
     21
     22
+    53 # dnsmasq
     #25565
     #25575 # mc rcon
     50001
@@ -130,6 +146,7 @@ in
     8080 # this should be commected out when not in use
   ];
   networking.firewall.allowedUDPPorts = [
+    53 # dnsmasq
     #25565
     51820 # wireguard
   ];

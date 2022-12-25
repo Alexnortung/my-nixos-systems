@@ -50,6 +50,11 @@
       inputs.nixpkgs-22_05.follows = "nixos-stable";
     };
 
+    hosts = {
+      url =  "github:StevenBlack/hosts";
+      inputs.nixpkgs.follows = "nixos-stable";
+    };
+
     #local-nixpkgs.url = "path:/home/alexander/source/nixpkgs";
   }
     #// ((import ./hosts).inputs)
@@ -64,6 +69,7 @@
     , agenix
     , nixvim
     , nix-on-droid
+    , hosts
     , ...
     }:
     utils-plus.lib.mkFlake {
@@ -104,6 +110,7 @@
           # nixvim.nixosModules.nixvim
           inputs.mail-server.nixosModule
           # import ./modules # My extra modules
+          hosts.nixosModule
         ];
       };
       hosts = (import ./hosts/default.nix).hosts inputs;
