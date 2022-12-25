@@ -8,8 +8,18 @@
     homeDirectory = "/home/alexander";
     packages = with pkgs; [
       nodejs
-      nodePackages.npm
+      # nodePackages.npm
+      nodePackages.pnpm
+      nodePackages.serverless
+      mysql
+      phpPackages.composer
+      fluxcd
+      neovide
     ];
+
+    shellAliases = {
+      # npm = "pnpm";
+    };
   };
 
   # This value determines the Home Manager release that your
@@ -28,7 +38,9 @@
   programs.zsh = {
     enable = true;
     initExtra = ''
-      PATH=$PATH:~/mutable_node_modules/bin/
+      export PNPM_HOME="/home/alexander/.local/share/pnpm"
+      export PATH="$PATH:$PNPM_HOME"
+      export PATH=$PATH:~/mutable_node_modules/bin/
     '';
   };
 }

@@ -4,6 +4,10 @@
 
 { inputs, config, pkgs, lib, ... }:
 
+let
+  system = "x86_64-linux";
+  # unstable-overlay = import ../../overlays/unstable.nix inputs system;
+in
 {
   imports = [
     ./hardware-configuration.nix
@@ -20,14 +24,14 @@
     ../../modules/zsh.nix
     # ../../modules/vscodium.nix
     ../../modules/location-denmark.nix
-    ];
-
-  disabledModules = [
-    "services/misc/autorandr.nix"
+    ../../profiles/registries.nix
   ];
-  
+
+  # nixpkgs.overlays = [
+  #   unstable-overlay
+  # ];
+
   nix = {
-    package = pkgs.nixUnstable;
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
@@ -62,6 +66,12 @@
   # };
 
   networking = {
+    # dhcpcd.enable = false;
+    enableIPv6 = false;
+    dhcpcd = {
+      # enable = true;
+      extraConfig = '''';
+      };
     hostName = "steve";
     # The global useDHCP flag is deprecated, therefore explicitly set to false here.
     # Per-interface useDHCP will be mandatory in the future, so this generated config
@@ -77,21 +87,11 @@
   services.xserver = {
     enable = true;
     windowManager.dwm.enable = true;
-    # videoDrivers = [ "nvidia" ];
-    # displayManager.setupCommands = ''
-    #   autorandr -c >> /tmp/autorandr-log.txt
-    # '';
-    #serverFlagsSection = ''
-    #  Option "IndirectGLX" "on"
-    #'';
-    #screenSection = ''
-    #  Option "metamodes" "HDMI-0: nvidia-auto-select +1920+0 {ForceCompositionPipeline=On}, DVI-I-0: nvidia-auto-select +0+0 {ForceCompositionPipeline=On}"
-    #'';
   };
 
   services.bg-setter = {
     enable = true;
-    wallpaper = lib.lists.elemAt (import ../../config/misc/nord-wallpapers.nix {}) 0;
+    wallpaper = lib.lists.elemAt (import ../../config/misc/nord-wallpapers.nix { }) 0;
   };
 
   services.autorandr = {
@@ -104,7 +104,6 @@
     };
   };
 
-
   fonts.fonts = with pkgs; [
     hasklig
     terminus-nerdfont
@@ -115,12 +114,11 @@
     order = [
       "audio"
       "cpu_load"
-      "network"
       "time"
     ];
     extraConfig = ''
       separator = " | "
- 
+
       [audio]
       icons = [ "奄", "奔", "墳" ]
       mute = "ﱝ"
@@ -129,10 +127,6 @@
       [cpu_load]
       template = " {CL1}"
       update_interval = 15
-
-      [network]
-      no_value = "睊 Not connected"
-      template = "直 {IPv4}"
     '';
   };
 
@@ -140,7 +134,7 @@
   services.redshift = {
     enable = true;
   };
-  
+
   # Configure keymap in X11
   services.xserver.layout = "dk";
 
@@ -159,67 +153,52 @@
     };
   };
 
-  programs.ssh.forwardX11 = true;
+  # programs.ssh.forwardX11 = true;
   #programs.ssh.startAgent = true;
 
   # List packages installed in system profile. To search, run:
   programs.steam.enable = true;
 
-  nixpkgs.config = {
-    # cudaSupport = true; # enable cuda for all packages that supprot it.
-    packageOverrides = pkgs: {
-      #steam = pkgs-steam.steam.override {
-      #  extraPkgs = pkgs:  [
-      #  ];
-      #  extraLibraries = pkgs: [
-      #    pkgs.pipewire
-      #  ];
-      #};
-    };
+  programs.kdeconnect = {
+    enable = true;
   };
 
-  services.mullvad-vpn.enable = true;
+  # services.mullvad-vpn.enable = true;
 
   environment.sessionVariables = {
     MOZ_X11_EGL = "1";
     # "CUDA_PATH" = "${pkgs.cudatoolkit}";
   };
 
-  environment.variables = {
-    "ZOOM_HOME" = "/home/zoom/zoomus";
-  };
-
   environment.systemPackages = with pkgs; [
     inputs.deploy-rs.defaultPackage.x86_64-linux
     lazygit
-    # jupyter
-    # python3Packages.pytorch
     superTuxKart
     protonup
     autorandr
     libreoffice
     mullvad-vpn
-    session-desktop-appimage
+    # session-desktop-appimage
+    unstable.session-desktop
+    # session-desktop
+    # krita
     # cudatoolkit
     (blender.override {
       # cudaSupport = true;
     })
     python39Packages.pygments
-    futhark
     zathura
     xorg.xhost
     # xpra
     socat
     bashmount
     pinta
-    plantuml
     appimage-run
     flameshot
     xclip
     # dotnet-sdk_5
     steam-run
     godot
-    glances
     texlive.combined.scheme-full
     wget
     firefox
@@ -239,11 +218,11 @@
     libv4l
     xorg.xrandr
     arandr
-    nvtop
     # linuxPackages.nvidia_x11
     #xorg.libpciaccess
     patchelf
-    libGL libGLU
+    libGL
+    libGLU
     glxinfo
     minecraft
     discord

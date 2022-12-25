@@ -2,7 +2,7 @@
 
 let 
   system = "x86_64-linux";
-  pkgs = inputs.nixos-spider.legacyPackages.${system};
+  pkgs = inputs.nixos-stable.legacyPackages.${system};
 in
 inputs.home-manager.lib.homeManagerConfiguration {
   inherit pkgs;
@@ -10,6 +10,7 @@ inputs.home-manager.lib.homeManagerConfiguration {
   modules = [
     inputs.nixvim.homeManagerModules.nixvim
     ../../profiles/nvim.nix
+    ../../profiles/eww
     ./home.nix
   ];
 

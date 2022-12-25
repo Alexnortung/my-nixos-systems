@@ -9,6 +9,9 @@
     packages = with pkgs; [
       nodejs
       nodePackages.npm
+      lmms
+      krita
+      neovide
     ];
 
     sessionVariables = {

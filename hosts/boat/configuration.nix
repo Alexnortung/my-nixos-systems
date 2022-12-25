@@ -6,13 +6,13 @@ args@{ inputs, pkgs, config, lib, ... }:
 
 let
   slock-command = "/run/wrappers/bin/slock";
-  nur-alexnortung = inputs.nur-alexnortung-boat;
+  # nur-alexnortung = inputs.nur-alexnortung-boat;
 in
 {
   imports = [
     ./hardware-configuration.nix
     ../../cachix.nix
-    ../../profiles/nvim-nixos.nix
+    # ../../profiles/nvim-nixos.nix
     ../../modules/programming-pkgs.nix
     ../../modules/comfort-packages.nix
     ../../modules/sound.nix
@@ -29,22 +29,11 @@ in
     ../../profiles/bluetooth.nix
   ];
 
-  programs.zathura = {
-    enable = true;
-    options = {
-      default-bg = "#2e3440";
-    };
-  };
-
   location = {
     latitude = 55.66283136357285;
     longitude = 12.534913904480344;
     provider = "manual";
   };
-
-  disabledModules = [
-    "services/misc/autorandr.nix"
-  ];
 
   nix = {
     package = pkgs.nix;
@@ -111,6 +100,10 @@ in
     };
     wg-quick.interfaces.wg0 = {
       address = [ "10.100.0.3" ];
+      privateKeyFile = "/etc/nixos/secret/wg-keys/boat-private";
+    };
+    wg-quick.interfaces.end-portal = {
+      address = [ "10.100.1.3" ];
       privateKeyFile = "/etc/nixos/secret/wg-keys/boat-private";
     };
   };

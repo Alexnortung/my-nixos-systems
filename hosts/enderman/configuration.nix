@@ -1,21 +1,18 @@
 { inputs, config, lib, pkgs, ... }:
 
 let
+  system = "x86_64-linux";
   ssh-keys = import ../../config/ssh;
-  authorizedKeyFiles = with ssh-keys; [
-    boat
-    steve
-  ];
+  authorizedKeyFiles = with ssh-keys; all;
 in
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      #"${nixos-unstable}/nixos/modules/services/misc/prowlarr.nix"
-      #../../common/nvim.nix
       ../../modules/console.nix
       ../../modules/comfort-packages.nix
-      ../../modules/programming-pkgs.nix
+      ../../modules/personal-vpn.nix
+      ../../profiles/registries.nix
     ];
 
   fileSystems."/data/data1" = {
@@ -140,16 +137,11 @@ in
   networking.wg-quick.interfaces = {
     wg0 = {
       address = [ "10.100.0.2/16" ];
-      listenPort = 51820; 
       privateKeyFile = "/root/wireguard-keys/wg-private";
-      peers = [
-        {
-          publicKey = "9WrHJEt/yzULE8IOLV0JkkA/8ult0RYg+buVuC7dfFU=";
-          allowedIPs = [ "10.100.0.0/16" ]; # send all communication to 10.100.xxx.xxx through wg0
-          endpoint = "142.93.130.164:51820";
-          persistentKeepalive = 25; # make sure nat tables are always fresh
-        }
-      ];
+    };
+    end-portal = {
+      address = [ "10.101.0.2/16" ];
+      privateKeyFile = "/root/wireguard-keys/wg-private";
     };
     wg-mullvad = {
       address = [ "10.64.156.180/32" "fc00:bbbb:bbbb:bb01::1:9cb3/128" ];
@@ -162,6 +154,13 @@ in
           endpoint = "176.125.235.72:3319";
         }
       ];
+    };
+  };
+
+  services.xserver = {
+    enable = true;
+    desktopManager.retroarch = {
+      enable = true;
     };
   };
 
@@ -238,7 +237,7 @@ in
     enable = true;
     eula = true;
     declarative = true;
-    package = pkgs.papermc-1_18_x;
+    package = inputs.minecraft-servers.packages.${system}.paper;
     #package = custom-papermc;
     dataDir = "/data/data1/var/lib/minecraft";
     openFirewall = true;

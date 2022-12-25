@@ -1,16 +1,18 @@
+{ lib, ... }:
+
 {
   programs.git = {
     enable = true;
     config = {
       user = {
-        name = "Alexander Nortung";
-        email = "alex_nortung@live.dk";
+        name = lib.mkDefault "Alexander Nortung";
+        email = lib.mkDefault "alex_nortung@live.dk";
       };
       init = {
-        defaultBranch = "main";
+        defaultBranch = lib.mkDefault "main";
       };
       pull = {
-        rebase = false;
+        rebase = lib.mkDefault false;
       };
       alias = {
         st = "status";

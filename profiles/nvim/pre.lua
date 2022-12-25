@@ -1,15 +1,15 @@
-local cmp = require'cmp'
-local npairs = require('nvim-autopairs')
-local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-local luasnip = require'luasnip'
+mycmp = require'cmp'
+npairs = require('nvim-autopairs')
+cmp_autopairs = require('nvim-autopairs.completion.cmp')
+luasnip = require'luasnip'
 
-local check_backspace = function()
+check_backspace = function()
     local col = vim.fn.col "." - 1
     return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
 end
 
 --   פּ ﯟ   some other good icons
-local kind_icons = {
+kind_icons = {
   Text = "",
   Method = "m",
   Function = "",

@@ -1,12 +1,9 @@
 {
-  channels = inputs@{ ... }: {
-    nixos-spider.overlaysBuilder = import ./package-overlay.nix inputs;
-  };
-  host = input@{ nur-alexnortung-spider, nixos-hardware, ... }: {
-    channelName = "nixos-spider";
+  host = inputs@{ nixos-hardware, ... }: {
+    channelName = "nixos-stable";
     # Relative to flake.nix
     modules = [
-      nur-alexnortung-spider.nixosModules.autorandr
+      # "${inputs.nixpkgs-alexnortung}/nixos/modules/services/network-filesystems/s3fs-fuse.nix"
       nixos-hardware.nixosModules.lenovo-thinkpad-x13
       ./configuration.nix
     ];

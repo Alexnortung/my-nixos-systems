@@ -1,41 +1,65 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ pkgs, config, lib, ... }:
-
-let
-  slock-command = "/run/wrappers/bin/slock";
-in
 {
+  pkgs,
+  config,
+  lib,
+  inputs,
+  ...
+}: let
+  system = "x86_64-linux";
+  slock-command = "/run/wrappers/bin/slock";
+  unstable = inputs.nixpkgs-unstable.legacyPackages.${system};
+in {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/nvim.nix
+    ./secrets
+    ../../modules/personal-vpn.nix
     ../../modules/programming-pkgs.nix
     ../../modules/comfort-packages.nix
     ../../modules/sound.nix
     ../../modules/console.nix
-    ../../modules/vscodium.nix
-    ../../modules/latex.nix
+    # ../../modules/vscodium.nix
+    # ../../modules/latex.nix
     ../../modules/nord-lightdm.nix
     ../../modules/nord-gtk.nix
     ../../modules/basic-desktop.nix
     ../../modules/zsh.nix
     ../../modules/location-denmark.nix
     ../../profiles/allow-multicast.nix
+    ../../profiles/registries.nix
   ];
+
+  age.identityPaths = [
+    "/etc/ssh/ssh_host_rsa_key"
+    "/home/alexander/.ssh/id_rsa"
+  ];
+
+  networking.wg-quick.interfaces.wg0 = {
+    privateKeyFile = config.age.secrets.wireguard-key.path;
+    address = ["10.100.0.6/32"];
+  };
+  networking.wg-quick.interfaces.end-portal = {
+    privateKeyFile = config.age.secrets.wireguard-key.path;
+    address = ["10.101.0.6/32"];
+  };
+
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+  };
+
+  programs.nix-ld.enable = true;
+
+  programs.steam.enable = true;
 
   nix = {
     package = pkgs.nix;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
+    # extraOptions = ''
+    #   experimental-features = nix-command flakes
+    # '';
   };
-
-
-  disabledModules = [
-    "services/misc/autorandr.nix"
-  ];
 
   hardware.bluetooth = {
     enable = true;
@@ -52,7 +76,6 @@ in
     terminus-nerdfont
   ];
 
-
   # Use the systemd-boot EFI boot loader.
   boot = {
     loader = {
@@ -63,7 +86,7 @@ in
       grub = {
         version = 2;
         configurationLimit = 25;
-        devices = [ "nodev" ];
+        devices = ["nodev"];
         enable = true;
         efiSupport = true;
       };
@@ -80,7 +103,6 @@ in
       '';
     };
   };
-
 
   # Set your time zone.
   time.timeZone = "Europe/Copenhagen";
@@ -100,25 +122,32 @@ in
       enable = true;
     };
     firewall = {
+      enable = false;
       checkReversePath = lib.mkForce "loose";
       allowedTCPPorts = [
         3000 # dev
-        8008 8009 # Chromecast
+        8008
+        8009 # Chromecast
         1337
       ];
       allowedUDPPorts = [
-        32768 61000 # Chromecast
+        32768
+        61000 # Chromecast
+        51820 # wireguard
       ];
     };
-    #wg-quick.interfaces.wg0 = {
-    #  address = [ "10.100.0.3" ];
-    #  privateKeyFile = "/etc/nixos/secret/wg-keys/boat-private";
-    #};
+    extraHosts = ''
+      192.168.49.2 minikube
+      192.168.49.2 oak-site-backend.minikube
+      192.168.49.2 oak-site-frontend.minikube
+    '';
   };
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+
+  # services.openssh.enable = true;
 
   services.batteryNotifier = {
     enable = true;
@@ -143,7 +172,7 @@ in
     ];
     extraConfig = ''
       separator = " | "
- 
+
       [audio]
       icons = [ "奄", "奔", "墳" ]
       mute = "ﱝ"
@@ -175,7 +204,7 @@ in
       };
     };
 
-    videoDrivers = [ "modesetting" ];
+    videoDrivers = ["modesetting"];
     useGlamor = true;
 
     # Enable touchpad support (enabled default in most desktopManager).
@@ -201,15 +230,15 @@ in
   services.picom = {
     enable = true;
     vSync = true;
-    #backend = "glx";
+    backend = "glx";
     #experimentalBackends = true;
   };
 
   services.autorandr = {
     enable = true;
-    hooks =  {
+    hooks = {
       postswitch = {
-        change-bavkground =  "systemctl --user restart bg-setter";
+        change-bavkground = "systemctl --user restart bg-setter";
       };
     };
   };
@@ -230,11 +259,28 @@ in
         ];
       };
     };
-    extraGroups.vboxusers.members = [ "alexander" ];
-    extraGroups.docker.members = [ "alexander" ];
+    extraGroups.vboxusers.members = ["alexander"];
+    extraGroups.docker.members = ["alexander"];
+  };
+
+  environment.variables = {
+    # NIX_LD = lib.fileContents "${pkgs.stdenv.cc}/nix-support/dynamic-linker";
+    # NIX_LD = pkgs.runCommand "ld.so" { } ''
+    #   ln -s "$(cat '${pkgs.stdenv.cc}/nix-support/dynamic-linker')" $out
+    # '';
+    NIX_LD = "${pkgs.runCommand "ld.so" {} ''
+      ln -s "$(cat '${pkgs.stdenv.cc}/nix-support/dynamic-linker')" $out
+    ''}";
   };
 
   environment.systemPackages = with pkgs; [
+    inputs.agenix.defaultPackage.x86_64-linux
+    inputs.deploy-rs.defaultPackage.x86_64-linux
+    postgresql
+    kubernetes-helm
+    ungoogled-chromium
+    minikube
+    kubectl
     mkchromecast
     lazygit
     nodejs
@@ -253,7 +299,7 @@ in
     xmrig
     bitwarden
     #torbrowser
-    mullvad-vpn
+    unstable.mullvad-vpn
     arandr
     bashmount
     gparted
@@ -270,9 +316,11 @@ in
     spotify
     libreoffice
     tmate
-    session-desktop-appimage
+    # session-desktop-appimage
+    unstable.session-desktop
     discord
-    zip unzip
+    zip
+    unzip
     flameshot
     vim
     firefox
@@ -301,6 +349,10 @@ in
     lockerCommand = slock-command;
   };
 
+  programs.git = {
+    config.user.email = "alexander.nortung@oakdigital.dk";
+  };
+
   services.redshift = {
     enable = true;
     temperature.night = 2900;
@@ -314,4 +366,3 @@ in
 
   system.stateVersion = "21.11";
 }
-

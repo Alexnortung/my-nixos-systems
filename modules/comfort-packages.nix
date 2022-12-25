@@ -8,6 +8,7 @@
     enable = true;
   };
   environment.systemPackages = with pkgs; [
+    ncdu
     git
     file
     bash

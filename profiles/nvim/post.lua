@@ -2,7 +2,7 @@ npairs.setup {
     check_ts = true,
 }
 
-cmp.event:on(
+mycmp.event:on(
     'confirm_done',
     cmp_autopairs.on_confirm_done()
 )
@@ -23,7 +23,16 @@ require('nvim-treesitter.configs').setup {
         enable = true,
         extended_mode = true,
     },
+    -- autotag = {
+    --     enable = true,
+    -- },
 }
+
+require('nvim-ts-autotag').setup()
+
+require('lsp_signature').setup({
+    select_signature_key = '<M-n>',
+});
 
 require('Comment').setup {
     pre_hook = function(ctx)
@@ -117,4 +126,43 @@ for name, values in pairs(cmp_colors) do
     -- vim.cmd(string.format('highlight! %s guifg=%s guibg=%s', name, values.fg, values.bg))
     -- print(name)
     -- print(values)
+end
+
+
+local TelescopePrompt = {
+    TelescopePromptNormal = {
+        bg = nord_colors.nord3_gui,
+    },
+    TelescopePromptBorder = {
+        bg = nord_colors.nord3_gui,
+    },
+    TelescopePromptTitle = {
+        fg = nord_colors.nord0_gui,
+        bg = nord_colors.nord9_gui,
+    },
+    TelescopePreviewTitle = {
+        fg = nord_colors.nord0_gui,
+        bg = nord_colors.nord10_gui,
+    },
+    TelescopeResultsTitle = {
+        -- hide this title
+        fg = nord_colors.nord1_gui,
+        bg = nord_colors.nord1_gui,
+    },
+    TelescopeNormal = {
+        -- fg = nord_colors.nord2_gui,
+        bg = nord_colors.nord1_gui,
+    },
+    TelescopeBorder = {
+        bg = nord_colors.nord1_gui,
+    },
+    TelescopeResultsBorder = {
+        bg = nord_colors.nord1_gui,
+    },
+    TelescopePreviewBorder = {
+        bg = nord_colors.nord1_gui,
+    },
+}
+for hl, col in pairs(TelescopePrompt) do
+    vim.api.nvim_set_hl(0, hl, col)
 end

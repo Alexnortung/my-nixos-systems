@@ -1,3 +1,24 @@
+require'nvim-rename-state'.setup{}
+
+require('template-string').setup({
+  filetypes = { 'typescript', 'javascript', 'typescriptreact', 'javascriptreact' }, -- filetypes where the plugin is active
+  jsx_brackets = true, -- must add brackets to jsx attributes
+  remove_template_string = false, -- remove backticks when there are no template string
+  restore_quotes = {
+    -- quotes used when "remove_template_string" option is enabled
+    normal = [[']],
+    jsx = [["]],
+  },
+})
+
+require("toggleterm").setup{
+    open_mapping = [[<c-0>]],
+    hide_numbers = true, -- hide the number column in toggleterm buffers
+    insert_mappings = true, -- whether or not the open mapping applies in insert mode
+    terminal_mappings = true, -- whether or not the open mapping applies in the opened terminals}
+    direction = 'float',
+    auto_scroll = true,
+}
 
 -- cmp.setup({
 --     snippet = {

@@ -16,11 +16,15 @@
     # rustc # use the one in nvim.nix instead
     #rustup
     #rls
-    cargo
-    rustfmt
+    # cargo
+    # rustfmt
     # Python
     pythonFull
     python3
+    openssl
+    pkg-config
+    nodejs
+    nodePackages.pnpm
   ];
 }
 
