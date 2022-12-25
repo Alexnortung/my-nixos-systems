@@ -122,7 +122,7 @@
 
       telescope = {
         enable = true;
-        defaultsConfig = {
+        defaults = {
           # path_display = "smart";
           winblend = 5;
           borderchars = [ " " " " " " " " " " " " " " " " ];
