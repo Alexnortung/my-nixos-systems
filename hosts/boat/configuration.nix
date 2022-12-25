@@ -27,6 +27,7 @@ in
     # ../../modules/nord-spicetify.nix
     # ../../overlays/pidgin-with-plugins.nix
     ../../profiles/bluetooth.nix
+    ../../profiles/registries.nix
   ];
 
   location = {
