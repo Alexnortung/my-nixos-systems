@@ -29,7 +29,7 @@
 
     nixvim = {
       url = "github:pta2002/nixvim";
-      # url = "github:Alexnortung/nixvim/test-branch";
+      # url = "github:Alexnortung/nixvim/alexnortung-main";
       # url = "path:/home/alexander/source/nixvim/";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
@@ -41,6 +41,17 @@
 
     nix-on-droid = {
       url = "github:t184256/nix-on-droid";
+      inputs.nixpkgs.follows = "nixos-stable";
+    };
+
+    mail-server = {
+      url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs-22_05.follows = "nixos-stable";
+    };
+
+    hosts = {
+      url =  "github:StevenBlack/hosts";
       inputs.nixpkgs.follows = "nixos-stable";
     };
 
@@ -58,6 +69,7 @@
     , agenix
     , nixvim
     , nix-on-droid
+    , hosts
     , ...
     }:
     utils-plus.lib.mkFlake {
@@ -95,8 +107,10 @@
         };
         modules = [
           agenix.nixosModules.age
-          nixvim.nixosModules.nixvim
+          # nixvim.nixosModules.nixvim
+          inputs.mail-server.nixosModule
           # import ./modules # My extra modules
+          hosts.nixosModule
         ];
       };
       hosts = (import ./hosts/default.nix).hosts inputs;

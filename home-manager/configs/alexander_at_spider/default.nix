@@ -10,6 +10,7 @@ inputs.home-manager.lib.homeManagerConfiguration {
   modules = [
     inputs.nixvim.homeManagerModules.nixvim
     ../../profiles/nvim.nix
+    ../../profiles/eww
     ./home.nix
   ];
 

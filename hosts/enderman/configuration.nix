@@ -11,6 +11,8 @@ in
       ./hardware-configuration.nix
       ../../modules/console.nix
       ../../modules/comfort-packages.nix
+      ../../modules/personal-vpn.nix
+      ../../profiles/registries.nix
     ];
 
   fileSystems."/data/data1" = {
@@ -30,19 +32,23 @@ in
   boot.loader.efi.canTouchEfiVariables = true;
   #boot.extraModulePackages = [ config.boot.kernelPackages.wireguard ];
 
-  networking.hostName = "enderman"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Set your time zone.
   time.timeZone = "Europe/Copenhagen";
 
-  # The global useDHCP flag is deprecated, therefore explicitly set to false here.
-  # Per-interface useDHCP will be mandatory in the future, so this generated config
-  # replicates the default behaviour.
-  networking.useDHCP = false;
-  networking.interfaces.enp0s31f6.useDHCP = true;
+  networking = {
+    hostName = "enderman"; # Define your hostname.
 
-  networking.nat.internalInterfaces = [ "wg0" ];
+    # The global useDHCP flag is deprecated, therefore explicitly set to false here.
+    # Per-interface useDHCP will be mandatory in the future, so this generated config
+    # replicates the default behaviour.
+    useDHCP = false;
+    interfaces.enp0s31f6.useDHCP = true;
+
+    nat.internalInterfaces = [ "wg0" ];
+
+    stevenBlackHosts.enable = true;
+  };
 
   environment.systemPackages = with pkgs; [
     inputs.agenix.defaultPackage.x86_64-linux
@@ -98,6 +104,17 @@ in
  .'                     `.
     '';
   };
+
+  services.dnsmasq = {
+    enable = true;
+    extraConfig = ''
+      port=53
+      # Never forward plain names (without a dot or domain part)
+      domain-needed
+      # Never forward addresses in the non-routed address spaces.
+      bogus-priv
+    '';
+  };
   
   users = {
     groups = {
@@ -120,6 +137,7 @@ in
   networking.firewall.allowedTCPPorts = [
     21
     22
+    53 # dnsmasq
     #25565
     #25575 # mc rcon
     50001
@@ -128,6 +146,7 @@ in
     8080 # this should be commected out when not in use
   ];
   networking.firewall.allowedUDPPorts = [
+    53 # dnsmasq
     #25565
     51820 # wireguard
   ];
@@ -135,16 +154,11 @@ in
   networking.wg-quick.interfaces = {
     wg0 = {
       address = [ "10.100.0.2/16" ];
-      listenPort = 51820; 
       privateKeyFile = "/root/wireguard-keys/wg-private";
-      peers = [
-        {
-          publicKey = "9WrHJEt/yzULE8IOLV0JkkA/8ult0RYg+buVuC7dfFU=";
-          allowedIPs = [ "10.100.0.0/16" ]; # send all communication to 10.100.xxx.xxx through wg0
-          endpoint = "142.93.130.164:51820";
-          persistentKeepalive = 25; # make sure nat tables are always fresh
-        }
-      ];
+    };
+    end-portal = {
+      address = [ "10.101.0.2/16" ];
+      privateKeyFile = "/root/wireguard-keys/wg-private";
     };
     wg-mullvad = {
       address = [ "10.64.156.180/32" "fc00:bbbb:bbbb:bb01::1:9cb3/128" ];

@@ -33,6 +33,7 @@
     enable = true;
     initExtra = ''
       PATH=$PATH:~/mutable_node_modules/bin/
+      PATH=$PATH:~/.cargo/bin
     '';
   };
 }

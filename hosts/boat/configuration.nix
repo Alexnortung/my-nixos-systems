@@ -12,7 +12,7 @@ in
   imports = [
     ./hardware-configuration.nix
     ../../cachix.nix
-    ../../profiles/nvim-nixos.nix
+    # ../../profiles/nvim-nixos.nix
     ../../modules/programming-pkgs.nix
     ../../modules/comfort-packages.nix
     ../../modules/sound.nix
@@ -27,6 +27,7 @@ in
     # ../../modules/nord-spicetify.nix
     # ../../overlays/pidgin-with-plugins.nix
     ../../profiles/bluetooth.nix
+    ../../profiles/registries.nix
   ];
 
   location = {
@@ -100,6 +101,10 @@ in
     };
     wg-quick.interfaces.wg0 = {
       address = [ "10.100.0.3" ];
+      privateKeyFile = "/etc/nixos/secret/wg-keys/boat-private";
+    };
+    wg-quick.interfaces.end-portal = {
+      address = [ "10.100.1.3" ];
       privateKeyFile = "/etc/nixos/secret/wg-keys/boat-private";
     };
   };

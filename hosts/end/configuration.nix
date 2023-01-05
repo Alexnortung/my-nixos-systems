@@ -12,8 +12,16 @@ in
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./secrets
+      ./db.nix
+      # ./nextcloud.nix
+      ./wireguard.nix
+      ./nginx.nix
+      ./mail-server.nix
+      ./vaultwarden.nix
       ../../modules/console.nix
       ../../modules/comfort-packages.nix
+      ../../profiles/registries.nix
     ];
 
   networking.hostName = "end"; # Define your hostname.
@@ -21,9 +29,21 @@ in
   # Set your time zone.
   time.timeZone = "Europe/Copenhagen";
 
+  # virtualisation.podman = {
+  #   enable = true;
+  #   dockerCompat = true;
+  #   dockerSocket.enable = true;
+  # };
+
+  virtualisation.docker = {
+    enable = true;
+  };
+
   # networking.nat.internalInterfaces = [ "wg0" ];
 
   environment.systemPackages = with pkgs; [
+    docker-compose
+    neovim
     inputs.agenix.defaultPackage.x86_64-linux
     nmap
     git
@@ -66,12 +86,11 @@ in
     21
     22
     50001
-    51820 # wireguard
   ];
   networking.firewall.allowedUDPPorts = [
     51820 # wireguard
   ];
 
-  # TODO: setup wireguard
+  system.stateVersion = "22.05";
 }
 
