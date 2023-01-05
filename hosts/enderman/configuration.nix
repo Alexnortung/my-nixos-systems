@@ -251,7 +251,7 @@ in
 
 
   services.minecraft-server = {
-    enable = true;
+    # enable = true;
     eula = true;
     declarative = true;
     package = inputs.minecraft-servers.packages.${system}.paper;
