@@ -9,6 +9,8 @@ in
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./nginx.nix
+      ./dns.nix
       ../../modules/console.nix
       ../../modules/comfort-packages.nix
       ../../modules/personal-vpn.nix
@@ -46,8 +48,6 @@ in
     interfaces.enp0s31f6.useDHCP = true;
 
     nat.internalInterfaces = [ "wg0" ];
-
-    stevenBlackHosts.enable = true;
   };
 
   environment.systemPackages = with pkgs; [
@@ -105,17 +105,6 @@ in
     '';
   };
 
-  services.dnsmasq = {
-    enable = true;
-    extraConfig = ''
-      port=53
-      # Never forward plain names (without a dot or domain part)
-      domain-needed
-      # Never forward addresses in the non-routed address spaces.
-      bogus-priv
-    '';
-  };
-  
   users = {
     groups = {
       servarr = {};
@@ -174,12 +163,12 @@ in
     };
   };
 
-  services.xserver = {
-    enable = true;
-    desktopManager.retroarch = {
-      enable = true;
-    };
-  };
+  # services.xserver = {
+  #   enable = true;
+  #   desktopManager.retroarch = {
+  #     enable = true;
+  #   };
+  # };
 
   services.sonarr = {
     enable = true;
