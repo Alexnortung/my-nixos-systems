@@ -194,7 +194,7 @@ in
     # xpra
     socat
     bashmount
-    pinta
+    # pinta
     appimage-run
     flameshot
     xclip
@@ -207,8 +207,8 @@ in
     ungoogled-chromium
     bitwarden
     xmrig
-    st
-    dwm
+    # st
+    # dwm
     neofetch
     dmenu
     dwm-status
@@ -218,8 +218,8 @@ in
     pavucontrol
     usbutils
     libv4l
-    xorg.xrandr
-    arandr
+    # xorg.xrandr
+    # arandr
     # linuxPackages.nvidia_x11
     #xorg.libpciaccess
     patchelf
@@ -239,12 +239,6 @@ in
     python3
     playerctl
     oh-my-zsh
-    xorg.libXrandr
-    xorg.libXcursor
-    xorg.libXinerama
-    xorg.libXrender
-    xorg.libX11
-    xorg.libXi
     libpulseaudio
   ];
 
