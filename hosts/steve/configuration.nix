@@ -18,7 +18,7 @@ in
     ../../modules/console.nix
     #../../modules/personal-vpn.nix
     # ../../modules/latex.nix
-    ../../modules/nord-lightdm.nix
+    # ../../modules/nord-lightdm.nix
     ../../modules/nord-gtk.nix
     ../../modules/basic-desktop.nix
     ../../modules/zsh.nix
@@ -86,7 +86,9 @@ in
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
-    windowManager.dwm.enable = true;
+    # windowManager.dwm.enable = true;
+    desktopManager.gnome.enable = true;
+    displayManager.gdm.enable = true;
   };
 
   services.bg-setter = {
@@ -109,26 +111,26 @@ in
     terminus-nerdfont
   ];
 
-  services.dwm-status = {
-    enable = true;
-    order = [
-      "audio"
-      "cpu_load"
-      "time"
-    ];
-    extraConfig = ''
-      separator = " | "
-
-      [audio]
-      icons = [ "奄", "奔", "墳" ]
-      mute = "ﱝ"
-      template = "{ICO} {VOL}%"
-
-      [cpu_load]
-      template = " {CL1}"
-      update_interval = 15
-    '';
-  };
+  # services.dwm-status = {
+  #   enable = true;
+  #   order = [
+  #     "audio"
+  #     "cpu_load"
+  #     "time"
+  #   ];
+  #   extraConfig = ''
+  #     separator = " | "
+  #
+  #     [audio]
+  #     icons = [ "奄", "奔", "墳" ]
+  #     mute = "ﱝ"
+  #     template = "{ICO} {VOL}%"
+  #
+  #     [cpu_load]
+  #     template = " {CL1}"
+  #     update_interval = 15
+  #   '';
+  # };
 
   # Redshift
   services.redshift = {
@@ -192,7 +194,7 @@ in
     # xpra
     socat
     bashmount
-    pinta
+    # pinta
     appimage-run
     flameshot
     xclip
@@ -205,8 +207,8 @@ in
     ungoogled-chromium
     bitwarden
     xmrig
-    st
-    dwm
+    # st
+    # dwm
     neofetch
     dmenu
     dwm-status
@@ -216,8 +218,8 @@ in
     pavucontrol
     usbutils
     libv4l
-    xorg.xrandr
-    arandr
+    # xorg.xrandr
+    # arandr
     # linuxPackages.nvidia_x11
     #xorg.libpciaccess
     patchelf
@@ -237,12 +239,6 @@ in
     python3
     playerctl
     oh-my-zsh
-    xorg.libXrandr
-    xorg.libXcursor
-    xorg.libXinerama
-    xorg.libXrender
-    xorg.libX11
-    xorg.libXi
     libpulseaudio
   ];
 
