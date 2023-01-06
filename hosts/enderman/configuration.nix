@@ -141,23 +141,20 @@ in
   ];
 
   networking.wg-quick.interfaces = {
-    wg0 = {
-      address = [ "10.100.0.2/16" ];
-      privateKeyFile = "/root/wireguard-keys/wg-private";
-    };
     end-portal = {
       address = [ "10.101.0.2/16" ];
       privateKeyFile = "/root/wireguard-keys/wg-private";
     };
     wg-mullvad = {
-      address = [ "10.64.156.180/32" "fc00:bbbb:bbbb:bb01::1:9cb3/128" ];
-      dns = [ "193.138.218.74" ]; # mullvad public dns
+      address = [ "10.64.28.12/32" ];
+      # dns = [ "193.138.218.74" ]; # mullvad public dns
+      dns = [ "10.64.0.1" ];
       privateKeyFile = "/root/wireguard-keys/mullvad/wg-mullvad";
       peers = [
         {
-          publicKey = "E3XgsLAaDdRhYl5tPbBIO87bdTYQmpF72nqIhFBk3g8=";
-          allowedIPs = [ "10.64.0.1/32" "10.124.0.0/22" ]; # Only send communication through mullvad if it is in the range of the given ips, allows for split tunneling
-          endpoint = "176.125.235.72:3319";
+          publicKey = "7ncbaCb+9za3jnXlR95I6dJBkwL1ABB5i4ndFUesYxE=";
+          allowedIPs = [ "10.8.0.1/32" "10.64.0.1/32" "10.124.0.0/22" ]; # Only send communication through mullvad if it is in the range of the given ips, allows for split tunneling
+          endpoint = "176.125.235.74:3189";
         }
       ];
     };
