@@ -321,6 +321,7 @@
         # };
 
         sources = [
+          # { name = "copilot"; }
           { name = "luasnip"; } #-- For luasnip users.
           { name = "nvim_lsp"; }
           { name = "path"; }
@@ -381,6 +382,8 @@
       template-string-nvim
       nvim-rename-state
       lsp_signature-nvim
+      copilot-lua
+      # cmp-copilot
     ];
 
     # plugins.lightline.enable = true;
@@ -412,6 +415,7 @@
       # Language servers
       nodePackages.typescript
       nodePackages.typescript-language-server
+
       ripgrep
     ];
   };
