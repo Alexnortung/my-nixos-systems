@@ -205,7 +205,7 @@ in {
     };
 
     videoDrivers = ["modesetting"];
-    useGlamor = true;
+    # useGlamor = true;
 
     # Enable touchpad support (enabled default in most desktopManager).
     libinput = {
