@@ -231,7 +231,7 @@ in
     obs-studio
     gimp
     spotify
-    # lutris
+    lutris
     vulkan-headers
     xorg.xev
     gcc
