@@ -19,8 +19,8 @@
           #})
           # Systray
           (super.fetchpatch {
-            url = "https://dwm.suckless.org/patches/systray/dwm-systray-6.3.diff";
-            sha256 = "M814rlwlO3ytmN/WjgunBDQBGrrjaMLVBYohng1RMjA=";
+            url = "https://dwm.suckless.org/patches/systray/dwm-systray-6.4.diff";
+            sha256 = "sha256-TXErH76w403T9tSJYu3tAJrQX3Y3lKSulKH0UdQLG/g=";
           })
           # Pertag - gives each tag its own workspace
           (super.fetchpatch {

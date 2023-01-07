@@ -1,3 +1,11 @@
+require('copilot').setup({
+  suggestion = {
+    auto_trigger = true,
+  },
+})
+
+-- require("copilot_cmp").setup()
+
 require'nvim-rename-state'.setup{}
 
 require('template-string').setup({
