@@ -165,7 +165,7 @@ in
     enable = true;
   };
 
-  # services.mullvad-vpn.enable = true;
+  services.mullvad-vpn.enable = true;
 
   environment.sessionVariables = {
     MOZ_X11_EGL = "1";
@@ -231,7 +231,7 @@ in
     obs-studio
     gimp
     spotify
-    # lutris
+    lutris
     vulkan-headers
     xorg.xev
     gcc

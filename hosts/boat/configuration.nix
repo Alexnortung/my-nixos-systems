@@ -197,7 +197,6 @@ in
     };
 
     videoDrivers = [ "modesetting" ];
-    useGlamor = true;
     # videoDrivers = [ "intel" ];
     deviceSection = ''
       Option "DRI" "2"
