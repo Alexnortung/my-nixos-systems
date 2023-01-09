@@ -1,17 +1,18 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{
-  pkgs,
-  config,
-  lib,
-  inputs,
-  ...
-}: let
+{ pkgs
+, config
+, lib
+, inputs
+, ...
+}:
+let
   system = "x86_64-linux";
   slock-command = "/run/wrappers/bin/slock";
   unstable = inputs.nixpkgs-unstable.legacyPackages.${system};
-in {
+in
+{
   imports = [
     ./hardware-configuration.nix
     ./secrets
@@ -38,11 +39,11 @@ in {
 
   networking.wg-quick.interfaces.wg0 = {
     privateKeyFile = config.age.secrets.wireguard-key.path;
-    address = ["10.100.0.6/32"];
+    address = [ "10.100.0.6/32" ];
   };
   networking.wg-quick.interfaces.end-portal = {
     privateKeyFile = config.age.secrets.wireguard-key.path;
-    address = ["10.101.0.6/32"];
+    address = [ "10.101.0.6/32" ];
   };
 
   programs.neovim = {
@@ -86,7 +87,7 @@ in {
       grub = {
         version = 2;
         configurationLimit = 25;
-        devices = ["nodev"];
+        devices = [ "nodev" ];
         enable = true;
         efiSupport = true;
       };
@@ -149,6 +150,14 @@ in {
 
   # services.openssh.enable = true;
 
+  services.printing.enable = true;
+  services.avahi = {
+    enable = true;
+    openFirewall = true;
+    nssmdns = true;
+  };
+  # for a WiFi printer
+
   services.batteryNotifier = {
     enable = true;
     notifyCapacity = 15;
@@ -157,7 +166,7 @@ in {
 
   services.bg-setter = {
     enable = true;
-    wallpaper = lib.lists.elemAt (import ../../config/misc/nord-wallpapers.nix {}) 0;
+    wallpaper = lib.lists.elemAt (import ../../config/misc/nord-wallpapers.nix { }) 0;
   };
 
   services.dwm-status = {
@@ -204,7 +213,7 @@ in {
       };
     };
 
-    videoDrivers = ["modesetting"];
+    videoDrivers = [ "modesetting" ];
     # useGlamor = true;
 
     # Enable touchpad support (enabled default in most desktopManager).
@@ -259,8 +268,8 @@ in {
         ];
       };
     };
-    extraGroups.vboxusers.members = ["alexander"];
-    extraGroups.docker.members = ["alexander"];
+    extraGroups.vboxusers.members = [ "alexander" ];
+    extraGroups.docker.members = [ "alexander" ];
   };
 
   environment.variables = {
