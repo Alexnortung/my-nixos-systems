@@ -37,10 +37,10 @@ in
     "/home/alexander/.ssh/id_rsa"
   ];
 
-  networking.wg-quick.interfaces.wg0 = {
-    privateKeyFile = config.age.secrets.wireguard-key.path;
-    address = [ "10.100.0.6/32" ];
-  };
+  # networking.wg-quick.interfaces.wg0 = {
+  #   privateKeyFile = config.age.secrets.wireguard-key.path;
+  #   address = [ "10.100.0.6/32" ];
+  # };
   networking.wg-quick.interfaces.end-portal = {
     privateKeyFile = config.age.secrets.wireguard-key.path;
     address = [ "10.101.0.6/32" ];

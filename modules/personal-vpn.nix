@@ -1,5 +1,5 @@
 {
-  networking.nat.internalInterfaces = [ "wg0" ];
+  networking.nat.internalInterfaces = [ "end-portal" ];
 
   networking.wireguard.enable = true;
 

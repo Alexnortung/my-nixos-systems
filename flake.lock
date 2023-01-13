@@ -328,11 +328,11 @@
         "utils": "utils_4"
       },
       "locked": {
-        "lastModified": 1664504390,
-        "narHash": "sha256-H7p9P2oxLiPYCYpbFFkECJ95+dwR0g83rYJJhYIbo/E=",
+        "lastModified": 1672621843,
+        "narHash": "sha256-Bl2yNHv+5s3eSf5i6icb6seKAwk3AV+iXqx1KWFtX0s=",
         "owner": "jyooru",
         "repo": "nix-minecraft-servers",
-        "rev": "d3eed15d776fe50786913047f0764efd917ea351",
+        "rev": "516bb060d630dc1aff23a6cb9493399a937887af",
         "type": "github"
       },
       "original": {
