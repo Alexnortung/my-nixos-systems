@@ -143,7 +143,7 @@ in
   networking.wg-quick.interfaces = {
     end-portal = {
       address = [ "10.101.0.2/16" ];
-      privateKeyFile = "/root/wireguard-keys/wg-private";
+      privateKeyFile = "/root/wireguard-keys/end-portal/wg-private";
     };
     wg-mullvad = {
       address = [ "10.64.28.12/32" ];

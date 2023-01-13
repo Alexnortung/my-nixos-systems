@@ -22,10 +22,10 @@
       inputs.nixpkgs.follows = "nixos-stable";
     };
 
-    neovim = {
-      url = "github:neovim/neovim?dir=contrib";
-      inputs.nixpkgs.follows = "nixos-stable";
-    };
+    # neovim = {
+    #   url = "github:neovim/neovim?dir=contrib";
+    #   inputs.nixpkgs.follows = "nixos-stable";
+    # };
 
     nixvim = {
       url = "github:pta2002/nixvim";
@@ -65,7 +65,7 @@
     , utils-plus
     , vim-extra-plugins
     , fenix
-    , neovim
+    # , neovim
     , agenix
     , nixvim
     , nix-on-droid
@@ -78,7 +78,7 @@
       sharedOverlays = [
         fenix.overlay
         vim-extra-plugins.overlays.default
-        neovim.overlay
+        # neovim.overlay
         # (import ./overlays/default-unstable.nix inputs.nixos-unstable)
         #agenix.overlay
       ];
