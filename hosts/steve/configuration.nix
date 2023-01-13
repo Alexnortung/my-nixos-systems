@@ -25,11 +25,14 @@ in
     # ../../modules/vscodium.nix
     ../../modules/location-denmark.nix
     ../../profiles/registries.nix
+    ../../profiles/nix-ld.nix
   ];
 
-  # nixpkgs.overlays = [
-  #   unstable-overlay
-  # ];
+  nixpkgs.config = {
+    chromium = {
+      enableWideVine = true;
+    };
+  };
 
   nix = {
     extraOptions = ''
@@ -173,6 +176,9 @@ in
   };
 
   environment.systemPackages = with pkgs; [
+    qbittorrent
+    wineWowPackages.stable
+    winetricks
     inputs.deploy-rs.defaultPackage.x86_64-linux
     lazygit
     superTuxKart
