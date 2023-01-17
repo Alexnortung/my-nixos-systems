@@ -57,6 +57,12 @@ in
 
   nix = {
     package = pkgs.nix;
+    settings = {
+      trusted-users = [
+        "root"
+        "alexander"
+      ];
+    };
     # extraOptions = ''
     #   experimental-features = nix-command flakes
     # '';
@@ -282,8 +288,10 @@ in
   };
 
   environment.systemPackages = with pkgs; [
-    inputs.agenix.defaultPackage.x86_64-linux
-    inputs.deploy-rs.defaultPackage.x86_64-linux
+    inputs.agenix.defaultPackage.${system}
+    inputs.deploy-rs.defaultPackage.${system}
+    # inputs.devenv.defaultPackage.${system}
+    cachix
     postgresql
     kubernetes-helm
     ungoogled-chromium

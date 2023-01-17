@@ -227,7 +227,7 @@
 
       treesitter = {
         enable = true;
-        nixGrammars = true;
+        # nixGrammars = true;
         indent = true;
         ensureInstalled = "all";
       };

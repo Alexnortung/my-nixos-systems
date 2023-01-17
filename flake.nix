@@ -22,6 +22,11 @@
       inputs.nixpkgs.follows = "nixos-stable";
     };
 
+    devenv = {
+      url = "github:cachix/devenv/v0.5";
+      inputs.nixpkgs.follows = "nixos-stable";
+    };
+
     # neovim = {
     #   url = "github:neovim/neovim?dir=contrib";
     #   inputs.nixpkgs.follows = "nixos-stable";
@@ -111,6 +116,7 @@
           inputs.mail-server.nixosModule
           # import ./modules # My extra modules
           hosts.nixosModule
+          ./cachix.nix
         ];
       };
       hosts = (import ./hosts/default.nix).hosts inputs;
