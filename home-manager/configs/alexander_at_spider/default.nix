@@ -12,6 +12,7 @@ inputs.home-manager.lib.homeManagerConfiguration {
     ../../profiles/nvim.nix
     ../../profiles/eww
     ./home.nix
+    ../../profiles/direnv.nix
   ];
 
   extraSpecialArgs = {

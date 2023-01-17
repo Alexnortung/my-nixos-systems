@@ -290,7 +290,7 @@ in
   environment.systemPackages = with pkgs; [
     inputs.agenix.defaultPackage.${system}
     inputs.deploy-rs.defaultPackage.${system}
-    # inputs.devenv.defaultPackage.${system}
+    inputs.devenv.defaultPackage.${system}
     cachix
     postgresql
     kubernetes-helm
