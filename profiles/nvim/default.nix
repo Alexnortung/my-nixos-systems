@@ -156,13 +156,8 @@
         disableNetrw = true;
         hijackNetrw = true;
 
-        # syncRootWithCwd = true;
-        updateCwd = true;
-        # respectBufCwd = true;
         updateFocusedFile = {
           enable = true;
-          # updateRoot = true;
-          updateCwd = true;
         };
 
         git = {
@@ -222,7 +217,7 @@
         enable = true;
         rightMouseCommand = null;
         middleMouseCommand = closeCommand;
-        indicatorIcon = "▎";
+        indicator.icon = "▎";
       };
 
       treesitter = {
