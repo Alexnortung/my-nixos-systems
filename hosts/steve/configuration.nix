@@ -175,7 +175,11 @@ in
     # "CUDA_PATH" = "${pkgs.cudatoolkit}";
   };
 
+  programs.corectrl.enable = true;
+
   environment.systemPackages = with pkgs; [
+    bind
+    metasploit
     qbittorrent
     wineWowPackages.stable
     winetricks
