@@ -11,6 +11,7 @@ in
       ./hardware-configuration.nix
       ./nginx.nix
       ./dns.nix
+      # ./games.nix
       ../../modules/console.nix
       ../../modules/comfort-packages.nix
       ../../modules/personal-vpn.nix
