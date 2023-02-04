@@ -510,22 +510,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-alexnortung": {
-      "locked": {
-        "lastModified": 1664697476,
-        "narHash": "sha256-JUC2qAg2OXR3K5YkYHUWyKVrAd/g45wN5xtrXZWo4RU=",
-        "owner": "alexnortung",
-        "repo": "nixpkgs",
-        "rev": "89cf9aef007f17d9a83f44345fddade78ab90761",
-        "type": "github"
-      },
-      "original": {
-        "owner": "alexnortung",
-        "ref": "s3fs-module",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nixpkgs-regression": {
       "locked": {
         "lastModified": 1643052045,
@@ -726,7 +710,6 @@
         "nix-on-droid": "nix-on-droid",
         "nixos-hardware": "nixos-hardware",
         "nixos-stable": "nixos-stable",
-        "nixpkgs-alexnortung": "nixpkgs-alexnortung",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nixvim": "nixvim",
         "utils-plus": "utils-plus",

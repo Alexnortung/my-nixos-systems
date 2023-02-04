@@ -11,7 +11,8 @@ in
       ./hardware-configuration.nix
       ./nginx.nix
       ./dns.nix
-      # ./games.nix
+      ./gc.nix
+      ./games.nix
       ../../modules/console.nix
       ../../modules/comfort-packages.nix
       ../../modules/personal-vpn.nix
@@ -238,7 +239,7 @@ in
 
 
   services.minecraft-server = {
-    enable = true;
+    # enable = true;
     eula = true;
     declarative = true;
     package = inputs.minecraft-servers.packages.${system}.paper;

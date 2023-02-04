@@ -293,9 +293,7 @@ in
     inputs.devenv.defaultPackage.${system}
     cachix
     postgresql
-    kubernetes-helm
     ungoogled-chromium
-    minikube
     kubectl
     mkchromecast
     lazygit
@@ -306,7 +304,6 @@ in
     brave
     gimp
     imagemagick
-    slack-term
     slack
     docker-compose
     ranger
@@ -322,7 +319,6 @@ in
     pcmanfm
     pavucontrol
     tdesktop
-    python39Packages.pygments
     xss-lock
     xorg.xev
     xclip
@@ -338,7 +334,6 @@ in
     zip
     unzip
     flameshot
-    vim
     firefox
     zathura
   ];
