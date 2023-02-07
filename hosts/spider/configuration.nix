@@ -138,6 +138,7 @@ in
         1337
       ];
       allowedUDPPorts = [
+        3000 # dev
         32768
         61000 # Chromecast
         51820 # wireguard
@@ -288,6 +289,7 @@ in
   };
 
   environment.systemPackages = with pkgs; [
+    (kodi.withPackages (p: with p; [ joystick ]))
     inputs.agenix.defaultPackage.${system}
     inputs.deploy-rs.defaultPackage.${system}
     inputs.devenv.defaultPackage.${system}

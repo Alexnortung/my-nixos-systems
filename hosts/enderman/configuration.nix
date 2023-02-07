@@ -12,7 +12,7 @@ in
       ./nginx.nix
       ./dns.nix
       ./gc.nix
-      ./games.nix
+      # ./games.nix
       ../../modules/console.nix
       ../../modules/comfort-packages.nix
       ../../modules/personal-vpn.nix

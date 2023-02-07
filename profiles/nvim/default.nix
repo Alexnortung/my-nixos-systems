@@ -106,6 +106,7 @@
           eslint.enable = true;
           gdscript.enable = true;
           tsserver.enable = true;
+          # denols.enable = true;
           vuels.enable = true;
           elixirls.enable = true;
         };
