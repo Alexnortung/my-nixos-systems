@@ -1,17 +1,11 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 let
   autostart = ''
-    #!${pkgs.bash}/bin/bash
-
-    ${pkgs.kodi}/bin/kodi &
+    ${config.programs.steam.package}/bin/steam -bigpicture &
   '';
 
   user = "player";
-
-  kodiWithPkgs = pkgs.kodi.withPackages (p: with p; [
-    joystick
-  ]);
 in
 {
   imports = [
@@ -38,31 +32,32 @@ in
 
     videoDrivers = [ "modesetting" ];
 
-    # displayManager.defaultSession = "none+openbox";
+    displayManager.defaultSession = "none+openbox";
     windowManager.openbox.enable = true;
-    # desktopManager.kodi = {
-    #   enable = true;
-    #   package = kodiWithPkgs;
-    # };
   };
 
-  # systemd.services."display-manager".after = [
-  #   "network-online.target"
-  #   "systemd-resolved.service"
-  # ];
+  # systemd.user.services.steam = {
+  #   description = "Steam systemd service";
+  #   wantedBy = [ "graphical-session.target" "multi-user.target" ];
+  #   partOf = [ "graphical-session.target" ];
+  #
+  #   serviceConfig = {
+  #     ExecStart = "${config.programs.steam.package}/bin/steam -bigpicture";
+  #     # Restart = "on-failure";
+  #   };
+  # };
 
-  systemd.user.services.ums = {
-    description = "UMS as systemd service";
-    wantedBy = [ "graphical-session.target" ];
-    partOf = [ "graphical-session.target" ];
-
-    serviceConfig = {
-      ExecStart = "${pkgs.ums}/bin/ums";
-      Restart = "on-failure";
+  networking = {
+    networkmanager = {
+      enable = true;
     };
   };
+
+  programs.steam.enable = true;
 
   environment.systemPackages = with pkgs; [
     superTuxKart
   ];
+
+  environment.etc."xdg/openbox/autostart".source = pkgs.writeScript "autostart" autostart;
 }
