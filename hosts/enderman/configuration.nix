@@ -30,12 +30,13 @@ in
     ];
   };
 
-
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   #boot.extraModulePackages = [ config.boot.kernelPackages.wireguard ];
 
+  # Latest kernel to support NIC
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Set your time zone.
   time.timeZone = "Europe/Copenhagen";
@@ -48,8 +49,13 @@ in
     # replicates the default behaviour.
     useDHCP = false;
     interfaces.enp0s31f6.useDHCP = true;
+    interfaces.wlp2s0.useDHCP = true;
 
     nat.internalInterfaces = [ "wg0" ];
+
+    networkmanager = {
+      enable = true;
+    };
   };
 
   environment.systemPackages = with pkgs; [
