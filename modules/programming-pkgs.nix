@@ -19,7 +19,7 @@
     # cargo
     # rustfmt
     # Python
-    pythonFull
+    # pythonFull
     python3
     openssl
     pkg-config

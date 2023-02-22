@@ -6,6 +6,7 @@
 
 let
   system = "x86_64-linux";
+  unstable = inputs.nixpkgs-unstable.legacyPackages.${system};
   # unstable-overlay = import ../../overlays/unstable.nix inputs system;
 in
 {
@@ -54,7 +55,10 @@ in
   };
 
   hardware.opengl.extraPackages = with pkgs; [
+    # Amd stuff
     rocm-opencl-icd
+
+    glfw
   ];
 
   # hardware.nvidia = {
@@ -92,6 +96,12 @@ in
     # windowManager.dwm.enable = true;
     desktopManager.gnome.enable = true;
     displayManager.gdm.enable = true;
+    # displayManager.sddm.enable = true;
+    # desktopManager.plasma5.enable = true;
+  };
+
+  programs.dconf = {
+    enable = true;
   };
 
   services.bg-setter = {
@@ -164,6 +174,8 @@ in
   # List packages installed in system profile. To search, run:
   programs.steam.enable = true;
 
+  programs.gamemode.enable = true;
+
   programs.kdeconnect = {
     enable = true;
   };
@@ -178,6 +190,8 @@ in
   programs.corectrl.enable = true;
 
   environment.systemPackages = with pkgs; [
+    prismlauncher
+    glfw
     bind
     metasploit
     qbittorrent
@@ -195,9 +209,9 @@ in
     # session-desktop
     # krita
     # cudatoolkit
-    (blender.override {
-      # cudaSupport = true;
-    })
+    # (blender.override {
+    #   # cudaSupport = true;
+    # })
     python39Packages.pygments
     zathura
     xorg.xhost
@@ -245,8 +259,6 @@ in
     vulkan-headers
     xorg.xev
     gcc
-    pythonFull
-    python3
     playerctl
     oh-my-zsh
     libpulseaudio

@@ -465,11 +465,11 @@
     },
     "nixos-hardware": {
       "locked": {
-        "lastModified": 1653463224,
-        "narHash": "sha256-bUxKhqZhki2vPzFTl8HOo1m7pagF7WzY1MZiso8U5ws=",
+        "lastModified": 1676775543,
+        "narHash": "sha256-VI0e60l94RY9Sc90OwDZpOf/nyLy41n2ULK6I6YkoP8=",
         "owner": "NixOS",
         "repo": "nixos-hardware",
-        "rev": "39a7bfc496d2ddfce73fe9542af1f2029ba4fe39",
+        "rev": "525177a78023e1363bee482f520d4f2471ada03a",
         "type": "github"
       },
       "original": {
@@ -490,6 +490,21 @@
       "original": {
         "owner": "NixOS",
         "ref": "nixos-22.11",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixos-unstable": {
+      "locked": {
+        "lastModified": 1676818333,
+        "narHash": "sha256-NDik5wYsLMzMPJedCwY74TzIKyQYgoDjLWQLoa8r1oY=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "2fe7e66ca091f5d3e7cef55ac4d8354ac13c5062",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -710,6 +725,7 @@
         "nix-on-droid": "nix-on-droid",
         "nixos-hardware": "nixos-hardware",
         "nixos-stable": "nixos-stable",
+        "nixos-unstable": "nixos-unstable",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nixvim": "nixvim",
         "utils-plus": "utils-plus",
