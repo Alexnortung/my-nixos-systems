@@ -4,6 +4,7 @@
   inputs = {
     utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus/";
     nixos-stable.url = "github:NixOS/nixpkgs/nixos-22.11";
+    nixos-unstable.url = "github:NixOS/nixpkgs/";
     # nixpkgs-alexnortung.url = "github:alexnortung/nixpkgs/s3fs-module";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
