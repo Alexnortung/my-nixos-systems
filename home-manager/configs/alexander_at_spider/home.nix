@@ -10,6 +10,7 @@
       nodejs
       # nodePackages.npm
       nodePackages.pnpm
+      nodePackages.yarn
       nodePackages.serverless
       mysql
       phpPackages.composer
