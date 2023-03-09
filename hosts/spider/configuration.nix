@@ -297,7 +297,7 @@ in
     postgresql
     ungoogled-chromium
     kubectl
-    mkchromecast
+    # mkchromecast
     lazygit
     nodejs
     nodePackages.npm
@@ -309,7 +309,6 @@ in
     slack
     docker-compose
     ranger
-    #ungoogled-chromium
     dunst
     xmrig
     bitwarden
@@ -320,7 +319,6 @@ in
     gparted
     pcmanfm
     pavucontrol
-    tdesktop
     xss-lock
     xorg.xev
     xclip

@@ -1,6 +1,9 @@
-{
-  imports = [
-    ../../profiles/nvim/default.nix
+{inputs, system, ...}: {
+  # imports = [
+  #   ../../profiles/nvim/default.nix
+  # ];
+  home.packages = [
+    inputs.nollevim.packages.${system}.default
   ];
   home.sessionVariables = {
     EDITOR = "nvim";

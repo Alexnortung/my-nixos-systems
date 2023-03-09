@@ -13,10 +13,21 @@
       inputs.nixpkgs.follows = "nixos-stable";
     };
 
+    nollevim = {
+      url = "github:Alexnortung/nollevim";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
     vim-extra-plugins.url = "github:m15a/nixpkgs-vim-extra-plugins";
 
-    agenix.url = "github:ryantm/agenix"; # for encrypted secrets. such as wireguard keys
-    deploy-rs.url = "github:serokell/deploy-rs";
+    agenix = {
+      url = "github:ryantm/agenix"; # for encrypted secrets. such as wireguard keys
+      inputs.nixpkgs.follows = "nixos-stable";
+    };
+    deploy-rs = {
+      url = "github:serokell/deploy-rs";
+      inputs.nixpkgs.follows = "nixos-stable";
+    };
 
     fenix = {
       url = "github:nix-community/fenix";
@@ -25,13 +36,8 @@
 
     devenv = {
       url = "github:cachix/devenv/v0.5";
-      # inputs.nixpkgs.follows = "nixos-stable";
+      inputs.nixpkgs.follows = "nixos-stable";
     };
-
-    # neovim = {
-    #   url = "github:neovim/neovim?dir=contrib";
-    #   inputs.nixpkgs.follows = "nixos-stable";
-    # };
 
     nixvim = {
       url = "github:pta2002/nixvim";

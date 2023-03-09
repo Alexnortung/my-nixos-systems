@@ -11,10 +11,10 @@
       # nodePackages.npm
       nodePackages.pnpm
       nodePackages.yarn
-      nodePackages.serverless
-      mysql
+      # nodePackages.serverless
+      # mysql
       phpPackages.composer
-      fluxcd
+      # fluxcd
       neovide
     ];
 
