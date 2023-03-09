@@ -12,6 +12,7 @@
       lmms
       krita
       neovide
+      edgedb
     ];
 
     sessionVariables = {

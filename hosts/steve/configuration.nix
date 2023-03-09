@@ -50,7 +50,10 @@ in
     # Use the systemd-boot EFI boot loader.
     loader = {
       systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
+      efi = {
+        canTouchEfiVariables = true;
+        efiSysMountPoint = "/boot/efi";
+      };
     };
   };
 
@@ -89,6 +92,21 @@ in
 
   # Set your time zone.
   time.timeZone = "Europe/Copenhagen";
+
+  i18n.defaultLocale = "en_DK.UTF-8";
+
+  i18n.extraLocaleSettings = {
+    LC_ADDRESS = "da_DK.UTF-8";
+    LC_IDENTIFICATION = "da_DK.UTF-8";
+    LC_MEASUREMENT = "da_DK.UTF-8";
+    LC_MONETARY = "da_DK.UTF-8";
+    LC_NAME = "da_DK.UTF-8";
+    LC_NUMERIC = "da_DK.UTF-8";
+    LC_PAPER = "da_DK.UTF-8";
+    LC_TELEPHONE = "da_DK.UTF-8";
+    LC_TIME = "da_DK.UTF-8";
+  };
+
 
   # Enable the X11 windowing system.
   services.xserver = {
@@ -275,5 +293,5 @@ in
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "20.09"; # Did you read the comment?
+  system.stateVersion = "22.11"; # Did you read the comment?
 }
