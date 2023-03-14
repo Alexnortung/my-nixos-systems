@@ -11,6 +11,7 @@ inputs.home-manager.lib.homeManagerConfiguration {
     inputs.nixvim.homeManagerModules.nixvim
     ../../profiles/nvim.nix
     ./home.nix
+    ../../profiles/direnv.nix
   ];
 
   extraSpecialArgs = {
