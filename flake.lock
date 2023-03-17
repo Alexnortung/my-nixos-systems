@@ -820,11 +820,11 @@
         "vim-extra-plugins": "vim-extra-plugins"
       },
       "locked": {
-        "lastModified": 1677893730,
-        "narHash": "sha256-5f19ER2H0Hww/OOq5tyDmTlMOo5kda9xcQ5kIHGOCA0=",
+        "lastModified": 1678716203,
+        "narHash": "sha256-5m9vEZ3MyedMCr3yQUGcrJyE7tMHFwIRX6a83c2/FqU=",
         "owner": "Alexnortung",
         "repo": "nollevim",
-        "rev": "5073cf3e011504c08327ec97b9d1b3fc059330fa",
+        "rev": "fea77ca7e5e767c4ffc77d741f21e0cca7dacf2f",
         "type": "github"
       },
       "original": {
