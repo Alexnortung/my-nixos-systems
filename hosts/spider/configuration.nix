@@ -30,6 +30,7 @@ in
     ../../modules/location-denmark.nix
     ../../profiles/allow-multicast.nix
     ../../profiles/registries.nix
+    ../../modules/ssh-config.nix
   ];
 
   age.identityPaths = [
