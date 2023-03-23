@@ -208,6 +208,7 @@ in
   programs.corectrl.enable = true;
 
   environment.systemPackages = with pkgs; [
+    inputs.devenv.defaultPackage.${system}
     prismlauncher
     glfw
     bind
