@@ -16,6 +16,8 @@
       phpPackages.composer
       # fluxcd
       neovide
+      rclone
+      insomnia
     ];
 
     shellAliases = {
