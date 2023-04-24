@@ -244,7 +244,7 @@ in
     # dotnet-sdk_5
     steam-run
     godot
-    texlive.combined.scheme-full
+    # texlive.combined.scheme-full
     wget
     firefox
     ungoogled-chromium

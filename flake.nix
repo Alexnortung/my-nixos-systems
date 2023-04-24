@@ -7,7 +7,9 @@
     nixos-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     # nixpkgs-alexnortung.url = "github:alexnortung/nixpkgs/s3fs-module";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nixos-hardware.url = "github:NixOS/nixos-hardware";
+    nixos-hardware = {
+      url = "github:NixOS/nixos-hardware";
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixos-stable";
@@ -63,7 +65,7 @@
     };
 
     hosts = {
-      url =  "github:StevenBlack/hosts";
+      url = "github:StevenBlack/hosts";
       inputs.nixpkgs.follows = "nixos-stable";
     };
 
@@ -77,7 +79,7 @@
     , utils-plus
     , vim-extra-plugins
     , fenix
-    # , neovim
+      # , neovim
     , agenix
     , nixvim
     , nix-on-droid
