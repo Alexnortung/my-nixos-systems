@@ -2,14 +2,14 @@
 
 {
   imports = [
-    ./ruststable.nix
+    # ./ruststable.nix
   ];
   environment.systemPackages = with pkgs; [
     # Required tools
     git
     curl
     # Futhark
-    futhark
+    # futhark
     # C
     gcc
     # Rust
