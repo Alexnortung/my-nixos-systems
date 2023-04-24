@@ -303,9 +303,8 @@ in
     nodejs
     nodePackages.npm
     beekeeper-studio
-    postman
-    brave
-    gimp
+    # brave
+    # gimp
     imagemagick
     slack
     docker-compose
@@ -317,7 +316,7 @@ in
     unstable.mullvad-vpn
     arandr
     bashmount
-    gparted
+    # gparted
     pcmanfm
     pavucontrol
     xss-lock
@@ -326,12 +325,12 @@ in
     brightnessctl # Brightness from terminal
     dmenu
     st
-    spotify
+    spotify-qt
     libreoffice
     tmate
     # session-desktop-appimage
     unstable.session-desktop
-    discord
+    # discord
     zip
     unzip
     flameshot

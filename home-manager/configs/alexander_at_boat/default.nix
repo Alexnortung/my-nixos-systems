@@ -8,7 +8,7 @@ inputs.home-manager.lib.homeManagerConfiguration {
   inherit pkgs;
 
   modules = [
-    inputs.nixvim.homeManagerModules.nixvim
+    # inputs.nixvim.homeManagerModules.nixvim
     ../../profiles/nvim.nix
     ./home.nix
   ];
