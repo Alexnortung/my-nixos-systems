@@ -11,7 +11,7 @@
     # Futhark
     # futhark
     # C
-    # gcc
+    gcc
     # Rust
     # rustc # use the one in nvim.nix instead
     #rustup
