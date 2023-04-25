@@ -47,6 +47,9 @@ in
     extraModulePackages = with config.boot.kernelPackages; [
       # nvidia_x11
     ];
+    kernelModules = [
+      "msr"
+    ];
     # Use the systemd-boot EFI boot loader.
     loader = {
       systemd-boot.enable = true;
@@ -107,6 +110,9 @@ in
     LC_TIME = "da_DK.UTF-8";
   };
 
+  powerManagement = {
+    cpufreq.max = 3800000;
+  };
 
   # Enable the X11 windowing system.
   services.xserver = {
