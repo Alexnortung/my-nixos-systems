@@ -214,6 +214,7 @@ in
   programs.corectrl.enable = true;
 
   environment.systemPackages = with pkgs; [
+    inputs.agenix.packages.${system}.agenix
     inputs.devenv.defaultPackage.${system}
     prismlauncher
     glfw

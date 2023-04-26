@@ -3,7 +3,7 @@
 {
   services.nextcloud = {
     enable = true;
-    https = true;
+    # https = true;
     hostName = "nextcloud.northwing.games";
     config = {
       adminpassFile = config.age.secrets.nextcloud-admin-pass.path;

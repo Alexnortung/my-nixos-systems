@@ -66,7 +66,7 @@ in {
   };
 
   environment.systemPackages = with pkgs; [
-    inputs.agenix.defaultPackage.x86_64-linux
+    inputs.agenix.packages.${system}.agenix
     nmap
     git
     zip

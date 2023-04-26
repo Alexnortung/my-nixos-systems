@@ -6,6 +6,7 @@ args@{ inputs, pkgs, config, lib, ... }:
 
 let
   slock-command = "/run/wrappers/bin/slock";
+  system = "x86_64-linux";
   # nur-alexnortung = inputs.nur-alexnortung-boat;
 in
 {
@@ -256,7 +257,7 @@ in
     trash-cli
     ncdu
     inputs.deploy-rs.defaultPackage.x86_64-linux
-    inputs.agenix.defaultPackage.x86_64-linux
+    inputs.agenix.packages.${system}.agenix
     emojipick
     vlc
     # dotnet-sdk

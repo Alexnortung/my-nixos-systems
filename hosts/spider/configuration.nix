@@ -291,7 +291,7 @@ in
 
   environment.systemPackages = with pkgs; [
     (kodi.withPackages (p: with p; [ joystick ]))
-    inputs.agenix.defaultPackage.${system}
+    inputs.agenix.packages.${system}.agenix
     inputs.deploy-rs.defaultPackage.${system}
     inputs.devenv.defaultPackage.${system}
     cachix
