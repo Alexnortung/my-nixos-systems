@@ -1,9 +1,10 @@
 {
-  host = input@{ ... }: {
+  host = inputs@{ ... }: {
     channelName = "nixos-stable";
     # Relative to flake.nix
     modules = [
       ./configuration.nix
+      # inputs.nixos-dev
     ];
   };
   # deploy-rs node

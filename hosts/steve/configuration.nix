@@ -41,6 +41,21 @@ in
     '';
   };
 
+  services.s3fs-fuse = {
+    enable = true;
+    mounts = {
+      backup-1 = {
+        mountPoint = "/mnt/backup";
+        bucket = "backup-1";
+        options = [
+          "passwd_file=/home/alexander/.config/s3fs/backup"
+          "use_path_request_style"
+          "allow_other"
+          "url=https://ams1.vultrobjects.com"
+        ];
+      };
+    };
+  };
 
   boot = {
     # kernelParams = [ "nvidia-drm.modeset=1" ];

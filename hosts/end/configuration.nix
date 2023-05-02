@@ -12,6 +12,7 @@ in
 {
   imports =
     [ # Include the results of the hardware scan.
+      ./backup.nix
       ./hardware-configuration.nix
       ./secrets
       ./db.nix

@@ -802,6 +802,7 @@
         "nixos-unstable": "nixos-unstable",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nollevim": "nollevim",
+        "s3fs-fuse": "s3fs-fuse",
         "utils-plus": "utils-plus",
         "vim-extra-plugins": "vim-extra-plugins_2"
       }
@@ -820,6 +821,22 @@
         "owner": "rust-lang",
         "ref": "nightly",
         "repo": "rust-analyzer",
+        "type": "github"
+      }
+    },
+    "s3fs-fuse": {
+      "locked": {
+        "lastModified": 1683058848,
+        "narHash": "sha256-/prhiFUxZAIVl79v4/E+uQUPcRAk9WqdsFOhZftlARQ=",
+        "owner": "alexnortung",
+        "repo": "nixpkgs",
+        "rev": "81b6209b1d89a5b244f95d6c3094333b0fd18e04",
+        "type": "github"
+      },
+      "original": {
+        "owner": "alexnortung",
+        "ref": "s3fs-module",
+        "repo": "nixpkgs",
         "type": "github"
       }
     },
