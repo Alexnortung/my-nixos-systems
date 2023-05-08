@@ -2,6 +2,7 @@
 
 let
   ssh-keys = import ../../config/ssh;
+  system = "x86_64-linux";
   authorizedKeyFiles = with ssh-keys; [
     boat
     steve
@@ -11,12 +12,14 @@ in
 {
   imports =
     [ # Include the results of the hardware scan.
+      ./backup.nix
       ./hardware-configuration.nix
       ./secrets
       ./db.nix
       # ./nextcloud.nix
       ./wireguard.nix
       ./nginx.nix
+      # ./reverse-proxy.nix
       ./mail-server.nix
       ./vaultwarden.nix
       ../../modules/console.nix
@@ -44,14 +47,13 @@ in
   environment.systemPackages = with pkgs; [
     docker-compose
     neovim
-    inputs.agenix.defaultPackage.x86_64-linux
+    inputs.agenix.packages.${system}.agenix
     nmap
     git
     zip unzip
     wireguard-tools
     file
     curl
-    #vim
     croc
     lm_sensors
     htop

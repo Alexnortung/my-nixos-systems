@@ -41,11 +41,29 @@ in
     '';
   };
 
+  services.s3fs-fuse = {
+    enable = true;
+    mounts = {
+      backup-1 = {
+        mountPoint = "/mnt/backup";
+        bucket = "backup-1";
+        options = [
+          "passwd_file=/home/alexander/.config/s3fs/backup"
+          "use_path_request_style"
+          "allow_other"
+          "url=https://ams1.vultrobjects.com"
+        ];
+      };
+    };
+  };
 
   boot = {
     # kernelParams = [ "nvidia-drm.modeset=1" ];
     extraModulePackages = with config.boot.kernelPackages; [
       # nvidia_x11
+    ];
+    kernelModules = [
+      "msr"
     ];
     # Use the systemd-boot EFI boot loader.
     loader = {
@@ -107,6 +125,9 @@ in
     LC_TIME = "da_DK.UTF-8";
   };
 
+  powerManagement = {
+    cpufreq.max = 3800000;
+  };
 
   # Enable the X11 windowing system.
   services.xserver = {
@@ -208,6 +229,7 @@ in
   programs.corectrl.enable = true;
 
   environment.systemPackages = with pkgs; [
+    inputs.agenix.packages.${system}.agenix
     inputs.devenv.defaultPackage.${system}
     prismlauncher
     glfw
@@ -244,7 +266,7 @@ in
     # dotnet-sdk_5
     steam-run
     godot
-    texlive.combined.scheme-full
+    # texlive.combined.scheme-full
     wget
     firefox
     ungoogled-chromium

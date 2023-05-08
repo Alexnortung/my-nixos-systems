@@ -3,11 +3,19 @@
 
   inputs = {
     utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus/";
+    # nixos-dev = {
+    #   url = "path:/home/alexander/source/nixpkgs";
+    # };
     nixos-stable.url = "github:NixOS/nixpkgs/nixos-22.11";
     nixos-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     # nixpkgs-alexnortung.url = "github:alexnortung/nixpkgs/s3fs-module";
+    s3fs-fuse = {
+      url = "github:alexnortung/nixpkgs/s3fs-module";
+    };
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nixos-hardware.url = "github:NixOS/nixos-hardware";
+    nixos-hardware = {
+      url = "github:NixOS/nixos-hardware";
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixos-stable";
@@ -63,7 +71,7 @@
     };
 
     hosts = {
-      url =  "github:StevenBlack/hosts";
+      url = "github:StevenBlack/hosts";
       inputs.nixpkgs.follows = "nixos-stable";
     };
 
@@ -77,7 +85,7 @@
     , utils-plus
     , vim-extra-plugins
     , fenix
-    # , neovim
+      # , neovim
     , agenix
     # , nixvim
     , nix-on-droid
@@ -123,6 +131,8 @@
           inputs.mail-server.nixosModule
           # import ./modules # My extra modules
           hosts.nixosModule
+          "${inputs.s3fs-fuse}/nixos/modules/services/network-filesystems/s3fs-fuse.nix"
+
           ./cachix.nix
         ];
       };

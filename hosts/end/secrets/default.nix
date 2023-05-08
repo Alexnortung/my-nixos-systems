@@ -1,4 +1,8 @@
 {
+  imports = [
+    ../../../config/secrets
+  ];
+
   age.secrets = {
     wireguard-key.file = ./wireguard-key.age;
     mail-pass-an.file = ./mail-passwords/an-northwing.games.age;
