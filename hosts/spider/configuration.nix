@@ -325,7 +325,7 @@ in
     brightnessctl # Brightness from terminal
     dmenu
     st
-    spotify-qt
+    spotify
     libreoffice
     tmate
     # session-desktop-appimage
