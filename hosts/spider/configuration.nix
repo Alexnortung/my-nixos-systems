@@ -290,7 +290,7 @@ in
   };
 
   environment.systemPackages = with pkgs; [
-    (kodi.withPackages (p: with p; [ joystick ]))
+    kondo
     inputs.agenix.packages.${system}.agenix
     inputs.deploy-rs.defaultPackage.${system}
     inputs.devenv.defaultPackage.${system}
@@ -308,7 +308,6 @@ in
     imagemagick
     slack
     docker-compose
-    ranger
     dunst
     xmrig
     bitwarden
