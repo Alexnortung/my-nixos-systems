@@ -23,7 +23,6 @@
 
     nollevim = {
       url = "github:Alexnortung/nollevim";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
     vim-extra-plugins.url = "github:m15a/nixpkgs-vim-extra-plugins";
