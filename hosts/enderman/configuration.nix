@@ -11,7 +11,9 @@
 in {
   imports = [
     # Include the results of the hardware scan.
+    ../../config/backup-bucket.nix
     ./hardware-configuration.nix
+    ./secrets
     ./nginx.nix
     ./dns.nix
     ./gc.nix
@@ -255,7 +257,7 @@ in {
     enable = true;
     eula = true;
     declarative = true;
-    package = inputs.minecraft-servers.packages.${system}.paper;
+    package = inputs.minecraft-servers.legacyPackages.${system}.paperServers.paper;
     #package = custom-papermc;
     dataDir = "/data/data1/var/lib/minecraft";
     openFirewall = true;

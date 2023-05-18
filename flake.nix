@@ -28,8 +28,9 @@
     vim-extra-plugins.url = "github:m15a/nixpkgs-vim-extra-plugins";
 
     agenix = {
-      url = "github:ryantm/agenix"; # for encrypted secrets. such as wireguard keys
-      inputs.nixpkgs.follows = "nixos-stable";
+      url = "github:ryantm/agenix/0.13.0"; # for encrypted secrets. such as wireguard keys
+      # inputs.nixpkgs.follows = "nixos-stable";
+      # inputs.home-manager.follows = "home-manager";
     };
     deploy-rs = {
       url = "github:serokell/deploy-rs";
@@ -54,7 +55,7 @@
     # };
 
     minecraft-servers = {
-      url = "github:jyooru/nix-minecraft-servers";
+      url = "github:Infinidoge/nix-minecraft";
       inputs.nixpkgs.follows = "nixos-stable";
     };
 
