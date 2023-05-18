@@ -3,6 +3,7 @@ rec {
   steve = ./keys/alexander_steve.pub;
   spider = ./keys/alexander_spider.pub;
   end = ./keys/end.rsa.pub;
+  enderman = ./keys/enderman.rsa.pub;
   
   spider_system = ./keys/spider.rsa.pub;
 
@@ -22,6 +23,7 @@ rec {
     steve
     spider
     end
+    enderman
   ];
 
   getKey = file: builtins.readFile file;
