@@ -88,6 +88,7 @@
       # , neovim
     , agenix
     # , nixvim
+    , minecraft-servers
     , nix-on-droid
     , hosts
     , ...
@@ -98,6 +99,7 @@
       sharedOverlays = [
         fenix.overlay
         vim-extra-plugins.overlays.default
+        minecraft-servers.overlay
         # neovim.overlay
         # (import ./overlays/default-unstable.nix inputs.nixos-unstable)
         #agenix.overlay

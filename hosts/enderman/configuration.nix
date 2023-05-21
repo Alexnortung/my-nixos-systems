@@ -257,9 +257,9 @@ in {
     enable = true;
     eula = true;
     declarative = true;
-    package = inputs.minecraft-servers.legacyPackages.${system}.paperServers.paper;
+    package = pkgs.fabricServers.fabric-1_20-pre2;
     #package = custom-papermc;
-    dataDir = "/data/data1/var/lib/minecraft";
+    dataDir = "/data/data1/var/lib/minecraft2";
     openFirewall = true;
     serverProperties = {
       server-ip = "0.0.0.0";
@@ -277,7 +277,8 @@ in {
       generator-settings = "";
       use-native-transport = true;
       enable-status = true;
-      level-seed = "-4846211776141860780";
+      # level-seed = "-4846211776141860780";
+      level-seed = "-433856114";
       enable-command-block = false;
       gamemode = "survival";
       force-gamemode = false;
