@@ -74,4 +74,7 @@
       Criller0933 = "93761b36-0b7a-4f87-b605-98273f69063a";
     };
   };
+
+  firewall.allowedTCPPorts = [ 25565 ];
+  firewall.allowedUDPPorts = [ 25565 ];
 }

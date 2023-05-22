@@ -146,8 +146,6 @@ in {
     21
     22
     53 # dnsmasq
-    #25565
-    #25575 # mc rcon
     50001
     51820 # wireguard
     5005 # testport
@@ -155,7 +153,6 @@ in {
   ];
   networking.firewall.allowedUDPPorts = [
     53 # dnsmasq
-    #25565
     51820 # wireguard
   ];
 
