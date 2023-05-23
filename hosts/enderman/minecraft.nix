@@ -3,7 +3,7 @@
     enable = true;
     eula = true;
     declarative = true;
-    package = pkgs.fabricServers.fabric-1_20-pre2;
+    package = pkgs.fabricServers.fabric-1_20-pre4;
     #package = custom-papermc;
     dataDir = "/data/data1/var/lib/minecraft2";
     openFirewall = true;
@@ -35,7 +35,7 @@
       max-players = 12;
       online-mode = true;
       allow-flight = false;
-      view-distance = 30;
+      view-distance = 15;
       max-build-height = 256;
       allow-nether = true;
       server-port = 25565;
@@ -75,6 +75,6 @@
     };
   };
 
-  firewall.allowedTCPPorts = [ 25565 ];
-  firewall.allowedUDPPorts = [ 25565 ];
+  networking.firewall.allowedTCPPorts = [ 25565 ];
+  networking.firewall.allowedUDPPorts = [ 25565 ];
 }

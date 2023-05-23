@@ -13,6 +13,7 @@
       krita
       neovide
       edgedb
+      insomnia
     ];
 
     sessionVariables = {
