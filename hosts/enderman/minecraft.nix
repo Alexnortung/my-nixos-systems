@@ -3,7 +3,7 @@
     enable = true;
     eula = true;
     declarative = true;
-    package = pkgs.fabricServers.fabric-1_20-pre4;
+    package = pkgs.fabricServers.fabric-1_20-pre5;
     #package = custom-papermc;
     dataDir = "/data/data1/var/lib/minecraft2";
     openFirewall = true;
