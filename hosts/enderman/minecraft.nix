@@ -7,6 +7,7 @@
     #package = custom-papermc;
     dataDir = "/data/data1/var/lib/minecraft2";
     openFirewall = true;
+    jvmOpts = "-Xms2G -Xmx8G";
     serverProperties = {
       server-ip = "0.0.0.0";
       #server-ip = "10.100.0.2";
@@ -35,7 +36,7 @@
       max-players = 12;
       online-mode = true;
       allow-flight = false;
-      view-distance = 15;
+      view-distance = 18;
       max-build-height = 256;
       allow-nether = true;
       server-port = 25565;
@@ -73,6 +74,8 @@
       LanterneFar = "ae1b9823-55db-4101-9a94-5069753d11db";
       Criller0933 = "93761b36-0b7a-4f87-b605-98273f69063a";
       retbull = "23d75ce2-b89d-4512-bde2-9a0a38521fc0";
+      Nexons2k = "52f367b7-e073-41f1-a2da-55c55678eee7";
+      LolerSwager = "3801f32d-bfbc-4cd6-ac4a-7909f2318b08";
     };
   };
 
