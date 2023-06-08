@@ -1,14 +1,15 @@
-{
-  inputs,
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ inputs
+, config
+, lib
+, pkgs
+, ...
+}:
+let
   system = "x86_64-linux";
   ssh-keys = import ../../config/ssh;
   authorizedKeyFiles = with ssh-keys; all;
-in {
+in
+{
   imports = [
     # Include the results of the hardware scan.
     ../../config/backup-bucket.nix
@@ -61,7 +62,7 @@ in {
     interfaces.enp0s31f6.useDHCP = true;
     interfaces.wlp2s0.useDHCP = true;
 
-    nat.internalInterfaces = ["wg0"];
+    nat.internalInterfaces = [ "wg0" ];
 
     networkmanager = {
       enable = true;
@@ -92,8 +93,6 @@ in {
     enable = true;
     startWhenNeeded = true;
     openFirewall = true;
-    permitRootLogin = "without-password";
-    passwordAuthentication = false;
     banner = ''
        ,=====================.
        |  ENDERMAN           |
@@ -122,11 +121,16 @@ in {
        |=====================|
       .'                     `.
     '';
+
+    settings = {
+      permitRootLogin = "without-password";
+      passwordAuthentication = false;
+    };
   };
 
   users = {
     groups = {
-      servarr = {};
+      servarr = { };
     };
     users = {
       root.openssh.authorizedKeys.keyFiles = authorizedKeyFiles;
@@ -158,18 +162,18 @@ in {
 
   networking.wg-quick.interfaces = {
     end-portal = {
-      address = ["10.101.0.2/16"];
+      address = [ "10.101.0.2/16" ];
       privateKeyFile = "/root/wireguard-keys/end-portal/wg-private";
     };
     wg-mullvad = {
-      address = ["10.64.28.12/32"];
+      address = [ "10.64.28.12/32" ];
       # dns = [ "193.138.218.74" ]; # mullvad public dns
-      dns = ["10.64.0.1"];
+      dns = [ "10.64.0.1" ];
       privateKeyFile = "/root/wireguard-keys/mullvad/wg-mullvad";
       peers = [
         {
           publicKey = "7ncbaCb+9za3jnXlR95I6dJBkwL1ABB5i4ndFUesYxE=";
-          allowedIPs = ["10.8.0.1/32" "10.64.0.1/32" "10.124.0.0/22"]; # Only send communication through mullvad if it is in the range of the given ips, allows for split tunneling
+          allowedIPs = [ "10.8.0.1/32" "10.64.0.1/32" "10.124.0.0/22" ]; # Only send communication through mullvad if it is in the range of the given ips, allows for split tunneling
           endpoint = "176.125.235.74:3189";
         }
       ];
