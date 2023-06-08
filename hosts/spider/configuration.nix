@@ -92,7 +92,6 @@ in
         efiSysMountPoint = "/boot";
       };
       grub = {
-        version = 2;
         configurationLimit = 25;
         devices = [ "nodev" ];
         enable = true;
