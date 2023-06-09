@@ -81,7 +81,7 @@ in
 
   fonts.fonts = with pkgs; [
     hasklig
-    terminus-nerdfont
+    nerdfonts
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -190,23 +190,23 @@ in
       separator = " | "
 
       [audio]
-      icons = [ "奄", "奔", "墳" ]
-      mute = "ﱝ"
+      icons = [ "󰕿", "󰖀", "󰕾" ]
+      mute = "󰖁"
       template = "{ICO} {VOL}%"
 
       [battery]
       charging = ""
       discharging = ""
       no_battery = " No battery"
-      icons = ["", "", "", "", "", "", "", "", "", "", ""]
+      icons = ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
 
       [cpu_load]
       template = " {CL1}"
       update_interval = 15
 
       [network]
-      no_value = "睊 Not connected"
-      template = "直 {IPv4}"
+      no_value = " Not connected"
+      template = " {IPv4}"
     '';
   };
 
@@ -253,7 +253,7 @@ in
     enable = true;
     hooks = {
       postswitch = {
-        change-bavkground = "systemctl --user restart bg-setter";
+        change-background = "systemctl --user restart bg-setter";
       };
     };
   };
