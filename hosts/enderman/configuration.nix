@@ -123,8 +123,8 @@ in
     '';
 
     settings = {
-      permitRootLogin = "without-password";
-      passwordAuthentication = false;
+      PermitRootLogin = "without-password";
+      PasswordAuthentication = false;
     };
   };
 

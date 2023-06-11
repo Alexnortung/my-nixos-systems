@@ -76,6 +76,10 @@
       retbull = "23d75ce2-b89d-4512-bde2-9a0a38521fc0";
       Nexons2k = "52f367b7-e073-41f1-a2da-55c55678eee7";
       LolerSwager = "3801f32d-bfbc-4cd6-ac4a-7909f2318b08";
+      _Jonathan = "397e0cbe-df20-411b-8296-b3b6560e4673";
+      emil247k = "f28bdbed-91db-46a6-9a32-9f4cbf639926";
+      Hovedpude =   "04077843-0e2b-4796-ab40-52cf7f6a8c13";
+      Mr16Dollars = "0eecb37c-d724-4854-8756-ec90fbca1e8e";
     };
   };
 

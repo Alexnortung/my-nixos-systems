@@ -1,5 +1,9 @@
-{ inputs, config, lib, pkgs, ... }:
-
+{ inputs
+, config
+, lib
+, pkgs
+, ...
+}:
 let
   ssh-keys = import ../../config/ssh;
   system = "x86_64-linux";
@@ -10,22 +14,22 @@ let
   ];
 in
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ../../config/backup-bucket.nix
-      ./hardware-configuration.nix
-      ./secrets
-      ./db.nix
-      # ./nextcloud.nix
-      ./wireguard.nix
-      ./nginx.nix
-      # ./reverse-proxy.nix
-      ./mail-server.nix
-      ./vaultwarden.nix
-      ../../modules/console.nix
-      ../../modules/comfort-packages.nix
-      ../../profiles/registries.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ../../config/backup-bucket.nix
+    ./hardware-configuration.nix
+    ./secrets
+    ./db.nix
+    # ./nextcloud.nix
+    ./wireguard.nix
+    ./nginx.nix
+    # ./reverse-proxy.nix
+    ./mail-server.nix
+    ./vaultwarden.nix
+    ../../modules/console.nix
+    ../../modules/comfort-packages.nix
+    ../../profiles/registries.nix
+  ];
 
   networking.hostName = "end"; # Define your hostname.
 
@@ -50,7 +54,8 @@ in
     inputs.agenix.packages.${system}.agenix
     nmap
     git
-    zip unzip
+    zip
+    unzip
     wireguard-tools
     file
     curl
@@ -65,18 +70,20 @@ in
     enable = true;
     startWhenNeeded = true;
     openFirewall = true;
-    permitRootLogin = "without-password";
-    passwordAuthentication = false;
+    settings = {
+      PermitRootLogin = "without-password";
+      PasswordAuthentication = false;
+    };
     banner = ''
-          .-~~~-.
-  .- ~ ~-(       )_ _
- /                     ~ -.
-|         END               \
- \                         .'
-   ~- . _____________ . -~
+                .-~~~-.
+        .- ~ ~-(       )_ _
+       /                     ~ -.
+      |         END               \
+       \                         .'
+         ~- . _____________ . -~
     '';
   };
-  
+
   users = {
     users = {
       root.openssh.authorizedKeys.keyFiles = authorizedKeyFiles;
@@ -95,4 +102,3 @@ in
 
   system.stateVersion = "22.05";
 }
-
