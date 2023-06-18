@@ -6,7 +6,7 @@
     enable = true;
     eula = true;
     openFirewall = true;
-    dataDir = "/data/data1/var/lib/minecraft-servers";
+    dataDir = "/var/lib/minecraft-servers";
     servers = {
       block-busters = {
         enable = true;

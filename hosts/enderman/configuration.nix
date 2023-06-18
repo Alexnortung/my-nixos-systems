@@ -37,6 +37,17 @@ in
     ];
   };
 
+  fileSystems."/data/data2" = {
+    device = "/dev/disk/by-uuid/561a42ce-2314-4c71-9a3b-795783863152";
+    mountPoint = "/data/data2";
+    options = [
+      "defaults"
+      "noexec"
+      "nouser"
+      "rw"
+    ];
+  };
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -130,7 +141,9 @@ in
 
   users = {
     groups = {
-      servarr = { };
+      servarr = {
+        gid = 998;
+      };
     };
     users = {
       root.openssh.authorizedKeys.keyFiles = authorizedKeyFiles;
@@ -191,21 +204,14 @@ in
     enable = true;
     group = "servarr";
     openFirewall = true;
-    #dataDir = "/var/lib/sonarr";
+    dataDir = "/data/data2/var/lib/sonarr/.config/NzbDrone";
   };
 
   services.radarr = {
     enable = true;
     group = "servarr";
     openFirewall = true;
-    #dataDir = "/var/lib/radarr";
-  };
-
-  services.lidarr = {
-    enable = false;
-    group = "servarr";
-    openFirewall = true;
-    #dataDir = "/var/lib/radarr";
+    dataDir = "/data/data2/var/lib/radarr/.config/Radarr";
   };
 
   services.prowlarr = {
@@ -218,7 +224,8 @@ in
     group = "servarr";
     openFirewall = true;
     dataDir = "/data/data1/var/lib/deluge/";
-    declarative = true;
+    # declarative = true;
+    declarative = false;
     authFile = ../../config/misc/deluge-authfile.txt;
     config = {
       torrentfiles_location = "/data/data1/var/lib/deluge/torrent_files";
