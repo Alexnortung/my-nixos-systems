@@ -18,7 +18,7 @@
           #server-ip = "10.100.0.2";
           enable-query = false;
           enable-jmx-monitoring = false;
-          motd = "Hi!";
+          motd = "Block Busters";
           "query.port" = 25565;
           texture-pack = "";
           network-compression-threshold = 256;
