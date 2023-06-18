@@ -13,6 +13,9 @@
 
   services.dnsmasq = {
     enable = true;
+    # settings = {
+    #   port = 53;
+    # };
     extraConfig = ''
       port=53
       # Never forward plain names (without a dot or domain part)

@@ -135,6 +135,8 @@
           hosts.nixosModule
           "${inputs.s3fs-fuse}/nixos/modules/services/network-filesystems/s3fs-fuse.nix"
 
+          minecraft-servers.nixosModules.minecraft-servers
+
           ./cachix.nix
         ];
       };
