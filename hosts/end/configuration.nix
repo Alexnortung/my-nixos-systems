@@ -26,6 +26,7 @@ in
     # ./reverse-proxy.nix
     ./mail-server.nix
     ./vaultwarden.nix
+    ./monero.nix
     ../../modules/console.nix
     ../../modules/comfort-packages.nix
     ../../profiles/registries.nix

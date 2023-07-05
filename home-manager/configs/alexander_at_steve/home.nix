@@ -9,11 +9,13 @@
     packages = with pkgs; [
       nodejs
       nodePackages.npm
+      nodePackages.yarn
       lmms
       krita
       neovide
       edgedb
       insomnia
+      beekeeper-studio
     ];
 
     sessionVariables = {
