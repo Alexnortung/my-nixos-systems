@@ -294,7 +294,7 @@ in
     inputs.deploy-rs.defaultPackage.${system}
     inputs.devenv.defaultPackage.${system}
     cachix
-    postgresql
+    postgresql_15
     ungoogled-chromium
     kubectl
     # mkchromecast
