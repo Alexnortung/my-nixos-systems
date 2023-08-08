@@ -245,9 +245,7 @@ in
     autorandr
     libreoffice
     mullvad-vpn
-    # session-desktop-appimage
     unstable.session-desktop
-    # session-desktop
     # krita
     # cudatoolkit
     # (blender.override {

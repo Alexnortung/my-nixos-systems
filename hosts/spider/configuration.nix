@@ -326,7 +326,6 @@ in
     spotify
     libreoffice
     tmate
-    # session-desktop-appimage
     unstable.session-desktop
     # discord
     zip

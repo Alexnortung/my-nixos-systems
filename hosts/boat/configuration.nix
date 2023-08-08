@@ -292,7 +292,7 @@ in
     libreoffice
     tmate
     bvi # hex editor with vim bindings
-    session-desktop-appimage
+    session-desktop
     discord
     zip unzip
     flameshot
