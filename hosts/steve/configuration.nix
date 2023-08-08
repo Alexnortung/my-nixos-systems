@@ -25,7 +25,7 @@ in
     ../../modules/zsh.nix
     # ../../modules/vscodium.nix
     ../../modules/location-denmark.nix
-    ../../profiles/registries.nix
+    # ../../profiles/registries.nix
     ../../profiles/nix-ld.nix
   ];
 
