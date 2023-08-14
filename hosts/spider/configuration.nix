@@ -135,6 +135,7 @@ in
         3000 # dev
         8008
         8009 # Chromecast
+        8888 # Jupyter
         1337
       ];
       allowedUDPPorts = [
