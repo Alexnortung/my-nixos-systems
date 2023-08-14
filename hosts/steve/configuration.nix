@@ -25,7 +25,7 @@ in
     ../../modules/zsh.nix
     # ../../modules/vscodium.nix
     ../../modules/location-denmark.nix
-    ../../profiles/registries.nix
+    # ../../profiles/registries.nix
     ../../profiles/nix-ld.nix
   ];
 
@@ -245,9 +245,7 @@ in
     autorandr
     libreoffice
     mullvad-vpn
-    # session-desktop-appimage
     unstable.session-desktop
-    # session-desktop
     # krita
     # cudatoolkit
     # (blender.override {
