@@ -737,11 +737,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1683777345,
-        "narHash": "sha256-V2p/A4RpEGqEZussOnHYMU6XglxBJGCODdzoyvcwig8=",
+        "lastModified": 1691916148,
+        "narHash": "sha256-DamxLt6yl1Ic1vCvgKhjObrzqwlV0pJ7334yuC5y3ew=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "635a306fc8ede2e34cb3dd0d6d0a5d49362150ed",
+        "rev": "750fc50bfd132a44972aa15bb21937ae26303bc4",
         "type": "github"
       },
       "original": {
@@ -794,15 +794,15 @@
         "pre-commit-hooks": "pre-commit-hooks_2"
       },
       "locked": {
-        "lastModified": 1684057446,
-        "narHash": "sha256-RgfgKKr7rBD4Fz9pjiikKgs8zxZ+PPls8fh4IwdNd6k=",
-        "owner": "pta2002",
+        "lastModified": 1692168760,
+        "narHash": "sha256-o9ozIPi0VnStiAN6JJPY9Kxpx7ZSUdEUkmEZhTo5LE0=",
+        "owner": "nix-community",
         "repo": "nixvim",
-        "rev": "c1a46a8360c864c4d4ef7d7240ff5403269cf00c",
+        "rev": "3d96207cb7ece639c8fcb6f86a3098c57366a6b5",
         "type": "github"
       },
       "original": {
-        "owner": "pta2002",
+        "owner": "nix-community",
         "repo": "nixvim",
         "type": "github"
       }
@@ -815,11 +815,11 @@
         "vim-extra-plugins": "vim-extra-plugins"
       },
       "locked": {
-        "lastModified": 1688638080,
-        "narHash": "sha256-rvXr5KvjvAn3GObJJKDfDmwQ35Sg2WghV3fhhEbr5to=",
+        "lastModified": 1692169945,
+        "narHash": "sha256-wMxgUj4LomQBjRBxfcqhkqK7YTTBGJyfb2chzfdfpQU=",
         "owner": "Alexnortung",
         "repo": "nollevim",
-        "rev": "0abd71804392d399428094166d9458c78ed92657",
+        "rev": "925a1b681bedb2cfc0a37be03ea8e232a181c85c",
         "type": "github"
       },
       "original": {
