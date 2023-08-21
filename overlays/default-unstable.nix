@@ -5,6 +5,7 @@
 unstable-channel: final: prev: {
   inherit (unstable-channel) steam
     superTuxKart
+    webcord
     discord
     session-desktop
     session-desktop-appimage

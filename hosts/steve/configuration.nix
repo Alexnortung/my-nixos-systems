@@ -229,6 +229,7 @@ in
   programs.corectrl.enable = true;
 
   environment.systemPackages = with pkgs; [
+    webcord
     inputs.agenix.packages.${system}.agenix
     inputs.devenv.packages.${system}.devenv
     prismlauncher
