@@ -293,7 +293,7 @@ in
     kondo
     inputs.agenix.packages.${system}.agenix
     inputs.deploy-rs.defaultPackage.${system}
-    inputs.devenv.defaultPackage.${system}
+    inputs.devenv.packages.${system}.devenv
     cachix
     postgresql_15
     ungoogled-chromium
@@ -327,7 +327,7 @@ in
     spotify
     libreoffice
     tmate
-    unstable.session-desktop
+    # unstable.session-desktop
     # discord
     zip
     unzip
