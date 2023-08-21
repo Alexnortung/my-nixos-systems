@@ -16,6 +16,7 @@
       edgedb
       insomnia
       beekeeper-studio
+      gftp
     ];
 
     sessionVariables = {
