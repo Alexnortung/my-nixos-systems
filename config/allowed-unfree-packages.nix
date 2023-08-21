@@ -15,4 +15,5 @@
     "steam" "steam-original" "steam-runtime"
     "blender"
     "postman" "slack"
+    "intelephense"
 ]

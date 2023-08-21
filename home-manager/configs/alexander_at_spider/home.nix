@@ -15,7 +15,6 @@
       # mysql
       phpPackages.composer
       # fluxcd
-      neovide
       rclone
       insomnia
     ];

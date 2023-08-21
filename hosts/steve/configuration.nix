@@ -230,7 +230,7 @@ in
 
   environment.systemPackages = with pkgs; [
     inputs.agenix.packages.${system}.agenix
-    inputs.devenv.defaultPackage.${system}
+    inputs.devenv.packages.${system}.devenv
     prismlauncher
     glfw
     bind
