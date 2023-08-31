@@ -4,7 +4,7 @@
   ...
 }: {
   mailserver = {
-    enable = true;
+    # enable = true;
     openFirewall = true;
     certificateScheme = 3;
     fqdn = "mails.northwing.games";

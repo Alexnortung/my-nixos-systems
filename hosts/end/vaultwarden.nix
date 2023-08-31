@@ -31,7 +31,7 @@ in
     };
   };
 
-  services.nginx.virtualHosts."bitwarden.northwing.games" = nginxConfig;
-  services.nginx.virtualHosts."bitwarden2.northwing.games" = nginxConfig;
+  # services.nginx.virtualHosts."bitwarden.northwing.games" = nginxConfig;
+  # services.nginx.virtualHosts."bitwarden2.northwing.games" = nginxConfig;
 
 }
