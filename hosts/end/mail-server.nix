@@ -4,9 +4,9 @@
   ...
 }: {
   mailserver = {
-    # enable = true;
+    enable = true;
     openFirewall = true;
-    certificateScheme = 3;
+    certificateScheme = "acme-nginx";
     fqdn = "mails.northwing.games";
     domains = [ "northwing.games" "nortung.dk" ];
 

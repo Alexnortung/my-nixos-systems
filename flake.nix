@@ -67,7 +67,7 @@
     mail-server = {
       url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
-      inputs.nixpkgs-22_05.follows = "nixos-stable";
+      inputs.nixpkgs-23_05.follows = "nixos-stable";
     };
 
     hosts = {
