@@ -19,7 +19,7 @@
     virtualHosts = {
       "jellyfin.northwing.games" = {
         # forceSSL = true;
-        # enableACME = true; # TODO: Enable when not rate limited
+        enableACME = true;
         addSSL = true;
         locations."/" = {
           proxyWebsockets = true;
