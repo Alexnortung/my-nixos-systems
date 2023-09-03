@@ -6,6 +6,11 @@
     openFirewall = true;
 
     extraComponents = [
+      "default_config"
+      "deluge"
+      "met"
+      "esphome"
+      "homeassistant"
       "sonos"
     ];
 
