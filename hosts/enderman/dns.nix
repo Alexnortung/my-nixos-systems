@@ -5,6 +5,7 @@
       "192.168.3.20" = [
         "jellyfin.northwing.games"
         "mc.northwing.games"
+        "grocy.nortung.dk"
       ];
     };
     # ad blocking
