@@ -13,6 +13,7 @@ inputs.home-manager.lib.homeManagerConfiguration {
     ../../profiles/eww
     ./home.nix
     ../../profiles/direnv.nix
+    ../../profiles/git.nix
   ];
 
   extraSpecialArgs = {
