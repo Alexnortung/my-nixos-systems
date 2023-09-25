@@ -12,7 +12,7 @@
         defaultBranch = lib.mkDefault "main";
       };
       pull = {
-        rebase = lib.mkDefault false;
+        rebase = lib.mkDefault true;
       };
       alias = {
         st = "status";
