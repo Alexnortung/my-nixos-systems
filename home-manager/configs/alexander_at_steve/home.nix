@@ -1,6 +1,7 @@
-{ config, pkgs, ... }:
-
-{
+{ config
+, pkgs
+, ...
+}: {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home = {
@@ -24,8 +25,6 @@
     };
   };
 
-
-
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowUnfreePredicate = pkg: true;
 
@@ -41,6 +40,14 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  programs.git = {
+    userEmail = "alexander.nortung@oakdigital.dk";
+    iniContent = {
+      gpg.format = "ssh";
+      user.signingkey = "/home/alexander/.ssh/id_rsa.pub";
+    };
+  };
 
   programs.zsh = {
     enable = true;
