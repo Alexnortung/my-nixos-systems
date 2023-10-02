@@ -99,7 +99,7 @@ in
     dhcpcd = {
       # enable = true;
       extraConfig = '''';
-      };
+    };
     hostName = "steve";
     # The global useDHCP flag is deprecated, therefore explicitly set to false here.
     # Per-interface useDHCP will be mandatory in the future, so this generated config
@@ -158,7 +158,7 @@ in
     };
   };
 
-  fonts.fonts = with pkgs; [
+  fonts.packages = with pkgs; [
     hasklig
     terminus-nerdfont
   ];
@@ -264,7 +264,7 @@ in
     xclip
     # dotnet-sdk_5
     steam-run
-    godot
+    # godot
     # texlive.combined.scheme-full
     wget
     firefox
