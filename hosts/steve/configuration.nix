@@ -196,7 +196,7 @@ in
     alexander = {
       isNormalUser = true;
       home = "/home/alexander";
-      extraGroups = [ "wheel" "video" "audio" "adbusers" ]; # Enable ‘sudo’ for the user.
+      extraGroups = [ "wheel" "video" "audio" "adbusers" "wireshark" ]; # Enable ‘sudo’ for the user.
       shell = pkgs.zsh;
     };
     morgan = {
@@ -227,6 +227,8 @@ in
   };
 
   programs.corectrl.enable = true;
+
+  programs.wireshark.enable = true;
 
   environment.systemPackages = with pkgs; [
     webcord
