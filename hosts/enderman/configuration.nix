@@ -228,7 +228,7 @@ in
     dataDir = "/data/data1/var/lib/deluge/";
     # declarative = true;
     declarative = false;
-    authFile = ../../config/misc/deluge-authfile.txt;
+    # authFile = ../../config/misc/deluge-authfile.txt;
     config = {
       torrentfiles_location = "/data/data1/var/lib/deluge/torrent_files";
       download_location = "/data/data1/var/lib/deluge/Downloads";
