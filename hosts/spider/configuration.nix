@@ -73,6 +73,11 @@ in
     enable = true;
   };
 
+  hardware.logitech.wireless = {
+    enable = true;
+    enableGraphical = true;
+  };
+
   # swapDevices = [
   #   {
   #     label = "swap";
@@ -290,6 +295,7 @@ in
   };
 
   environment.systemPackages = with pkgs; [
+    solaar
     kondo
     inputs.agenix.packages.${system}.agenix
     inputs.deploy-rs.defaultPackage.${system}
