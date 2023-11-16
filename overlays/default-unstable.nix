@@ -14,8 +14,8 @@ unstable-channel: final: prev: {
     minecraft
     nordzy-cursor-theme
     sagetex
-    mullvad
-    mullvad-vpn
+    # mullvad
+    # mullvad-vpn
     # libreoffice
     blender
     dbeaver
