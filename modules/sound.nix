@@ -10,11 +10,11 @@
     tcp = {
       enable = false;
       anonymousClients = {
-        allowedIpRanges = ["127.0.0.1" "192.168.7.0/24"];
+        allowedIpRanges = [ "127.0.0.1" "192.168.7.0/24" ];
       };
     };
   };
-  nixpkgs.config.pulseaudio = true;
+  # nixpkgs.config.pulseaudio = true;
   #services.pipewire = {
   #  enable = true;
   #  alsa.enable = true;

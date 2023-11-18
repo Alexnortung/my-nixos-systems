@@ -14,7 +14,8 @@
     bash
     lm_sensors
     gnumake
-    zip unzip
+    zip
+    unzip
     croc
     nmap
     vim

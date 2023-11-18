@@ -6,16 +6,17 @@
     {
       # Read the changelog before changing this value
       home.stateVersion = "21.11";
-  
+
       # Use the same overlays as the system packages
       nixpkgs = { inherit (config.nixpkgs) overlays; };
 
       # insert home-manager config
-      
+
       home.packages = with pkgs; [
         git
         vim
-        zip unzip
+        zip
+        unzip
         diffutils
         findutils
         #utillinux

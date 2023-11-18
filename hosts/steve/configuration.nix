@@ -29,13 +29,14 @@ in
     ../../profiles/nix-ld.nix
   ];
 
-  nixpkgs.config = {
-    chromium = {
-      enableWideVine = true;
-    };
-  };
+  # nixpkgs.config = {
+  #   chromium = {
+  #     enableWideVine = true;
+  #   };
+  # };
 
   nix = {
+    package = unstable.nixVersions.nix_2_17;
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
@@ -143,20 +144,20 @@ in
     enable = true;
   };
 
-  services.bg-setter = {
-    enable = true;
-    wallpaper = lib.lists.elemAt (import ../../config/misc/nord-wallpapers.nix { }) 0;
-  };
-
-  services.autorandr = {
-    enable = true;
-    defaultTarget = "horizontal";
-    hooks = {
-      postswitch = {
-        "change-background" = "systemctl --user restart bg-setter";
-      };
-    };
-  };
+  # services.bg-setter = {
+  #   enable = true;
+  #   wallpaper = lib.lists.elemAt (import ../../config/misc/nord-wallpapers.nix { }) 0;
+  # };
+  #
+  # services.autorandr = {
+  #   enable = true;
+  #   defaultTarget = "horizontal";
+  #   hooks = {
+  #     postswitch = {
+  #       "change-background" = "systemctl --user restart bg-setter";
+  #     };
+  #   };
+  # };
 
   fonts.packages = with pkgs; [
     hasklig
@@ -212,6 +213,9 @@ in
 
   # List packages installed in system profile. To search, run:
   programs.steam.enable = true;
+  programs.steam.gamescopeSession = {
+    enable = true;
+  };
 
   programs.gamemode.enable = true;
 
@@ -292,7 +296,7 @@ in
     libGL
     libGLU
     glxinfo
-    minecraft
+    # minecraft
     discord
     obs-studio
     gimp

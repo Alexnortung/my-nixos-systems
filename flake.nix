@@ -87,7 +87,7 @@
     , fenix
       # , neovim
     , agenix
-    # , nixvim
+      # , nixvim
     , minecraft-servers
     , nix-on-droid
     , hosts
@@ -112,6 +112,9 @@
         # allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) (import ./config/allowed-unfree-packages.nix);
         allowUnfreePredicate = (pkg: true);
         allowUnfree = true;
+        permittedInsecurePackages = [
+          "electron-24.8.6"
+        ];
       };
 
       channels.nixos-stable.overlaysBuilder = channels: [
