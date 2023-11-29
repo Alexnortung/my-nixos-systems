@@ -234,7 +234,11 @@ in
 
   programs.wireshark.enable = true;
 
+  services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
+
   environment.systemPackages = with pkgs; [
+    gnomeExtensions.gnome-bedtime
+    gnomeExtensions.appindicator
     webcord
     inputs.agenix.packages.${system}.agenix
     inputs.devenv.packages.${system}.devenv
