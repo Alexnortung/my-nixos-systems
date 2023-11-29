@@ -29,15 +29,12 @@
 
   services.dnsmasq = {
     enable = true;
-    # settings = {
-    #   port = 53;
-    # };
-    extraConfig = ''
-      port=53
+    settings = {
+      port = 53;
       # Never forward plain names (without a dot or domain part)
-      domain-needed
+      domain-needed = true;
       # Never forward addresses in the non-routed address spaces.
-      bogus-priv
-    '';
+      bogus-priv = true;
+    };
   };
 }
