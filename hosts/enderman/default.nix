@@ -1,10 +1,11 @@
 {
-  host = inputs@{ ... }: {
+  host = inputs@{ nixos-hardware, ... }: {
     channelName = "nixos-stable";
     # Relative to flake.nix
     modules = [
       ./configuration.nix
       # inputs.nixos-dev
+      nixos-hardware.nixosModules.common-cpu-intel
     ];
   };
   # deploy-rs node
