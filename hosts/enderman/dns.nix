@@ -10,6 +10,21 @@
     };
     # ad blocking
     stevenBlackHosts.enable = true;
+
+    nameservers = [
+      # Mullvad adblock dns
+      "194.242.2.3"
+      # Mullvad dns
+      "194.242.2.2"
+
+      # Cloudflare
+      "1.1.1.2"
+      "1.0.0.2"
+
+      # Google
+      "8.8.8.8"
+      "8.8.4.4"
+    ];
   };
 
   services.dnsmasq = {
