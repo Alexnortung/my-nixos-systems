@@ -84,7 +84,8 @@ in
   #   }
   # ];
 
-  fonts.fonts = with pkgs; [
+  fonts.packages = with pkgs; [
+    fira-code
     hasklig
     nerdfonts
   ];
@@ -125,6 +126,7 @@ in
   networking = {
     hostName = "spider";
     useDHCP = false;
+    enableIPv6 = true;
     interfaces.enp0s31f6.useDHCP = true;
     interfaces.wlp0s20f3.useDHCP = true;
     networkmanager = {
@@ -164,6 +166,10 @@ in
   # services.openssh.enable = true;
 
   services.printing.enable = true;
+  services.printing.drivers = with pkgs; [
+    gutenprint
+    foomatic-db-ppds
+  ];
   services.avahi = {
     enable = true;
     openFirewall = true;
@@ -289,9 +295,9 @@ in
     # NIX_LD = pkgs.runCommand "ld.so" { } ''
     #   ln -s "$(cat '${pkgs.stdenv.cc}/nix-support/dynamic-linker')" $out
     # '';
-    NIX_LD = "${pkgs.runCommand "ld.so" {} ''
-      ln -s "$(cat '${pkgs.stdenv.cc}/nix-support/dynamic-linker')" $out
-    ''}";
+    # NIX_LD = "${pkgs.runCommand "ld.so" {} ''
+    #   ln -s "$(cat '${pkgs.stdenv.cc}/nix-support/dynamic-linker')" $out
+    # ''}";
   };
 
   environment.systemPackages = with pkgs; [

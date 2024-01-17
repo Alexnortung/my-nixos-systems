@@ -49,7 +49,7 @@ static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "Fira Code:size=12", "TerminessTTF Nerd Font:size=12" };
-static const char dmenufont[]       = "Hasklig:size=12";
+static const char dmenufont[]       = "Fira Code:size=12";
 static const char nord0[]  = "#2e3440";
 static const char nord1[]  = "#3b4252";
 static const char nord2[]  = "#434c5e";
