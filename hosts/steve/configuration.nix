@@ -197,7 +197,7 @@ in
     alexander = {
       isNormalUser = true;
       home = "/home/alexander";
-      extraGroups = [ "wheel" "video" "audio" "adbusers" "wireshark" ]; # Enable ‘sudo’ for the user.
+      extraGroups = [ "wheel" "video" "audio" "adbusers" "docker" "wireshark" ]; # Enable ‘sudo’ for the user.
       shell = pkgs.zsh;
     };
     morgan = {
@@ -207,6 +207,7 @@ in
       shell = pkgs.zsh;
     };
   };
+  users.extraGroups.docker.members = [ "alexander" ];
 
   # programs.ssh.forwardX11 = true;
   #programs.ssh.startAgent = true;
@@ -237,6 +238,7 @@ in
   services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
 
   environment.systemPackages = with pkgs; [
+    docker-compose
     gnomeExtensions.gnome-bedtime
     gnomeExtensions.appindicator
     webcord
@@ -257,7 +259,7 @@ in
     libreoffice
     mullvad-vpn
     unstable.session-desktop
-    # krita
+    krita
     # cudatoolkit
     # (blender.override {
     #   # cudaSupport = true;
@@ -313,6 +315,10 @@ in
     oh-my-zsh
     libpulseaudio
   ];
+
+  virtualisation.docker = {
+    enable = true;
+  };
 
   programs.gnupg.agent = {
     enable = true;
