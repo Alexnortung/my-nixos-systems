@@ -8,6 +8,7 @@ let
   system = "x86_64-linux";
   ssh-keys = import ../../config/ssh;
   authorizedKeyFiles = with ssh-keys; all;
+  unstable = import inputs.nixpkgs-unstable { inherit inputs system; };
 in
 {
   imports = [
@@ -216,8 +217,17 @@ in
     dataDir = "/data/data2/var/lib/radarr/.config/Radarr";
   };
 
+  services.readarr = {
+    enable = true;
+    package = unstable.readarr;
+    group = "servarr";
+    openFirewall = true;
+    dataDir = "/data/data2/var/lib/readarr/.config/Readarr";
+  };
+
   services.prowlarr = {
     enable = true;
+    package = unstable.prowlarr;
     openFirewall = true;
   };
 

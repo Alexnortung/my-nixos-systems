@@ -19,7 +19,7 @@ in
     ../../modules/sound.nix
     ../../modules/console.nix
     ../../modules/personal-vpn.nix
-    ../../modules/latex.nix
+    # ../../modules/latex.nix
     ../../modules/nord-lightdm.nix
     ../../modules/nord-gtk.nix
     ../../modules/basic-desktop.nix
@@ -44,7 +44,7 @@ in
     '';
   };
 
-  fonts.fonts = with pkgs; [
+  fonts.packages = with pkgs; [
     hasklig
     terminus-nerdfont
   ];
@@ -117,7 +117,7 @@ in
 
   services.bg-setter = {
     enable = true;
-    wallpaper = lib.lists.elemAt (import ../../config/misc/nord-wallpapers.nix {}) 0;
+    wallpaper = lib.lists.elemAt (import ../../config/misc/nord-wallpapers.nix { }) 0;
   };
 
   services.autorandr = {
@@ -294,7 +294,8 @@ in
     bvi # hex editor with vim bindings
     session-desktop
     discord
-    zip unzip
+    zip
+    unzip
     flameshot
     joplin-desktop
     firefox
