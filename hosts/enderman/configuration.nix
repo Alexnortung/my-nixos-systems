@@ -16,6 +16,7 @@ in
     ../../config/backup-bucket.nix
     ./hardware-configuration.nix
     ./secrets
+    ./audiobookshelf.nix
     ./nginx.nix
     ./dns.nix
     ./gc.nix

@@ -1,6 +1,8 @@
-{lib, ...}: let
+{ lib, ... }:
+let
   defaultSSLPort = 8443;
-in {
+in
+{
   security.acme = {
     acceptTerms = true;
     defaults.email = "admin@northwing.games";
@@ -41,6 +43,7 @@ in {
 
       map $ssl_preread_server_name $targetBackend {
         jellyfin.northwing.games  endermanSsl;
+        audio.nortung.dk          endermanSsl;
         mails.northwing.games     localSsl;
         nextcloud.northwing.games localSsl;
         bitwarden.northwing.games localSsl;
@@ -77,6 +80,20 @@ in {
       };
 
       "grocy.nortung.dk" = {
+        locations."/" = {
+          proxyPass = "$scheme://enderman$request_uri";
+          proxyWebsockets = true;
+          extraConfig = ''
+            # proxy_ssl_server_name on;
+            # proxy_set_header Host $host;
+            # proxy_set_header X-Real-IP $remote_addr;
+            # proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            # proxy_set_header X-Forwarded-Proto $scheme;
+          '';
+        };
+      };
+
+      "audio.nortung.dk" = {
         locations."/" = {
           proxyPass = "$scheme://enderman$request_uri";
           proxyWebsockets = true;
