@@ -18,6 +18,7 @@
       insomnia
       beekeeper-studio
       gftp
+      prusa-slicer
     ];
 
     sessionVariables = {
