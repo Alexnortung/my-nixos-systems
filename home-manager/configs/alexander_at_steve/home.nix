@@ -19,6 +19,7 @@
       beekeeper-studio
       gftp
       prusa-slicer
+      blender
     ];
 
     sessionVariables = {
