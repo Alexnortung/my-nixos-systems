@@ -13,6 +13,7 @@ inputs.home-manager.lib.homeManagerConfiguration {
     ./home.nix
     ../../profiles/direnv.nix
     ../../profiles/git.nix
+    inputs.oak-configs.homeManagerModules.ssh
   ];
 
   extraSpecialArgs = {
