@@ -5,6 +5,7 @@
     # ../overlays/st.nix
     ../overlays/dmenu.nix
     ../overlays/dwm.nix
+    ../overlays/slock.nix
     ./battery-notifier.nix
     ./bg-setter.nix
   ];
