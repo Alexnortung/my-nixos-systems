@@ -42,6 +42,8 @@ in
     '';
   };
 
+  services.flatpak.enable = true;
+
   services.s3fs-fuse = {
     enable = true;
     mounts = {
@@ -238,6 +240,7 @@ in
   services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
 
   environment.systemPackages = with pkgs; [
+    gnome.gnome-software
     docker-compose
     gnomeExtensions.gnome-bedtime
     gnomeExtensions.appindicator

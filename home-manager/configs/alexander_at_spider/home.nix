@@ -18,6 +18,7 @@
       # fluxcd
       rclone
       insomnia
+      alacritty
     ];
 
     shellAliases = {

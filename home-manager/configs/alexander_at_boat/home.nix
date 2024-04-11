@@ -9,6 +9,7 @@
     packages = with pkgs; [
       nodejs
       nodePackages.npm
+      alacritty
     ];
 
     sessionVariables = {

@@ -22,7 +22,8 @@
   };
 
   services.picom = {
-    enable = true;
+    # Do not enable if using gnome
+    # enable = true;
   };
 
   services.gnome.gnome-keyring = {
@@ -46,6 +47,6 @@
   environment.systemPackages = with pkgs; [
     playerctl # used by dmw config
     feh # Image viewer and background setter
-    alacritty
+    # alacritty
   ];
 }

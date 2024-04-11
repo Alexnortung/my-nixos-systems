@@ -20,6 +20,8 @@
       gftp
       prusa-slicer
       blender
+      alacritty
+      ffmpeg
     ];
 
     sessionVariables = {
@@ -54,7 +56,8 @@
   programs.zsh = {
     enable = true;
     initExtra = ''
-      PATH=$PATH:~/.node_modules/bin/
+      export PATH=$PATH:~/.node_modules/bin/
+      export XDG_DATA_DIRS=$XDG_DATA_DIRS:/usr/share:/var/lib/flatpak/exports/share:$HOME/.local/share/flatpak/exports/share
     '';
   };
 }
