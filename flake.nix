@@ -43,8 +43,8 @@
     };
 
     devenv = {
-      url = "github:cachix/devenv/v0.6.3";
-      inputs.nixpkgs.follows = "nixos-stable";
+      url = "github:cachix/devenv/v1.0.3";
+      # inputs.nixpkgs.follows = "nixos-stable";
     };
 
     # nixvim = {
