@@ -642,11 +642,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1699480737,
-        "narHash": "sha256-u44zoJEMqPQCB5fAcl3FSijzPQjXqMqH+qIBChW5mJY=",
+        "lastModified": 1713041295,
+        "narHash": "sha256-31walXF1q2PHjFLUOqzSHMEQkDbSoo634FlZSPVVMDU=",
         "owner": "StevenBlack",
         "repo": "hosts",
-        "rev": "85fd0ee9ce91e8585ea92272df5f5c34ae4489bf",
+        "rev": "48b11d97aea2962e0835f267804392241cddd5fe",
         "type": "github"
       },
       "original": {
@@ -989,11 +989,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1709294055,
-        "narHash": "sha256-7EECkQYoNKJZOf2+miJdrMpxpvsn/qZFwIhUI3fQpLs=",
+        "lastModified": 1713219115,
+        "narHash": "sha256-xC8H/s6ZBnqzJIf7gIV9OIL73d43pV60E8F2VOr5QRo=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "ec869190b56a1b4677d24a8bdbcfe80ccea2ece6",
+        "rev": "2b80ce7707aedcb79be09e412b6dd6c15c578ab2",
         "type": "github"
       },
       "original": {
@@ -1114,11 +1114,11 @@
         "plugins": "plugins"
       },
       "locked": {
-        "lastModified": 1707380996,
-        "narHash": "sha256-oHSVMleVPzeQuEoiTzR3zN2zEgwQ+KjSFxqjKrO7hH8=",
+        "lastModified": 1712825441,
+        "narHash": "sha256-aTbfOzUN4nrgWrtG2WWbYZYyj7vvB5ytk5o1oDU5EIg=",
         "owner": "Alexnortung",
         "repo": "nollevim",
-        "rev": "24d3959c760bbef6cf5cca6316f377bb27310741",
+        "rev": "42f7ee3323145bafedd6b86e05094eb1b9968249",
         "type": "github"
       },
       "original": {

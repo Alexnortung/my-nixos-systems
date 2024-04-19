@@ -3,7 +3,7 @@
 {
   nixpkgs.overlays = [
     (self: super: {
-      dwm = super.dwm.overrideAttrs (oldAttrs : rec {
+      dwm = super.dwm.overrideAttrs (oldAttrs: rec {
         configFile = super.writeText "config.h" (builtins.readFile ../config/dwm-config.h);
         postPatch = oldAttrs.postPatch or "" + "\necho 'Using own config file...'\n cp ${configFile} config.def.h";
         patches = [
@@ -19,8 +19,8 @@
           #})
           # Systray
           (super.fetchpatch {
-            url = "https://dwm.suckless.org/patches/systray/dwm-systray-6.4.diff";
-            sha256 = "sha256-TXErH76w403T9tSJYu3tAJrQX3Y3lKSulKH0UdQLG/g=";
+            url = "https://dwm.suckless.org/patches/systray/dwm-systray-20230922-9f88553.diff";
+            sha256 = "sha256-Kh1aP1xgZAREjTy7Xz48YBo3rhrJngspUYwBU2Gyw7k=";
           })
           # Pertag - gives each tag its own workspace
           (super.fetchpatch {
