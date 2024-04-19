@@ -1,7 +1,13 @@
 { config
 , pkgs
+, inputs
+, system
 , ...
-}: {
+}:
+let
+  unstable = import inputs.nixpkgs-unstable { inherit system; };
+in
+{
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home = {
@@ -19,6 +25,7 @@
       rclone
       insomnia
       alacritty
+      unstable.bruno
     ];
 
     shellAliases = {
