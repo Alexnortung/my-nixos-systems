@@ -17,7 +17,7 @@ in
       nodejs
       # nodePackages.npm
       nodePackages.pnpm
-      nodePackages.yarn
+      yarn-berry
       # nodePackages.serverless
       # mysql
       phpPackages.composer
