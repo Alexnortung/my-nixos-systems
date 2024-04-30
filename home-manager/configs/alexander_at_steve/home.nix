@@ -1,7 +1,13 @@
 { config
 , pkgs
+, inputs
+, system
 , ...
-}: {
+}:
+let
+  unstable = import inputs.nixpkgs-unstable { inherit system; };
+in
+{
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home = {
@@ -10,10 +16,9 @@
     packages = with pkgs; [
       nodejs
       nodePackages.npm
-      nodePackages.yarn
+      unstable.yarn-berry
       lmms
       krita
-      neovide
       edgedb
       insomnia
       beekeeper-studio
@@ -22,6 +27,8 @@
       blender
       alacritty
       ffmpeg
+      unstable.bruno
+      unstable.webcord
     ];
 
     sessionVariables = {
