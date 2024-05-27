@@ -36,7 +36,7 @@ in
   # };
 
   nix = {
-    package = unstable.nixVersions.nix_2_17;
+    package = unstable.nix;
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
@@ -146,6 +146,8 @@ in
     enable = true;
   };
 
+  programs.adb.enable = true;
+
   # services.bg-setter = {
   #   enable = true;
   #   wallpaper = lib.lists.elemAt (import ../../config/misc/nord-wallpapers.nix { }) 0;
@@ -193,7 +195,7 @@ in
   };
 
   # Configure keymap in X11
-  services.xserver.layout = "dk";
+  services.xserver.xkb.layout = "dk";
 
   users.users = {
     alexander = {
@@ -240,6 +242,7 @@ in
   services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
 
   environment.systemPackages = with pkgs; [
+    android-tools
     gnome.gnome-software
     docker-compose
     gnomeExtensions.gnome-bedtime
