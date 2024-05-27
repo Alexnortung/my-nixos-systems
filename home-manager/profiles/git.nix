@@ -1,8 +1,12 @@
 { lib, ... }@args:
-let 
+let
   config = (import ../../modules/git-config.nix args).programs.git.config;
 in
 {
+  imports = [
+    ./lazygit.nix
+  ];
+
   programs.git = {
     enable = true;
     aliases = config.alias;

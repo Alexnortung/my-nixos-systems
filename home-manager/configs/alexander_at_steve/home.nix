@@ -53,6 +53,7 @@ in
   programs.home-manager.enable = true;
 
   programs.git = {
+    difftastic.enable = true;
     userEmail = "alexander.nortung@oakdigital.dk";
     iniContent = {
       gpg.format = "ssh";

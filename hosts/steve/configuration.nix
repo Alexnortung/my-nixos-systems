@@ -258,7 +258,6 @@ in
     wineWowPackages.stable
     winetricks
     inputs.deploy-rs.defaultPackage.x86_64-linux
-    lazygit
     superTuxKart
     protonup
     autorandr
