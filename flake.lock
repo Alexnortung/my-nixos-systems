@@ -1130,21 +1130,6 @@
         "type": "github"
       }
     },
-    "oak-configs": {
-      "locked": {
-        "lastModified": 1709821491,
-        "narHash": "sha256-k7g4pEBxbKdG2rtGI+kWM53YQNbJg4NxnGwxhYmotgI=",
-        "ref": "refs/heads/main",
-        "rev": "c44cb3d6a6313047a494da78453041571c89bb91",
-        "revCount": 1,
-        "type": "git",
-        "url": "ssh://git@github.com/Oak-Digital/oak-nix-configs"
-      },
-      "original": {
-        "type": "git",
-        "url": "ssh://git@github.com/Oak-Digital/oak-nix-configs"
-      }
-    },
     "plugins": {
       "inputs": {
         "flake-utils": "flake-utils_8",
@@ -1321,7 +1306,6 @@
         "nixos-unstable": "nixos-unstable",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nollevim": "nollevim",
-        "oak-configs": "oak-configs",
         "s3fs-fuse": "s3fs-fuse",
         "utils-plus": "utils-plus",
         "vim-extra-plugins": "vim-extra-plugins"
