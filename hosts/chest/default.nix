@@ -19,7 +19,14 @@ in
       path =
         deploy-rs.lib.${system}.activate.nixos self.nixosConfigurations.chest;
       sshUser = "nixos";
-      user = "root";
+      user = "nixos";
     };
   };
+
+  cachixDeployAgent = inputs@{ self, cachix-deploy-flake, nixos-stable, ... }:
+    let
+      pkgs = import nixos-stable { inherit system; };
+      cachix-deploy-lib = cachix-deploy-flake.lib pkgs;
+    in
+    cachix-deploy-lib.nixos self.nixosConfigurations.chest;
 }

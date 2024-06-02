@@ -86,6 +86,8 @@
       inputs.nixpkgs.follows = "nixos-stable";
     };
 
+    cachix-deploy-flake.url = "github:cachix/cachix-deploy-flake";
+
     # oak-configs = {
     #   url = "git+ssh://git@github.com/Oak-Digital/oak-nix-configs";
     # };
@@ -106,6 +108,7 @@
     , minecraft-servers
     , nix-on-droid
     , hosts
+    , cachix-deploy-flake
     , ...
     }:
     utils-plus.lib.mkFlake {
@@ -165,6 +168,9 @@
       deploy = {
         nodes = (import ./hosts/default.nix).nodes inputs;
       };
+
+      # TODO: make package
+      cachix-deploy-lib.spec.agents = (import ./hosts/default.nix).cachixDeployAgents inputs;
       # nixOnDroidConfigurations = {
       #   bundle = nix-on-droid.lib.nixOnDroidConfiguration {
       #     config = ./hosts/droid-devices/bundle/configuration.nix;

@@ -21,4 +21,7 @@ in
     end = end.node inputs;
     enderman = enderman.node inputs;
   };
+  cachixDeployAgents = inputs: {
+    chest = chest.cachixDeployAgent inputs;
+  };
 }

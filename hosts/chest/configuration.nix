@@ -11,6 +11,17 @@ let
   ];
 in
 {
+  nix = {
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+    settings = {
+      trusted-users = [
+        "root"
+        user
+      ];
+    };
+  };
   fileSystems = {
     "/" = {
       device = "/dev/disk/by-label/NIXOS_SD";

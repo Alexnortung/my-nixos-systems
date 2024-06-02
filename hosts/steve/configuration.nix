@@ -40,6 +40,12 @@ in
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
+    settings = {
+      trusted-users = [
+        "root"
+        "alexander"
+      ];
+    };
   };
 
   services.flatpak.enable = true;
