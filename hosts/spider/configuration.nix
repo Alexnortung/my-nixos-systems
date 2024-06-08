@@ -311,7 +311,6 @@ in
     ungoogled-chromium
     kubectl
     # mkchromecast
-    lazygit
     nodejs
     nodePackages.npm
     beekeeper-studio
