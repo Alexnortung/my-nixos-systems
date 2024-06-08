@@ -23,10 +23,15 @@ in
     };
   };
 
-  cachixDeployAgent = inputs@{ self, cachix-deploy-flake, nixos-stable, ... }:
+  cachixDeployAgent = inputs@{ self, cachix-deploy-flake, nixos-stable, nixos-hardware, ... }:
     let
       pkgs = import nixos-stable { inherit system; };
       cachix-deploy-lib = cachix-deploy-flake.lib pkgs;
     in
-    cachix-deploy-lib.nixos self.nixosConfigurations.chest;
+    cachix-deploy-lib.nixos {
+      imports = [
+        nixos-hardware.nixosModules.raspberry-pi-4
+        ./configuration.nix
+      ];
+    };
 }

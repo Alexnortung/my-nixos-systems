@@ -169,8 +169,6 @@
         nodes = (import ./hosts/default.nix).nodes inputs;
       };
 
-      # TODO: make package
-      cachix-deploy-lib.spec.agents = (import ./hosts/default.nix).cachixDeployAgents inputs;
       # nixOnDroidConfigurations = {
       #   bundle = nix-on-droid.lib.nixOnDroidConfiguration {
       #     config = ./hosts/droid-devices/bundle/configuration.nix;
@@ -190,5 +188,17 @@
       #     ];
       #   };
       # };
+
+      outputsBuilder = channels:
+        let
+          cachix-deploy-lib = cachix-deploy-flake.lib channels.nixpkgs-unstable;
+        in
+        {
+          packages = {
+            cachix-deploy-spec = cachix-deploy-lib.spec {
+              agents = (import ./hosts/default.nix).cachixDeployAgents inputs;
+            };
+          };
+        };
     };
 }
