@@ -29,6 +29,9 @@ in
       ffmpeg
       unstable.bruno
       unstable.webcord
+      kicad
+      # legendary-gl
+      heroic
     ];
 
     sessionVariables = {
