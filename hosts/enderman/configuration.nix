@@ -80,7 +80,7 @@ in
     nat.internalInterfaces = [ "wg0" ];
 
     networkmanager = {
-      enable = true;
+      # enable = true;
     };
   };
 

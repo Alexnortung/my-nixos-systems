@@ -275,7 +275,7 @@ in
     # torbrowser
     mullvad-vpn
     arandr
-    minecraft
+    # minecraft
     bashmount
     gparted
     pcmanfm

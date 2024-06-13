@@ -13,11 +13,11 @@
   };
 
   inputs = {
-    utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus/";
+    utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus/v1.4.0";
     # nixos-dev = {
     #   url = "path:/home/alexander/source/nixpkgs";
     # };
-    nixos-stable.url = "github:NixOS/nixpkgs/nixos-23.11";
+    nixos-stable.url = "github:NixOS/nixpkgs/nixos-24.05";
     nixos-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     # nixpkgs-alexnortung.url = "github:alexnortung/nixpkgs/s3fs-module";
     s3fs-fuse = {
@@ -45,7 +45,7 @@
     };
     deploy-rs = {
       url = "github:serokell/deploy-rs";
-      inputs.nixpkgs.follows = "nixos-stable";
+      # inputs.nixpkgs.follows = "nixos-stable";
     };
 
     fenix = {
@@ -66,8 +66,8 @@
     # };
 
     minecraft-servers = {
-      url = "github:Infinidoge/nix-minecraft";
-      inputs.nixpkgs.follows = "nixos-stable";
+      url = "github:Alexnortung/nix-minecraft";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
     nix-on-droid = {
@@ -195,9 +195,9 @@
         in
         {
           packages = {
-            cachix-deploy-spec = cachix-deploy-lib.spec {
-              agents = (import ./hosts/default.nix).cachixDeployAgents inputs;
-            };
+            # cachix-deploy-spec = cachix-deploy-lib.spec {
+            #   agents = (import ./hosts/default.nix).cachixDeployAgents inputs;
+            # };
           };
         };
     };

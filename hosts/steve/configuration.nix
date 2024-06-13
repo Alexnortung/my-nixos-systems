@@ -256,6 +256,7 @@ in
     webcord
     inputs.agenix.packages.${system}.agenix
     inputs.devenv.packages.${system}.devenv
+    zulu
     prismlauncher
     glfw
     bind
