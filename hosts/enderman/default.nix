@@ -1,6 +1,6 @@
 {
   host = inputs@{ nixos-hardware, ... }: {
-    channelName = "nixos-stable";
+    channelName = "nixos-unstable";
     # Relative to flake.nix
     modules = [
       ./configuration.nix

@@ -22,7 +22,7 @@ in
     ./gc.nix
     ./minecraft.nix
     ./grocy.nix
-    ./home-assistant.nix
+    # ./home-assistant.nix
     # ./games.nix
     ../../modules/console.nix
     ../../modules/comfort-packages.nix

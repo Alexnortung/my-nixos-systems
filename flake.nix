@@ -67,7 +67,7 @@
 
     minecraft-servers = {
       url = "github:Alexnortung/nix-minecraft";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      # inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
     nix-on-droid = {

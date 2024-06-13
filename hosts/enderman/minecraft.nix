@@ -1,8 +1,10 @@
 { pkgs
 , lib
+, inputs
 , ...
 }:
 let
+  system = "x86_64-linux";
   sharedProperties = {
     server-ip = "0.0.0.0";
     enable-query = false;
@@ -76,6 +78,7 @@ let
     KrameoLime = "00a01b47-d626-4c53-a4b1-04607b23eb56";
     gUwUld = "10720cba-54c5-417c-b92e-f46ffb3dda77";
     xXN1coXx = "e9041e9b-353a-44b9-bbee-d3187c772b05";
+    xDaredevil = "f6c77440-d399-4e60-a2bc-efeaed120658";
   };
 in
 {
@@ -112,7 +115,8 @@ in
       block-busters-1-21 = {
         inherit whitelist;
         enable = true;
-        package = pkgs.vanillaServers.vanilla-1_21;
+        # package = pkgs.vanillaServers.vanilla-1_21;
+        package = inputs.minecraft-servers.legacyPackages.${system}.vanillaServers.vanilla-1_21;
         # package = pkgs.fabricServers.fabric-1_21;
         jvmOpts = "-Xms2G -Xmx8G";
         serverProperties = sharedProperties // {
