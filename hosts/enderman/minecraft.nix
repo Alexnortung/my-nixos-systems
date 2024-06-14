@@ -82,6 +82,7 @@ let
     Fazzdc = "fa3742db-388a-4af5-bb3c-1a4b52e8c70c";
     Timinator2000 = "b5e4229f-df3c-4f39-ad90-d4452eca5423";
     GoatMaster69 = "4d3ccfdb-1d7b-4d64-bb40-b1cbfac2c2e9";
+    duxari = "a072ba4e-5521-4d4d-afb1-9084e0b03e07";
   };
 in
 {

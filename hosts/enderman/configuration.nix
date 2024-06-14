@@ -85,6 +85,7 @@ in
   };
 
   environment.systemPackages = with pkgs; [
+    tmux
     inputs.agenix.packages.${system}.agenix
     nmap
     git
