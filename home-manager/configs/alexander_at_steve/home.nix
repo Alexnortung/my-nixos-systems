@@ -29,6 +29,7 @@ in
       ffmpeg
       unstable.bruno
       unstable.webcord
+      freecad
       kicad
       # legendary-gl
       heroic
