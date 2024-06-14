@@ -48,7 +48,7 @@ let
     function-permission-level = 2;
     level-type = "default";
     spawn-monsters = true;
-    spawn-protection = 16;
+    spawn-protection = 0;
     max-world-size = 29999984;
     sync-chunk-writes = true;
     enable-rcon = false;
