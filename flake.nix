@@ -88,9 +88,9 @@
 
     cachix-deploy-flake.url = "github:cachix/cachix-deploy-flake";
 
-    oak-configs = {
-      url = "git+ssh://git@github.com/Oak-Digital/oak-nix-configs";
-    };
+    # oak-configs = {
+    #   url = "git+ssh://git@github.com/Oak-Digital/oak-nix-configs";
+    # };
 
     #local-nixpkgs.url = "path:/home/alexander/source/nixpkgs";
   }
