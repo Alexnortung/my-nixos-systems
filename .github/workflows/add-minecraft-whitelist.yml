@@ -1,5 +1,8 @@
 name: Add Minecraft whitelist
 
+permissions:
+  pull-requests: write
+
 on:
   repository_dispatch:
     types: [minecraft_whitelist_add]
