@@ -88,9 +88,9 @@
 
     cachix-deploy-flake.url = "github:cachix/cachix-deploy-flake";
 
-    # oak-configs = {
-    #   url = "git+ssh://git@github.com/Oak-Digital/oak-nix-configs";
-    # };
+    oak-configs = {
+      url = "git+ssh://git@github.com/Oak-Digital/oak-nix-configs";
+    };
 
     #local-nixpkgs.url = "path:/home/alexander/source/nixpkgs";
   }
@@ -191,6 +191,7 @@
 
       outputsBuilder = channels:
         let
+          pkgs = channels.nixpkgs-unstable;
           cachix-deploy-lib = cachix-deploy-flake.lib channels.nixpkgs-unstable;
         in
         {
@@ -198,6 +199,15 @@
             # cachix-deploy-spec = cachix-deploy-lib.spec {
             #   agents = (import ./hosts/default.nix).cachixDeployAgents inputs;
             # };
+
+            minecraft-whitelist-add =
+              pkgs.writeShellScriptBin "minecraft-whitelist-add" ''
+                #!${pkgs.stdenv.shell}
+                echo "Adding" "$1"
+                cat ./hosts/enderman/minecraft-whitelist.json | \
+                  jq ".\"$1\" = \"$2\"" > ./hosts/enderman/minecraft-whitelist.tmp.json
+                mv ./hosts/enderman/minecraft-whitelist.tmp.json ./hosts/enderman/minecraft-whitelist.json
+              '';
           };
         };
     };
