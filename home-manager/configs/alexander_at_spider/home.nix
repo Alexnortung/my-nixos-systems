@@ -26,6 +26,7 @@ in
       insomnia
       alacritty
       unstable.bruno
+      jq
     ];
 
     shellAliases = {
