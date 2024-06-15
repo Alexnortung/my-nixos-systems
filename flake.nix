@@ -58,6 +58,11 @@
       # inputs.nixpkgs.follows = "nixos-stable";
     };
 
+    block-busters = {
+      url = "github:Alexnortung/block-busters";
+      # url = "path:/home/alexander/source/block-busters";
+    };
+
     # nixvim = {
     #   url = "github:pta2002/nixvim";
     #   # url = "github:Alexnortung/nixvim/alexnortung-main";
@@ -158,6 +163,7 @@
           "${inputs.s3fs-fuse}/nixos/modules/services/network-filesystems/s3fs-fuse.nix"
 
           minecraft-servers.nixosModules.minecraft-servers
+          inputs.block-busters.nixosModules.discord-bot
 
           ./cachix.nix
         ];

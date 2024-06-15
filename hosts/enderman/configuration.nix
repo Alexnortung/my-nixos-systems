@@ -20,7 +20,7 @@ in
     ./nginx.nix
     ./dns.nix
     ./gc.nix
-    ./minecraft.nix
+    ./minecraft
     ./grocy.nix
     # ./home-assistant.nix
     # ./games.nix

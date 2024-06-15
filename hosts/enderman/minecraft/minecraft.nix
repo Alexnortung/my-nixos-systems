@@ -2,7 +2,7 @@
 , lib
 , inputs
 , ...
-}:
+}@args:
 let
   system = "x86_64-linux";
   sharedProperties = {
@@ -51,12 +51,13 @@ let
     spawn-protection = 0;
     max-world-size = 29999984;
     sync-chunk-writes = true;
-    enable-rcon = false;
+    enable-rcon = true;
     "rcon.port" = 25575;
+    "rcon.password" = "rconpass2";
     prevent-proxy-connection = false;
     entity-broadcast-range-percentage = 100;
   };
-  whitelist = builtins.fromJSON (builtins.readFile ./minecraft-whitelist.json);
+  whitelist = lib.importJSON ./minecraft-whitelist.json;
 in
 {
   services.minecraft-servers = {

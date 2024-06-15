@@ -6,6 +6,7 @@
       ./configuration.nix
       # inputs.nixos-dev
       nixos-hardware.nixosModules.common-cpu-intel
+      # inputs.block-busters.nixosModules.discord-bot
     ];
   };
   # deploy-rs node
