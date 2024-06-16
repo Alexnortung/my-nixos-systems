@@ -57,7 +57,8 @@ let
     prevent-proxy-connection = false;
     entity-broadcast-range-percentage = 100;
   };
-  whitelist = lib.importJSON ./minecraft-whitelist.json;
+  # whitelist = lib.importJSON ./minecraft-whitelist.json;
+  whitelist = null;
 in
 {
   services.minecraft-servers = {

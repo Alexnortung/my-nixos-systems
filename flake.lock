@@ -42,11 +42,11 @@
         "systems": "systems_3"
       },
       "locked": {
-        "lastModified": 1718492790,
-        "narHash": "sha256-tyFuZMEjkvuPl/F8XpSTepio/f3VJPcYnWfOzhX38dw=",
+        "lastModified": 1718540813,
+        "narHash": "sha256-hP2hVvJRZiFb4bKL2yLFXuVKTtruspQZJwbW/ZBFmF4=",
         "owner": "Alexnortung",
         "repo": "block-busters",
-        "rev": "ddca8b905b73199e6d3f3c13b7311c8cf4008baf",
+        "rev": "805030d746972e4f516c32f47168315f28d2402e",
         "type": "github"
       },
       "original": {
@@ -999,15 +999,16 @@
         "nixpkgs": "nixpkgs_8"
       },
       "locked": {
-        "lastModified": 1718312169,
-        "narHash": "sha256-iqmHy5g7ggmQJTj6XcieXw/MADO53PKR12zqLuXpeok=",
+        "lastModified": 1718494675,
+        "narHash": "sha256-T7izHz1QgzvvG3M9Sa+pxgVD3wBki6+hywJEcaOK+8U=",
         "owner": "Alexnortung",
         "repo": "nix-minecraft",
-        "rev": "3a835903066a09aeb87696510d31849488e3e3c6",
+        "rev": "c757bd7884a7001c5305a88edcb46ee2842452fa",
         "type": "github"
       },
       "original": {
         "owner": "Alexnortung",
+        "ref": "non-declarative-whitelist",
         "repo": "nix-minecraft",
         "type": "github"
       }
@@ -1639,11 +1640,11 @@
     },
     "nixpkgs_8": {
       "locked": {
-        "lastModified": 1718160348,
-        "narHash": "sha256-9YrUjdztqi4Gz8n3mBuqvCkMo4ojrA6nASwyIKWMpus=",
+        "lastModified": 1715266358,
+        "narHash": "sha256-doPgfj+7FFe9rfzWo1siAV2mVCasW+Bh8I1cToAXEE4=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "57d6973abba7ea108bac64ae7629e7431e0199b6",
+        "rev": "f1010e0469db743d14519a1efd37e23f8513d714",
         "type": "github"
       },
       "original": {

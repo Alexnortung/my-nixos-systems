@@ -71,7 +71,7 @@
     # };
 
     minecraft-servers = {
-      url = "github:Alexnortung/nix-minecraft";
+      url = "github:Alexnortung/nix-minecraft/non-declarative-whitelist";
       # inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
