@@ -42,11 +42,11 @@
         "systems": "systems_3"
       },
       "locked": {
-        "lastModified": 1718540813,
-        "narHash": "sha256-hP2hVvJRZiFb4bKL2yLFXuVKTtruspQZJwbW/ZBFmF4=",
+        "lastModified": 1718911482,
+        "narHash": "sha256-tHmw/VLQx5QIRLTM4sQwk2xbBfdKEUk0ASWDHWqEuR0=",
         "owner": "Alexnortung",
         "repo": "block-busters",
-        "rev": "805030d746972e4f516c32f47168315f28d2402e",
+        "rev": "7084998cf032beabfca3618d4324546f0ae62e7d",
         "type": "github"
       },
       "original": {
