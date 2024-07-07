@@ -66,6 +66,7 @@ in
 
   # Set your time zone.
   time.timeZone = "Europe/Copenhagen";
+  time.hardwareClockInLocalTime = true;
 
   networking = {
     hostName = "enderman"; # Define your hostname.

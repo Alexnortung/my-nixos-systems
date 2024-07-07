@@ -111,7 +111,7 @@ in
       };
 
       block-busters-1-21-test = {
-        enable = true;
+        enable = false;
         # package = pkgs.vanillaServers.vanilla-1_21;
         package = inputs.minecraft-servers.legacyPackages.${system}.fabricServers.fabric-1_21;
         # package = inputs.minecraft-servers.legacyPackages.${system}.vanillaServers.vanilla-1_21;
@@ -123,6 +123,7 @@ in
         };
 
         symlinks = {
+          "allowed_symlinks.txt" = pkgs.writeText "allowed_symlinks.txt" "/nix/store";
           mods = pkgs.linkFarmFromDrvs "mods" (builtins.attrValues {
             FabricApi = (
               pkgs.fetchurl {
