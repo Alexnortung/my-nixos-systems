@@ -59,14 +59,26 @@ let
   };
   # whitelist = lib.importJSON ./minecraft-whitelist.json;
   whitelist = null;
+  fabricApi = (
+    pkgs.fetchurl {
+      url = "https://cdn.modrinth.com/data/P7dR8mSH/versions/1cXs6RWI/fabric-api-0.100.3%2B1.21.jar";
+      sha256 = "sha256-K4q84mbCBprhFlo5lRZOv6tVWpXnvCQPIhynIionNZU=";
+    }
+  );
+  invView = (
+    pkgs.fetchurl {
+      url = "https://cdn.modrinth.com/data/jrDKjZP7/versions/LNGVFn7g/InvView-1.4.15-1.20.5%2B.jar";
+      sha256 = "sha256-fsEUjewyHKVg/0RJcpTdl0ClWSRj3ApU8Qv+AxIFZJE=";
+    }
+  );
 in
 {
   systemd.services.minecraft-server-block-busters-1-21 = {
     startLimitIntervalSec = lib.mkForce 15;
   };
-  systemd.services.minecraft-server-block-busters-1-21-test = {
-    startLimitIntervalSec = lib.mkForce 15;
-  };
+  # systemd.services.minecraft-server-block-busters-1-21-test = {
+  #   startLimitIntervalSec = lib.mkForce 15;
+  # };
 
   services.minecraft-servers = {
     enable = true;
@@ -102,49 +114,51 @@ in
         enable = true;
         # package = pkgs.vanillaServers.vanilla-1_21;
         # package = inputs.minecraft-servers.legacyPackages.${system}.fabricServers.fabric-1_21;
-        package = inputs.minecraft-servers.legacyPackages.${system}.vanillaServers.vanilla-1_21;
-        # package = pkgs.fabricServers.fabric-1_21;
-        jvmOpts = "-Xms2G -Xmx8G";
-        serverProperties = sharedProperties // {
-          level-seed = "2529419826";
-        };
-      };
-
-      block-busters-1-21-test = {
-        enable = false;
-        # package = pkgs.vanillaServers.vanilla-1_21;
         package = inputs.minecraft-servers.legacyPackages.${system}.fabricServers.fabric-1_21;
-        # package = inputs.minecraft-servers.legacyPackages.${system}.vanillaServers.vanilla-1_21;
         # package = pkgs.fabricServers.fabric-1_21;
         jvmOpts = "-Xms2G -Xmx8G";
         serverProperties = sharedProperties // {
           level-seed = "2529419826";
-          server-port = 25566;
         };
 
         symlinks = {
           "allowed_symlinks.txt" = pkgs.writeText "allowed_symlinks.txt" "/nix/store";
           mods = pkgs.linkFarmFromDrvs "mods" (builtins.attrValues {
-            FabricApi = (
-              pkgs.fetchurl {
-                url = "https://cdn.modrinth.com/data/P7dR8mSH/versions/1cXs6RWI/fabric-api-0.100.3%2B1.21.jar";
-                sha256 = "sha256-K4q84mbCBprhFlo5lRZOv6tVWpXnvCQPIhynIionNZU=";
-              }
-            );
-            InvView = (
-              pkgs.fetchurl {
-                url = "https://cdn.modrinth.com/data/jrDKjZP7/versions/LNGVFn7g/InvView-1.4.15-1.20.5%2B.jar";
-                sha256 = "sha256-fsEUjewyHKVg/0RJcpTdl0ClWSRj3ApU8Qv+AxIFZJE=";
-              }
-            );
+            FabricApi = fabricApi;
+            InvView = invView;
           });
-
-          # "world/datapacks/Deactivate-Portals.zip" = pkgs.fetchurl {
-          #   url = "https://cdn.modrinth.com/data/L83JDWD9/versions/bOGaf8Q5/Deactivate-Portals.zip";
-          #   sha256 = "sha256-14sYSQAmixq1i6UP98eKQ4X5EqilQtWaFXKigsKERWw=";
-          # };
+          "world/datapacks/ShulkerDropsTwoShells.zip" = pkgs.fetchurl {
+            url = "https://cdn.modrinth.com/data/ZHZLKDpx/versions/f6d6Q07A/ShulkerDropsTwoShells-%5B1.21%5D-v.2.0.0.zip";
+            sha256 = "sha256-7QD3nRMIEv2QWUUjzCRRfZs4mTZGyfInMAEFzV/YA6c=";
+          };
         };
       };
+
+      # block-busters-1-21-test = {
+      #   enable = false;
+      #   # package = pkgs.vanillaServers.vanilla-1_21;
+      #   package = inputs.minecraft-servers.legacyPackages.${system}.fabricServers.fabric-1_21;
+      #   # package = inputs.minecraft-servers.legacyPackages.${system}.vanillaServers.vanilla-1_21;
+      #   # package = pkgs.fabricServers.fabric-1_21;
+      #   jvmOpts = "-Xms2G -Xmx8G";
+      #   serverProperties = sharedProperties // {
+      #     level-seed = "2529419826";
+      #     server-port = 25566;
+      #   };
+      #
+      #   symlinks = {
+      #     "allowed_symlinks.txt" = pkgs.writeText "allowed_symlinks.txt" "/nix/store";
+      #     mods = pkgs.linkFarmFromDrvs "mods" (builtins.attrValues {
+      #       FabricApi = fabricApi;
+      #       InvView = invView;
+      #     });
+      #
+      #     # "world/datapacks/Deactivate-Portals.zip" = pkgs.fetchurl {
+      #     #   url = "https://cdn.modrinth.com/data/L83JDWD9/versions/bOGaf8Q5/Deactivate-Portals.zip";
+      #     #   sha256 = "sha256-14sYSQAmixq1i6UP98eKQ4X5EqilQtWaFXKigsKERWw=";
+      #     # };
+      #   };
+      # };
     };
     # declarative = true;
   };
