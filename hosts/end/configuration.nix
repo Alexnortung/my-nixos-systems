@@ -16,7 +16,7 @@ in
 {
   imports = [
     # Include the results of the hardware scan.
-    ../../config/backup-bucket.nix
+    # ../../config/backup-bucket.nix
     ./hardware-configuration.nix
     ./secrets
     ./db.nix
@@ -29,7 +29,7 @@ in
     ./monero.nix
     ../../modules/console.nix
     ../../modules/comfort-packages.nix
-    ../../profiles/registries.nix
+    # ../../profiles/registries.nix
   ];
 
   networking.hostName = "end"; # Define your hostname.

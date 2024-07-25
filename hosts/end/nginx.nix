@@ -13,6 +13,10 @@ in
     443 # HTTP and HTTPS
     25565 # Minecraft
   ];
+  networking.firewall.allowedUDPPorts = [
+    34197 # Factorio
+    25565 # Minecraft
+  ];
 
   services.nginx = {
     enable = true;
@@ -35,10 +39,18 @@ in
         server 127.0.0.1:${toString defaultSSLPort};
       }
 
+      # Forward Minecraft
       server {
         listen 25565;
         listen 25565 udp;
         proxy_pass 10.101.0.2:25565;
+      }
+
+      # Forward Factorio
+      server {
+        listen 34197;
+        listen 34197 udp;
+        proxy_pass 10.101.0.2:34197;
       }
 
       map $ssl_preread_server_name $targetBackend {

@@ -19,6 +19,7 @@ in
     ./audiobookshelf.nix
     ./nginx.nix
     ./dns.nix
+    ./factorio.nix
     ./gc.nix
     ./minecraft
     ./grocy.nix

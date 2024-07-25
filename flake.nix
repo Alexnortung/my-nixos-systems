@@ -13,7 +13,7 @@
   };
 
   inputs = {
-    utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus/v1.4.0";
+    utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus/v1.5.1";
     # nixos-dev = {
     #   url = "path:/home/alexander/source/nixpkgs";
     # };
@@ -83,7 +83,6 @@
     mail-server = {
       url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
-      inputs.nixpkgs-23_05.follows = "nixos-stable";
     };
 
     hosts = {
