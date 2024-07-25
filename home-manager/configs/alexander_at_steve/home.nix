@@ -18,6 +18,7 @@ in
       nodePackages.npm
       unstable.yarn-berry
       lmms
+      bitwig-studio
       krita
       edgedb
       insomnia
