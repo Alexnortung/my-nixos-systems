@@ -12,11 +12,84 @@ in
     80
     443 # HTTP and HTTPS
     25565 # Minecraft
+    18989
   ];
   networking.firewall.allowedUDPPorts = [
-    34197 # Factorio
+    # 34197 # Factorio
     25565 # Minecraft
   ];
+
+  # networking.nat.enable = true;
+  # networking.nat.forwardPorts = [
+  #   {
+  #     proto = "tcp";
+  #     sourcePort = 34197;
+  #     destination = "10.101.0.2:34197";
+  #   }
+  #   {
+  #     proto = "udp";
+  #     sourcePort = 34197;
+  #     destination = "10.101.0.2:34197";
+  #   }
+  # ];
+  # networking.nat.externalInterface = "ens18";
+
+  # boot.kernelModules = [
+  #   "iptable_nat"
+  #   "iptable_filter"
+  #   "xt_nat"
+  # ];
+  # networking.firewall.enable = true;
+  # networking.nat = {
+  #   enable = true;
+  #   forwardPorts = [
+  #     {
+  #       proto = "tcp";
+  #       sourcePort = 34197;
+  #       destination = "10.101.0.2:34197";
+  #     }
+  #     {
+  #       proto = "udp";
+  #       sourcePort = 34197;
+  #       destination = "10.101.0.2:34197";
+  #     }
+  #     {
+  #       proto = "tcp";
+  #       sourcePort = 18989;
+  #       destination = "10.101.0.2:8989";
+  #     }
+  #   ];
+  #
+  #   externalInterface = "end-portal";
+  #   internalInterfaces = [ "ens18" ];
+  #   # internalInterfaces = [ "end-portal" ];
+  #   # externalInterface = "ens18";
+  # };
+
+  networking.firewall = {
+    enable = true;
+
+    # extraCommands = ''
+    #   iptables -A FORWARD -i ens18 -o end-portal -m state --state RELATED,ESTABLISHED -j ACCEPT || true
+    #   iptables -A FORWARD -i end-portal -o ens18 -j ACCEPT || true
+    # '';
+    extraCommands = ''
+      iptables -A FORWARD -i ens18 -o end-portal -m state --state RELATED,ESTABLISHED -j ACCEPT
+      iptables -A FORWARD -i end-portal -o ens18 -j ACCEPT
+
+      # DNAT rules for UDP
+      iptables -t nat -A PREROUTING -i ens18 -p udp --dport 34197 -j DNAT --to-destination 10.101.0.2:34197
+      iptables -t nat -A PREROUTING -i ens5 -p udp --dport 34197 -j DNAT --to-destination 10.101.0.2:34197
+
+      # Masquerade rule
+      iptables -t nat -A POSTROUTING -o end-portal -j MASQUERADE
+    '';
+
+    # extraStopCommands = ''
+    #   iptables -D FORWARD -i ens18 -o end-portal -m state --state RELATED,ESTABLISHED -j ACCEPT || true
+    #   iptables -D FORWARD -i end-portal -o ens18 -j ACCEPT || true
+    # '';
+  };
 
   services.nginx = {
     enable = true;
@@ -30,6 +103,7 @@ in
       servers."10.101.0.2" = { };
     };
 
+
     streamConfig = ''
       upstream endermanSsl {
         server 10.101.0.2:443;
@@ -40,18 +114,18 @@ in
       }
 
       # Forward Minecraft
-      server {
-        listen 25565;
-        listen 25565 udp;
-        proxy_pass 10.101.0.2:25565;
-      }
+      #server {
+      #  listen 25565;
+      #  listen 25565 udp reuseport;
+      #  proxy_pass 10.101.0.2:25565;
+      #}
 
       # Forward Factorio
-      server {
-        listen 34197;
-        listen 34197 udp;
-        proxy_pass 10.101.0.2:34197;
-      }
+      # server {
+      #   listen 34197 udp reuseport;
+      #   proxy_pass 10.101.0.2:34197;
+      #   proxy_timeout 15s;
+      # }
 
       map $ssl_preread_server_name $targetBackend {
         jellyfin.northwing.games  endermanSsl;

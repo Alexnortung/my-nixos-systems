@@ -1,6 +1,6 @@
 {
   imports = [
-    ./minecraft.nix
-    ./discord-bot.nix
+    # ./minecraft.nix
+    # ./discord-bot.nix
   ];
 }

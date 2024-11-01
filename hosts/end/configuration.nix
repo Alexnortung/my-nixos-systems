@@ -30,6 +30,7 @@ in
     ../../modules/console.nix
     ../../modules/comfort-packages.nix
     # ../../profiles/registries.nix
+    ./factorio.nix
   ];
 
   networking.hostName = "end"; # Define your hostname.

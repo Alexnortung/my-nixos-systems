@@ -5,7 +5,7 @@ let
 in
 {
   services.factorio = {
-    enable = true;
+    enable = false;
     package = unstable.factorio-headless;
     openFirewall = true;
     saveName = "v2";
