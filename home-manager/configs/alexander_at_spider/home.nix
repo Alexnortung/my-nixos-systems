@@ -27,6 +27,9 @@ in
       alacritty
       unstable.bruno
       jq
+      webcord
+      tenacity
+      # sherloq
     ];
 
     shellAliases = {
