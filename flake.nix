@@ -29,7 +29,7 @@
       url = "github:NixOS/nixos-hardware";
     };
     home-manager = {
-      url = "github:nix-community/home-manager/release-23.11";
+      url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
@@ -93,9 +93,9 @@
 
     cachix-deploy-flake.url = "github:cachix/cachix-deploy-flake";
 
-    # oak-configs = {
-    #   url = "git+ssh://git@github.com/Oak-Digital/oak-nix-configs";
-    # };
+    oak-configs = {
+      url = "git+ssh://git@github.com/Oak-Digital/oak-nix-configs";
+    };
 
     #local-nixpkgs.url = "path:/home/alexander/source/nixpkgs";
   }
