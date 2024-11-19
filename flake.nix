@@ -24,7 +24,7 @@
       url = "github:alexnortung/nixpkgs/s3fs-module";
     };
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nixpkgs-unstable-master.url = "github:Infinidoge/nixpkgs/bump/factorio";
+    nixpkgs-unstable-master.url = "github:graysonhead/nixpkgs/master";
     nixos-hardware = {
       url = "github:NixOS/nixos-hardware";
     };

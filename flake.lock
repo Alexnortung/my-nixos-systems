@@ -1626,16 +1626,16 @@
     },
     "nixpkgs-unstable-master": {
       "locked": {
-        "lastModified": 1731080245,
-        "narHash": "sha256-EQYSFZ+lCY39OcJ3U2RzzScmMyaOm+jJDa0ApV0vwac=",
-        "owner": "Infinidoge",
+        "lastModified": 1732030610,
+        "narHash": "sha256-c+o5/A5XaDdVHj2xNHrNwoCjBWdZiuwzE2GjuEyznc4=",
+        "owner": "graysonhead",
         "repo": "nixpkgs",
-        "rev": "16518a3f3d4be90eb8ca7f961b12349ccce9c0b5",
+        "rev": "c6bb9240c96b6b532d74f8694defc9366bb78cc4",
         "type": "github"
       },
       "original": {
-        "owner": "Infinidoge",
-        "ref": "bump/factorio",
+        "owner": "graysonhead",
+        "ref": "master",
         "repo": "nixpkgs",
         "type": "github"
       }
