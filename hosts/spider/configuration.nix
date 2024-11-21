@@ -1,18 +1,12 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{ pkgs
-, config
-, lib
-, inputs
-, ...
-}:
+{ pkgs, config, lib, inputs, ... }:
 let
   system = "x86_64-linux";
   slock-command = "/run/wrappers/bin/slock";
   unstable = inputs.nixpkgs-unstable.legacyPackages.${system};
-in
-{
+in {
   imports = [
     ./hardware-configuration.nix
     ./secrets
@@ -33,10 +27,8 @@ in
     ../../modules/ssh-config.nix
   ];
 
-  age.identityPaths = [
-    "/etc/ssh/ssh_host_rsa_key"
-    "/home/alexander/.ssh/id_rsa"
-  ];
+  age.identityPaths =
+    [ "/etc/ssh/ssh_host_rsa_key" "/home/alexander/.ssh/id_rsa" ];
 
   # networking.wg-quick.interfaces.wg0 = {
   #   privateKeyFile = config.age.secrets.wireguard-key.path;
@@ -58,20 +50,13 @@ in
 
   nix = {
     package = pkgs.nix;
-    settings = {
-      trusted-users = [
-        "root"
-        "alexander"
-      ];
-    };
+    settings = { trusted-users = [ "root" "alexander" ]; };
     # extraOptions = ''
     #   experimental-features = nix-command flakes
     # '';
   };
 
-  hardware.bluetooth = {
-    enable = true;
-  };
+  hardware.bluetooth = { enable = true; };
 
   hardware.logitech.wireless = {
     enable = true;
@@ -84,11 +69,7 @@ in
   #   }
   # ];
 
-  fonts.packages = with pkgs; [
-    fira-code
-    hasklig
-    nerdfonts
-  ];
+  fonts.packages = with pkgs; [ fira-code hasklig nerdfonts ];
 
   # Use the systemd-boot EFI boot loader.
   boot = {
@@ -129,12 +110,8 @@ in
     enableIPv6 = true;
     interfaces.enp0s31f6.useDHCP = true;
     interfaces.wlp0s20f3.useDHCP = true;
-    networkmanager = {
-      enable = true;
-    };
-    wireguard = {
-      enable = true;
-    };
+    networkmanager = { enable = true; };
+    wireguard = { enable = true; };
     firewall = {
       enable = false;
       checkReversePath = lib.mkForce "loose";
@@ -166,14 +143,11 @@ in
   # services.openssh.enable = true;
 
   services.printing.enable = true;
-  services.printing.drivers = with pkgs; [
-    gutenprint
-    foomatic-db-ppds
-  ];
+  services.printing.drivers = with pkgs; [ gutenprint foomatic-db-ppds ];
   services.avahi = {
     enable = true;
     openFirewall = true;
-    nssmdns = true;
+    nssmdns4 = true;
   };
   # for a WiFi printer
 
@@ -185,7 +159,8 @@ in
 
   services.bg-setter = {
     enable = true;
-    wallpaper = lib.lists.elemAt (import ../../config/misc/nord-wallpapers.nix { }) 0;
+    wallpaper =
+      lib.lists.elemAt (import ../../config/misc/nord-wallpapers.nix { }) 0;
   };
 
   services.dwm-status = {
@@ -226,22 +201,13 @@ in
     enable = true;
     windowManager.dwm.enable = true;
     displayManager.lightdm.enable = true;
-    desktopManager = {
-      wallpaper = {
-        mode = "center";
-      };
-    };
+    desktopManager = { wallpaper = { mode = "center"; }; };
 
     videoDrivers = [ "modesetting" ];
 
     # Enable touchpad support (enabled default in most desktopManager).
-    libinput = {
-      enable = true;
-      touchpad.tapping = true;
-      touchpad.naturalScrolling = true;
-    };
     # Configure keymap in X11
-    layout = "dk";
+    xkb.layout = "dk";
 
     xautolock = {
       enable = true;
@@ -252,6 +218,12 @@ in
         "-detectsleep"
       ];
     };
+  };
+
+  services.libinput = {
+    enable = true;
+    touchpad.tapping = true;
+    touchpad.naturalScrolling = true;
   };
 
   services.picom = {
@@ -278,12 +250,7 @@ in
       alexander = {
         shell = pkgs.zsh;
         isNormalUser = true;
-        extraGroups = [
-          "wheel"
-          "vboxusers"
-          "docker"
-          "audio"
-        ];
+        extraGroups = [ "wheel" "vboxusers" "docker" "audio" ];
       };
     };
     extraGroups.vboxusers.members = [ "alexander" ];
@@ -301,6 +268,7 @@ in
   };
 
   environment.systemPackages = with pkgs; [
+    gftp
     solaar
     kondo
     inputs.agenix.packages.${system}.agenix
@@ -343,7 +311,7 @@ in
     zip
     unzip
     flameshot
-    firefox
+    firefox-bin
     zathura
   ];
 
@@ -355,13 +323,9 @@ in
     enableSSHSupport = true;
   };
 
-  programs.slock = {
-    enable = true;
-  };
+  programs.slock = { enable = true; };
 
-  programs.nm-applet = {
-    enable = true;
-  };
+  programs.nm-applet = { enable = true; };
 
   programs.xss-lock = {
     enable = true;
@@ -369,9 +333,7 @@ in
     lockerCommand = slock-command;
   };
 
-  programs.git = {
-    config.user.email = "alexander.nortung@oakdigital.dk";
-  };
+  programs.git = { config.user.email = "alexander.nortung@oakdigital.dk"; };
 
   services.redshift = {
     enable = true;
@@ -380,9 +342,7 @@ in
 
   services.mullvad-vpn.enable = true;
 
-  virtualisation.docker = {
-    enable = true;
-  };
+  virtualisation.docker = { enable = true; };
 
   system.stateVersion = "21.11";
 }

@@ -2,10 +2,8 @@
   description = "Alexnortung's system configurations and server configurations";
 
   nixConfig = {
-    extra-substituters = [
-      "https://nix-community.cachix.org"
-      "https://deploy-rs.cachix.org"
-    ];
+    extra-substituters =
+      [ "https://nix-community.cachix.org" "https://deploy-rs.cachix.org" ];
     extra-trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "deploy-rs.cachix.org-1:xfNobmiwF/vzvK1gpfediPwpdIP0rpDV2rYqx40zdSI="
@@ -20,27 +18,24 @@
     nixos-stable.url = "github:NixOS/nixpkgs/nixos-24.05";
     # nixos-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     # nixpkgs-alexnortung.url = "github:alexnortung/nixpkgs/s3fs-module";
-    s3fs-fuse = {
-      url = "github:alexnortung/nixpkgs/s3fs-module";
-    };
+    s3fs-fuse = { url = "github:alexnortung/nixpkgs/s3fs-module"; };
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixpkgs-unstable-master.url = "github:graysonhead/nixpkgs/master";
     nixos-hardware = {
       url = "github:NixOS/nixos-hardware";
     };
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.05";
+      url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
-    nollevim = {
-      url = "github:Alexnortung/nollevim";
-    };
+    nollevim = { url = "github:Alexnortung/nollevim/old"; };
 
     vim-extra-plugins.url = "github:m15a/nixpkgs-vim-extra-plugins";
 
     agenix = {
-      url = "github:ryantm/agenix/0.13.0"; # for encrypted secrets. such as wireguard keys
+      url =
+        "github:ryantm/agenix/0.13.0"; # for encrypted secrets. such as wireguard keys
       # inputs.nixpkgs.follows = "nixos-stable";
       # inputs.home-manager.follows = "home-manager";
     };
@@ -72,7 +67,7 @@
     # };
 
     minecraft-servers = {
-      url = "github:Alexnortung/nix-minecraft/non-declarative-whitelist";
+      url = "github:Infinidoge/nix-minecraft";
       # inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
@@ -99,23 +94,14 @@
 
     #local-nixpkgs.url = "path:/home/alexander/source/nixpkgs";
   }
-    #// ((import ./hosts).inputs)
+  #// ((import ./hosts).inputs)
   ;
 
-  outputs =
-    inputs@{ self
-    , utils-plus
-    , vim-extra-plugins
-    , fenix
-      # , neovim
+  outputs = inputs@{ self, utils-plus, vim-extra-plugins, fenix
+    # , neovim
     , agenix
-      # , nixvim
-    , minecraft-servers
-    , nix-on-droid
-    , hosts
-    , cachix-deploy-flake
-    , ...
-    }:
+    # , nixvim
+    , minecraft-servers, nix-on-droid, hosts, cachix-deploy-flake, ... }:
     utils-plus.lib.mkFlake {
       inherit self inputs;
 
@@ -135,19 +121,16 @@
         # allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) (import ./config/allowed-unfree-packages.nix);
         allowUnfreePredicate = (pkg: true);
         allowUnfree = true;
-        permittedInsecurePackages = [
-          "electron-24.8.6"
-        ];
+        permittedInsecurePackages = [ "electron-24.8.6" ];
       };
 
-      channels.nixos-stable.overlaysBuilder = channels: [
-        # (import ./overlays/default-unstable.nix channels.nixpkgs-unstable)
-        (final: prev: {
-          unstable = channels.nixpkgs-unstable;
-        })
-        # (import ./overlays/unstable.nix inputs)
-        # (final: prev: { inherit (channels.nixpkgs-unstable) session-desktop krita; })
-      ];
+      channels.nixos-stable.overlaysBuilder = channels:
+        [
+          # (import ./overlays/default-unstable.nix channels.nixpkgs-unstable)
+          (final: prev: { unstable = channels.nixpkgs-unstable; })
+          # (import ./overlays/unstable.nix inputs)
+          # (final: prev: { inherit (channels.nixpkgs-unstable) session-desktop krita; })
+        ];
 
       hostDefaults = {
         extraArgs = {
@@ -171,9 +154,7 @@
       hosts = (import ./hosts/default.nix).hosts inputs;
 
       # deploy-rs definitions
-      deploy = {
-        nodes = (import ./hosts/default.nix).nodes inputs;
-      };
+      deploy = { nodes = (import ./hosts/default.nix).nodes inputs; };
 
       # nixOnDroidConfigurations = {
       #   bundle = nix-on-droid.lib.nixOnDroidConfiguration {
@@ -199,8 +180,7 @@
         let
           pkgs = channels.nixpkgs-unstable;
           cachix-deploy-lib = cachix-deploy-flake.lib channels.nixpkgs-unstable;
-        in
-        {
+        in {
           packages = {
             # cachix-deploy-spec = cachix-deploy-lib.spec {
             #   agents = (import ./hosts/default.nix).cachixDeployAgents inputs;

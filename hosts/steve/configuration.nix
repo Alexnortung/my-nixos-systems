@@ -8,8 +8,7 @@ let
   system = "x86_64-linux";
   unstable = inputs.nixpkgs-unstable.legacyPackages.${system};
   # unstable-overlay = import ../../overlays/unstable.nix inputs system;
-in
-{
+in {
   imports = [
     ./hardware-configuration.nix
     # ../../modules/nvim.nix
@@ -40,12 +39,7 @@ in
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
-    settings = {
-      trusted-users = [
-        "root"
-        "alexander"
-      ];
-    };
+    settings = { trusted-users = [ "root" "alexander" ]; };
   };
 
   services.flatpak.enable = true;
@@ -68,12 +62,11 @@ in
 
   boot = {
     # kernelParams = [ "nvidia-drm.modeset=1" ];
-    extraModulePackages = with config.boot.kernelPackages; [
-      # nvidia_x11
-    ];
-    kernelModules = [
-      "msr"
-    ];
+    extraModulePackages = with config.boot.kernelPackages;
+      [
+        # nvidia_x11
+      ];
+    kernelModules = [ "msr" ];
     # Use the systemd-boot EFI boot loader.
     loader = {
       systemd-boot.enable = true;
@@ -107,7 +100,7 @@ in
     enableIPv6 = false;
     dhcpcd = {
       # enable = true;
-      extraConfig = '''';
+      extraConfig = "";
     };
     hostName = "steve";
     # The global useDHCP flag is deprecated, therefore explicitly set to false here.
@@ -134,9 +127,7 @@ in
     LC_TIME = "da_DK.UTF-8";
   };
 
-  powerManagement = {
-    cpufreq.max = 3800000;
-  };
+  powerManagement = { cpufreq.max = 3800000; };
 
   # Enable the X11 windowing system.
   services.xserver = {
@@ -148,9 +139,7 @@ in
     # desktopManager.plasma5.enable = true;
   };
 
-  programs.dconf = {
-    enable = true;
-  };
+  programs.dconf = { enable = true; };
 
   programs.adb.enable = true;
 
@@ -169,10 +158,7 @@ in
   #   };
   # };
 
-  fonts.packages = with pkgs; [
-    hasklig
-    terminus-nerdfont
-  ];
+  fonts.packages = with pkgs; [ hasklig terminus-nerdfont ];
 
   # services.dwm-status = {
   #   enable = true;
@@ -196,9 +182,7 @@ in
   # };
 
   # Redshift
-  services.redshift = {
-    enable = true;
-  };
+  services.redshift = { enable = true; };
 
   # Configure keymap in X11
   services.xserver.xkb.layout = "dk";
@@ -207,7 +191,14 @@ in
     alexander = {
       isNormalUser = true;
       home = "/home/alexander";
-      extraGroups = [ "wheel" "video" "audio" "adbusers" "docker" "wireshark" ]; # Enable ‘sudo’ for the user.
+      extraGroups = [
+        "wheel"
+        "video"
+        "audio"
+        "adbusers"
+        "docker"
+        "wireshark"
+      ]; # Enable ‘sudo’ for the user.
       shell = pkgs.zsh;
     };
     morgan = {
@@ -224,15 +215,11 @@ in
 
   # List packages installed in system profile. To search, run:
   programs.steam.enable = true;
-  programs.steam.gamescopeSession = {
-    enable = true;
-  };
+  programs.steam.gamescopeSession = { enable = true; };
 
   programs.gamemode.enable = true;
 
-  programs.kdeconnect = {
-    enable = true;
-  };
+  programs.kdeconnect = { enable = true; };
 
   services.mullvad-vpn.enable = true;
 
@@ -328,9 +315,7 @@ in
     libpulseaudio
   ];
 
-  virtualisation.docker = {
-    enable = true;
-  };
+  virtualisation.docker = { enable = true; };
 
   programs.gnupg.agent = {
     enable = true;
