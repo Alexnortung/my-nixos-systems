@@ -1,6 +1,7 @@
 { config, pkgs, inputs, system, ... }:
 let unstable = import inputs.nixpkgs-unstable { inherit system; };
-in {
+in
+{
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home = {
@@ -23,7 +24,8 @@ in {
       webcord
       tenacity
       # sherloq
-      unstable.zed-editor
+      # unstable.zed-editor
+      unstable.infisical
     ];
 
     shellAliases = {
