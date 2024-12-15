@@ -20,7 +20,7 @@
     # nixpkgs-alexnortung.url = "github:alexnortung/nixpkgs/s3fs-module";
     s3fs-fuse = { url = "github:alexnortung/nixpkgs/s3fs-module"; };
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nixpkgs-unstable-master.url = "github:graysonhead/nixpkgs/master";
+    nixpkgs-unstable-master.url = "github:Alexnortung/nixpkgs/factorio";
     nixos-hardware = {
       url = "github:NixOS/nixos-hardware";
     };
@@ -94,14 +94,23 @@
 
     #local-nixpkgs.url = "path:/home/alexander/source/nixpkgs";
   }
-  #// ((import ./hosts).inputs)
+    #// ((import ./hosts).inputs)
   ;
 
-  outputs = inputs@{ self, utils-plus, vim-extra-plugins, fenix
-    # , neovim
+  outputs =
+    inputs@{ self
+    , utils-plus
+    , vim-extra-plugins
+    , fenix
+      # , neovim
     , agenix
-    # , nixvim
-    , minecraft-servers, nix-on-droid, hosts, cachix-deploy-flake, ... }:
+      # , nixvim
+    , minecraft-servers
+    , nix-on-droid
+    , hosts
+    , cachix-deploy-flake
+    , ...
+    }:
     utils-plus.lib.mkFlake {
       inherit self inputs;
 
@@ -180,7 +189,8 @@
         let
           pkgs = channels.nixpkgs-unstable;
           cachix-deploy-lib = cachix-deploy-flake.lib channels.nixpkgs-unstable;
-        in {
+        in
+        {
           packages = {
             # cachix-deploy-spec = cachix-deploy-lib.spec {
             #   agents = (import ./hosts/default.nix).cachixDeployAgents inputs;

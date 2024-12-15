@@ -1494,16 +1494,16 @@
     },
     "nixpkgs-unstable-master": {
       "locked": {
-        "lastModified": 1732030610,
-        "narHash": "sha256-c+o5/A5XaDdVHj2xNHrNwoCjBWdZiuwzE2GjuEyznc4=",
-        "owner": "graysonhead",
+        "lastModified": 1733172703,
+        "narHash": "sha256-shWC+ZeFHR1oU+H60EjeWafP38cxbX/XdF8jmJckcQk=",
+        "owner": "Alexnortung",
         "repo": "nixpkgs",
-        "rev": "c6bb9240c96b6b532d74f8694defc9366bb78cc4",
+        "rev": "345ee0e6ca177e87866ea59bb06c205c9d90a5da",
         "type": "github"
       },
       "original": {
-        "owner": "graysonhead",
-        "ref": "master",
+        "owner": "Alexnortung",
+        "ref": "factorio",
         "repo": "nixpkgs",
         "type": "github"
       }
