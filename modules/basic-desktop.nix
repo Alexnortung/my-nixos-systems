@@ -14,11 +14,9 @@
     fira-code
   ];
 
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
-    driSupport = true;
-    #s3tcSupport = true;
-    driSupport32Bit = true;
+    enable32Bit = true;
   };
 
   services.picom = {
@@ -38,7 +36,7 @@
     menus.enable = true;
   };
 
-  environment.etc."xdg/alacritty/alacritty.yml".source = ../config/alacritty.yml;
+  environment.etc."xdg/alacritty/alacritty.toml".source = ../config/alacritty.toml;
 
   environment.variables = {
     # XDG_CONFIG_HOME = "/etc/xdg/"

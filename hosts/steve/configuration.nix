@@ -8,13 +8,14 @@ let
   system = "x86_64-linux";
   unstable = inputs.nixpkgs-unstable.legacyPackages.${system};
   # unstable-overlay = import ../../overlays/unstable.nix inputs system;
-in {
+in
+{
   imports = [
     ./hardware-configuration.nix
     # ../../modules/nvim.nix
     ../../modules/programming-pkgs.nix
     ../../modules/comfort-packages.nix
-    ../../modules/sound.nix
+    # ../../modules/sound.nix
     ../../modules/console.nix
     #../../modules/personal-vpn.nix
     # ../../modules/latex.nix
@@ -33,6 +34,12 @@ in {
   #     enableWideVine = true;
   #   };
   # };
+
+  networking.hosts = {
+    "192.168.3.20" = [
+      "jellyfin.northwing.games"
+    ];
+  };
 
   nix = {
     package = unstable.nix;
@@ -77,9 +84,12 @@ in {
     };
   };
 
-  hardware.opengl.extraPackages = with pkgs; [
+  hardware.graphics.extraPackages = with pkgs; [
     # Amd stuff
-    rocm-opencl-icd
+    # rocm-opencl-icd
+    rocmPackages.clr.icd
+    # rocmPackages.clr
+    ocl-icd
 
     glfw
   ];
@@ -236,7 +246,7 @@ in {
 
   environment.systemPackages = with pkgs; [
     android-tools
-    gnome.gnome-software
+    gnome-software
     docker-compose
     gnomeExtensions.gnome-bedtime
     gnomeExtensions.appindicator

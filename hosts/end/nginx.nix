@@ -139,8 +139,8 @@ in
       server {
         listen 443;
 
-        proxy_connect_timeout 1s;
-        proxy_timeout 3s;
+        # proxy_connect_timeout 1s;
+        # proxy_timeout 3s;
         # resolver 1.1.1.1;
         
         proxy_pass $targetBackend;
