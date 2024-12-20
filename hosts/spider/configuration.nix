@@ -6,14 +6,15 @@ let
   system = "x86_64-linux";
   slock-command = "/run/wrappers/bin/slock";
   unstable = inputs.nixpkgs-unstable.legacyPackages.${system};
-in {
+in
+{
   imports = [
     ./hardware-configuration.nix
     ./secrets
     ../../modules/personal-vpn.nix
     ../../modules/programming-pkgs.nix
     ../../modules/comfort-packages.nix
-    ../../modules/sound.nix
+    # ../../modules/sound.nix
     ../../modules/console.nix
     # ../../modules/vscodium.nix
     # ../../modules/latex.nix
