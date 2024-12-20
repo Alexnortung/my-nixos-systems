@@ -26,6 +26,7 @@ in
       # sherloq
       # unstable.zed-editor
       unstable.infisical
+      unstable.doctl
     ];
 
     shellAliases = {
