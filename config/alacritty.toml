@@ -1,4 +1,4 @@
-[[key_bindings]]
+[[keyboard.bindings]]
 key = "Return"
 mods = "Control|Shift"
 action = "SpawnNewInstance"
@@ -39,8 +39,11 @@ style = "Bold"
 family = "Fira Code"
 style = "Italic"
 
+[cursor]
+blink_interval = 750
+blink_timeout = 5
+
 [cursor.style]
 shape = "Beam"
 blinking = "On"
-blink_interval = 750
-blink_timeout = 5
+
