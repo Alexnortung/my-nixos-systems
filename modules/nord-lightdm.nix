@@ -1,7 +1,7 @@
-{ config, lib, pkgs, ...}:
+{ config, lib, pkgs, ... }:
 
 let
-  nord-wallpaper = lib.lists.elemAt (import ../config/misc/nord-wallpapers.nix {}) 0;
+  nord-wallpaper = lib.lists.elemAt (import ../config/misc/nord-wallpapers.nix { }) 0;
 in
 {
   services.xserver.displayManager.lightdm = {

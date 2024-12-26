@@ -29,6 +29,8 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
+    stylix.url = "github:danth/stylix";
+
     nollevim = { url = "github:Alexnortung/nollevim/old"; };
 
     vim-extra-plugins.url = "github:m15a/nixpkgs-vim-extra-plugins";
@@ -109,6 +111,7 @@
     , nix-on-droid
     , hosts
     , cachix-deploy-flake
+    , stylix
     , ...
     }:
     utils-plus.lib.mkFlake {
@@ -147,6 +150,7 @@
           inherit utils-plus inputs;
         };
         modules = [
+          stylix.nixosModules.stylix
           agenix.nixosModules.age
           # nixvim.nixosModules.nixvim
           inputs.mail-server.nixosModule

@@ -11,6 +11,7 @@ in
   imports = [
     ./hardware-configuration.nix
     ./secrets
+    ../../config/stylix.nix
     ../../modules/personal-vpn.nix
     ../../modules/programming-pkgs.nix
     ../../modules/comfort-packages.nix
@@ -18,8 +19,8 @@ in
     ../../modules/console.nix
     # ../../modules/vscodium.nix
     # ../../modules/latex.nix
-    ../../modules/nord-lightdm.nix
-    ../../modules/nord-gtk.nix
+    # ../../modules/nord-lightdm.nix
+    # ../../modules/nord-gtk.nix
     ../../modules/basic-desktop.nix
     ../../modules/zsh.nix
     ../../modules/location-denmark.nix
@@ -165,7 +166,7 @@ in
   };
 
   services.dwm-status = {
-    enable = true;
+    enable = false;
     order = [
       "audio"
       #"backlight"
@@ -198,28 +199,45 @@ in
     '';
   };
 
+  services.displayManager.sddm = {
+    enable = true;
+    wayland.enable = true;
+    theme = "where_is_my_sddm_theme";
+  };
+
   services.xserver = {
     enable = true;
-    windowManager.dwm.enable = true;
-    displayManager.lightdm.enable = true;
-    desktopManager = { wallpaper = { mode = "center"; }; };
 
-    videoDrivers = [ "modesetting" ];
+
+    # windowManager.dwm.enable = true;
+    # displayManager.lightdm.enable = true;
+    # desktopManager = { wallpaper = { mode = "center"; }; };
+
+    # videoDrivers = [ "modesetting" ];
 
     # Enable touchpad support (enabled default in most desktopManager).
     # Configure keymap in X11
     xkb.layout = "dk";
 
-    xautolock = {
-      enable = true;
-      time = 10;
-      locker = slock-command;
-      extraOptions = [
-        #"-lockaftersleep"
-        "-detectsleep"
-      ];
-    };
+    # xautolock = {
+    #   enable = true;
+    #   time = 10;
+    #   locker = slock-command;
+    #   extraOptions = [
+    #     #"-lockaftersleep"
+    #     "-detectsleep"
+    #   ];
+    # };
   };
+
+  programs.hyprland = {
+    enable = true;
+  };
+
+  programs.hyprlock = {
+    enable = true;
+  };
+
 
   services.libinput = {
     enable = true;
@@ -228,14 +246,14 @@ in
   };
 
   services.picom = {
-    enable = true;
+    enable = false;
     vSync = true;
     backend = "glx";
     #experimentalBackends = true;
   };
 
   services.autorandr = {
-    enable = true;
+    enable = false;
     hooks = {
       postswitch = {
         change-background = "systemctl --user restart bg-setter";
@@ -269,6 +287,8 @@ in
   };
 
   environment.systemPackages = with pkgs; [
+    where-is-my-sddm-theme
+    kitty
     gftp
     solaar
     kondo
@@ -300,7 +320,7 @@ in
     pavucontrol
     xss-lock
     xorg.xev
-    xclip
+    wl-clipboard
     brightnessctl # Brightness from terminal
     dmenu
     st
@@ -324,15 +344,15 @@ in
     enableSSHSupport = true;
   };
 
-  programs.slock = { enable = true; };
+  # programs.slock = { enable = true; };
 
   programs.nm-applet = { enable = true; };
 
-  programs.xss-lock = {
-    enable = true;
-    #lockerCommand = "${pkgs.xautolock}/bin/xautolock -locknow";
-    lockerCommand = slock-command;
-  };
+  # programs.xss-lock = {
+  #   enable = true;
+  #   #lockerCommand = "${pkgs.xautolock}/bin/xautolock -locknow";
+  #   lockerCommand = slock-command;
+  # };
 
   programs.git = { config.user.email = "alexander.nortung@oakdigital.dk"; };
 

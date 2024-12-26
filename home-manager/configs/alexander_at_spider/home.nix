@@ -68,4 +68,9 @@ in
       export PATH=$PATH:~/mutable_node_modules/bin/
     '';
   };
+
+  programs.kitty.enable = true; # required for the default Hyprland config
+
+  # Optional, hint Electron apps to use Wayland:
+  # home.sessionVariables.NIXOS_OZONE_WL = "1";
 }
