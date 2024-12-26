@@ -1,9 +1,21 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
+let
+  inherit (lib) mkForce;
+  amixer = "${pkgs.alsa-utils}/bin/amixer";
+in
 {
-
   programs.hyprlock = {
     enable = true;
+
+    settings = {
+      background = mkForce {
+        color = "rgba(25, 20, 20, 1.0)";
+        path = "screenshot";
+        blur_passes = 2;
+        brightness = 0.5;
+      };
+    };
   };
 
   wayland.windowManager.hyprland = {
@@ -46,6 +58,23 @@
       binds = {
         allow_workspace_cycles = true;
       };
+
+      bindl = [
+        ", XF86AudioMute, exec, ${amixer} -q set Master toggle"
+        ", XF86AudioMicMute, exec, ${amixer} -q set Capture toggle"
+        ", XF86AudioPrev, exec, playerctl -p playerctld previous"
+        ", XF86AudioNext, exec, playerctl -p playerctld next"
+        ", XF86AudioPlay, exec, playerctl -p playerctld play"
+        ", XF86AudioPause, exec, playerctl -p playerctld pause"
+      ];
+
+      bindle = [
+        ", XF86MonBrightnessDown, exec, brightnessctl set 5%-"
+        ", XF86MonBrightnessUp, exec, brightnessctl set 5%+"
+        ", XF86AudioLowerVolume, exec, ${amixer} -q set Master 3%-"
+        ", XF86AudioRaiseVolume, exec, ${amixer} -q set Master 3%+"
+      ];
+
       bind =
         [
           # Workspace/Layout
@@ -82,8 +111,46 @@
     };
   };
 
+  services.hypridle = {
+    enable = true;
+
+    settings = {
+      env = {
+        HOME = "/home/alexander/";
+      };
+
+      general = {
+        lock_cmd = "pidof hyprlock || hyprlock";
+        before_sleep_cmd = "loginctl lock-session";
+        after_sleep_cmd = "hyprctl dispatch dpms on";
+      };
+
+      listener = [
+        {
+          timeout = 200;
+          on-timeout = "${pkgs.brightnessctl}/bin/brightnessctl set 0% --save";
+          on-resume = "${pkgs.brightnessctl}/bin/brightnessctl --restore";
+        }
+        {
+          timeout = 300;
+          on-timeout = "loginctl lock-session";
+        }
+        {
+          timeout = 380;
+          on-timeout = "hyprctl dispatch dpms off";
+          on-resume = "hyprctl dispatch dpms on";
+        }
+        {
+          timeout = 2400;
+          on-timeout = "systemctl suspend";
+        }
+      ];
+    };
+  };
+
   home.packages = with pkgs; [
     grimblast
     killall
+    brightnessctl
   ];
 }
