@@ -2,7 +2,17 @@
 
 let
   system = "x86_64-linux";
-  pkgs = inputs.nixos-stable.legacyPackages.${system};
+  # pkgs = inputs.nixos-stable.legacyPackages.${system};
+  pkgs = import inputs.nixos-stable {
+    inherit system;
+    overlays = [
+      inputs.hyprpanel.overlay
+    ];
+    extraSpecialArgs = {
+      inherit system;
+      inherit inputs;
+    };
+  };
 in
 inputs.home-manager.lib.homeManagerConfiguration {
   inherit pkgs;

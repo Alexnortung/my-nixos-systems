@@ -1,10 +1,14 @@
-{ pkgs, lib, ... }:
+{ inputs, pkgs, lib, ... }:
 
 let
   inherit (lib) mkForce;
   amixer = "${pkgs.alsa-utils}/bin/amixer";
 in
 {
+  imports = [
+    inputs.hyprpanel.homeManagerModules.hyprpanel
+  ];
+
   programs.hyprlock = {
     enable = true;
 
@@ -33,6 +37,11 @@ in
       general = {
         layout = "master";
       };
+
+      monitor = [
+        "eDP-1, 1920x1200@60, 0x0, 1"
+        ",preferred,auto-left,1"
+      ];
 
       decoration = {
         blur = {
@@ -148,9 +157,67 @@ in
     };
   };
 
+  programs.waybar = {
+    enable = true;
+    systemd = {
+      enable = true;
+    };
+
+    settings = {
+      mainBar = {
+        layer = "top";
+        position = "top";
+        height = 30;
+        modules-left = [
+          "hyprland/workspaces"
+        ];
+        modules-center = [ ];
+        modules-right = [ "clock" ];
+      };
+    };
+  };
+
+  programs.hyprpanel = {
+    enable = true;
+
+    layout = {
+      "bar.layouts" = {
+        "0" = {
+          left = [ "dashboard" "workspaces" ];
+          middle = [ "clock" ];
+          right = [ "volume" "brightness" "battery" "bluetooth" "network" "systray" ];
+        };
+      };
+    };
+
+    settings = {
+      bar.launcher.autoDetectIcon = true;
+      bar.workspaces.show_icons = true;
+
+      menus.clock = {
+        time = {
+          military = true;
+          hideSeconds = true;
+        };
+        weather.unit = "metric";
+      };
+
+      menus.dashboard.directories.enabled = false;
+      menus.dashboard.stats.enable_gpu = true;
+
+      theme.bar.transparent = true;
+
+      theme.font = {
+        name = "CaskaydiaCove NF";
+        size = "16px";
+      };
+    };
+  };
+
   home.packages = with pkgs; [
     grimblast
     killall
     brightnessctl
+    hyprpanel
   ];
 }
