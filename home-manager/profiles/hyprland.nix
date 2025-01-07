@@ -68,12 +68,17 @@ in
         allow_workspace_cycles = true;
       };
 
+      bindm = [
+        "$mod, mouse:272, movewindow"
+        "$mod, mouse:273, resize"
+      ];
+
       bindl = [
         ", XF86AudioMute, exec, ${amixer} -q set Master toggle"
         ", XF86AudioMicMute, exec, ${amixer} -q set Capture toggle"
         ", XF86AudioPrev, exec, playerctl -p playerctld previous"
         ", XF86AudioNext, exec, playerctl -p playerctld next"
-        ", XF86AudioPlay, exec, playerctl -p playerctld play"
+        ", XF86AudioPlay, exec, playerctl -p playerctld play-pause"
         ", XF86AudioPause, exec, playerctl -p playerctld pause"
       ];
 
@@ -96,12 +101,16 @@ in
           "$mod, K, layoutmsg, cycleprev"
           "$mod, J, layoutmsg, cyclenext"
 
+          "$mod, Comma, focusmonitor, l"
+          "$mod, Period, focusmonitor, r"
+
           # Programs
           "$mod, F, exec, firefox"
           "$mod SHIFT, Return, exec, alacritty"
           ", Print, exec, grimblast --freeze copy area"
           "$mod ALT, L, exec, hyprlock"
           "$mod, Space, exec, killall rofi || rofi -show"
+          ", code:179, exec, spotify"
         ]
         ++ (
           # workspaces
@@ -163,6 +172,12 @@ in
       enable = true;
     };
 
+    style = ''
+      * {
+        font-family: "Fira Code";
+      }
+    '';
+
     settings = {
       mainBar = {
         layer = "top";
@@ -172,7 +187,37 @@ in
           "hyprland/workspaces"
         ];
         modules-center = [ ];
-        modules-right = [ "clock" ];
+        modules-right = [
+          "battery"
+          "network"
+          "clock"
+          "tray"
+        ];
+        "network" = {
+          # "interface" = "wlp2*"; # (Optional) To force the use of this interface
+          "interval" = 1;
+          # "format-wifi" = "  {bandwidthTotalBytes =>2}"; #({essid} {signalStrength}%)
+          # "format-ethernet" = "{ipaddr}/{cidr} ";
+          # "tooltip-format-wifi" = " {ipaddr} ({signalStrength}%)";
+          # "tooltip-format" = "{ifname} via {gwaddr} ";
+          "format-linked" = "{ifname} (No IP) ";
+          "format-disconnected" = "󰀦 Disconnected"; #Disconnected ⚠
+          # "format-alt" = "{ifname}: {ipaddr}/{cidr}";
+        };
+
+        battery = {
+          "states" = {
+            "warning" = 30;
+            "critical" = 15;
+          };
+          "format" = "{capacity}% {icon}";
+          "format-charging" = " {capacity}%";
+          "format-plugged" = " {capacity}%";
+          "format-alt" = "{icon} {time}";
+          # // "format-good": "", // An empty format will hide the module
+          # // "format-full": "",
+          "format-icons" = [ "" "" "" "" "" ];
+        };
       };
     };
   };
