@@ -9,6 +9,7 @@ in
     homeDirectory = "/home/alexander";
     packages = with pkgs; [
       nodejs
+      bun
       # nodePackages.npm
       nodePackages.pnpm
       yarn-berry
