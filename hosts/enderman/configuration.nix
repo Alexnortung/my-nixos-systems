@@ -13,7 +13,7 @@ in
 {
   imports = [
     # Include the results of the hardware scan.
-    ../../config/backup-bucket.nix
+    # ../../config/backup-bucket.nix
     ./hardware-configuration.nix
     ./secrets
     ./audiobookshelf.nix
