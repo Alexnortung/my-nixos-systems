@@ -20,7 +20,7 @@
     # nixpkgs-alexnortung.url = "github:alexnortung/nixpkgs/s3fs-module";
     s3fs-fuse = { url = "github:alexnortung/nixpkgs/s3fs-module"; };
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nixpkgs-unstable-master.url = "github:Alexnortung/nixpkgs/factorio";
+    nixpkgs-unstable-master.url = "github:NixOS/nixpkgs/master";
     nixos-hardware = {
       url = "github:NixOS/nixos-hardware";
     };
@@ -136,7 +136,7 @@
         # allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) (import ./config/allowed-unfree-packages.nix);
         allowUnfreePredicate = (pkg: true);
         allowUnfree = true;
-        permittedInsecurePackages = [ "electron-24.8.6" ];
+        permittedInsecurePackages = [ "electron-24.8.6" "dotnet-sdk-6.0.428" "aspnetcore-runtime-6.0.36" ];
       };
 
       channels.nixos-stable.overlaysBuilder = channels:

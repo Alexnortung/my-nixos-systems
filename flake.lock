@@ -1557,11 +1557,11 @@
     },
     "nixos-stable_2": {
       "locked": {
-        "lastModified": 1734083684,
-        "narHash": "sha256-5fNndbndxSx5d+C/D0p/VF32xDiJCJzyOqorOYW4JEo=",
+        "lastModified": 1738843498,
+        "narHash": "sha256-7x+Q4xgFj9UxZZO9aUDCR8h4vyYut4zPUvfj3i+jBHE=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "314e12ba369ccdb9b352a4db26ff419f7c49fa84",
+        "rev": "f5a32fa27df91dfc4b762671a0e0a859a8a0058f",
         "type": "github"
       },
       "original": {
@@ -1732,16 +1732,16 @@
     },
     "nixpkgs-unstable-master": {
       "locked": {
-        "lastModified": 1733172703,
-        "narHash": "sha256-shWC+ZeFHR1oU+H60EjeWafP38cxbX/XdF8jmJckcQk=",
-        "owner": "Alexnortung",
+        "lastModified": 1734813166,
+        "narHash": "sha256-QQ6a19QgzptXqDDEOm8ilcs+WUtq4Xi7QtCEhCpbBLE=",
+        "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "345ee0e6ca177e87866ea59bb06c205c9d90a5da",
+        "rev": "81629effd3f7e0cea0c1cf983efb87fee31bb103",
         "type": "github"
       },
       "original": {
-        "owner": "Alexnortung",
-        "ref": "factorio",
+        "owner": "NixOS",
+        "ref": "master",
         "repo": "nixpkgs",
         "type": "github"
       }

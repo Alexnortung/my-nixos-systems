@@ -207,33 +207,33 @@ in
   #   };
   # };
 
-  # services.sonarr = {
-  #   enable = true;
-  #   group = "servarr";
-  #   openFirewall = true;
-  #   dataDir = "/data/data2/var/lib/sonarr/.config/NzbDrone";
-  # };
-  #
-  # services.radarr = {
-  #   enable = true;
-  #   group = "servarr";
-  #   openFirewall = true;
-  #   dataDir = "/data/data2/var/lib/radarr/.config/Radarr";
-  # };
-  #
-  # services.readarr = {
-  #   enable = true;
-  #   package = unstable.readarr;
-  #   group = "servarr";
-  #   openFirewall = true;
-  #   dataDir = "/data/data2/var/lib/readarr/.config/Readarr";
-  # };
-  #
-  # services.prowlarr = {
-  #   enable = true;
-  #   package = unstable.prowlarr;
-  #   openFirewall = true;
-  # };
+  services.sonarr = {
+    enable = true;
+    group = "servarr";
+    openFirewall = true;
+    dataDir = "/data/data2/var/lib/sonarr/.config/NzbDrone";
+  };
+
+  services.radarr = {
+    enable = true;
+    group = "servarr";
+    openFirewall = true;
+    dataDir = "/data/data2/var/lib/radarr/.config/Radarr";
+  };
+
+  services.readarr = {
+    enable = true;
+    package = unstable.readarr;
+    group = "servarr";
+    openFirewall = true;
+    dataDir = "/data/data2/var/lib/readarr/.config/Readarr";
+  };
+
+  services.prowlarr = {
+    enable = true;
+    package = unstable.prowlarr;
+    openFirewall = true;
+  };
 
   services.deluge = {
     enable = true;
