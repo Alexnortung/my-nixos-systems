@@ -16,6 +16,7 @@ in
     packages = with pkgs; [
       nodejs
       nodePackages.npm
+      bun
       unstable.yarn-berry
       lmms
       bitwig-studio
