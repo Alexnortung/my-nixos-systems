@@ -176,6 +176,10 @@ in
       * {
         font-family: "Fira Code";
       }
+
+      #clock {
+        font-size: 16px;
+      }
     '';
 
     settings = {
@@ -186,13 +190,24 @@ in
         modules-left = [
           "hyprland/workspaces"
         ];
-        modules-center = [ ];
+        modules-center = [
+          "clock"
+        ];
         modules-right = [
           "battery"
           "network"
-          "clock"
           "tray"
         ];
+
+        clock = {
+          # format = "{:%H:%M}";
+          # tooltip-format = "{:%Y-%m-%d}";
+          # tooltip = true;
+          format = "{:%R}";
+          format-alt = "{:%Y %b %a %d %R}";
+          tooltip = false;
+        };
+
         "network" = {
           # "interface" = "wlp2*"; # (Optional) To force the use of this interface
           "interval" = 1;
@@ -223,7 +238,7 @@ in
   };
 
   programs.hyprpanel = {
-    enable = true;
+    # enable = true;
 
     layout = {
       "bar.layouts" = {
