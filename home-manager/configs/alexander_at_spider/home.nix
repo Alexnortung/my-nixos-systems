@@ -28,6 +28,7 @@ in
       # unstable.zed-editor
       unstable.infisical
       unstable.doctl
+      act
     ];
 
     shellAliases = {
