@@ -2079,11 +2079,11 @@
         "plugins": "plugins"
       },
       "locked": {
-        "lastModified": 1736181222,
-        "narHash": "sha256-zo/eP0G8IWfCf7coj4/0OYi7EGKTWajJHW8OhepICd0=",
+        "lastModified": 1741793998,
+        "narHash": "sha256-hgptmHyY8ORjCOokirlcuzbZvO+/O/T5b+wp3tblmo0=",
         "owner": "Alexnortung",
         "repo": "nollevim",
-        "rev": "dfbe94e67c2800b6529f683dd5611bc4e36e425d",
+        "rev": "906e05fc9fd8e0bd9bef14aef4dd90eba14ba3e2",
         "type": "github"
       },
       "original": {
