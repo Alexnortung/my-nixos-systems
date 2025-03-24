@@ -34,7 +34,7 @@
 
     stylix.url = "github:danth/stylix";
 
-    nollevim = { url = "github:Alexnortung/nollevim/old"; };
+    nollevim = { url = "github:Alexnortung/nollevim"; };
 
     vim-extra-plugins.url = "github:m15a/nixpkgs-vim-extra-plugins";
 
