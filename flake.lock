@@ -2033,11 +2033,11 @@
         "plugins": "plugins"
       },
       "locked": {
-        "lastModified": 1742809015,
-        "narHash": "sha256-L8VyTv3EycfKcWUqz9gGJHLB4c51TMTlfujIrnpZqps=",
+        "lastModified": 1742905177,
+        "narHash": "sha256-ihcP2YFdpFeqctfewNCqjhtOYlRkLC/xBeH+ajULjl8=",
         "owner": "Alexnortung",
         "repo": "nollevim",
-        "rev": "8da495628b9ef790f3de2470e0b9ff65b8f4093d",
+        "rev": "09e875a2eff18608d3dba6bf1044dbfb504c65ff",
         "type": "github"
       },
       "original": {
