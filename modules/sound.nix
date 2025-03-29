@@ -9,7 +9,10 @@
     tcp = {
       enable = false;
       anonymousClients = {
-        allowedIpRanges = [ "127.0.0.1" "192.168.7.0/24" ];
+        allowedIpRanges = [
+          "127.0.0.1"
+          "192.168.7.0/24"
+        ];
       };
     };
   };
@@ -20,4 +23,5 @@
   #  alsa.support32Bit = true;
   #  pulse.enable = true;
   #};
+
 }

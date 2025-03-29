@@ -2,13 +2,19 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-args@{ inputs, pkgs, config, lib, ... }:
+args@{
+  inputs,
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 
 let
   slock-command = "/run/wrappers/bin/slock";
   system = "x86_64-linux";
-  # nur-alexnortung = inputs.nur-alexnortung-boat;
 in
+# nur-alexnortung = inputs.nur-alexnortung-boat;
 {
   imports = [
     ./hardware-configuration.nix
@@ -16,7 +22,7 @@ in
     # ../../profiles/nvim-nixos.nix
     ../../modules/programming-pkgs.nix
     ../../modules/comfort-packages.nix
-    ../../modules/sound.nix
+    # ../../modules/sound.nix
     ../../modules/console.nix
     ../../modules/personal-vpn.nix
     # ../../modules/latex.nix
@@ -167,7 +173,7 @@ in
     ];
     extraConfig = ''
       separator = " | "
- 
+
       [audio]
       icons = [ "奄", "奔", "墳" ]
       mute = "ﱝ"

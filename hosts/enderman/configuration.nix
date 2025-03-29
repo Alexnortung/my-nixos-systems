@@ -1,8 +1,9 @@
-{ inputs
-, config
-, lib
-, pkgs
-, ...
+{
+  inputs,
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 let
   system = "x86_64-linux";
@@ -193,7 +194,11 @@ in
       peers = [
         {
           publicKey = "7ncbaCb+9za3jnXlR95I6dJBkwL1ABB5i4ndFUesYxE=";
-          allowedIPs = [ "10.8.0.1/32" "10.64.0.1/32" "10.124.0.0/22" ]; # Only send communication through mullvad if it is in the range of the given ips, allows for split tunneling
+          allowedIPs = [
+            "10.8.0.1/32"
+            "10.64.0.1/32"
+            "10.124.0.0/22"
+          ]; # Only send communication through mullvad if it is in the range of the given ips, allows for split tunneling
           endpoint = "176.125.235.74:3189";
         }
       ];
@@ -206,6 +211,18 @@ in
   #     enable = true;
   #   };
   # };
+  # Save a file to etc directory
+  environment.etc = {
+    "arr-on-import-symlink.sh" = {
+      enable = true;
+      group = "servarr";
+      # source = ./scripts/arr-on-import-symlink.sh;
+      mode = "0555";
+      source = pkgs.writeShellScript "arr-on-import-symlink.sh" (
+        builtins.readFile ./scripts/arr-on-import-symlink.sh
+      );
+    };
+  };
 
   services.sonarr = {
     enable = true;
