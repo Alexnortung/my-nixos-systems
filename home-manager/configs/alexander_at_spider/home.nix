@@ -1,5 +1,12 @@
-{ config, pkgs, inputs, system, ... }:
-let unstable = import inputs.nixpkgs-unstable { inherit system; };
+{
+  config,
+  pkgs,
+  inputs,
+  system,
+  ...
+}:
+let
+  unstable = import inputs.nixpkgs-unstable { inherit system; };
 in
 {
   # Home Manager needs a bit of information about you and the
@@ -9,7 +16,7 @@ in
     homeDirectory = "/home/alexander";
     packages = with pkgs; [
       nodejs
-      bun
+      unstable.bun
       # nodePackages.npm
       nodePackages.pnpm
       yarn-berry
