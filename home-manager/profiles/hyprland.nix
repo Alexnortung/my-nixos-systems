@@ -1,4 +1,9 @@
-{ inputs, pkgs, lib, ... }:
+{
+  inputs,
+  pkgs,
+  lib,
+  ...
+}:
 
 let
   inherit (lib) mkForce;
@@ -115,16 +120,18 @@ in
         ++ (
           # workspaces
           # binds $mod + [shift +] {1..9} to [move to] workspace {1..9}
-          builtins.concatLists (builtins.genList
-            (i:
-              let ws = i + 1;
+          builtins.concatLists (
+            builtins.genList (
+              i:
+              let
+                ws = i + 1;
               in
               [
                 "$mod, code:1${toString i}, workspace, ${toString ws}"
                 "$mod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
               ]
-            )
-            9)
+            ) 9
+          )
         );
     };
   };
@@ -154,12 +161,12 @@ in
           on-timeout = "loginctl lock-session";
         }
         {
-          timeout = 2000;
+          timeout = 3800;
           on-timeout = "hyprctl dispatch dpms off";
           on-resume = "hyprctl dispatch dpms on";
         }
         {
-          timeout = 2400;
+          timeout = 4200;
           on-timeout = "systemctl suspend";
         }
       ];
@@ -216,7 +223,7 @@ in
           # "tooltip-format-wifi" = " {ipaddr} ({signalStrength}%)";
           # "tooltip-format" = "{ifname} via {gwaddr} ";
           "format-linked" = "{ifname} (No IP) ";
-          "format-disconnected" = "󰀦 Disconnected"; #Disconnected ⚠
+          "format-disconnected" = "󰀦 Disconnected"; # Disconnected ⚠
           # "format-alt" = "{ifname}: {ipaddr}/{cidr}";
         };
 
@@ -231,7 +238,13 @@ in
           "format-alt" = "{icon} {time}";
           # // "format-good": "", // An empty format will hide the module
           # // "format-full": "",
-          "format-icons" = [ "" "" "" "" "" ];
+          "format-icons" = [
+            ""
+            ""
+            ""
+            ""
+            ""
+          ];
         };
       };
     };
@@ -243,9 +256,19 @@ in
     layout = {
       "bar.layouts" = {
         "0" = {
-          left = [ "dashboard" "workspaces" ];
+          left = [
+            "dashboard"
+            "workspaces"
+          ];
           middle = [ "clock" ];
-          right = [ "volume" "brightness" "battery" "bluetooth" "network" "systray" ];
+          right = [
+            "volume"
+            "brightness"
+            "battery"
+            "bluetooth"
+            "network"
+            "systray"
+          ];
         };
       };
     };
