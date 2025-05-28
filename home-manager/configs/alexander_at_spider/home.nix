@@ -7,6 +7,11 @@
 }:
 let
   unstable = import inputs.nixpkgs-unstable { inherit system; };
+  phpConfigured = pkgs.php.buildEnv {
+    extraConfig = ''
+      memory_limit = 2G;
+    '';
+  };
 in
 {
   # Home Manager needs a bit of information about you and the
@@ -17,6 +22,7 @@ in
     packages = with pkgs; [
       nodejs
       unstable.bun
+      phpConfigured
       # nodePackages.npm
       nodePackages.pnpm
       yarn-berry
