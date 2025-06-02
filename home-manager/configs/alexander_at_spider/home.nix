@@ -6,7 +6,12 @@
   ...
 }:
 let
-  unstable = import inputs.nixpkgs-unstable { inherit system; };
+  unstable = import inputs.nixpkgs-unstable {
+    inherit system;
+    config = {
+      allowUnfree = true;
+    };
+  };
   phpConfigured = pkgs.php.buildEnv {
     extraConfig = ''
       memory_limit = 2G;
@@ -14,6 +19,7 @@ let
   };
 in
 {
+  nixpkgs.config.allowUnfree = true;
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home = {
@@ -23,6 +29,8 @@ in
       nodejs
       unstable.bun
       phpConfigured
+      unstable.mongodb-compass
+      mongodb-tools
       # nodePackages.npm
       nodePackages.pnpm
       yarn-berry
