@@ -50,6 +50,8 @@ in
       unstable.infisical
       unstable.doctl
       act
+      gh
+      ripgrep
     ];
 
     shellAliases = {
