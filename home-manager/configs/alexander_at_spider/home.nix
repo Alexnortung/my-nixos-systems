@@ -10,6 +10,9 @@ let
     inherit system;
     config = {
       allowUnfree = true;
+      permittedInsecurePackages = [
+        "beekeeper-studio-5.2.12"
+      ];
     };
   };
   phpConfigured = pkgs.php.buildEnv {
@@ -20,6 +23,9 @@ let
 in
 {
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.permittedInsecurePackages = [
+    "beekeeper-studio-5.2.12"
+  ];
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home = {
@@ -43,15 +49,18 @@ in
       alacritty
       unstable.bruno
       jq
-      webcord
-      tenacity
+      # webcord
+      # tenacity
       # sherloq
       # unstable.zed-editor
       unstable.infisical
       unstable.doctl
+      unstable.beekeeper-studio
       act
       gh
       ripgrep
+      unstable.devenv
+      unstable.playwright
     ];
 
     shellAliases = {
@@ -87,10 +96,12 @@ in
 
   programs.zsh = {
     enable = true;
-    initExtra = ''
+    initContent = ''
       export PNPM_HOME="/home/alexander/.local/share/pnpm"
       export PATH="$PATH:$PNPM_HOME"
       export PATH=$PATH:~/mutable_node_modules/bin/
+
+      alias dnvim='nix run ~/source/nollevim'
     '';
   };
 

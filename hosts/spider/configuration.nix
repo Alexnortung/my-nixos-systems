@@ -90,7 +90,7 @@ in
   fonts.packages = with pkgs; [
     fira-code
     hasklig
-    nerdfonts
+    nerd-fonts.symbols-only
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -323,7 +323,7 @@ in
     kondo
     inputs.agenix.packages.${system}.agenix
     inputs.deploy-rs.defaultPackage.${system}
-    inputs.devenv.packages.${system}.devenv
+    # inputs.devenv.packages.${system}.devenv
     cachix
     postgresql_15
     ungoogled-chromium
@@ -331,7 +331,7 @@ in
     # mkchromecast
     nodejs
     nodePackages.npm
-    beekeeper-studio
+    # beekeeper-studio
     # brave
     # gimp
     imagemagick

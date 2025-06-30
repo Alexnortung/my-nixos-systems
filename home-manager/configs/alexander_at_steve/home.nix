@@ -1,8 +1,9 @@
-{ config
-, pkgs
-, inputs
-, system
-, ...
+{
+  config,
+  pkgs,
+  inputs,
+  system,
+  ...
 }:
 let
   unstable = import inputs.nixpkgs-unstable { inherit system; };
@@ -69,7 +70,7 @@ in
 
   programs.zsh = {
     enable = true;
-    initExtra = ''
+    initContent = ''
       export PATH=$PATH:~/.node_modules/bin/
       export XDG_DATA_DIRS=$XDG_DATA_DIRS:/usr/share:/var/lib/flatpak/exports/share:$HOME/.local/share/flatpak/exports/share
     '';

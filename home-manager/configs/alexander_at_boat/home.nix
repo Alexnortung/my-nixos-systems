@@ -32,7 +32,7 @@
 
   programs.zsh = {
     enable = true;
-    initExtra = ''
+    initContent = ''
       PATH=$PATH:~/mutable_node_modules/bin/
       PATH=$PATH:~/.cargo/bin
     '';

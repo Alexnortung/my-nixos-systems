@@ -2,8 +2,10 @@
   description = "Alexnortung's system configurations and server configurations";
 
   nixConfig = {
-    extra-substituters =
-      [ "https://nix-community.cachix.org" "https://deploy-rs.cachix.org" ];
+    extra-substituters = [
+      "https://nix-community.cachix.org"
+      "https://deploy-rs.cachix.org"
+    ];
     extra-trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "deploy-rs.cachix.org-1:xfNobmiwF/vzvK1gpfediPwpdIP0rpDV2rYqx40zdSI="
@@ -15,17 +17,19 @@
     # nixos-dev = {
     #   url = "path:/home/alexander/source/nixpkgs";
     # };
-    nixos-stable.url = "github:NixOS/nixpkgs/nixos-24.11";
+    nixos-stable.url = "github:NixOS/nixpkgs/nixos-25.05";
     # nixos-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     # nixpkgs-alexnortung.url = "github:alexnortung/nixpkgs/s3fs-module";
-    s3fs-fuse = { url = "github:alexnortung/nixpkgs/s3fs-module"; };
+    s3fs-fuse = {
+      url = "github:alexnortung/nixpkgs/s3fs-module";
+    };
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixpkgs-unstable-master.url = "github:NixOS/nixpkgs/master";
     nixos-hardware = {
       url = "github:NixOS/nixos-hardware";
     };
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
+      url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
@@ -34,13 +38,14 @@
 
     stylix.url = "github:danth/stylix";
 
-    nollevim = { url = "github:Alexnortung/nollevim"; };
+    nollevim = {
+      url = "github:Alexnortung/nollevim";
+    };
 
     vim-extra-plugins.url = "github:m15a/nixpkgs-vim-extra-plugins";
 
     agenix = {
-      url =
-        "github:ryantm/agenix/0.13.0"; # for encrypted secrets. such as wireguard keys
+      url = "github:ryantm/agenix/0.13.0"; # for encrypted secrets. such as wireguard keys
       # inputs.nixpkgs.follows = "nixos-stable";
       # inputs.home-manager.follows = "home-manager";
     };
@@ -55,7 +60,7 @@
     };
 
     devenv = {
-      url = "github:cachix/devenv/v1.3.1";
+      url = "github:cachix/devenv/v1.6";
       # inputs.nixpkgs.follows = "nixos-stable";
     };
 
@@ -99,23 +104,24 @@
 
     #local-nixpkgs.url = "path:/home/alexander/source/nixpkgs";
   }
-    #// ((import ./hosts).inputs)
+  #// ((import ./hosts).inputs)
   ;
 
   outputs =
-    inputs@{ self
-    , utils-plus
-    , vim-extra-plugins
-    , fenix
+    inputs@{
+      self,
+      utils-plus,
+      vim-extra-plugins,
+      fenix,
       # , neovim
-    , agenix
+      agenix,
       # , nixvim
-    , minecraft-servers
-    , nix-on-droid
-    , hosts
-    , cachix-deploy-flake
-    , stylix
-    , ...
+      minecraft-servers,
+      nix-on-droid,
+      hosts,
+      cachix-deploy-flake,
+      stylix,
+      ...
     }:
     utils-plus.lib.mkFlake {
       inherit self inputs;
@@ -136,16 +142,21 @@
         # allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) (import ./config/allowed-unfree-packages.nix);
         allowUnfreePredicate = (pkg: true);
         allowUnfree = true;
-        permittedInsecurePackages = [ "electron-24.8.6" "dotnet-sdk-6.0.428" "aspnetcore-runtime-6.0.36" ];
+        permittedInsecurePackages = [
+          "electron-24.8.6"
+          "dotnet-sdk-6.0.428"
+          "aspnetcore-runtime-6.0.36"
+          "beekeeper-studio-5.1.5"
+          "beekeeper-studio-5.2.12"
+        ];
       };
 
-      channels.nixos-stable.overlaysBuilder = channels:
-        [
-          # (import ./overlays/default-unstable.nix channels.nixpkgs-unstable)
-          (final: prev: { unstable = channels.nixpkgs-unstable; })
-          # (import ./overlays/unstable.nix inputs)
-          # (final: prev: { inherit (channels.nixpkgs-unstable) session-desktop krita; })
-        ];
+      channels.nixos-stable.overlaysBuilder = channels: [
+        # (import ./overlays/default-unstable.nix channels.nixpkgs-unstable)
+        (final: prev: { unstable = channels.nixpkgs-unstable; })
+        # (import ./overlays/unstable.nix inputs)
+        # (final: prev: { inherit (channels.nixpkgs-unstable) session-desktop krita; })
+      ];
 
       hostDefaults = {
         extraArgs = {
@@ -170,7 +181,9 @@
       hosts = (import ./hosts/default.nix).hosts inputs;
 
       # deploy-rs definitions
-      deploy = { nodes = (import ./hosts/default.nix).nodes inputs; };
+      deploy = {
+        nodes = (import ./hosts/default.nix).nodes inputs;
+      };
 
       # nixOnDroidConfigurations = {
       #   bundle = nix-on-droid.lib.nixOnDroidConfiguration {
@@ -192,7 +205,8 @@
       #   };
       # };
 
-      outputsBuilder = channels:
+      outputsBuilder =
+        channels:
         let
           pkgs = channels.nixpkgs-unstable;
           cachix-deploy-lib = cachix-deploy-flake.lib channels.nixpkgs-unstable;
@@ -203,14 +217,13 @@
             #   agents = (import ./hosts/default.nix).cachixDeployAgents inputs;
             # };
 
-            minecraft-whitelist-add =
-              pkgs.writeShellScriptBin "minecraft-whitelist-add" ''
-                #!${pkgs.stdenv.shell}
-                echo "Adding" "$1"
-                cat ./hosts/enderman/minecraft-whitelist.json | \
-                  jq ".\"$1\" = \"$2\"" > ./hosts/enderman/minecraft-whitelist.tmp.json
-                mv ./hosts/enderman/minecraft-whitelist.tmp.json ./hosts/enderman/minecraft-whitelist.json
-              '';
+            minecraft-whitelist-add = pkgs.writeShellScriptBin "minecraft-whitelist-add" ''
+              #!${pkgs.stdenv.shell}
+              echo "Adding" "$1"
+              cat ./hosts/enderman/minecraft-whitelist.json | \
+                jq ".\"$1\" = \"$2\"" > ./hosts/enderman/minecraft-whitelist.tmp.json
+              mv ./hosts/enderman/minecraft-whitelist.tmp.json ./hosts/enderman/minecraft-whitelist.json
+            '';
           };
         };
     };

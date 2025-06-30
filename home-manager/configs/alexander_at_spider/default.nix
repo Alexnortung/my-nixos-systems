@@ -12,6 +12,10 @@ let
       inherit system;
       inherit inputs;
     };
+
+    permittedInsecurePackages = [
+      "beekeeper-studio-5.2.12"
+    ];
   };
 in
 inputs.home-manager.lib.homeManagerConfiguration {
