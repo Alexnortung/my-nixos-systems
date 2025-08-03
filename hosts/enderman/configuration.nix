@@ -289,6 +289,36 @@ in
     };
   };
 
+  services.cross-seed = {
+    enable = true;
+    useGenConfigDefaults = true;
+    user = "deluge";
+    group = "servarr";
+    settings = {
+      linkDirs = [
+        "/data/data1/var/lib/deluge/cross-seed-links"
+      ];
+      dataDirs = [
+        "/data/data1/var/lib/deluge/Downloads"
+        "/data/data1/var/lib/radarr/movies"
+        "/data/data1/var/lib/sonarr/series"
+      ];
+      torrentDir = "/data/data1/var/lib/deluge/.config/deluge/state";
+      useClientTorrents = false;
+      outputDir = "/data/data1/var/lib/deluge/output";
+      linkType = "hardlink";
+      matchMode = "partial";
+      skipRecheck = true;
+      maxDataDepth = 3;
+      # includeSingleEpisodes = true;
+      # seasonFromEpisodes = 0.5;
+      fuzzySizeThreshold = 0.02;
+      action = "inject";
+      duplicateCategories = true;
+    };
+    settingsFile = config.age.secrets.cross-seed-config.path;
+  };
+
   services.jellyfin = {
     enable = true;
     group = "servarr";
