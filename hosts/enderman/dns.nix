@@ -27,14 +27,14 @@
     ];
   };
 
-  services.dnsmasq = {
-    enable = true;
-    settings = {
-      port = 53;
-      # Never forward plain names (without a dot or domain part)
-      domain-needed = true;
-      # Never forward addresses in the non-routed address spaces.
-      bogus-priv = true;
-    };
-  };
+  # services.dnsmasq = {
+  #   enable = true;
+  #   settings = {
+  #     port = 53;
+  #     # Never forward plain names (without a dot or domain part)
+  #     domain-needed = true;
+  #     # Never forward addresses in the non-routed address spaces.
+  #     bogus-priv = true;
+  #   };
+  # };
 }

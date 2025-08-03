@@ -1365,6 +1365,22 @@
         "type": "github"
       }
     },
+    "nixos-enderman": {
+      "locked": {
+        "lastModified": 1746422338,
+        "narHash": "sha256-NTtKOTLQv6dPfRe00OGSywg37A1FYqldS6xiNmqBUYc=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "5b35d248e9206c1f3baf8de6a7683fee126364aa",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-24.11",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixos-hardware": {
       "locked": {
         "lastModified": 1729333370,
@@ -2009,6 +2025,7 @@
         "mail-server": "mail-server",
         "minecraft-servers": "minecraft-servers",
         "nix-on-droid": "nix-on-droid",
+        "nixos-enderman": "nixos-enderman",
         "nixos-hardware": "nixos-hardware",
         "nixos-stable": "nixos-stable_2",
         "nixpkgs-unstable": "nixpkgs-unstable",
