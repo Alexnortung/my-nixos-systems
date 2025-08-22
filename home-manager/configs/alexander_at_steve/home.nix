@@ -6,7 +6,15 @@
   ...
 }:
 let
-  unstable = import inputs.nixpkgs-unstable { inherit system; };
+  unstable = import inputs.nixpkgs-unstable {
+    inherit system;
+    config = {
+      permittedInsecurePackages = [
+        "beekeeper-studio-5.1.5"
+        "beekeeper-studio-5.2.12"
+      ];
+    };
+  };
 in
 {
   # Home Manager needs a bit of information about you and the
@@ -22,11 +30,10 @@ in
       lmms
       bitwig-studio
       krita
-      edgedb
       insomnia
-      beekeeper-studio
+      unstable.beekeeper-studio
       gftp
-      prusa-slicer
+      unstable.prusa-slicer
       blender
       alacritty
       ffmpeg
@@ -36,6 +43,7 @@ in
       kicad
       # legendary-gl
       heroic
+      unstable.openscad-unstable
     ];
 
     sessionVariables = {
