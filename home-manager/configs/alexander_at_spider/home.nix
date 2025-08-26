@@ -61,6 +61,7 @@ in
       ripgrep
       unstable.devenv
       unstable.playwright
+      unstable.slack
     ];
 
     shellAliases = {
