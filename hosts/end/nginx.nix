@@ -103,7 +103,6 @@ in
       servers."10.101.0.2" = { };
     };
 
-
     streamConfig = ''
       upstream endermanSsl {
         server 10.101.0.2:443;
@@ -134,6 +133,7 @@ in
         nextcloud.northwing.games localSsl;
         bitwarden.northwing.games localSsl;
         grocy.nortung.dk          endermanSsl;
+        mealie.nortung.dk          endermanSsl;
       }
 
       server {
@@ -166,6 +166,20 @@ in
       };
 
       "grocy.nortung.dk" = {
+        locations."/" = {
+          proxyPass = "$scheme://enderman$request_uri";
+          proxyWebsockets = true;
+          extraConfig = ''
+            # proxy_ssl_server_name on;
+            # proxy_set_header Host $host;
+            # proxy_set_header X-Real-IP $remote_addr;
+            # proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            # proxy_set_header X-Forwarded-Proto $scheme;
+          '';
+        };
+      };
+
+      "mealie.nortung.dk" = {
         locations."/" = {
           proxyPass = "$scheme://enderman$request_uri";
           proxyWebsockets = true;
@@ -240,7 +254,7 @@ in
         forceSSL = true;
         enableACME = true;
         locations."/" = {
-          proxyPass = "http://localhost:8812"; #changed the default rocket port due to some conflict
+          proxyPass = "http://localhost:8812"; # changed the default rocket port due to some conflict
           proxyWebsockets = true;
         };
         locations."/notifications/hub" = {

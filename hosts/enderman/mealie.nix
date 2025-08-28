@@ -6,6 +6,7 @@
     database.createLocally = true;
 
     settings = {
+      BASE_URL = "https://mealie.nortung.dk";
       TZ = "Europe/Copenhagen";
 
       SMTP_HOST = "mails.northwing.games";
