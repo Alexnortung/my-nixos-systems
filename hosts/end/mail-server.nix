@@ -30,6 +30,9 @@
       "alexander@nortung.dk" = {
         hashedPasswordFile = config.age.secrets.mail-pass-admin.path;
       };
+      "mealie@nortung.dk" = {
+        hashedPasswordFile = config.age.secrets.mail-pass-mealie.path;
+      };
     };
 
   };

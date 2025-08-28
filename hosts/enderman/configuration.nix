@@ -23,6 +23,7 @@ in
     ./factorio.nix
     ./gc.nix
     ./minecraft
+    ./mealie.nix
     ./grocy.nix
     # ./home-assistant.nix
     # ./games.nix
