@@ -267,7 +267,7 @@ in
       enabled_plugins = [
         "Label"
       ];
-      max_active_seeding = 5;
+      max_active_seeding = 20;
       max_active_downloading = 25;
       max_active_limit = 30;
       queue_new_to_top = true;
