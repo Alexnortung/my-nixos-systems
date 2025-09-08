@@ -225,11 +225,16 @@ in
     '';
   };
 
-  services.displayManager.sddm = {
+  # services.displayManager.sddm = {
+  #   enable = true;
+  #   wayland.enable = true;
+  #   theme = "where_is_my_sddm_theme";
+  # };
+
+  services.greetd = {
     enable = true;
-    wayland.enable = true;
-    theme = "where_is_my_sddm_theme";
   };
+  programs.regreet.enable = true;
 
   services.xserver = {
     enable = true;

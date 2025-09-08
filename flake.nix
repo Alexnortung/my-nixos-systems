@@ -37,7 +37,7 @@
     hyprpanel.url = "github:Jas-SinghFSU/HyprPanel";
     hyprpanel.inputs.nixpkgs.follows = "nixos-stable";
 
-    stylix.url = "github:danth/stylix";
+    stylix.url = "github:danth/stylix/release-25.05";
 
     nollevim = {
       url = "github:Alexnortung/nollevim";
