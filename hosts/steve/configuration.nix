@@ -2,13 +2,25 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ inputs, config, pkgs, lib, ... }:
+{
+  inputs,
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 let
   system = "x86_64-linux";
-  unstable = inputs.nixpkgs-unstable.legacyPackages.${system};
-  # unstable-overlay = import ../../overlays/unstable.nix inputs system;
+  # unstable = inputs.nixpkgs-unstable.legacyPackages.${system};
+  unstable = import inputs.nixpkgs-unstable {
+    inherit system;
+    config = {
+      allowUnfree = true;
+    };
+  };
 in
+# unstable-overlay = import ../../overlays/unstable.nix inputs system;
 {
   imports = [
     ./hardware-configuration.nix
@@ -29,6 +41,12 @@ in
     ../../profiles/nix-ld.nix
   ];
 
+  # nixpkgs.config.allowUnfreePredicate =
+  #   pkg:
+  #   builtins.elem (lib.getName pkg) [
+  #     "steam"
+  #   ];
+
   # nixpkgs.config = {
   #   chromium = {
   #     enableWideVine = true;
@@ -46,33 +64,37 @@ in
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
-    settings = { trusted-users = [ "root" "alexander" ]; };
+    settings = {
+      trusted-users = [
+        "root"
+        "alexander"
+      ];
+    };
   };
 
   services.flatpak.enable = true;
 
-  services.s3fs-fuse = {
-    enable = true;
-    mounts = {
-      backup-1 = {
-        mountPoint = "/mnt/backup";
-        bucket = "backup-1";
-        options = [
-          "passwd_file=/home/alexander/.config/s3fs/backup"
-          "use_path_request_style"
-          "allow_other"
-          "url=https://ams1.vultrobjects.com"
-        ];
-      };
-    };
-  };
+  # services.s3fs-fuse = {
+  #   enable = true;
+  #   mounts = {
+  #     backup-1 = {
+  #       mountPoint = "/mnt/backup";
+  #       bucket = "backup-1";
+  #       options = [
+  #         "passwd_file=/home/alexander/.config/s3fs/backup"
+  #         "use_path_request_style"
+  #         "allow_other"
+  #         "url=https://ams1.vultrobjects.com"
+  #       ];
+  #     };
+  #   };
+  # };
 
   boot = {
     # kernelParams = [ "nvidia-drm.modeset=1" ];
-    extraModulePackages = with config.boot.kernelPackages;
-      [
-        # nvidia_x11
-      ];
+    extraModulePackages = with config.boot.kernelPackages; [
+      # nvidia_x11
+    ];
     kernelModules = [ "msr" ];
     # Use the systemd-boot EFI boot loader.
     loader = {
@@ -137,7 +159,9 @@ in
     LC_TIME = "da_DK.UTF-8";
   };
 
-  powerManagement = { cpufreq.max = 3800000; };
+  powerManagement = {
+    cpufreq.max = 3800000;
+  };
 
   # Enable the X11 windowing system.
   services.xserver = {
@@ -149,7 +173,9 @@ in
     # desktopManager.plasma5.enable = true;
   };
 
-  programs.dconf = { enable = true; };
+  programs.dconf = {
+    enable = true;
+  };
 
   programs.adb.enable = true;
 
@@ -168,7 +194,10 @@ in
   #   };
   # };
 
-  fonts.packages = with pkgs; [ hasklig terminus-nerdfont ];
+  fonts.packages = with pkgs; [
+    hasklig
+    terminus-nerdfont
+  ];
 
   # services.dwm-status = {
   #   enable = true;
@@ -192,7 +221,9 @@ in
   # };
 
   # Redshift
-  services.redshift = { enable = true; };
+  services.redshift = {
+    enable = true;
+  };
 
   # Configure keymap in X11
   services.xserver.xkb.layout = "dk";
@@ -214,7 +245,10 @@ in
     morgan = {
       isNormalUser = true;
       home = "/home/morgan";
-      extraGroups = [ "audio" "video" ];
+      extraGroups = [
+        "audio"
+        "video"
+      ];
       shell = pkgs.zsh;
     };
   };
@@ -225,11 +259,15 @@ in
 
   # List packages installed in system profile. To search, run:
   programs.steam.enable = true;
-  programs.steam.gamescopeSession = { enable = true; };
+  programs.steam.gamescopeSession = {
+    enable = true;
+  };
 
   programs.gamemode.enable = true;
 
-  programs.kdeconnect = { enable = true; };
+  programs.kdeconnect = {
+    enable = true;
+  };
 
   services.mullvad-vpn.enable = true;
 
@@ -242,17 +280,16 @@ in
 
   programs.wireshark.enable = true;
 
-  services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
+  services.udev.packages = with pkgs; [ gnome-settings-daemon ];
 
   environment.systemPackages = with pkgs; [
     android-tools
     gnome-software
     docker-compose
     gnomeExtensions.gnome-bedtime
-    gnomeExtensions.appindicator
+    # gnomeExtensions.appindicator
     webcord
     inputs.agenix.packages.${system}.agenix
-    inputs.devenv.packages.${system}.devenv
     zulu
     prismlauncher
     glfw
@@ -273,7 +310,7 @@ in
     # (blender.override {
     #   # cudaSupport = true;
     # })
-    python39Packages.pygments
+    # python39Packages.pygments
     zathura
     xorg.xhost
     # xpra
@@ -316,7 +353,7 @@ in
     obs-studio
     gimp
     spotify
-    lutris
+    unstable.lutris
     vulkan-headers
     xorg.xev
     gcc
@@ -325,7 +362,9 @@ in
     libpulseaudio
   ];
 
-  virtualisation.docker = { enable = true; };
+  virtualisation.docker = {
+    enable = true;
+  };
 
   programs.gnupg.agent = {
     enable = true;
