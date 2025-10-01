@@ -12,7 +12,9 @@ let
       permittedInsecurePackages = [
         "beekeeper-studio-5.1.5"
         "beekeeper-studio-5.2.12"
+        "beekeeper-studio-5.3.4"
       ];
+      allowUnfree = true;
     };
   };
 in
@@ -44,6 +46,7 @@ in
       # legendary-gl
       heroic
       unstable.openscad-unstable
+      unstable.obsidian
     ];
 
     sessionVariables = {
