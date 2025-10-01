@@ -243,7 +243,7 @@ in
     # displayManager.lightdm.enable = true;
     # desktopManager = { wallpaper = { mode = "center"; }; };
 
-    # videoDrivers = [ "modesetting" ];
+    videoDrivers = [ "modesetting" ];
 
     # Enable touchpad support (enabled default in most desktopManager).
     # Configure keymap in X11

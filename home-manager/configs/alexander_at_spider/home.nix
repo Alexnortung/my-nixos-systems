@@ -62,6 +62,7 @@ in
       unstable.devenv
       unstable.playwright
       unstable.slack
+      unstable.obsidian
     ];
 
     shellAliases = {
