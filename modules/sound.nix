@@ -2,7 +2,7 @@
 
 {
   # Enable sound.
-  hardware.pulseaudio = {
+  services.pulseaudio = {
     enable = true;
     #systemWide = true;
     support32Bit = true;
@@ -16,6 +16,10 @@
       };
     };
   };
+
+  environment.systemPackages = [
+    config.services.pulseaudio.package
+  ];
   # nixpkgs.config.pulseaudio = true;
   #services.pipewire = {
   #  enable = true;

@@ -66,6 +66,7 @@ in
       unstable.obsidian
       cowsay
       gcalcli
+      libnotify
     ];
 
     shellAliases = {
@@ -112,6 +113,28 @@ in
   };
 
   programs.kitty.enable = true; # required for the default Hyprland config
+
+  services.dunst = {
+    enable = true;
+    settings = {
+      global = {
+        frame_width = 1;
+        padding = 16;
+        horizontal_padding = 16;
+      };
+      urgency_critical = {
+        origin = "center";
+        width = 300;
+        script = "${./alert.sh}";
+      };
+
+      # play_sound = {
+      #   stack_tag = "play_sound";
+      #   summary = "";
+      #   script = "${./alert.sh}";
+      # };
+    };
+  };
 
   # Optional, hint Electron apps to use Wayland:
   # home.sessionVariables.NIXOS_OZONE_WL = "1";
