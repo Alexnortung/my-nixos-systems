@@ -12,6 +12,7 @@ let
       allowUnfree = true;
       permittedInsecurePackages = [
         "beekeeper-studio-5.2.12"
+        "beekeeper-studio-5.3.4"
       ];
     };
   };
@@ -63,6 +64,8 @@ in
       unstable.playwright
       unstable.slack
       unstable.obsidian
+      cowsay
+      gcalcli
     ];
 
     shellAliases = {
@@ -104,6 +107,7 @@ in
       export PATH=$PATH:~/mutable_node_modules/bin/
 
       alias dnvim='nix run ~/source/nollevim'
+      ${./goodmorning.sh}
     '';
   };
 
