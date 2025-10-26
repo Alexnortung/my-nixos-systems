@@ -283,6 +283,7 @@ in
   services.udev.packages = with pkgs; [ gnome-settings-daemon ];
 
   environment.systemPackages = with pkgs; [
+    vulkan-tools
     android-tools
     gnome-software
     docker-compose
