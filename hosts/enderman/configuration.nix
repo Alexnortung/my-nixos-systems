@@ -164,6 +164,13 @@ in
       #    "wheel"
       #  ];
       #};
+
+      readarr = {
+        isNormalUser = false;
+        createHome = false;
+        group = "servarr";
+        uid = 986;
+      };
     };
   };
 
@@ -176,6 +183,8 @@ in
     51820 # wireguard
     5005 # testport
     8080 # this should be commected out when not in use
+
+    8787 # Readarr
   ];
   networking.firewall.allowedUDPPorts = [
     53 # dnsmasq
@@ -239,13 +248,13 @@ in
     dataDir = "/data/data2/var/lib/radarr/.config/Radarr";
   };
 
-  services.readarr = {
-    enable = true;
-    package = unstable.readarr;
-    group = "servarr";
-    openFirewall = true;
-    dataDir = "/data/data2/var/lib/readarr/.config/Readarr";
-  };
+  # services.readarr = {
+  #   enable = true;
+  #   package = unstable.readarr;
+  #   group = "servarr";
+  #   openFirewall = true;
+  #   dataDir = "/data/data2/var/lib/readarr/.config/Readarr";
+  # };
 
   services.prowlarr = {
     enable = true;
@@ -267,9 +276,9 @@ in
       enabled_plugins = [
         "Label"
       ];
-      max_active_seeding = 20;
-      max_active_downloading = 25;
-      max_active_limit = 30;
+      max_active_seeding = 30;
+      max_active_downloading = 35;
+      max_active_limit = 60;
       queue_new_to_top = true;
       copy_torrent_file = true;
       pre_allocate_storage = true;
@@ -341,6 +350,21 @@ in
         #     LOG_LEVEL = "info";
         #   };
         # };
+        bookshelf = {
+          image = "ghcr.io/pennydreadful/bookshelf:hardcover-v0.4.20.91";
+          ports = [ "8787:8787" ];
+          # user = "readarr:servarr";
+          user = "986:998";
+          volumes = [
+            "/data/data2/var/lib/bookshelf/.config/bookshelf:/config"
+            "/data/data1/var/lib/readarr/books/:/data/data1/var/lib/readarr/books/"
+            "/data/data1/var/lib/deluge/Downloads:/data/data1/var/lib/deluge/Downloads"
+
+            "/etc/passwd:/etc/passwd:ro"
+            "/etc/group:/etc/group:ro"
+          ];
+          networks = [ "host" ];
+        };
       };
     };
   };
