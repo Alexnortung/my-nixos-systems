@@ -22,7 +22,7 @@ inputs.home-manager.lib.homeManagerConfiguration {
   inherit pkgs;
 
   modules = [
-    inputs.stylix.homeManagerModules.stylix
+    inputs.stylix.homeModules.stylix
     ../../../config/stylix.nix
     ../../profiles/nvim.nix
     # ../../profiles/eww
@@ -32,6 +32,7 @@ inputs.home-manager.lib.homeManagerConfiguration {
     ../../profiles/hyprland.nix
     ../../profiles/polybar.nix
     ../../profiles/rofi.nix
+    ../../profiles/gcalcli-remind.nix
     inputs.oak-configs.homeManagerModules.ssh
   ];
 

@@ -121,6 +121,7 @@ in
         frame_width = 1;
         padding = 16;
         horizontal_padding = 16;
+        origin = "top-right";
       };
       urgency_critical = {
         origin = "center";
