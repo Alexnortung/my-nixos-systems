@@ -67,6 +67,7 @@ in
       cowsay
       gcalcli
       libnotify
+      btop
     ];
 
     shellAliases = {

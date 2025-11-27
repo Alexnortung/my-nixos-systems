@@ -89,8 +89,9 @@ in
 
   fonts.packages = with pkgs; [
     fira-code
-    hasklig
+    # hasklig
     nerd-fonts.symbols-only
+    gelasio
   ];
 
   # Use the systemd-boot EFI boot loader.
