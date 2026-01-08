@@ -185,10 +185,12 @@ in
     8080 # this should be commected out when not in use
 
     8787 # Readarr
+    64422 # deluge
   ];
   networking.firewall.allowedUDPPorts = [
     53 # dnsmasq
     51820 # wireguard
+    64422 # deluge
   ];
 
   networking.wg-quick.interfaces = {
