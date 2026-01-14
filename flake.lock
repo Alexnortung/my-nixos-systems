@@ -1793,11 +1793,11 @@
         "unstable": "unstable"
       },
       "locked": {
-        "lastModified": 1755268011,
-        "narHash": "sha256-nqiTTICKmAGPaMEcZb3B/ddVIANYfGg46S8tYQJtAAY=",
+        "lastModified": 1768317503,
+        "narHash": "sha256-AcGq+rO9IOGCgJQrcndxrE0RQ80g0IWNQ3xAEdpATFQ=",
         "owner": "Alexnortung",
         "repo": "nollevim",
-        "rev": "fd6c2165e887ad1f45e7e12b5d2973d98b906fd9",
+        "rev": "69d3e8458cfeff227255e0c5bc7464d080fc014a",
         "type": "github"
       },
       "original": {
