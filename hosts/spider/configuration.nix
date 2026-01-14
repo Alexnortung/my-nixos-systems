@@ -187,6 +187,16 @@ in
     hibernateCapacity = 5;
   };
 
+  services.earlyoom = {
+    enable = true;
+    extraArgs = [
+      "--avoid"
+      "(^|/)(init|Xorg|ssh)$"
+      "--prefer"
+      "(^|/)(java|chromium|firefox)$"
+    ];
+  };
+
   services.bg-setter = {
     enable = true;
     wallpaper = lib.lists.elemAt (import ../../config/misc/nord-wallpapers.nix { }) 0;
