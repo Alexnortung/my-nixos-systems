@@ -205,13 +205,24 @@ in
       privateKeyFile = "/root/wireguard-keys/mullvad/wg-mullvad";
       peers = [
         {
-          publicKey = "7ncbaCb+9za3jnXlR95I6dJBkwL1ABB5i4ndFUesYxE=";
+          # se-got-004
+          publicKey = "veGD6/aEY6sMfN3Ls7YWPmNgu3AheO7nQqsFT47YSws=";
           allowedIPs = [
             "10.8.0.1/32"
             "10.64.0.1/32"
             "10.124.0.0/22"
           ]; # Only send communication through mullvad if it is in the range of the given ips, allows for split tunneling
-          endpoint = "176.125.235.74:3189";
+          endpoint = "185.213.154.69:51820";
+        }
+        {
+          # se-got-005
+          publicKey = "x4h55uXoIIKUqKjjm6PzNiZlzLjxjuAIKzvgU9UjOGw=";
+          allowedIPs = [
+            "10.8.0.1/32"
+            "10.64.0.1/32"
+            "10.124.0.0/22"
+          ]; # Only send communication through mullvad if it is in the range of the given ips, allows for split tunneling
+          endpoint = "185.209.199.2:51820";
         }
       ];
     };

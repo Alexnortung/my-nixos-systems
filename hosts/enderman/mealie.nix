@@ -2,7 +2,7 @@
 
 {
   services.mealie = {
-    enable = true;
+    enable = false;
     database.createLocally = true;
 
     settings = {

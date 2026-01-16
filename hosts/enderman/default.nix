@@ -20,6 +20,8 @@
         path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.enderman;
         sshUser = "root";
         user = "root";
+        activationTimeout = 600;
+        confirmTimeout = 150;
       };
     };
 }

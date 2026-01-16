@@ -18,12 +18,12 @@
     #   url = "path:/home/alexander/source/nixpkgs";
     # };
     nixos-stable.url = "github:NixOS/nixpkgs/nixos-25.05";
-    nixos-enderman.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixos-enderman.url = "github:NixOS/nixpkgs/nixos-25.11";
     # nixos-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     # nixpkgs-alexnortung.url = "github:alexnortung/nixpkgs/s3fs-module";
-    s3fs-fuse = {
-      url = "github:alexnortung/nixpkgs/s3fs-module";
-    };
+    # s3fs-fuse = {
+    #   url = "github:alexnortung/nixpkgs/s3fs-module";
+    # };
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixpkgs-unstable-master.url = "github:NixOS/nixpkgs/master";
     nixos-hardware = {
@@ -65,10 +65,10 @@
       # inputs.nixpkgs.follows = "nixos-stable";
     };
 
-    block-busters = {
-      url = "github:Alexnortung/block-busters";
-      # url = "path:/home/alexander/source/block-busters";
-    };
+    # block-busters = {
+    #   url = "github:Alexnortung/block-busters";
+    #   # url = "path:/home/alexander/source/block-busters";
+    # };
 
     # nixvim = {
     #   url = "github:pta2002/nixvim";
@@ -171,10 +171,10 @@
           inputs.mail-server.nixosModule
           # import ./modules # My extra modules
           hosts.nixosModule
-          "${inputs.s3fs-fuse}/nixos/modules/services/network-filesystems/s3fs-fuse.nix"
+          # "${inputs.s3fs-fuse}/nixos/modules/services/network-filesystems/s3fs-fuse.nix"
 
           minecraft-servers.nixosModules.minecraft-servers
-          inputs.block-busters.nixosModules.discord-bot
+          # inputs.block-busters.nixosModules.discord-bot
 
           ./cachix.nix
         ];
