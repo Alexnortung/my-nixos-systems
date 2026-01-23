@@ -201,7 +201,7 @@ in
     wg-mullvad = {
       address = [ "10.64.28.12/32" ];
       # dns = [ "193.138.218.74" ]; # mullvad public dns
-      dns = [ "10.64.0.1" ];
+      # dns = [ "10.64.0.1" ];
       privateKeyFile = "/root/wireguard-keys/mullvad/wg-mullvad";
       peers = [
         {
@@ -342,11 +342,16 @@ in
     settingsFile = config.age.secrets.cross-seed-config.path;
   };
 
-  services.jellyfin = {
-    enable = true;
-    group = "servarr";
-    openFirewall = true;
-  };
+  services.jellyfin =
+    let
+      jellyfin-pkgs = import inputs.nixpkgs-jellyfin { inherit inputs system; };
+    in
+    {
+      enable = true;
+      group = "servarr";
+      openFirewall = true;
+      package = jellyfin-pkgs.jellyfin;
+    };
 
   virtualisation = {
     docker = {

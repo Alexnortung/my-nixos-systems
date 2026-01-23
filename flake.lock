@@ -1170,6 +1170,38 @@
         "type": "github"
       }
     },
+    "nixpkgs-factorio": {
+      "locked": {
+        "lastModified": 1769192047,
+        "narHash": "sha256-BtdnTiRg2W9OG/0UUyWyIaHn+gJ8DorVcd8aK678Z7I=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "09911a052d43f5fd7d0109b9ae0354b8c611af28",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "master",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs-jellyfin": {
+      "locked": {
+        "lastModified": 1768364046,
+        "narHash": "sha256-PDFfpswLiuG/DcadTBb7dEfO3jX1fcGlCD4ZKSkC0M8=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "ea30586ee015f37f38783006a9bc9e4aa64d7d61",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "ea30586ee015f37f38783006a9bc9e4aa64d7d61",
+        "type": "github"
+      }
+    },
     "nixpkgs-unstable": {
       "locked": {
         "lastModified": 1768456270,
@@ -1574,6 +1606,8 @@
         "nixos-enderman": "nixos-enderman",
         "nixos-hardware": "nixos-hardware",
         "nixos-stable": "nixos-stable_2",
+        "nixpkgs-factorio": "nixpkgs-factorio",
+        "nixpkgs-jellyfin": "nixpkgs-jellyfin",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nixpkgs-unstable-master": "nixpkgs-unstable-master",
         "nollevim": "nollevim",

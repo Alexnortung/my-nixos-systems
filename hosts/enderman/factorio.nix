@@ -1,7 +1,7 @@
 { pkgs, inputs, ... }:
 let
   system = "x86_64-linux";
-  unstable = import inputs.nixpkgs-unstable {
+  unstable = import inputs.nixpkgs-factorio {
     inherit system;
     config.allowUnfree = true;
   };
