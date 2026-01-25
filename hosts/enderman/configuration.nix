@@ -326,8 +326,9 @@ in
         "/data/data1/var/lib/radarr/movies"
         "/data/data1/var/lib/sonarr/series"
       ];
-      torrentDir = "/data/data1/var/lib/deluge/.config/deluge/state";
-      useClientTorrents = false;
+      # torrentDir = "/data/data1/var/lib/deluge/.config/deluge/state";
+      # useClientTorrents = false;
+      useClientTorrents = true;
       outputDir = "/data/data1/var/lib/deluge/output";
       linkType = "hardlink";
       matchMode = "partial";
