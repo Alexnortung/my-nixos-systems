@@ -327,7 +327,8 @@ in
     # texlive.combined.scheme-full
     wget
     firefox
-    ungoogled-chromium
+    brave
+    # ungoogled-chromium
     bitwarden
     xmrig
     # st
