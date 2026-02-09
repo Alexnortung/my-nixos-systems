@@ -377,7 +377,6 @@ in
     zip
     unzip
     flameshot
-    firefox-bin
     zathura
   ];
 

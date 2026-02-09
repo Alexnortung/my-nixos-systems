@@ -13,6 +13,7 @@ let
       permittedInsecurePackages = [
         "beekeeper-studio-5.2.12"
         "beekeeper-studio-5.3.4"
+        "beekeeper-studio-5.5.3"
       ];
     };
   };
@@ -68,6 +69,7 @@ in
       gcalcli
       libnotify
       btop
+      unstable.firefox
     ];
 
     shellAliases = {

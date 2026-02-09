@@ -1,4 +1,9 @@
-{ lib, inputs, system, ... }@args:
+{
+  lib,
+  inputs,
+  system,
+  ...
+}@args:
 let
   unstable = import inputs.nixpkgs-unstable { inherit system; };
 in
@@ -10,11 +15,13 @@ in
     package = unstable.lazygit;
     settings = {
       git = {
-        paging = {
-          # useConfig = true;
-          colorArg = "always";
-          externalDiffCommand = "difft --color=always";
-        };
+        pagers = [
+          {
+            # useConfig = true;
+            colorArg = "always";
+            externalDiffCommand = "difft --color=always";
+          }
+        ];
       };
     };
   };
