@@ -2,12 +2,16 @@
   inputs,
   pkgs,
   lib,
+  system,
   ...
 }:
 
 let
   inherit (lib) mkForce;
   amixer = "${pkgs.alsa-utils}/bin/amixer";
+  unstable = import inputs.nixpkgs-unstable {
+    inherit system;
+  };
 in
 {
   imports = [
@@ -94,45 +98,58 @@ in
         ", XF86AudioRaiseVolume, exec, ${amixer} -q set Master 3%+"
       ];
 
-      bind =
-        [
-          # Workspace/Layout
-          "$mod SHIFT, Q, killactive"
-          "$mod, TAB, workspace, previous"
-          "$mod, Return, layoutmsg, swapwithmaster master"
-          "$mod, H, splitratio, -0.05"
-          "$mod, L, splitratio, +0.05"
-          "$mod, M, fullscreen"
-          "$mod, K, layoutmsg, cycleprev"
-          "$mod, J, layoutmsg, cyclenext"
+      bind = [
+        # Workspace/Layout
+        "$mod SHIFT, Q, killactive"
+        "$mod, TAB, workspace, previous"
+        "$mod, Return, layoutmsg, swapwithmaster master"
+        "$mod, H, splitratio, -0.05"
+        "$mod, L, splitratio, +0.05"
+        "$mod, M, fullscreen"
+        "$mod, K, layoutmsg, cycleprev"
+        "$mod, J, layoutmsg, cyclenext"
 
-          "$mod, Comma, focusmonitor, l"
-          "$mod, Period, focusmonitor, r"
+        "$mod, Comma, focusmonitor, l"
+        "$mod, Period, focusmonitor, r"
 
-          # Programs
-          "$mod, F, exec, firefox"
-          "$mod SHIFT, Return, exec, alacritty"
-          ", Print, exec, grimblast --freeze copy area"
-          "$mod ALT, L, exec, hyprlock"
-          "$mod, Space, exec, killall rofi || rofi -show"
-          ", code:179, exec, spotify"
-        ]
-        ++ (
-          # workspaces
-          # binds $mod + [shift +] {1..9} to [move to] workspace {1..9}
-          builtins.concatLists (
-            builtins.genList (
-              i:
-              let
-                ws = i + 1;
-              in
-              [
-                "$mod, code:1${toString i}, workspace, ${toString ws}"
-                "$mod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
-              ]
-            ) 9
-          )
-        );
+        # Programs
+        "$mod, F, exec, firefox"
+        "$mod SHIFT, Return, exec, alacritty"
+        ", Print, exec, grimblast --freeze copy area"
+        "$mod ALT, L, exec, hyprlock"
+        "$mod, Space, exec, killall rofi || rofi -show"
+        ", code:179, exec, spotify"
+      ]
+      ++ (
+        # workspaces
+        # binds $mod + [shift +] {1..9} to [move to] workspace {1..9}
+        builtins.concatLists (
+          builtins.genList (
+            i:
+            let
+              ws = i + 1;
+            in
+            [
+              "$mod, code:1${toString i}, workspace, ${toString ws}"
+              "$mod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
+            ]
+          ) 9
+        )
+      );
+
+      windowrulev2 = [
+        # Make the specific Alacritty instance float
+        "float, class:^(wifitui_popup)$"
+
+        # Optional: Set a specific size for the pop-up (width height)
+        "size 600 900, class:^(wifitui_popup)$"
+
+        # Optional: Force it to open in the center of the screen
+        "center, class:^(wifitui_popup)$"
+
+        # Optional: Add a slight dim behind the popup to draw focus
+        "dimaround, class:^(wifitui_popup)$"
+      ];
     };
   };
 
@@ -218,13 +235,17 @@ in
         "network" = {
           # "interface" = "wlp2*"; # (Optional) To force the use of this interface
           "interval" = 1;
-          # "format-wifi" = "  {bandwidthTotalBytes =>2}"; #({essid} {signalStrength}%)
-          # "format-ethernet" = "{ipaddr}/{cidr} ";
-          # "tooltip-format-wifi" = " {ipaddr} ({signalStrength}%)";
-          # "tooltip-format" = "{ifname} via {gwaddr} ";
+          "format-wifi" = " {ipaddr} ({signalStrength}%)";
+          "tooltip-format-wifi" = "  {bandwidthTotalBytes =>2}"; # ({essid} {signalStrength}%)
+          "format-ethernet" = "{ipaddr}/{cidr} ";
+          "tooltip-format" = "{ifname} via {gwaddr} ";
           "format-linked" = "{ifname} (No IP) ";
           "format-disconnected" = "󰀦 Disconnected"; # Disconnected ⚠
           # "format-alt" = "{ifname}: {ipaddr}/{cidr}";
+
+          on-click = "alacritty --class wifitui_popup -e wifitui";
+          # Keep right click for alternating the text format if you like
+          on-click-right = "mode";
         };
 
         battery = {
@@ -298,6 +319,7 @@ in
   # };
 
   home.packages = with pkgs; [
+    unstable.wifitui
     grimblast
     killall
     brightnessctl

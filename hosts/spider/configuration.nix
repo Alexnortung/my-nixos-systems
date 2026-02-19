@@ -391,7 +391,8 @@ in
   # programs.slock = { enable = true; };
 
   programs.nm-applet = {
-    enable = true;
+    # enable = true;
+    enable = false;
   };
 
   # programs.xss-lock = {
