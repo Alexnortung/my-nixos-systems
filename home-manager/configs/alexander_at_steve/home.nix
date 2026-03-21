@@ -13,6 +13,8 @@ let
         "beekeeper-studio-5.1.5"
         "beekeeper-studio-5.2.12"
         "beekeeper-studio-5.3.4"
+        "beekeeper-studio-5.5.3"
+        "beekeeper-studio-5.5.5"
       ];
       allowUnfree = true;
     };
@@ -25,7 +27,10 @@ in
     username = "alexander";
     homeDirectory = "/home/alexander";
     packages = with pkgs; [
-      nodejs
+      unstable.wineWow64Packages.stableFull
+      bottles
+      unstable.winetricks
+      # nodejs
       nodePackages.npm
       bun
       unstable.yarn-berry
@@ -71,8 +76,9 @@ in
   programs.home-manager.enable = true;
 
   programs.git = {
-    difftastic.enable = true;
-    userEmail = "alexander.nortung@oakdigital.dk";
+    settings = {
+      user.email = "alex_nortung@live.dk";
+    };
     iniContent = {
       gpg.format = "ssh";
       user.signingkey = "/home/alexander/.ssh/id_rsa.pub";

@@ -52,7 +52,7 @@ in
 
   fonts.packages = with pkgs; [
     hasklig
-    terminus-nerdfont
+    nerd-fonts.terminess-ttf
   ];
 
   # Use the systemd-boot EFI boot loader.

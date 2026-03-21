@@ -167,10 +167,13 @@ in
   services.xserver = {
     enable = true;
     # windowManager.dwm.enable = true;
-    desktopManager.gnome.enable = true;
-    displayManager.gdm.enable = true;
     # displayManager.sddm.enable = true;
     # desktopManager.plasma5.enable = true;
+  };
+
+  services = {
+    desktopManager.gnome.enable = true;
+    displayManager.gdm.enable = true;
   };
 
   programs.dconf = {
@@ -196,7 +199,7 @@ in
 
   fonts.packages = with pkgs; [
     hasklig
-    terminus-nerdfont
+    nerd-fonts.terminess-ttf
   ];
 
   # services.dwm-status = {
@@ -297,11 +300,11 @@ in
     bind
     metasploit
     qbittorrent
-    wineWowPackages.stable
-    winetricks
+    # wineWowPackages.stable
+    # winetricks
     inputs.deploy-rs.defaultPackage.x86_64-linux
     superTuxKart
-    protonup
+    protonup-ng
     autorandr
     libreoffice
     mullvad-vpn
@@ -329,14 +332,14 @@ in
     firefox
     brave
     # ungoogled-chromium
-    bitwarden
+    bitwarden-desktop
     xmrig
     # st
     # dwm
     neofetch
     dmenu
     dwm-status
-    tdesktop # telegram
+    telegram-desktop
     redshift
     lsof
     pavucontrol
@@ -349,7 +352,7 @@ in
     patchelf
     libGL
     libGLU
-    glxinfo
+    mesa-demos
     # minecraft
     discord
     obs-studio

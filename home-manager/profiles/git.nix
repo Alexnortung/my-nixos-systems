@@ -9,9 +9,11 @@ in
 
   programs.git = {
     enable = true;
-    aliases = config.alias;
-    userEmail = lib.mkDefault config.user.email;
-    userName = config.user.name;
+    settings = {
+      alias = config.alias;
+      user.email = lib.mkDefault config.user.email;
+      user.name = lib.mkDefault config.user.name;
+    };
 
     iniContent = {
       init = config.init;

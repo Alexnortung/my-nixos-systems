@@ -8,7 +8,8 @@ let
   unstable = import inputs.nixpkgs-unstable { inherit system; };
 in
 {
-  programs.git.difftastic.enable = true;
+  programs.difftastic.enable = true;
+  programs.difftastic.git.enable = true;
 
   programs.lazygit = {
     enable = true;
