@@ -30,6 +30,8 @@ in
   nixpkgs.config.permittedInsecurePackages = [
     "beekeeper-studio-5.2.12"
   ];
+  stylix.targets.gnome.colors.override = false;
+  stylix.targets.gnome.enable = false;
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home = {
@@ -66,7 +68,7 @@ in
       unstable.devenv
       unstable.playwright
       unstable.slack
-      unstable.obsidian
+      # unstable.obsidian
       cowsay
       gcalcli
       libnotify
@@ -112,10 +114,12 @@ in
   programs.home-manager.enable = true;
 
   programs.git = {
-    userEmail = "alexander.nortung@oakdigital.dk";
     iniContent = {
       gpg.format = "ssh";
       user.signingkey = "/home/alexander/.ssh/id_rsa.pub";
+    };
+    settings = {
+      user.email = "alexander.nortung@oakdigital.dk";
     };
   };
 

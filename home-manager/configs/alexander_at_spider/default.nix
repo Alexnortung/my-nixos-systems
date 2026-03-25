@@ -5,9 +5,6 @@ let
   # pkgs = inputs.nixos-stable.legacyPackages.${system};
   pkgs = import inputs.nixos-stable {
     inherit system;
-    overlays = [
-      inputs.hyprpanel.overlay
-    ];
     extraSpecialArgs = {
       inherit system;
       inherit inputs;
@@ -30,7 +27,7 @@ inputs.home-manager.lib.homeManagerConfiguration {
     ../../profiles/direnv.nix
     ../../profiles/git.nix
     ../../profiles/hyprland.nix
-    ../../profiles/polybar.nix
+    # ../../profiles/polybar.nix
     ../../profiles/rofi.nix
     ../../profiles/gcalcli-remind.nix
     inputs.oak-configs.homeManagerModules.ssh
