@@ -14,6 +14,9 @@
       pull = {
         rebase = lib.mkDefault true;
       };
+      fetch = {
+        prune = lib.mkDefault true;
+      };
       alias = {
         st = "status";
         co = "checkout";
