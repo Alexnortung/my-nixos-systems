@@ -31,6 +31,7 @@ in
     "beekeeper-studio-5.2.12"
   ];
   stylix.targets.gnome.enable = false;
+  stylix.targets.firefox.profileNames = [ "default" ];
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home = {
@@ -75,7 +76,6 @@ in
       gcalcli
       libnotify
       btop
-      unstable.firefox
       unstable.codex
       unstable.antigravity-fhs
       # Antigravity is using sanbox-exec
@@ -114,6 +114,35 @@ in
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  gtk = {
+    enable = true;
+    gtk3.extraConfig = {
+      gtk-application-prefer-dark-theme = true;
+    };
+    gtk4.extraConfig = {
+      gtk-application-prefer-dark-theme = true;
+    };
+  };
+
+  dconf.settings."org/gnome/desktop/interface" = {
+    color-scheme = "prefer-dark";
+  };
+
+  programs.firefox = {
+    enable = true;
+    package = unstable.firefox;
+
+    profiles.default = {
+      id = 0;
+      path = "fkcoc1l0.default";
+      settings = {
+        "layout.css.prefers-color-scheme.content-override" = 0;
+        "ui.systemUsesDarkTheme" = 1;
+        "browser.theme.dark-private-windows" = true;
+      };
+    };
+  };
 
   programs.git = {
     iniContent = {
