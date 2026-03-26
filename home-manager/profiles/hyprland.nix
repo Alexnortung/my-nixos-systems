@@ -323,6 +323,6 @@ in
     grimblast
     killall
     brightnessctl
-    hyprpanel
+    # hyprpanel
   ];
 }

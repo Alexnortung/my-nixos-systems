@@ -30,7 +30,6 @@ in
   nixpkgs.config.permittedInsecurePackages = [
     "beekeeper-studio-5.2.12"
   ];
-  stylix.targets.gnome.colors.override = false;
   stylix.targets.gnome.enable = false;
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -68,6 +67,9 @@ in
       unstable.devenv
       unstable.playwright
       unstable.slack
+      imagemagick
+      unstable.bitwarden-desktop
+      unstable.spotify
       # unstable.obsidian
       cowsay
       gcalcli

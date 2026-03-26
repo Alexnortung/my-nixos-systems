@@ -202,39 +202,39 @@ in
     wallpaper = lib.lists.elemAt (import ../../config/misc/nord-wallpapers.nix { }) 0;
   };
 
-  services.dwm-status = {
-    enable = false;
-    order = [
-      "audio"
-      #"backlight"
-      "battery"
-      "cpu_load"
-      "network"
-      "time"
-    ];
-    extraConfig = ''
-      separator = " | "
-
-      [audio]
-      icons = [ "󰕿", "󰖀", "󰕾" ]
-      mute = "󰖁"
-      template = "{ICO} {VOL}%"
-
-      [battery]
-      charging = ""
-      discharging = ""
-      no_battery = " No battery"
-      icons = ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
-
-      [cpu_load]
-      template = " {CL1}"
-      update_interval = 15
-
-      [network]
-      no_value = " Not connected"
-      template = " {IPv4}"
-    '';
-  };
+  # services.dwm-status = {
+  #   enable = false;
+  #   order = [
+  #     "audio"
+  #     #"backlight"
+  #     "battery"
+  #     "cpu_load"
+  #     "network"
+  #     "time"
+  #   ];
+  #   extraConfig = ''
+  #     separator = " | "
+  #
+  #     [audio]
+  #     icons = [ "󰕿", "󰖀", "󰕾" ]
+  #     mute = "󰖁"
+  #     template = "{ICO} {VOL}%"
+  #
+  #     [battery]
+  #     charging = ""
+  #     discharging = ""
+  #     no_battery = " No battery"
+  #     icons = ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+  #
+  #     [cpu_load]
+  #     template = " {CL1}"
+  #     update_interval = 15
+  #
+  #     [network]
+  #     no_value = " Not connected"
+  #     template = " {IPv4}"
+  #   '';
+  # };
 
   # services.displayManager.sddm = {
   #   enable = true;
@@ -350,12 +350,9 @@ in
     # beekeeper-studio
     # brave
     # gimp
-    imagemagick
-    slack
     docker-compose
     dunst
     xmrig
-    bitwarden
     #torbrowser
     unstable.mullvad-vpn
     arandr
@@ -369,7 +366,6 @@ in
     brightnessctl # Brightness from terminal
     dmenu
     st
-    spotify
     libreoffice
     tmate
     # unstable.session-desktop

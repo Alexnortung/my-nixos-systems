@@ -277,7 +277,7 @@ in
     dunst
     # xmrig
     # conky
-    bitwarden
+    bitwarden-desktop
     # torbrowser
     mullvad-vpn
     arandr
