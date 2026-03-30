@@ -87,8 +87,7 @@
     };
 
     mail-server = {
-      url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-25.05";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-25.11";
     };
 
     hosts = {

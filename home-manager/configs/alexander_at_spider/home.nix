@@ -78,6 +78,7 @@ in
       btop
       unstable.codex
       unstable.antigravity-fhs
+      bubblewrap
       # Antigravity is using sanbox-exec
       (writeShellScriptBin "sandbox-exec" ''
         # Loop through arguments and strip sandbox-exec specific flags
