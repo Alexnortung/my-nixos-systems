@@ -209,8 +209,90 @@
         let
           pkgs = channels.nixpkgs-unstable;
           cachix-deploy-lib = cachix-deploy-flake.lib channels.nixpkgs-unstable;
+          spiderHome = self.homeConfigurations."alexander@spider".config;
+          hasTarget =
+            target: value:
+            if builtins.isList value then builtins.elem target value else value == target;
+          lacksTarget =
+            target: value:
+            if builtins.isList value then !(builtins.elem target value) else value != target;
+          expectContains =
+            name: target: value:
+            if hasTarget target value then null else throw "${name} must contain ${target}, got ${builtins.toJSON value}";
+          expectLacks =
+            name: target: value:
+            if lacksTarget target value then null else throw "${name} must not contain ${target}, got ${builtins.toJSON value}";
         in
         {
+          checks = {
+            spider-session-startup =
+              let
+                checkWaybarAfter = expectContains
+                  "waybar.Unit.After"
+                  "hyprland-session.target"
+                  spiderHome.systemd.user.services.waybar.Unit.After;
+                checkWaybarAfterRace = expectLacks
+                  "waybar.Unit.After"
+                  "graphical-session.target"
+                  spiderHome.systemd.user.services.waybar.Unit.After;
+                checkWaybarWantedBy = expectContains
+                  "waybar.Install.WantedBy"
+                  "hyprland-session.target"
+                  spiderHome.systemd.user.services.waybar.Install.WantedBy;
+                checkWaybarWantedByRace = expectLacks
+                  "waybar.Install.WantedBy"
+                  "graphical-session.target"
+                  spiderHome.systemd.user.services.waybar.Install.WantedBy;
+                checkHyprpaperAfter = expectContains
+                  "hyprpaper.Unit.After"
+                  "hyprland-session.target"
+                  spiderHome.systemd.user.services.hyprpaper.Unit.After;
+                checkHyprpaperAfterRace = expectLacks
+                  "hyprpaper.Unit.After"
+                  "graphical-session.target"
+                  spiderHome.systemd.user.services.hyprpaper.Unit.After;
+                checkHyprpaperWantedBy = expectContains
+                  "hyprpaper.Install.WantedBy"
+                  "hyprland-session.target"
+                  spiderHome.systemd.user.services.hyprpaper.Install.WantedBy;
+                checkHyprpaperWantedByRace = expectLacks
+                  "hyprpaper.Install.WantedBy"
+                  "graphical-session.target"
+                  spiderHome.systemd.user.services.hyprpaper.Install.WantedBy;
+                checkHypridleAfter = expectContains
+                  "hypridle.Unit.After"
+                  "hyprland-session.target"
+                  spiderHome.systemd.user.services.hypridle.Unit.After;
+                checkHypridleAfterRace = expectLacks
+                  "hypridle.Unit.After"
+                  "graphical-session.target"
+                  spiderHome.systemd.user.services.hypridle.Unit.After;
+                checkHypridleWantedBy = expectContains
+                  "hypridle.Install.WantedBy"
+                  "hyprland-session.target"
+                  spiderHome.systemd.user.services.hypridle.Install.WantedBy;
+                checkHypridleWantedByRace = expectLacks
+                  "hypridle.Install.WantedBy"
+                  "graphical-session.target"
+                  spiderHome.systemd.user.services.hypridle.Install.WantedBy;
+              in
+              assert checkWaybarAfter == null;
+              assert checkWaybarAfterRace == null;
+              assert checkWaybarWantedBy == null;
+              assert checkWaybarWantedByRace == null;
+              assert checkHyprpaperAfter == null;
+              assert checkHyprpaperAfterRace == null;
+              assert checkHyprpaperWantedBy == null;
+              assert checkHyprpaperWantedByRace == null;
+              assert checkHypridleAfter == null;
+              assert checkHypridleAfterRace == null;
+              assert checkHypridleWantedBy == null;
+              assert checkHypridleWantedByRace == null;
+              pkgs.runCommand "spider-session-startup" { } ''
+                touch "$out"
+              '';
+          };
+
           packages = {
             # cachix-deploy-spec = cachix-deploy-lib.spec {
             #   agents = (import ./hosts/default.nix).cachixDeployAgents inputs;

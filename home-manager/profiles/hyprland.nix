@@ -271,6 +271,38 @@ in
     };
   };
 
+  systemd.user.services = {
+    waybar = {
+      Unit = {
+        After = mkForce [ "hyprland-session.target" ];
+        PartOf = mkForce [ "hyprland-session.target" ];
+      };
+      Install = {
+        WantedBy = mkForce [ "hyprland-session.target" ];
+      };
+    };
+
+    hypridle = {
+      Unit = {
+        After = mkForce [ "hyprland-session.target" ];
+        PartOf = mkForce [ "hyprland-session.target" ];
+      };
+      Install = {
+        WantedBy = mkForce [ "hyprland-session.target" ];
+      };
+    };
+
+    hyprpaper = {
+      Unit = {
+        After = mkForce [ "hyprland-session.target" ];
+        PartOf = mkForce [ "hyprland-session.target" ];
+      };
+      Install = {
+        WantedBy = mkForce [ "hyprland-session.target" ];
+      };
+    };
+  };
+
   # programs.hyprpanel = {
   #   # enable = true;
   #
