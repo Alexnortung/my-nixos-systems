@@ -53,9 +53,15 @@ in
   #   };
   # };
 
-  networking.hosts = {
-    "192.168.3.20" = [
-      "jellyfin.northwing.games"
+  networking = {
+    hosts = {
+      "192.168.3.20" = [
+        "jellyfin.northwing.games"
+      ];
+    };
+
+    firewall.allowedTCPPorts = [
+      3000 # For home development
     ];
   };
 
