@@ -77,6 +77,7 @@ in
       libnotify
       btop
       unstable.codex
+      unstable.opencode
       unstable.antigravity-fhs
       bubblewrap
       # Antigravity is using sanbox-exec
