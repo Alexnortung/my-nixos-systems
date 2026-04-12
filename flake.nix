@@ -64,6 +64,10 @@
       # inputs.nixpkgs.follows = "nixos-stable";
     };
 
+    coding-agents = {
+      url = "github:kissgyorgy/coding-agents";
+    };
+
     # block-busters = {
     #   url = "github:Alexnortung/block-busters";
     #   # url = "path:/home/alexander/source/block-busters";

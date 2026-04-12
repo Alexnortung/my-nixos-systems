@@ -59,8 +59,13 @@ in
     };
   };
 
+  coding-agents.pi-coding-agent = {
+    # enable = true;
+  };
+
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowUnfreePredicate = pkg: true;
+  nixpkgs.overlays = [ inputs.coding-agents.overlays.default ];
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
@@ -89,6 +94,7 @@ in
     enable = true;
     initContent = ''
       export PATH=$PATH:~/.node_modules/bin/
+      export PATH="/home/alexander/.bun/bin:$PATH"
       export XDG_DATA_DIRS=$XDG_DATA_DIRS:/usr/share:/var/lib/flatpak/exports/share:$HOME/.local/share/flatpak/exports/share
     '';
   };
