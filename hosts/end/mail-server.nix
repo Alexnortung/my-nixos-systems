@@ -35,6 +35,7 @@
       };
     };
 
+    stateVersion = 3;
   };
 
   services.roundcube = {

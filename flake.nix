@@ -45,8 +45,8 @@
     vim-extra-plugins.url = "github:m15a/nixpkgs-vim-extra-plugins";
 
     agenix = {
-      url = "github:ryantm/agenix/0.13.0"; # for encrypted secrets. such as wireguard keys
-      # inputs.nixpkgs.follows = "nixos-stable";
+      url = "github:ryantm/agenix"; # for encrypted secrets. such as wireguard keys
+      inputs.nixpkgs.follows = "nixos-stable";
       # inputs.home-manager.follows = "home-manager";
     };
     deploy-rs = {
@@ -211,70 +211,62 @@
           cachix-deploy-lib = cachix-deploy-flake.lib channels.nixpkgs-unstable;
           spiderHome = self.homeConfigurations."alexander@spider".config;
           hasTarget =
-            target: value:
-            if builtins.isList value then builtins.elem target value else value == target;
+            target: value: if builtins.isList value then builtins.elem target value else value == target;
           lacksTarget =
-            target: value:
-            if builtins.isList value then !(builtins.elem target value) else value != target;
+            target: value: if builtins.isList value then !(builtins.elem target value) else value != target;
           expectContains =
             name: target: value:
-            if hasTarget target value then null else throw "${name} must contain ${target}, got ${builtins.toJSON value}";
+            if hasTarget target value then
+              null
+            else
+              throw "${name} must contain ${target}, got ${builtins.toJSON value}";
           expectLacks =
             name: target: value:
-            if lacksTarget target value then null else throw "${name} must not contain ${target}, got ${builtins.toJSON value}";
+            if lacksTarget target value then
+              null
+            else
+              throw "${name} must not contain ${target}, got ${builtins.toJSON value}";
         in
         {
           checks = {
             spider-session-startup =
               let
-                checkWaybarAfter = expectContains
-                  "waybar.Unit.After"
-                  "hyprland-session.target"
-                  spiderHome.systemd.user.services.waybar.Unit.After;
-                checkWaybarAfterRace = expectLacks
-                  "waybar.Unit.After"
-                  "graphical-session.target"
-                  spiderHome.systemd.user.services.waybar.Unit.After;
-                checkWaybarWantedBy = expectContains
-                  "waybar.Install.WantedBy"
-                  "hyprland-session.target"
-                  spiderHome.systemd.user.services.waybar.Install.WantedBy;
-                checkWaybarWantedByRace = expectLacks
-                  "waybar.Install.WantedBy"
-                  "graphical-session.target"
-                  spiderHome.systemd.user.services.waybar.Install.WantedBy;
-                checkHyprpaperAfter = expectContains
-                  "hyprpaper.Unit.After"
-                  "hyprland-session.target"
-                  spiderHome.systemd.user.services.hyprpaper.Unit.After;
-                checkHyprpaperAfterRace = expectLacks
-                  "hyprpaper.Unit.After"
-                  "graphical-session.target"
-                  spiderHome.systemd.user.services.hyprpaper.Unit.After;
-                checkHyprpaperWantedBy = expectContains
-                  "hyprpaper.Install.WantedBy"
-                  "hyprland-session.target"
-                  spiderHome.systemd.user.services.hyprpaper.Install.WantedBy;
-                checkHyprpaperWantedByRace = expectLacks
-                  "hyprpaper.Install.WantedBy"
-                  "graphical-session.target"
-                  spiderHome.systemd.user.services.hyprpaper.Install.WantedBy;
-                checkHypridleAfter = expectContains
-                  "hypridle.Unit.After"
-                  "hyprland-session.target"
-                  spiderHome.systemd.user.services.hypridle.Unit.After;
-                checkHypridleAfterRace = expectLacks
-                  "hypridle.Unit.After"
-                  "graphical-session.target"
-                  spiderHome.systemd.user.services.hypridle.Unit.After;
-                checkHypridleWantedBy = expectContains
-                  "hypridle.Install.WantedBy"
-                  "hyprland-session.target"
-                  spiderHome.systemd.user.services.hypridle.Install.WantedBy;
-                checkHypridleWantedByRace = expectLacks
-                  "hypridle.Install.WantedBy"
-                  "graphical-session.target"
-                  spiderHome.systemd.user.services.hypridle.Install.WantedBy;
+                checkWaybarAfter =
+                  expectContains "waybar.Unit.After" "hyprland-session.target"
+                    spiderHome.systemd.user.services.waybar.Unit.After;
+                checkWaybarAfterRace =
+                  expectLacks "waybar.Unit.After" "graphical-session.target"
+                    spiderHome.systemd.user.services.waybar.Unit.After;
+                checkWaybarWantedBy =
+                  expectContains "waybar.Install.WantedBy" "hyprland-session.target"
+                    spiderHome.systemd.user.services.waybar.Install.WantedBy;
+                checkWaybarWantedByRace =
+                  expectLacks "waybar.Install.WantedBy" "graphical-session.target"
+                    spiderHome.systemd.user.services.waybar.Install.WantedBy;
+                checkHyprpaperAfter =
+                  expectContains "hyprpaper.Unit.After" "hyprland-session.target"
+                    spiderHome.systemd.user.services.hyprpaper.Unit.After;
+                checkHyprpaperAfterRace =
+                  expectLacks "hyprpaper.Unit.After" "graphical-session.target"
+                    spiderHome.systemd.user.services.hyprpaper.Unit.After;
+                checkHyprpaperWantedBy =
+                  expectContains "hyprpaper.Install.WantedBy" "hyprland-session.target"
+                    spiderHome.systemd.user.services.hyprpaper.Install.WantedBy;
+                checkHyprpaperWantedByRace =
+                  expectLacks "hyprpaper.Install.WantedBy" "graphical-session.target"
+                    spiderHome.systemd.user.services.hyprpaper.Install.WantedBy;
+                checkHypridleAfter =
+                  expectContains "hypridle.Unit.After" "hyprland-session.target"
+                    spiderHome.systemd.user.services.hypridle.Unit.After;
+                checkHypridleAfterRace =
+                  expectLacks "hypridle.Unit.After" "graphical-session.target"
+                    spiderHome.systemd.user.services.hypridle.Unit.After;
+                checkHypridleWantedBy =
+                  expectContains "hypridle.Install.WantedBy" "hyprland-session.target"
+                    spiderHome.systemd.user.services.hypridle.Install.WantedBy;
+                checkHypridleWantedByRace =
+                  expectLacks "hypridle.Install.WantedBy" "graphical-session.target"
+                    spiderHome.systemd.user.services.hypridle.Install.WantedBy;
               in
               assert checkWaybarAfter == null;
               assert checkWaybarAfterRace == null;
