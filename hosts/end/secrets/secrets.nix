@@ -9,6 +9,7 @@ in
   # For mail passwords, use a password hash from
   "wireguard-key.age".publicKeys = sshKeys.getKeys keyFiles;
   "mail-passwords/an-northwing.games.age".publicKeys = sshKeys.getKeys keyFiles;
+  "mail-passwords/morgan-nortung.dk.age".publicKeys = sshKeys.getKeys keyFiles;
   "mail-passwords/admin-northwing.games.age".publicKeys = sshKeys.getKeys keyFiles;
   "mail-passwords/bitwarden-northwing.games.age".publicKeys = sshKeys.getKeys keyFiles;
   "mail-passwords/mealie-nortung.dk.age".publicKeys = sshKeys.getKeys keyFiles;

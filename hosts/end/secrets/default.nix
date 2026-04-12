@@ -6,6 +6,7 @@
   age.secrets = {
     wireguard-key.file = ./wireguard-key.age;
     mail-pass-an.file = ./mail-passwords/an-northwing.games.age;
+    mail-pass-morgan.file = ./mail-passwords/morgan-nortung.dk.age;
     mail-pass-admin.file = ./mail-passwords/an-northwing.games.age;
     mail-pass-bitwarden.file = ./mail-passwords/bitwarden-northwing.games.age;
     mail-pass-mealie.file = ./mail-passwords/mealie-nortung.dk.age;

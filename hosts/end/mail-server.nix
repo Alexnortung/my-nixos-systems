@@ -1,5 +1,6 @@
 {
   inputs,
+  pkgs,
   config,
   ...
 }:
@@ -30,6 +31,9 @@
       "alexander@nortung.dk" = {
         hashedPasswordFile = config.age.secrets.mail-pass-admin.path;
       };
+      "morgan@nortung.dk" = {
+        hashedPasswordFile = config.age.secrets.mail-pass-morgan.path;
+      };
       "mealie@nortung.dk" = {
         hashedPasswordFile = config.age.secrets.mail-pass-mealie.path;
       };
@@ -41,12 +45,32 @@
   services.roundcube = {
     enable = true;
     hostName = "mails.northwing.games";
+    package = pkgs.roundcube.withPlugins (
+      plugins: with plugins; [
+        # external plugins to be included
+        # https://search.nixos.org/packages?query=roundcubePlugins
+        persistent_login
+      ]
+    );
+    # activate plugins
+    plugins = [
+      "persistent_login"
+      "managesieve" # built-in
+    ];
+    dicts = with pkgs.aspellDicts; [
+      # https://search.nixos.org/packages?query=aspellDicts
+      en
+    ];
+    maxAttachmentSize = config.mailserver.messageSizeLimit / 1024 / 1024;
     extraConfig = ''
-      # starttls needed for authentication, so the fqdn required to match
-      # the certificate
-      $config['smtp_server'] = "tls://${config.mailserver.fqdn}";
+      $config['imap_host'] = "ssl://${config.mailserver.fqdn}";
+      $config['smtp_host'] = "ssl://${config.mailserver.fqdn}";
       $config['smtp_user'] = "%u";
       $config['smtp_pass'] = "%p";
+
+      $config['managesieve_host'] = "tls://${config.mailserver.fqdn}";
+      $config['managesieve_port'] = 4190;
+      $config['managesieve_usetls'] = true;
     '';
   };
 }
