@@ -18,6 +18,8 @@ in
     # inputs.hyprpanel.homeManagerModules.hyprpanel
   ];
 
+  # Home Manager owns user-session behavior: Hyprland settings,
+  # bars/idle/background services, and other per-user desktop prefs.
   programs.hyprlock = {
     enable = true;
 
@@ -31,6 +33,7 @@ in
     };
   };
 
+  # User-level Hyprland behavior stays here.
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {

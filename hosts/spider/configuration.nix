@@ -81,6 +81,12 @@ in
     enableGraphical = true;
   };
 
+  # System owns desktop/session plumbing such as portals.
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
+  };
+
   # swapDevices = [
   #   {
   #     label = "swap";
@@ -271,6 +277,7 @@ in
     # };
   };
 
+  # NixOS owns Hyprland availability and session integration.
   programs.hyprland = {
     enable = true;
   };
