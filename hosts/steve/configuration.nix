@@ -251,6 +251,15 @@ in
       ]; # Enable ‘sudo’ for the user.
       shell = pkgs.zsh;
     };
+    alexwork = {
+      isNormalUser = true;
+      home = "/home/alexwork";
+      extraGroups = [
+        "audio"
+        "video"
+      ];
+      shell = pkgs.zsh;
+    };
     morgan = {
       isNormalUser = true;
       home = "/home/morgan";
