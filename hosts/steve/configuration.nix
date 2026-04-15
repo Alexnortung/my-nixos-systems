@@ -257,6 +257,7 @@ in
       extraGroups = [
         "audio"
         "video"
+        "docker"
       ];
       shell = pkgs.zsh;
     };
@@ -270,7 +271,10 @@ in
       shell = pkgs.zsh;
     };
   };
-  users.extraGroups.docker.members = [ "alexander" ];
+  users.extraGroups.docker.members = [
+    "alexander"
+    "alexwork"
+  ];
 
   # programs.ssh.forwardX11 = true;
   #programs.ssh.startAgent = true;
