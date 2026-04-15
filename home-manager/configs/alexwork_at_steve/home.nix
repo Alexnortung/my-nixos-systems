@@ -24,26 +24,34 @@ in
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home = {
-    username = "alexander";
-    homeDirectory = "/home/alexander";
+    username = "alexwork";
+    homeDirectory = "/home/alexwork";
     packages = with pkgs; [
+      unstable.slack
+      imagemagick
+      ripgrep
+      nodejs
       bun
       unstable.yarn-berry
+      nodePackages.pnpm
       unstable.beekeeper-studio
       gftp
       alacritty
       ffmpeg
       unstable.bruno
       unstable.obsidian
+      unstable.mongodb-compass
+      mongodb-tools
+      unstable.gh
+      unstable.spotify
+      unstable.codex
+      bubblewrap
+      rclone
     ];
 
     sessionVariables = {
       EDITOR = "nvim";
     };
-  };
-
-  coding-agents.pi-coding-agent = {
-    # enable = true;
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -67,10 +75,13 @@ in
     settings = {
       user.email = "alexander.nortung@oakdigital.dk";
     };
-    # iniContent = {
-    #   gpg.format = "ssh";
-    #   user.signingkey = "/home/alexander/.ssh/id_rsa.pub";
-    # };
+    iniContent = {
+      commit.gpgsign = false;
+      # gpg.format = { };
+      # user.signingkey = { };
+      # # gpg.format = false;
+      # # user.signingkey = null;
+    };
   };
 
   programs.zsh = {
