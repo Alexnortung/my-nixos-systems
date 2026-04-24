@@ -198,6 +198,9 @@ in
     };
   };
 
-  # Optional, hint Electron apps to use Wayland:
-  # home.sessionVariables.NIXOS_OZONE_WL = "1";
+  home.sessionVariables = {
+    # Native Wayland is required for reliable screen sharing in Hyprland.
+    MOZ_ENABLE_WAYLAND = "1";
+    NIXOS_OZONE_WL = "1";
+  };
 }

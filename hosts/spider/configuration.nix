@@ -84,7 +84,17 @@ in
   # System owns desktop/session plumbing such as portals.
   xdg.portal = {
     enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
+    xdgOpenUsePortal = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-hyprland
+      xdg-desktop-portal-gtk
+    ];
+    config = {
+      common.default = [
+        "hyprland"
+        "gtk"
+      ];
+    };
   };
 
   # swapDevices = [
