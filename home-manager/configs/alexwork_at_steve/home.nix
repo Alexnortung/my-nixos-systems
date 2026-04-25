@@ -91,4 +91,26 @@ in
       export PATH="/home/alexander/.bun/bin:$PATH"
     '';
   };
+
+  xdg.configFile = {
+    "autostart/slack.desktop".text = ''
+      [Desktop Entry]
+      Type=Application
+      Version=1.0
+      Name=Slack
+      Exec=${unstable.slack}/bin/slack
+      Terminal=false
+      X-GNOME-Autostart-enabled=true
+    '';
+
+    "autostart/firefox.desktop".text = ''
+      [Desktop Entry]
+      Type=Application
+      Version=1.0
+      Name=Firefox
+      Exec=${pkgs.firefox}/bin/firefox
+      Terminal=false
+      X-GNOME-Autostart-enabled=true
+    '';
+  };
 }
