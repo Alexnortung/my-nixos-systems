@@ -35,6 +35,9 @@
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
     };
+    home-manager-unstable = {
+      url = "github:nix-community/home-manager/master";
+    };
 
     stylix.url = "github:danth/stylix/release-25.11";
 
