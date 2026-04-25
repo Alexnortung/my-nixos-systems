@@ -29,6 +29,7 @@ in
         "oh-my-openagent@3.17.5"
         "@slkiser/opencode-quota@3.2.0"
         "@simonwjackson/opencode-direnv"
+        "@tarquinen/opencode-dcp@3.1.9"
       ];
     };
   };
