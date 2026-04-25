@@ -25,7 +25,7 @@ in
     package = unstable.opencode;
     skills = ../../agents/skills;
     settings = {
-      plugin = [ "oh-my-openagent" ];
+      plugin = [ "oh-my-openagent@3.17.5" ];
     };
   };
 
