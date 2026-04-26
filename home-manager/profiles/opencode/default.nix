@@ -26,6 +26,7 @@ in
     enable = true;
     package = unstable.opencode;
     skills = ../../agents/skills;
+    agents = ../../agents/agents;
     settings = {
       plugin = [
         # "oh-my-openagent@3.17.5"
@@ -41,24 +42,24 @@ in
 
   # xdg.configFile."opencode/oh-my-openagent.jsonc".source = ./oh-my-openagent.jsonc;
 
-  xdg.configFile."opencode/agent" = {
-    source = "${openagentscontrol}/.config/opencode/agent";
-    recursive = true;
-  };
-  xdg.configFile."opencode/command" = {
-    source = "${openagentscontrol}/.config/opencode/command";
-    recursive = true;
-  };
-  xdg.configFile."opencode/context" = {
-    source = "${openagentscontrol}/.config/opencode/context";
-    recursive = true;
-  };
-  xdg.configFile."opencode/skill" = {
-    source = "${openagentscontrol}/.config/opencode/skill";
-    recursive = true;
-  };
-  xdg.configFile."opencode/tool" = {
-    source = "${openagentscontrol}/.config/opencode/tool";
-    recursive = true;
-  };
+  # xdg.configFile."opencode/agent" = {
+  #   source = "${openagentscontrol}/.config/opencode/agent";
+  #   recursive = true;
+  # };
+  # xdg.configFile."opencode/command" = {
+  #   source = "${openagentscontrol}/.config/opencode/command";
+  #   recursive = true;
+  # };
+  # xdg.configFile."opencode/context" = {
+  #   source = "${openagentscontrol}/.config/opencode/context";
+  #   recursive = true;
+  # };
+  # xdg.configFile."opencode/skill" = {
+  #   source = "${openagentscontrol}/.config/opencode/skill";
+  #   recursive = true;
+  # };
+  # xdg.configFile."opencode/tool" = {
+  #   source = "${openagentscontrol}/.config/opencode/tool";
+  #   recursive = true;
+  # };
 }
