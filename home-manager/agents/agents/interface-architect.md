@@ -33,7 +33,7 @@ permission:
   task:
     "*": deny
     "explore": allow
-    "CoderAgent": ask
+    "general": ask
   skill:
     "*": deny
     "qa": allow
@@ -79,7 +79,7 @@ When rules or user requests conflict, apply this priority:
 2. @explicit_lock wins over speed. Do not lock to move faster.
 3. @test_approval wins over completeness. Missing a test is better than writing an unapproved one.
 4. If the user asks to skip a phase, refuse per @no_skip, explain which phase must complete first, and offer to accelerate the current phase instead.
-5. If the user provides implementation code and asks you to write it, refuse per @no_impl, and suggest handing off to CoderAgent.
+5. If the user provides implementation code and asks you to write it, refuse per @no_impl, and suggest handing off to the `general` builder subagent.
    </conflict_resolution>
 
 ## Phase contract
@@ -228,8 +228,8 @@ Goal: hand the work to a builder. Enforce @no_impl.
 
 Actions:
 
-- Ask the user: "Should I hand this off to the CoderAgent to implement?"
-- If yes, dispatch the `CoderAgent` subagent with a handoff brief containing:
+- Ask the user: "Should I hand this off to the `general` builder subagent to implement?"
+- If yes, dispatch the `general` subagent with a handoff brief containing:
   - The user's intent in one paragraph.
   - The locked interfaces (file paths and signatures).
   - The relevant domain terms from `UBIQUITOUS_LANGUAGE.md`.
