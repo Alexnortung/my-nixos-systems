@@ -31,6 +31,7 @@ inputs.home-manager.lib.homeManagerConfiguration {
     ../../profiles/rofi.nix
     ../../profiles/gcalcli-remind.nix
     inputs.oak-configs.homeManagerModules.ssh
+    ../../profiles/opencode
   ];
 
   extraSpecialArgs = {

@@ -51,7 +51,7 @@ in
       phpPackages.composer
       # fluxcd
       rclone
-      insomnia
+      # insomnia
       alacritty
       unstable.bruno
       jq
@@ -78,25 +78,25 @@ in
       btop
       unstable.codex
       unstable.opencode
-      unstable.antigravity-fhs
+      # unstable.antigravity-fhs
       bubblewrap
       # Antigravity is using sanbox-exec
-      (writeShellScriptBin "sandbox-exec" ''
-        # Loop through arguments and strip sandbox-exec specific flags
-        while [[ $# -gt 0 ]]; do
-          case "$1" in
-            -f|-n|-p|-D) 
-              shift 2 ;; # Shift the flag and its argument
-            -*) 
-              shift 1 ;; # Shift any other rogue flags
-            *) 
-              break ;;   # Stop when we hit the actual command
-          esac
-        done
-
-        # Execute the raw command
-        exec "$@"
-      '')
+      # (writeShellScriptBin "sandbox-exec" ''
+      #   # Loop through arguments and strip sandbox-exec specific flags
+      #   while [[ $# -gt 0 ]]; do
+      #     case "$1" in
+      #       -f|-n|-p|-D)
+      #         shift 2 ;; # Shift the flag and its argument
+      #       -*)
+      #         shift 1 ;; # Shift any other rogue flags
+      #       *)
+      #         break ;;   # Stop when we hit the actual command
+      #     esac
+      #   done
+      #
+      #   # Execute the raw command
+      #   exec "$@"
+      # '')
     ];
 
     shellAliases = {
