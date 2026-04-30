@@ -62,6 +62,7 @@ in
 
     firewall.allowedTCPPorts = [
       3000 # For home development
+      4096 # opencode web
     ];
   };
 
