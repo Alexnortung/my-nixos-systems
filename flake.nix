@@ -24,9 +24,7 @@
     # s3fs-fuse = {
     #   url = "github:alexnortung/nixpkgs/s3fs-module";
     # };
-    # nixpkgs-jellyfin.url = "github:NixOS/nixpkgs/01b6809f7f9d1183a2b3e081f0a1e6f8f415cb09";
     nixpkgs-factorio.url = "github:NixOS/nixpkgs/master";
-    nixpkgs-jellyfin.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixpkgs-unstable-master.url = "github:NixOS/nixpkgs/master";
     nixos-hardware = {

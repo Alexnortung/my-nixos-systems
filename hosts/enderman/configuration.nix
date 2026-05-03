@@ -343,16 +343,11 @@ in
     settingsFile = config.age.secrets.cross-seed-config.path;
   };
 
-  services.jellyfin =
-    let
-      jellyfin-pkgs = import inputs.nixpkgs-jellyfin { inherit inputs system; };
-    in
-    {
-      enable = true;
-      group = "servarr";
-      openFirewall = true;
-      package = jellyfin-pkgs.jellyfin;
-    };
+  services.jellyfin = {
+    enable = true;
+    group = "servarr";
+    openFirewall = true;
+  };
 
   virtualisation = {
     docker = {

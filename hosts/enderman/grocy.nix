@@ -1,7 +1,20 @@
-{ pkgs, lib, ... }: {
+{
+  pkgs,
+  lib,
+  inputs,
+  ...
+}:
+let
+  system = "x86_64-linux";
+  unstable = import inputs.nixpkgs-unstable {
+    inherit system;
+  };
+in
+{
   services.grocy = {
     enable = true;
     hostName = "grocy.nortung.dk";
+    package = unstable.grocy;
     nginx = {
       enableSSL = true;
     };
