@@ -131,6 +131,21 @@ in
     color-scheme = "prefer-dark";
   };
 
+  xdg = {
+    enable = true;
+    mimeApps = {
+      enable = true;
+      defaultApplications = {
+        "text/html" = [ "firefox.desktop" ];
+        "application/xhtml+xml" = [ "firefox.desktop" ];
+        "x-scheme-handler/http" = [ "firefox.desktop" ];
+        "x-scheme-handler/https" = [ "firefox.desktop" ];
+        "x-scheme-handler/about" = [ "firefox.desktop" ];
+        "x-scheme-handler/unknown" = [ "firefox.desktop" ];
+      };
+    };
+  };
+
   programs.firefox = {
     enable = true;
     package = unstable.firefox;
@@ -200,6 +215,7 @@ in
 
   home.sessionVariables = {
     # Native Wayland is required for reliable screen sharing in Hyprland.
+    BROWSER = "firefox";
     MOZ_ENABLE_WAYLAND = "1";
     NIXOS_OZONE_WL = "1";
   };

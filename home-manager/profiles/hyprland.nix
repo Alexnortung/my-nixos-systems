@@ -80,6 +80,10 @@ in
         allow_workspace_cycles = true;
       };
 
+      exec-once = [
+        "${pkgs.dbus}/bin/dbus-update-activation-environment --systemd --all"
+      ];
+
       bindm = [
         "$mod, mouse:272, movewindow"
         "$mod, mouse:273, resize"

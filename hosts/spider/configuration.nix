@@ -90,7 +90,8 @@ in
       xdg-desktop-portal-gtk
     ];
     config = {
-      common.default = [
+      common.default = [ "gtk" ];
+      hyprland.default = [
         "hyprland"
         "gtk"
       ];
