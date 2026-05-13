@@ -16,6 +16,7 @@ inputs.home-manager.lib.homeManagerConfiguration {
     ./home.nix
     ../../profiles/direnv.nix
     ../../profiles/git.nix
+    ../../profiles/opencode
   ];
 
   extraSpecialArgs = {
