@@ -243,7 +243,7 @@ in
           # "interface" = "wlp2*"; # (Optional) To force the use of this interface
           "interval" = 1;
           "format-wifi" = " {ipaddr} ({signalStrength}%)";
-          "tooltip-format-wifi" = "  {bandwidthTotalBytes =>2}"; # ({essid} {signalStrength}%)
+          "tooltip-format-wifi" = "  {bandwidthTotalBytes:>2}"; # ({essid} {signalStrength}%)
           "format-ethernet" = "{ipaddr}/{cidr} ";
           "tooltip-format" = "{ifname} via {gwaddr} ";
           "format-linked" = "{ifname} (No IP) ";
