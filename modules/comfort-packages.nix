@@ -20,7 +20,7 @@
     nmap
     vim
     pciutils
-    neofetch
+    hyfetch
     binutils
   ];
 }
