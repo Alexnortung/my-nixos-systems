@@ -33,7 +33,7 @@ in
       nodejs
       bun
       unstable.yarn-berry
-      nodePackages.pnpm
+      pnpm
       unstable.beekeeper-studio
       gftp
       alacritty

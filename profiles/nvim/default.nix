@@ -1,4 +1,10 @@
-{ inputs, pkgs, system, config, ... }:
+{
+  inputs,
+  pkgs,
+  system,
+  config,
+  ...
+}:
 
 {
   # Requires the following for home manager
@@ -72,12 +78,12 @@
     };
 
     options = {
-      number = true;                # sets numbers in the side
-      relativenumber = true;        # makes side numbers relative to the cursor
-      expandtab = true;             # nicer default tabs
-      clipboard = "unnamedplus";    # use system clipboard
-      mouse = "a";                  # make neovim usable with mouse
-      smartcase = true;             # "smart" search
+      number = true; # sets numbers in the side
+      relativenumber = true; # makes side numbers relative to the cursor
+      expandtab = true; # nicer default tabs
+      clipboard = "unnamedplus"; # use system clipboard
+      mouse = "a"; # make neovim usable with mouse
+      smartcase = true; # "smart" search
       ignorecase = true;
       splitbelow = true;
       splitright = true;
@@ -85,7 +91,7 @@
       tabstop = 4;
       cursorline = true;
       smartindent = 1;
-      scrolloff = 4;                # keeps lines above and below
+      scrolloff = 4; # keeps lines above and below
     };
 
     globals = {
@@ -126,8 +132,17 @@
         defaults = {
           # path_display = "smart";
           winblend = 5;
-          borderchars = [ " " " " " " " " " " " " " " " " ];
-          border = [];
+          borderchars = [
+            " "
+            " "
+            " "
+            " "
+            " "
+            " "
+            " "
+            " "
+          ];
+          border = [ ];
           prompt_prefix = " 🤓 ";
           entry_prefix = "   ";
           selection_caret = "🤌 ";
@@ -143,11 +158,11 @@
           project-nvim = {
             enable = true;
           };
-        #   media_files = {
-        #     enable = true;
-        #     find_cmd = "rg";
-        #     # find_cmd = "${pkgs.ripgrep}/bin/rg";
-        #   };
+          #   media_files = {
+          #     enable = true;
+          #     find_cmd = "rg";
+          #     # find_cmd = "${pkgs.ripgrep}/bin/rg";
+          #   };
         };
       };
 
@@ -173,18 +188,28 @@
             customOnly = false;
             list = [
               {
-                 key = [ "l" "<CR>" "o" ];
-                 cb = {__raw = ''require("nvim-tree.config").nvim_tree_callback "edit"''; }; 
+                key = [
+                  "l"
+                  "<CR>"
+                  "o"
+                ];
+                cb = {
+                  __raw = ''require("nvim-tree.config").nvim_tree_callback "edit"'';
+                };
               }
               {
                 key = "h";
-                cb = { __raw = ''require("nvim-tree.config").nvim_tree_callback "close_node"''; };
+                cb = {
+                  __raw = ''require("nvim-tree.config").nvim_tree_callback "close_node"'';
+                };
               }
               {
                 key = "v";
-                cb = { __raw = ''require("nvim-tree.config").nvim_tree_callback "vsplit"''; };
+                cb = {
+                  __raw = ''require("nvim-tree.config").nvim_tree_callback "vsplit"'';
+                };
               }
-                # { key = "v", cb = require("nvim-tree.config").nvim_tree_callback "vsplit" },
+              # { key = "v", cb = require("nvim-tree.config").nvim_tree_callback "vsplit" },
             ];
           };
         };
@@ -211,15 +236,17 @@
         enable = true;
       };
 
-      bufferline = let
-        closeCommand = "Bdelete! %d";
-      in {
-        inherit closeCommand;
-        enable = true;
-        rightMouseCommand = null;
-        middleMouseCommand = closeCommand;
-        indicator.icon = "▎";
-      };
+      bufferline =
+        let
+          closeCommand = "Bdelete! %d";
+        in
+        {
+          inherit closeCommand;
+          enable = true;
+          rightMouseCommand = null;
+          middleMouseCommand = closeCommand;
+          indicator.icon = "▎";
+        };
 
       treesitter = {
         enable = true;
@@ -236,24 +263,31 @@
             luasnip.lsp_expand(args.body)
           end
         '';
-        mappingPresets = [ "insert" "cmdline" ];
+        mappingPresets = [
+          "insert"
+          "cmdline"
+        ];
         mapping = {
-          "<C-b>" = ''cmp.mapping.scroll_docs(-4)'';
-          "<C-f>" = ''cmp.mapping.scroll_docs(4)'';
-          "<C-Space>" = ''cmp.mapping.complete({
-            config = {
-              sources = {
-                { name = "nvim_lsp" },
-                { name = "luasnip" },
-                { name = "path" },
-                { name = "buffer" },
-              }
-            }
-          })'';
+          "<C-b>" = "cmp.mapping.scroll_docs(-4)";
+          "<C-f>" = "cmp.mapping.scroll_docs(4)";
+          "<C-Space>" = ''
+            cmp.mapping.complete({
+                        config = {
+                          sources = {
+                            { name = "nvim_lsp" },
+                            { name = "luasnip" },
+                            { name = "path" },
+                            { name = "buffer" },
+                          }
+                        }
+                      })'';
           "<C-e>" = "cmp.mapping.abort()";
           "<CR>" = "cmp.mapping.confirm({ select = true })";
           "<Tab>" = {
-            modes = [ "i" "s" ];
+            modes = [
+              "i"
+              "s"
+            ];
             action = ''
               function(fallback)
                 if luasnip.jumpable(1) then
@@ -273,7 +307,10 @@
             '';
           };
           "<S-Tab>" = {
-            modes = [ "i" "s" ];
+            modes = [
+              "i"
+              "s"
+            ];
             action = ''
               function(fallback)
                 if cmp.visible() then
@@ -295,18 +332,18 @@
             "menu"
           ];
           format = ''
-            function(entry, vim_item)
-              -- Kind icons
-              vim_item.kind = string.format(" %s ", kind_icons[vim_item.kind])
-              -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
-              vim_item.menu = ({
-                nvim_lsp = "[LSP]",
-                luasnip = "[Snippet]",
-                buffer = "[Buffer]",
-                path = "[Path]",
-              })[entry.source.name]
-              return vim_item
-          end
+              function(entry, vim_item)
+                -- Kind icons
+                vim_item.kind = string.format(" %s ", kind_icons[vim_item.kind])
+                -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
+                vim_item.menu = ({
+                  nvim_lsp = "[LSP]",
+                  luasnip = "[Snippet]",
+                  buffer = "[Buffer]",
+                  path = "[Path]",
+                })[entry.source.name]
+                return vim_item
+            end
           '';
         };
 
@@ -318,7 +355,7 @@
 
         sources = [
           # { name = "copilot"; }
-          { name = "luasnip"; } #-- For luasnip users.
+          { name = "luasnip"; } # -- For luasnip users.
           { name = "nvim_lsp"; }
           { name = "path"; }
           { name = "buffer"; }
@@ -369,9 +406,11 @@
       which-key-nvim
       nvim-ts-rainbow # treesitter color brackets
       nvim-ts-autotag
-      (inputs.vim-extra-plugins.packages.${system}.nvim-ts-context-commentstring.overrideAttrs (oldAttrs: {
-        dependencies = [];
-      }))
+      (inputs.vim-extra-plugins.packages.${system}.nvim-ts-context-commentstring.overrideAttrs
+        (oldAttrs: {
+          dependencies = [ ];
+        })
+      )
       vim-bbye
       Jenkinsfile-vim-syntax
       toggleterm-nvim
@@ -389,7 +428,7 @@
       contrast = true;
     };
 
-    extraConfigLua = builtins.readFile ./main.lua 
+    extraConfigLua = builtins.readFile ./main.lua
     # + ''
     #   require'lspconfig'.volar.setup{
     #     filetypes = {'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json'},
@@ -404,13 +443,13 @@
 
     extraConfigVim = builtins.readFile ./main.vim;
 
-    extraConfigLuaPre= builtins.readFile ./pre.lua;
+    extraConfigLuaPre = builtins.readFile ./pre.lua;
     extraConfigLuaPost = builtins.readFile ./post.lua;
 
     extraPackages = with pkgs; [
       # Language servers
-      nodePackages.typescript
-      nodePackages.typescript-language-server
+      typescript
+      typescript-language-server
 
       ripgrep
     ];

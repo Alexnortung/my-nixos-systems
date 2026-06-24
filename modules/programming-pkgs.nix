@@ -24,7 +24,6 @@
     openssl
     pkg-config
     nodejs
-    nodePackages.pnpm
+    pnpm
   ];
 }
-

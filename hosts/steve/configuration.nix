@@ -41,6 +41,19 @@ in
     ../../profiles/nix-ld.nix
   ];
 
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-39.8.10"
+  ];
+
+  # # Temp fix
+  # nixpkgs.overlays = [
+  #   (final: prev: {
+  #     openldap = prev.openldap.overrideAttrs (oldAttrs: {
+  #       doCheck = false;
+  #     });
+  #   })
+  # ];
+
   # nixpkgs.config.allowUnfreePredicate =
   #   pkg:
   #   builtins.elem (lib.getName pkg) [
@@ -187,7 +200,7 @@ in
     enable = true;
   };
 
-  programs.adb.enable = true;
+  # programs.adb.enable = true;
 
   # services.bg-setter = {
   #   enable = true;
@@ -246,6 +259,7 @@ in
         "wheel"
         "video"
         "audio"
+        "plugdev"
         "adbusers"
         "docker"
         "wireshark"
@@ -276,6 +290,15 @@ in
     "alexander"
     "alexwork"
   ];
+
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    jack.enable = true;
+  };
 
   # programs.ssh.forwardX11 = true;
   #programs.ssh.startAgent = true;
@@ -323,13 +346,13 @@ in
     # wineWowPackages.stable
     # winetricks
     inputs.deploy-rs.defaultPackage.x86_64-linux
-    superTuxKart
+    supertuxkart
     protonup-ng
     autorandr
     libreoffice
     mullvad-vpn
     unstable.session-desktop
-    krita
+    # krita
     # cudatoolkit
     # (blender.override {
     #   # cudaSupport = true;
@@ -352,13 +375,13 @@ in
     firefox
     brave
     # ungoogled-chromium
-    bitwarden-desktop
+    # bitwarden-desktop
     xmrig
     # st
     # dwm
-    neofetch
-    dmenu
-    dwm-status
+    hyfetch
+    # dmenu
+    # dwm-status
     telegram-desktop
     redshift
     lsof
@@ -378,7 +401,7 @@ in
     obs-studio
     gimp
     spotify
-    unstable.lutris
+    # unstable.lutris
     vulkan-headers
     xorg.xev
     gcc

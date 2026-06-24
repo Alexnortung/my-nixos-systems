@@ -52,6 +52,7 @@ in
       heroic
       unstable.openscad-unstable
       unstable.obsidian
+      unstable.chromium
     ];
 
     sessionVariables = {

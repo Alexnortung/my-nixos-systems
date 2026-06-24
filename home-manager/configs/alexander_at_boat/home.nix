@@ -8,7 +8,7 @@
     homeDirectory = "/home/alexander";
     packages = with pkgs; [
       nodejs
-      nodePackages.npm
+      npm
       alacritty
     ];
 

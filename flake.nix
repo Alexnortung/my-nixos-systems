@@ -17,7 +17,7 @@
     # nixos-dev = {
     #   url = "path:/home/alexander/source/nixpkgs";
     # };
-    nixos-stable.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixos-stable.url = "github:NixOS/nixpkgs/nixos-26.05";
     nixos-enderman.url = "github:NixOS/nixpkgs/nixos-26.05";
     # nixos-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     # nixpkgs-alexnortung.url = "github:alexnortung/nixpkgs/s3fs-module";
