@@ -329,6 +329,7 @@ in
   services.udev.packages = with pkgs; [ gnome-settings-daemon ];
 
   environment.systemPackages = with pkgs; [
+    alsa-utils
     vulkan-tools
     android-tools
     gnome-software
