@@ -55,6 +55,7 @@ in
     username = "alex";
     homeDirectory = "/home/alex";
     packages = with pkgs; [
+      unstable.winboat
       nodejs
       unstable.bun
       phpConfigured
@@ -74,7 +75,7 @@ in
       unstable.slack
       imagemagick
       unstable.bitwarden-desktop
-      # unstable.spotify
+      unstable.spotify
       cowsay
       # gcalcli
       libnotify
