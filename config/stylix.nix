@@ -4,10 +4,10 @@
   stylix = {
     enable = true;
     image = pkgs.fetchurl {
-      url = "https://images.hdqwalls.com/download/minimal-mountain-dark-5k-ur-2560x1440.jpg";
-      hash = "sha256-LIqJnnsWxx+gl8dbdRRRLPdvhe/Itj32bIwxzGp6r5E=";
+      url = "https://github.com/dharmx/walls/blob/main/minimal/a_drawing_of_a_bear_and_a_campfire.png?raw=true";
+      hash = "sha256-GVam71y9Lvdmq1YWhlnZVba3CuuttnUr8PCwh0hk5pM=";
     };
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/nord.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/oxocarbon-dark.yaml";
     polarity = "dark";
   };
 }

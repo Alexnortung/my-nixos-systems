@@ -17,6 +17,8 @@
     # nixos-dev = {
     #   url = "path:/home/alexander/source/nixpkgs";
     # };
+    # hyprland.url = "github:hyprwm/Hyprland";
+    nixos-paper.url = "github:NixOS/nixpkgs/nixos-26.05";
     nixos-stable.url = "github:NixOS/nixpkgs/nixos-26.05";
     nixos-enderman.url = "github:NixOS/nixpkgs/nixos-26.05";
     # nixos-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -31,13 +33,13 @@
       url = "github:NixOS/nixos-hardware";
     };
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager/release-26.05";
     };
     home-manager-unstable = {
       url = "github:nix-community/home-manager/master";
     };
 
-    stylix.url = "github:danth/stylix/release-25.11";
+    stylix.url = "github:danth/stylix/release-26.05";
 
     nollevim = {
       url = "github:Alexnortung/nollevim";
@@ -102,9 +104,9 @@
 
     cachix-deploy-flake.url = "github:cachix/cachix-deploy-flake";
 
-    oak-configs = {
-      url = "git+ssh://git@github.com/Oak-Digital/oak-nix-configs";
-    };
+    # oak-configs = {
+    #   url = "git+ssh://git@github.com/Oak-Digital/oak-nix-configs";
+    # };
 
     #local-nixpkgs.url = "path:/home/alexander/source/nixpkgs";
   }

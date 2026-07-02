@@ -3,7 +3,7 @@
 let
   system = "x86_64-linux";
   # pkgs = inputs.nixos-stable.legacyPackages.${system};
-  pkgs = import inputs.nixos-stable {
+  pkgs = import inputs.nixos-paper {
     inherit system;
     extraSpecialArgs = {
       inherit system;
@@ -29,7 +29,7 @@ inputs.home-manager.lib.homeManagerConfiguration {
     ../../profiles/hyprland.nix
     # ../../profiles/polybar.nix
     ../../profiles/rofi.nix
-    ../../profiles/gcalcli-remind.nix
+    # ../../profiles/gcalcli-remind.nix
     # inputs.oak-configs.homeManagerModules.ssh
     ../../profiles/opencode
   ];

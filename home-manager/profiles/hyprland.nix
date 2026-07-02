@@ -35,6 +35,14 @@ in
 
   # User-level Hyprland behavior stays here.
   wayland.windowManager.hyprland = {
+    # # set the flake package
+    # package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    # # make sure to also set the portal package, so that they are in sync
+    # portalPackage =
+    #   inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+    # Set to null to use system
+    package = null;
+    portalPackage = null;
     enable = true;
     settings = {
       "$mod" = "SUPER";
@@ -51,8 +59,8 @@ in
       };
 
       monitor = [
-        "eDP-1, 1920x1200@60, 0x0, 1"
-        ",preferred,auto-left,1"
+        "eDP-1, 2560x1600@60.00Hz, 0x0, 1"
+        ",preferred,auto-right,1"
       ];
 
       decoration = {
@@ -64,9 +72,9 @@ in
       };
 
       layerrule = [
-        "blur,ironbar"
-        "blur,rofi"
-        "blur,notifications"
+        "blur on, match:namespace ironbar"
+        "blur on, match:namespace rofi"
+        "blur on, match:namespace notifications"
       ];
 
       master = {
@@ -110,8 +118,10 @@ in
         "$mod SHIFT, Q, killactive"
         "$mod, TAB, workspace, previous"
         "$mod, Return, layoutmsg, swapwithmaster master"
-        "$mod, H, splitratio, -0.05"
-        "$mod, L, splitratio, +0.05"
+        # "$mod, H, splitratio, -0.05"
+        # "$mod, L, splitratio, +0.05"
+        "$mod, H, resizeactive, -50"
+        "$mod, L, resizeactive, 50"
         "$mod, M, fullscreen"
         "$mod, K, layoutmsg, cycleprev"
         "$mod, J, layoutmsg, cyclenext"
@@ -144,19 +154,25 @@ in
         )
       );
 
-      windowrulev2 = [
-        # Make the specific Alacritty instance float
-        "float, class:^(wifitui_popup)$"
-
-        # Optional: Set a specific size for the pop-up (width height)
-        "size 600 900, class:^(wifitui_popup)$"
-
-        # Optional: Force it to open in the center of the screen
-        "center, class:^(wifitui_popup)$"
-
-        # Optional: Add a slight dim behind the popup to draw focus
-        "dimaround, class:^(wifitui_popup)$"
+      windowrule = [
+        "float class:^(wifitui_popup)$"
+        "size 600 900 class:^(wifitui_popup)$"
+        "center class:^(wifitui_popup)$"
+        "dim_around class:^(wifitui_popup)$"
       ];
+      # windowrulev2 = [
+      #   # Make the specific Alacritty instance float
+      #   "float, class:^(wifitui_popup)$"
+      #
+      #   # Optional: Set a specific size for the pop-up (width height)
+      #   "size 600 900, class:^(wifitui_popup)$"
+      #
+      #   # Optional: Force it to open in the center of the screen
+      #   "center, class:^(wifitui_popup)$"
+      #
+      #   # Optional: Add a slight dim behind the popup to draw focus
+      #   "dimaround, class:^(wifitui_popup)$"
+      # ];
     };
   };
 
@@ -278,37 +294,37 @@ in
     };
   };
 
-  systemd.user.services = {
-    waybar = {
-      Unit = {
-        After = mkForce [ "hyprland-session.target" ];
-        PartOf = mkForce [ "hyprland-session.target" ];
-      };
-      Install = {
-        WantedBy = mkForce [ "hyprland-session.target" ];
-      };
-    };
-
-    hypridle = {
-      Unit = {
-        After = mkForce [ "hyprland-session.target" ];
-        PartOf = mkForce [ "hyprland-session.target" ];
-      };
-      Install = {
-        WantedBy = mkForce [ "hyprland-session.target" ];
-      };
-    };
-
-    hyprpaper = {
-      Unit = {
-        After = mkForce [ "hyprland-session.target" ];
-        PartOf = mkForce [ "hyprland-session.target" ];
-      };
-      Install = {
-        WantedBy = mkForce [ "hyprland-session.target" ];
-      };
-    };
-  };
+  # systemd.user.services = {
+  #   waybar = {
+  #     Unit = {
+  #       After = mkForce [ "hyprland-session.target" ];
+  #       PartOf = mkForce [ "hyprland-session.target" ];
+  #     };
+  #     Install = {
+  #       WantedBy = mkForce [ "hyprland-session.target" ];
+  #     };
+  #   };
+  #
+  #   hypridle = {
+  #     Unit = {
+  #       After = mkForce [ "hyprland-session.target" ];
+  #       PartOf = mkForce [ "hyprland-session.target" ];
+  #     };
+  #     Install = {
+  #       WantedBy = mkForce [ "hyprland-session.target" ];
+  #     };
+  #   };
+  #
+  #   hyprpaper = {
+  #     Unit = {
+  #       After = mkForce [ "hyprland-session.target" ];
+  #       PartOf = mkForce [ "hyprland-session.target" ];
+  #     };
+  #     Install = {
+  #       WantedBy = mkForce [ "hyprland-session.target" ];
+  #     };
+  #   };
+  # };
 
   # programs.hyprpanel = {
   #   # enable = true;
