@@ -173,6 +173,10 @@ in
       #   # Optional: Add a slight dim behind the popup to draw focus
       #   "dimaround, class:^(wifitui_popup)$"
       # ];
+
+      env = [
+        "SSH_AUTH_SOCK,$XDG_RUNTIME_DIR/gcr/ssh"
+      ];
     };
   };
 

@@ -13,6 +13,7 @@ in
 {
   imports = [
     ./hardware-configuration.nix
+    ../../config/stylix.nix
     ../../modules/programming-pkgs.nix
     ../../modules/comfort-packages.nix
     ../../modules/console.nix
@@ -89,7 +90,16 @@ in
   };
   programs.regreet.enable = true;
 
-  security.pam.services.greetd.enableGnomeKeyring = true;
+  security.pam.services = {
+    greetd.enableGnomeKeyring = true;
+    greetd-password.enableGnomeKeyring = true;
+    login.enableGnomeKeyring = true;
+  };
+
+  services.dbus.packages = [
+    pkgs.gnome-keyring
+    pkgs.gcr
+  ];
 
   programs.nix-ld.enable = true;
 
@@ -133,6 +143,7 @@ in
 
   programs.hyprland = {
     enable = true;
+    withUWSM = true;
     # set the flake package
     # package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     # # make sure to also set the portal package, so that they are in sync
@@ -147,7 +158,7 @@ in
 
   programs.gnupg.agent = {
     enable = true;
-    enableSSHSupport = true;
+    # enableSSHSupport = true;
   };
 
   programs.git = {
@@ -189,6 +200,7 @@ in
   };
 
   environment.systemPackages = with pkgs; [
+    seahorse
     solaar
     nodejs
     docker-compose
