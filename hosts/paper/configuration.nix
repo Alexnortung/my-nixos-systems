@@ -31,6 +31,12 @@ in
     # Defaults after installing
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
+    kernelParams = [
+      "xe.force_probe=7d51"
+      "i915.force_probe=!7d51"
+    ];
+
+    initrd.kernelModules = [ "xe" ];
   };
 
   services.xserver.xkb = {
