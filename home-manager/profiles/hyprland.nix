@@ -118,13 +118,14 @@ in
         "$mod SHIFT, Q, killactive"
         "$mod, TAB, workspace, previous"
         "$mod, Return, layoutmsg, swapwithmaster master"
-        # "$mod, H, splitratio, -0.05"
-        # "$mod, L, splitratio, +0.05"
-        "$mod, H, resizeactive, -50"
-        "$mod, L, resizeactive, 50"
+        "$mod, H, layoutmsg, splitratio, -0.05"
+        "$mod, L, layoutmsg, splitratio, +0.05"
+        # "$mod, H, resizewindowpixel, -50"
+        # "$mod, L, resizewindowpixel, 50"
         "$mod, M, fullscreen"
         "$mod, K, layoutmsg, cycleprev"
         "$mod, J, layoutmsg, cyclenext"
+        "$mod SHIFT, T, togglefloating"
 
         "$mod, Comma, focusmonitor, l"
         "$mod, Period, focusmonitor, r"
@@ -154,12 +155,22 @@ in
         )
       );
 
-      windowrule = [
-        "float class:^(wifitui_popup)$"
-        "size 600 900 class:^(wifitui_popup)$"
-        "center class:^(wifitui_popup)$"
-        "dim_around class:^(wifitui_popup)$"
-      ];
+      windowrule =
+        let
+          winboatRegex = "(^winboat-.+$)|(^(xfreerdp|xfreerdp3)$)";
+        in
+        [
+          "float on, match:class ^(wifitui_popup)$"
+          "size 600 900, match:class ^(wifitui_popup)$"
+          "center on, match:class ^(wifitui_popup)$"
+          "dim_around on, match:class ^(wifitui_popup)$"
+
+          "float on, match:class ${winboatRegex}"
+          "center on, match:class ${winboatRegex}"
+          "no_anim on, match:class ${winboatRegex}"
+          "no_blur on, match:class ${winboatRegex}"
+          "no_shadow on, match:class ${winboatRegex}"
+        ];
       # windowrulev2 = [
       #   # Make the specific Alacritty instance float
       #   "float, class:^(wifitui_popup)$"
