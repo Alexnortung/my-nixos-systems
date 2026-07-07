@@ -24,6 +24,99 @@ let
       memory_limit = 2G;
     '';
   };
+  winboatWord = pkgs.writeShellApplication {
+    name = "winboat-word";
+    runtimeInputs = with pkgs; [
+      coreutils
+      docker
+      freerdp
+      yq-go
+    ];
+    text = ''
+      set -eu
+
+      compose_file=""
+      for candidate in \
+        "''${WINBOAT_DIR:-}" \
+        "''${HOME}/.winboat" \
+        "''${HOME}/winboat" \
+        "''${HOME}/.local/share/winboat"
+      do
+        [ -n "$candidate" ] || continue
+        if [ -f "$candidate/docker-compose.yml" ]; then
+          compose_file="$candidate/docker-compose.yml"
+          break
+        fi
+      done
+
+      if [ -z "$compose_file" ]; then
+        printf '%s\n' "WinBoat compose file not found. Checked WINBOAT_DIR, ~/.winboat, ~/winboat, and ~/.local/share/winboat." >&2
+        exit 1
+      fi
+
+      username="$(yq '.services.windows.environment.USERNAME' "$compose_file")"
+      password="$(yq '.services.windows.environment.PASSWORD' "$compose_file")"
+
+      if [ -z "$username" ] || [ "$username" = "null" ] || [ -z "$password" ] || [ "$password" = "null" ]; then
+        printf '%s\n' "WinBoat credentials are missing from $compose_file." >&2
+        exit 1
+      fi
+
+      rdp_port="$(docker port WinBoat 3389/tcp | awk -F: 'NR == 1 { print $NF }')"
+      if [ -z "$rdp_port" ]; then
+        printf '%s\n' "Could not determine the WinBoat RDP port. Is the WinBoat container running?" >&2
+        exit 1
+      fi
+
+      if command -v xfreerdp3 >/dev/null 2>&1; then
+        rdp_bin="$(command -v xfreerdp3)"
+      else
+        rdp_bin="$(command -v xfreerdp)"
+      fi
+
+      app_args=""
+      if [ "$#" -gt 0 ]; then
+        file_path="$(realpath "$1")"
+        file_dir="$(dirname "$file_path")"
+        file_name="$(basename "$file_path")"
+        windows_file="\\\\tsclient\\linux\\$file_name"
+        app_args=",cmd:\"$windows_file\""
+
+        exec "$rdp_bin" \
+          "/u:$username" \
+          "/p:$password" \
+          /v:127.0.0.1 \
+          "/port:$rdp_port" \
+          /cert:ignore \
+          +clipboard \
+          /sound:sys:pulse \
+          /microphone:sys:pulse \
+          /floatbar \
+          /compression \
+          -wallpaper \
+          /scale-desktop:100 \
+          /wm-class:winboat-MicrosoftWord \
+          "/drive:linux,$file_dir" \
+          "/app:program:C:\Program Files\Microsoft Office\root\Office16\WINWORD.EXE,name:MicrosoftWord$app_args"
+      fi
+
+      exec "$rdp_bin" \
+        "/u:$username" \
+        "/p:$password" \
+        /v:127.0.0.1 \
+        "/port:$rdp_port" \
+        /cert:ignore \
+        +clipboard \
+        /sound:sys:pulse \
+        /microphone:sys:pulse \
+        /floatbar \
+        /compression \
+        -wallpaper \
+        /scale-desktop:100 \
+        /wm-class:winboat-MicrosoftWord \
+        '/app:program:C:\Program Files\Microsoft Office\root\Office16\WINWORD.EXE,name:MicrosoftWord'
+    '';
+  };
 in
 {
   nixpkgs.config.allowUnfree = true;
@@ -56,6 +149,8 @@ in
     homeDirectory = "/home/alex";
     packages = with pkgs; [
       unstable.winboat
+      freerdp
+      winboatWord
       nodejs
       unstable.bun
       phpConfigured
@@ -118,9 +213,30 @@ in
 
   xdg = {
     enable = true;
+    desktopEntries.microsoft-word-winboat = {
+      categories = [
+        "Office"
+        "WordProcessor"
+      ];
+      exec = "${winboatWord}/bin/winboat-word %f";
+      genericName = "Word Processor";
+      icon = "winboat";
+      mimeType = [
+        "application/msword"
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+      ];
+      name = "Microsoft Word (WinBoat)";
+      settings = {
+        StartupWMClass = "winboat-MicrosoftWord";
+      };
+      terminal = false;
+      type = "Application";
+    };
     mimeApps = {
       enable = true;
       defaultApplications = {
+        "application/msword" = [ "microsoft-word-winboat.desktop" ];
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = [ "microsoft-word-winboat.desktop" ];
         "text/html" = [ "firefox.desktop" ];
         "application/xhtml+xml" = [ "firefox.desktop" ];
         "x-scheme-handler/http" = [ "firefox.desktop" ];

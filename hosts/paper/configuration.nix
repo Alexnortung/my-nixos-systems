@@ -188,6 +188,7 @@ in
           "wheel"
           "vboxusers"
           "docker"
+          "kvm"
           "audio"
           "networkmanager"
         ];
