@@ -68,7 +68,9 @@ let
         exit 1
       fi
 
-      if command -v xfreerdp3 >/dev/null 2>&1; then
+      if [ -n "''${WAYLAND_DISPLAY:-}" ] && command -v wlfreerdp >/dev/null 2>&1; then
+        rdp_bin="$(command -v wlfreerdp)"
+      elif command -v xfreerdp3 >/dev/null 2>&1; then
         rdp_bin="$(command -v xfreerdp3)"
       else
         rdp_bin="$(command -v xfreerdp)"
@@ -91,9 +93,14 @@ let
           +clipboard \
           /sound:sys:pulse \
           /microphone:sys:pulse \
-          /floatbar \
           /compression \
+          /gdi:sw \
+          +geometry \
+          /mouse:grab:off \
+          -grab-mouse \
+          -toggle-fullscreen \
           -wallpaper \
+          /size:1400x1000 \
           /scale-desktop:100 \
           /wm-class:winboat-MicrosoftWord \
           "/drive:linux,$file_dir" \
@@ -109,9 +116,14 @@ let
         +clipboard \
         /sound:sys:pulse \
         /microphone:sys:pulse \
-        /floatbar \
         /compression \
+        /gdi:sw \
+        +geometry \
+        /mouse:grab:off \
+        -grab-mouse \
+        -toggle-fullscreen \
         -wallpaper \
+        /size:1400x1000 \
         /scale-desktop:100 \
         /wm-class:winboat-MicrosoftWord \
         '/app:program:C:\Program Files\Microsoft Office\root\Office16\WINWORD.EXE,name:MicrosoftWord'

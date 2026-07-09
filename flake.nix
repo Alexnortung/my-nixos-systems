@@ -30,7 +30,7 @@
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixpkgs-unstable-master.url = "github:NixOS/nixpkgs/master";
     nixos-hardware = {
-      url = "github:NixOS/nixos-hardware";
+      url = "github:Alexnortung/nixos-hardware/hp-zbook";
     };
     home-manager = {
       url = "github:nix-community/home-manager/release-26.05";

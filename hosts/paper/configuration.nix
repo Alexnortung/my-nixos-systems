@@ -31,12 +31,17 @@ in
     # Defaults after installing
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
-    kernelParams = [
-      "xe.force_probe=7d51"
-      "i915.force_probe=!7d51"
-    ];
-
-    initrd.kernelModules = [ "xe" ];
+    # kernelParams = [
+    #   # "xe.force_probe=7d51"
+    #   # "i915.force_probe=!7d51"
+    #   "xe.force_probe=!7d51"
+    #   "i915.force_probe=7d51"
+    # ];
+    #
+    # initrd.kernelModules = [
+    #   "i915"
+    #   #"xe"
+    # ];
   };
 
   services.xserver.xkb = {
@@ -78,6 +83,10 @@ in
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
     #media-session.enable = true;
+  };
+
+  services.fwupd = {
+    enable = true;
   };
 
   services.printing.enable = true;

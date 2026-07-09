@@ -166,6 +166,7 @@ in
           "dim_around on, match:class ^(wifitui_popup)$"
 
           "float on, match:class ${winboatRegex}"
+          # "size 1400 1000, match:class ${winboatRegex}"
           "center on, match:class ${winboatRegex}"
           "no_anim on, match:class ${winboatRegex}"
           "no_blur on, match:class ${winboatRegex}"
