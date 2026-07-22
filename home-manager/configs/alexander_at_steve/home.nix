@@ -93,6 +93,7 @@ in
 
   programs.zsh = {
     enable = true;
+    dotDir = config.home.homeDirectory;
     initContent = ''
       export PATH=$PATH:~/.node_modules/bin/
       export PATH="/home/alexander/.bun/bin:$PATH"

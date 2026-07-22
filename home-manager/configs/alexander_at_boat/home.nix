@@ -32,6 +32,7 @@
 
   programs.zsh = {
     enable = true;
+    dotDir = config.home.homeDirectory;
     initContent = ''
       PATH=$PATH:~/mutable_node_modules/bin/
       PATH=$PATH:~/.cargo/bin

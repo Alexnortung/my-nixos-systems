@@ -149,6 +149,7 @@ in
   programs.firefox = {
     enable = true;
     package = unstable.firefox;
+    configPath = ".mozilla/firefox";
 
     profiles.default = {
       id = 0;
@@ -174,10 +175,12 @@ in
   programs.yazi = {
     enable = true;
     enableZshIntegration = true;
+    shellWrapperName = "yy";
   };
 
   programs.zsh = {
     enable = true;
+    dotDir = config.home.homeDirectory;
     initContent = ''
       export PNPM_HOME="/home/alexander/.local/share/pnpm"
       export PATH="$PATH:$PNPM_HOME"

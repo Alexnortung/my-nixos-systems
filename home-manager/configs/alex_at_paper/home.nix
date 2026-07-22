@@ -16,6 +16,8 @@ let
         "beekeeper-studio-5.3.4"
         "beekeeper-studio-5.5.5"
         "beekeeper-studio-5.5.7"
+        "electron-40.10.5"
+        "electron-39.8.10"
       ];
     };
   };
@@ -160,13 +162,14 @@ in
     username = "alex";
     homeDirectory = "/home/alex";
     packages = with pkgs; [
+      unstable.vlc
       unstable.winboat
       freerdp
       winboatWord
       nodejs
       unstable.bun
       phpConfigured
-      unstable.mongodb-compass
+      # unstable.mongodb-compass
       mongodb-tools
       pnpm
       yarn-berry
@@ -248,7 +251,9 @@ in
       enable = true;
       defaultApplications = {
         "application/msword" = [ "microsoft-word-winboat.desktop" ];
-        "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = [ "microsoft-word-winboat.desktop" ];
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = [
+          "microsoft-word-winboat.desktop"
+        ];
         "text/html" = [ "firefox.desktop" ];
         "application/xhtml+xml" = [ "firefox.desktop" ];
         "x-scheme-handler/http" = [ "firefox.desktop" ];
@@ -262,6 +267,7 @@ in
   programs.firefox = {
     enable = true;
     package = unstable.firefox;
+    configPath = ".mozilla/firefox";
 
     profiles.default = {
       id = 0;
@@ -288,10 +294,12 @@ in
   programs.yazi = {
     enable = true;
     enableZshIntegration = true;
+    shellWrapperName = "yy";
   };
 
   programs.zsh = {
     enable = true;
+    dotDir = config.home.homeDirectory;
     initContent = ''
       export PNPM_HOME="/home/alexander/.local/share/pnpm"
       export PATH="$PATH:$PNPM_HOME"

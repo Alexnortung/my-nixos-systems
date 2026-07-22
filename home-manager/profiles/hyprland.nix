@@ -257,6 +257,7 @@ in
           "clock"
         ];
         modules-right = [
+          "pulseaudio"
           "battery"
           "network"
           "tray"
@@ -305,6 +306,21 @@ in
             ""
             ""
           ];
+        };
+
+        pulseaudio = {
+          format = "{volume}% {icon}";
+          format-muted = " muted";
+          format-icons = {
+            default = [
+              ""
+              ""
+              ""
+            ];
+          };
+          on-click = "${pkgs.pavucontrol}/bin/pavucontrol";
+          scroll-step = 5;
+          tooltip = false;
         };
       };
     };
