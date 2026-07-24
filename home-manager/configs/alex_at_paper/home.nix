@@ -162,6 +162,7 @@ in
     username = "alex";
     homeDirectory = "/home/alex";
     packages = with pkgs; [
+      unstable.localsend
       unstable.vlc
       unstable.winboat
       freerdp
