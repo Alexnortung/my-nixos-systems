@@ -356,7 +356,7 @@ in
     solaar
     kondo
     inputs.agenix.packages.${system}.agenix
-    inputs.deploy-rs.defaultPackage.${system}
+    inputs.deploy-rs.packages.${system}.default
     # inputs.devenv.packages.${system}.devenv
     cachix
     postgresql_15

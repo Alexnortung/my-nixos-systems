@@ -1,8 +1,9 @@
-{ inputs
-, config
-, lib
-, pkgs
-, ...
+{
+  inputs,
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 let
   ssh-keys = import ../../config/ssh;
@@ -75,15 +76,15 @@ in
     settings = {
       PermitRootLogin = "without-password";
       PasswordAuthentication = false;
+      # Banner = ''
+      #             .-~~~-.
+      #     .- ~ ~-(       )_ _
+      #    /                     ~ -.
+      #   |         END               \
+      #    \                         .'
+      #      ~- . _____________ . -~
+      # '';
     };
-    banner = ''
-                .-~~~-.
-        .- ~ ~-(       )_ _
-       /                     ~ -.
-      |         END               \
-       \                         .'
-         ~- . _____________ . -~
-    '';
   };
 
   users = {

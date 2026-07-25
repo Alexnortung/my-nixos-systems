@@ -346,13 +346,11 @@ in
     qbittorrent
     # wineWowPackages.stable
     # winetricks
-    inputs.deploy-rs.defaultPackage.x86_64-linux
     supertuxkart
     protonup-ng
     autorandr
     libreoffice
     mullvad-vpn
-    unstable.session-desktop
     # krita
     # cudatoolkit
     # (blender.override {

@@ -8,7 +8,7 @@
   mailserver = {
     enable = true;
     openFirewall = true;
-    certificateScheme = "acme-nginx";
+    x509.useACMEHost = config.mailserver.fqdn;
     fqdn = "mails.northwing.games";
     domains = [
       "northwing.games"

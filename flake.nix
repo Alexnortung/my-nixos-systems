@@ -20,6 +20,7 @@
     # hyprland.url = "github:hyprwm/Hyprland";
     nixos-paper.url = "github:NixOS/nixpkgs/nixos-26.05";
     nixos-stable.url = "github:NixOS/nixpkgs/nixos-26.05";
+    nixos-end.url = "github:NixOS/nixpkgs/nixos-26.05";
     nixos-enderman.url = "github:NixOS/nixpkgs/nixos-26.05";
     # nixos-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     # nixpkgs-alexnortung.url = "github:alexnortung/nixpkgs/s3fs-module";
@@ -94,7 +95,7 @@
     };
 
     mail-server = {
-      url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-25.11";
+      url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-26.05";
     };
 
     hosts = {

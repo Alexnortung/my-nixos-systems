@@ -27,17 +27,17 @@ in
     username = "alexander";
     homeDirectory = "/home/alexander";
     packages = with pkgs; [
+      unstable.deploy-rs
+      unstable.lutris
       unstable.wineWow64Packages.stableFull
       bottles
       unstable.winetricks
       # nodejs
-      nodePackages.npm
       bun
       unstable.yarn-berry
       lmms
       bitwig-studio
       krita
-      insomnia
       unstable.beekeeper-studio
       gftp
       unstable.prusa-slicer
@@ -50,7 +50,7 @@ in
       kicad
       # legendary-gl
       heroic
-      unstable.openscad-unstable
+      # unstable.openscad-unstable
       unstable.obsidian
       unstable.chromium
     ];

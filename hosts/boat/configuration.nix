@@ -261,7 +261,7 @@ in
     # pidgin-with-plugins
     trash-cli
     ncdu
-    inputs.deploy-rs.defaultPackage.x86_64-linux
+    inputs.deploy-rs.packages.${system}.default
     inputs.agenix.packages.${system}.agenix
     emojipick
     vlc
