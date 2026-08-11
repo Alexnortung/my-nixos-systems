@@ -28,6 +28,7 @@ in
     skills = ../../agents/skills;
     agents = ../../agents/agents;
     settings = {
+      permission.external_directory."/nix/store/**" = "allow";
       plugin = [
         # "oh-my-openagent@3.17.5"
         "opencode-antigravity-auth@1.6.0"
