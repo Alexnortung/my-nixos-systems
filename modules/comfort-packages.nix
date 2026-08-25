@@ -8,6 +8,7 @@
     enable = true;
   };
   environment.systemPackages = with pkgs; [
+    traceroute
     ncdu
     git
     file

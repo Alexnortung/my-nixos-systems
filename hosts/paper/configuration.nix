@@ -85,6 +85,8 @@ in
     #media-session.enable = true;
   };
 
+  services.mullvad-vpn.enable = true;
+
   services.fwupd = {
     enable = true;
   };

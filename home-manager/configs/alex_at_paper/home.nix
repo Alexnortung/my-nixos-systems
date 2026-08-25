@@ -213,6 +213,10 @@ in
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
+  programs.mullvad-vpn = {
+    enable = true;
+  };
+
   gtk = {
     enable = true;
     gtk3.extraConfig = {
