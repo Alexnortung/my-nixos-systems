@@ -55,7 +55,7 @@
     };
     deploy-rs = {
       url = "github:serokell/deploy-rs";
-      # inputs.nixpkgs.follows = "nixos-stable";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
     fenix = {
@@ -236,6 +236,10 @@
               throw "${name} must not contain ${target}, got ${builtins.toJSON value}";
         in
         {
+          devShells.default = pkgs.mkShell {
+            packages = [ inputs.deploy-rs.packages.${pkgs.stdenv.hostPlatform.system}.default ];
+          };
+
           checks = {
             spider-session-startup =
               let
