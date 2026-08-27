@@ -7,8 +7,9 @@
       modules = [
         ./configuration.nix
         # inputs.nixos-dev
-        nixos-hardware.nixosModules.common-cpu-intel
+        # nixos-hardware.nixosModules.common-cpu-intel
         # inputs.block-busters.nixosModules.discord-bot
+        "${nixos-hardware}/common/cpu/intel/skylake"
       ];
     };
   # deploy-rs node

@@ -89,6 +89,8 @@ in
   };
 
   environment.systemPackages = with pkgs; [
+    libva-utils
+    intel-gpu-tools
     tmux
     inputs.agenix.packages.${system}.agenix
     nmap
@@ -344,11 +346,18 @@ in
     settingsFile = config.age.secrets.cross-seed-config.path;
   };
 
+  hardware.graphics.enable = true; # potentially to support hardware acceleration for Jellyfin transcoding
   services.jellyfin = {
     enable = true;
     group = "servarr";
     openFirewall = true;
   };
+
+  users.users.jellyfin.extraGroups = [
+    "servarr"
+    "video"
+    "render"
+  ];
 
   virtualisation = {
     docker = {
