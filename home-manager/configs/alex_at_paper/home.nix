@@ -162,6 +162,7 @@ in
     username = "alex";
     homeDirectory = "/home/alex";
     packages = with pkgs; [
+      unstable.gftp
       unstable.localsend
       unstable.vlc
       unstable.winboat
