@@ -17,6 +17,7 @@ in
     # ../../config/backup-bucket.nix
     ./hardware-configuration.nix
     ./secrets
+    ./alchemy-lab.nix
     ./audiobookshelf.nix
     ./nginx.nix
     ./dns.nix
