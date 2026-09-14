@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   systemd.tmpfiles.rules = [
     "d /var/lib/alchemy-lab 0750 1000 1000 -"
@@ -7,7 +7,10 @@
   systemd.services = {
     alchemy-lab-config = {
       description = "Ensure Alchemy Lab server configuration has a section header";
-      path = with pkgs; [ coreutils gnugrep ];
+      path = with pkgs; [
+        coreutils
+        gnugrep
+      ];
       serviceConfig.Type = "oneshot";
       script = ''
         config=/var/lib/alchemy-lab/server/ServerConfig.ini
@@ -32,6 +35,12 @@
     docker-alchemy-lab = {
       requires = [ "alchemy-lab-config.service" ];
       after = [ "alchemy-lab-config.service" ];
+      serviceConfig = {
+        Restart = lib.mkForce "always";
+        RestartSec = "1min";
+        RestartSteps = 3;
+        RestartMaxDelaySec = "1h";
+      };
     };
   };
 
@@ -45,6 +54,7 @@
       containers = {
         alchemy-lab = {
           image = "idarlafish/alchemy-factory-server:latest";
+          autoStart = true;
           environment = {
             SERVER_NAME = "Alchemy Lab";
             SERVER_RELAY = "1";
