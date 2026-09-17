@@ -17,6 +17,8 @@ in
   networking.firewall.allowedUDPPorts = [
     # 34197 # Factorio
     25565 # Minecraft
+    9877
+    9878
   ];
 
   # networking.nat.enable = true;
@@ -125,6 +127,17 @@ in
       #   proxy_pass 10.101.0.2:34197;
       #   proxy_timeout 15s;
       # }
+
+      # Forward Alchemy Lab
+      server {
+        listen 9877 udp reuseport;
+        proxy_pass 10.101.0.2:9877;
+      }
+
+      server {
+        listen 9878 udp reuseport;
+        proxy_pass 10.101.0.2:9878;
+      }
 
       map $ssl_preread_server_name $targetBackend {
         jellyfin.northwing.games  endermanSsl;

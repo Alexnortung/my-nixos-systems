@@ -44,6 +44,11 @@
     };
   };
 
+  networking.firewall.allowedUDPPorts = [
+    9877
+    9878
+  ];
+
   virtualisation = {
     docker = {
       enable = true;
@@ -57,7 +62,8 @@
           autoStart = true;
           environment = {
             SERVER_NAME = "Alchemy Lab";
-            SERVER_RELAY = "1";
+            # SERVER_RELAY = "1";
+            SERVER_RELAY = "0";
             SERVER_PASSWORD = "det ved jeg ikke";
             ADMIN_PASSWORD = "duerikkeadmin";
             SERVER_PUBLIC = "0";
