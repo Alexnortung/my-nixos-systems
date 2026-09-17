@@ -62,13 +62,19 @@
           autoStart = true;
           environment = {
             SERVER_NAME = "Alchemy Lab";
-            # SERVER_RELAY = "1";
+            SERVER_LAN = "0";
             SERVER_RELAY = "0";
+            SERVER_PORT = "9877";
+            QUERY_PORT = "9878";
             SERVER_PASSWORD = "det ved jeg ikke";
             ADMIN_PASSWORD = "duerikkeadmin";
             SERVER_PUBLIC = "0";
             TZ = "Europe/Copenhagen";
           };
+          ports = [
+            "9877:9877/udp"
+            "9878:9878/udp"
+          ];
           volumes = [
             "/var/lib/alchemy-lab:/data"
           ];

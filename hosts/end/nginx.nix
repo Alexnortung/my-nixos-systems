@@ -13,12 +13,14 @@ in
     443 # HTTP and HTTPS
     25565 # Minecraft
     18989
+    9877 # Alchemy lab
+    9878 # Alchemy lab
   ];
   networking.firewall.allowedUDPPorts = [
     # 34197 # Factorio
     25565 # Minecraft
-    9877
-    9878
+    9877 # Alchemy lab
+    9878 # Alchemy lab# Alchemy lab
   ];
 
   # networking.nat.enable = true;
