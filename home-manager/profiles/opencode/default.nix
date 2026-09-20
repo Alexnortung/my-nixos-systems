@@ -24,22 +24,21 @@ in
 
   programs.opencode = {
     enable = true;
-    package = unstable.opencode;
+    package = inputs.opencode.packages.${system}.opencode;
     skills = ../../agents/skills;
     agents = ../../agents/agents;
     settings = {
       permission.external_directory."/nix/store/**" = "allow";
       plugin = [
         # "oh-my-openagent@3.17.5"
-        "opencode-antigravity-auth@1.6.0"
         "@slkiser/opencode-quota@3.2.0"
         "@simonwjackson/opencode-direnv"
-        "@tarquinen/opencode-dcp@3.1.9"
+        # "@tarquinen/opencode-dcp@3.1.9"
       ];
     };
   };
 
-  home.sessionVariables.OPENCODE_CONFIG = localConfigPath;
+  # home.sessionVariables.OPENCODE_CONFIG = localConfigPath;
 
   # xdg.configFile."opencode/oh-my-openagent.jsonc".source = ./oh-my-openagent.jsonc;
 

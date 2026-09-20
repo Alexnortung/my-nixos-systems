@@ -40,6 +40,11 @@
       url = "github:nix-community/home-manager/master";
     };
 
+    opencode = {
+      url = "github:anomalyco/opencode/v1.18.31";
+      # inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
     stylix.url = "github:danth/stylix/release-26.05";
 
     nollevim = {
@@ -155,6 +160,7 @@
           "aspnetcore-runtime-6.0.36"
           "beekeeper-studio-5.1.5"
           "beekeeper-studio-5.2.12"
+          "beekeeper-studio-6.0.5"
         ];
       };
 
