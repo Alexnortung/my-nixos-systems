@@ -16,11 +16,12 @@ in
     package = unstable.lazygit;
     settings = {
       git = {
-        pagers = [
+        diffRenderers = [
           {
             # useConfig = true;
             colorArg = "always";
-            externalDiffCommand = "difft --color=always";
+            type = "extDiff";
+            command = "difft --color=always";
           }
         ];
       };
