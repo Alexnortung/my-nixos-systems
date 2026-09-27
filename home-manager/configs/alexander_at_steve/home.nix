@@ -54,6 +54,9 @@ in
       # unstable.openscad-unstable
       unstable.obsidian
       unstable.chromium
+
+      unstable.gh
+      inputs.gjc.packages.${system}.default
     ];
 
     sessionVariables = {

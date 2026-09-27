@@ -77,6 +77,8 @@
       url = "github:kissgyorgy/coding-agents";
     };
 
+    gjc.url = "github:Alexnortung/gajae-code/nix-flake";
+
     # block-busters = {
     #   url = "github:Alexnortung/block-busters";
     #   # url = "path:/home/alexander/source/block-busters";
