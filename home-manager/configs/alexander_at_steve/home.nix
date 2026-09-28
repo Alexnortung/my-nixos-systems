@@ -43,7 +43,6 @@ in
       gftp
       unstable.prusa-slicer
       blender
-      alacritty
       ffmpeg
       unstable.bruno
       unstable.webcord
@@ -54,6 +53,7 @@ in
       # unstable.openscad-unstable
       unstable.obsidian
       unstable.chromium
+      unstable.claude-code
 
       unstable.gh
       inputs.gjc.packages.${system}.default
@@ -84,6 +84,11 @@ in
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  programs.alacritty = {
+    enable = true;
+    settings = builtins.fromTOML (builtins.readFile ../../../config/alacritty.toml);
+  };
 
   programs.git = {
     settings = {
