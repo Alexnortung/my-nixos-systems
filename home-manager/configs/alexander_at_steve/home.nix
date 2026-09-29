@@ -16,6 +16,7 @@ let
         "beekeeper-studio-5.5.3"
         "beekeeper-studio-5.5.5"
         "beekeeper-studio-6.0.5"
+        "beekeeper-studio-6.1.1"
       ];
       allowUnfree = true;
     };

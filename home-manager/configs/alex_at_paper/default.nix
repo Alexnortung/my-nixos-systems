@@ -13,6 +13,7 @@ let
     permittedInsecurePackages = [
       "beekeeper-studio-5.2.12"
       "beekeeper-studio-6.0.5"
+      "beekeeper-studio-6.1.1"
     ];
   };
 in
