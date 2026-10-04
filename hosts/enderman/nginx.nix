@@ -23,7 +23,8 @@
         addSSL = true;
         locations."/" = {
           proxyWebsockets = true;
-          proxyPass = "http://127.0.0.1:8096";
+          proxyPass = "http://10.200.0.2:8096";
+          # proxyPass = "http://127.0.0.1:8096";
           # return = "301 https://google.com";
           extraConfig = ''
             # proxy_set_header Host $host;

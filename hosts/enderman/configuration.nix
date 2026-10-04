@@ -21,6 +21,7 @@ in
     ./audiobookshelf.nix
     ./nginx.nix
     ./dns.nix
+    ./vpn-namespace.nix
     ./factorio.nix
     ./gc.nix
     ./minecraft
@@ -202,34 +203,6 @@ in
       address = [ "10.101.0.2/16" ];
       privateKeyFile = "/root/wireguard-keys/end-portal/wg-private";
     };
-    wg-mullvad = {
-      address = [ "10.64.28.12/32" ];
-      # dns = [ "193.138.218.74" ]; # mullvad public dns
-      # dns = [ "10.64.0.1" ];
-      privateKeyFile = "/root/wireguard-keys/mullvad/wg-mullvad";
-      peers = [
-        {
-          # se-got-004
-          publicKey = "veGD6/aEY6sMfN3Ls7YWPmNgu3AheO7nQqsFT47YSws=";
-          allowedIPs = [
-            "10.8.0.1/32"
-            "10.64.0.1/32"
-            "10.124.0.0/22"
-          ]; # Only send communication through mullvad if it is in the range of the given ips, allows for split tunneling
-          endpoint = "185.213.154.69:51820";
-        }
-        {
-          # se-got-005
-          publicKey = "x4h55uXoIIKUqKjjm6PzNiZlzLjxjuAIKzvgU9UjOGw=";
-          allowedIPs = [
-            "10.8.0.1/32"
-            "10.64.0.1/32"
-            "10.124.0.0/22"
-          ]; # Only send communication through mullvad if it is in the range of the given ips, allows for split tunneling
-          endpoint = "185.209.199.2:51820";
-        }
-      ];
-    };
   };
 
   # services.xserver = {
@@ -351,7 +324,7 @@ in
   services.jellyfin = {
     enable = true;
     group = "servarr";
-    openFirewall = true;
+    openFirewall = false;
   };
 
   users.users.jellyfin.extraGroups = [
