@@ -1486,11 +1486,11 @@
         "unstable": "unstable"
       },
       "locked": {
-        "lastModified": 1786110451,
-        "narHash": "sha256-epkQY6l0lAxvcA4m/jUwF7RGxkPgi5ETmWBudnLYyXs=",
+        "lastModified": 1789920472,
+        "narHash": "sha256-eWKV+mMX4GvbPCeFRYwj5KAkl2+4Oum9q8X5F22bSD0=",
         "owner": "Alexnortung",
         "repo": "nollevim",
-        "rev": "54e2a1a467429e03e9a200ac8139c2c10ba9a414",
+        "rev": "bde2d622ea607613ad16361b874a9b0dbccba882",
         "type": "github"
       },
       "original": {
