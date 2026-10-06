@@ -24,6 +24,63 @@ let
       memory_limit = 2G;
     '';
   };
+  # Shared by the WinBoat launchers: finds credentials and the RDP port, and
+  # sets $rdp_bin and the common_args array.
+  winboatRdpPrelude = ''
+    compose_file=""
+    for candidate in \
+      "''${WINBOAT_DIR:-}" \
+      "''${HOME}/.winboat" \
+      "''${HOME}/winboat" \
+      "''${HOME}/.local/share/winboat"
+    do
+      [ -n "$candidate" ] || continue
+      if [ -f "$candidate/docker-compose.yml" ]; then
+        compose_file="$candidate/docker-compose.yml"
+        break
+      fi
+    done
+
+    if [ -z "$compose_file" ]; then
+      printf '%s\n' "WinBoat compose file not found. Checked WINBOAT_DIR, ~/.winboat, ~/winboat, and ~/.local/share/winboat." >&2
+      exit 1
+    fi
+
+    username="$(yq '.services.windows.environment.USERNAME' "$compose_file")"
+    password="$(yq '.services.windows.environment.PASSWORD' "$compose_file")"
+
+    if [ -z "$username" ] || [ "$username" = "null" ] || [ -z "$password" ] || [ "$password" = "null" ]; then
+      printf '%s\n' "WinBoat credentials are missing from $compose_file." >&2
+      exit 1
+    fi
+
+    rdp_port="$(docker port WinBoat 3389/tcp | awk -F: 'NR == 1 { print $NF }')"
+    if [ -z "$rdp_port" ]; then
+      printf '%s\n' "Could not determine the WinBoat RDP port. Is the WinBoat container running?" >&2
+      exit 1
+    fi
+
+    # Always use the X11 client (via XWayland): wlfreerdp does not implement
+    # RemoteApp windows properly.
+    if command -v xfreerdp3 >/dev/null 2>&1; then
+      rdp_bin="$(command -v xfreerdp3)"
+    else
+      rdp_bin="$(command -v xfreerdp)"
+    fi
+
+    common_args=(
+      "/u:$username"
+      "/p:$password"
+      /v:127.0.0.1
+      "/port:$rdp_port"
+      /cert:ignore
+      +clipboard
+      /sound:sys:pulse
+      /microphone:sys:pulse
+      /compression
+      -wallpaper
+    )
+  '';
   winboatWord = pkgs.writeShellApplication {
     name = "winboat-word";
     runtimeInputs = with pkgs; [
@@ -33,100 +90,55 @@ let
       yq-go
     ];
     text = ''
-      set -eu
+      ${winboatRdpPrelude}
 
-      compose_file=""
-      for candidate in \
-        "''${WINBOAT_DIR:-}" \
-        "''${HOME}/.winboat" \
-        "''${HOME}/winboat" \
-        "''${HOME}/.local/share/winboat"
-      do
-        [ -n "$candidate" ] || continue
-        if [ -f "$candidate/docker-compose.yml" ]; then
-          compose_file="$candidate/docker-compose.yml"
-          break
-        fi
-      done
+      # /multimon tells Windows about every monitor; without it RemoteApp
+      # windows stop repainting on anything but the primary screen.
+      word_args=(
+        /gdi:sw
+        +geometry
+        /mouse:grab:off
+        -grab-mouse
+        -toggle-fullscreen
+        /multimon
+        /scale-desktop:100
+        /wm-class:winboat-MicrosoftWord
+      )
+      word_exe='C:\Program Files\Microsoft Office\root\Office16\WINWORD.EXE'
 
-      if [ -z "$compose_file" ]; then
-        printf '%s\n' "WinBoat compose file not found. Checked WINBOAT_DIR, ~/.winboat, ~/winboat, and ~/.local/share/winboat." >&2
-        exit 1
-      fi
-
-      username="$(yq '.services.windows.environment.USERNAME' "$compose_file")"
-      password="$(yq '.services.windows.environment.PASSWORD' "$compose_file")"
-
-      if [ -z "$username" ] || [ "$username" = "null" ] || [ -z "$password" ] || [ "$password" = "null" ]; then
-        printf '%s\n' "WinBoat credentials are missing from $compose_file." >&2
-        exit 1
-      fi
-
-      rdp_port="$(docker port WinBoat 3389/tcp | awk -F: 'NR == 1 { print $NF }')"
-      if [ -z "$rdp_port" ]; then
-        printf '%s\n' "Could not determine the WinBoat RDP port. Is the WinBoat container running?" >&2
-        exit 1
-      fi
-
-      if [ -n "''${WAYLAND_DISPLAY:-}" ] && command -v wlfreerdp >/dev/null 2>&1; then
-        rdp_bin="$(command -v wlfreerdp)"
-      elif command -v xfreerdp3 >/dev/null 2>&1; then
-        rdp_bin="$(command -v xfreerdp3)"
-      else
-        rdp_bin="$(command -v xfreerdp)"
-      fi
-
-      app_args=""
       if [ "$#" -gt 0 ]; then
         file_path="$(realpath "$1")"
         file_dir="$(dirname "$file_path")"
         file_name="$(basename "$file_path")"
         windows_file="\\\\tsclient\\linux\\$file_name"
-        app_args=",cmd:\"$windows_file\""
 
-        exec "$rdp_bin" \
-          "/u:$username" \
-          "/p:$password" \
-          /v:127.0.0.1 \
-          "/port:$rdp_port" \
-          /cert:ignore \
-          +clipboard \
-          /sound:sys:pulse \
-          /microphone:sys:pulse \
-          /compression \
-          /gdi:sw \
-          +geometry \
-          /mouse:grab:off \
-          -grab-mouse \
-          -toggle-fullscreen \
-          -wallpaper \
-          /size:1400x1000 \
-          /scale-desktop:100 \
-          /wm-class:winboat-MicrosoftWord \
+        exec "$rdp_bin" "''${common_args[@]}" "''${word_args[@]}" \
           "/drive:linux,$file_dir" \
-          "/app:program:C:\Program Files\Microsoft Office\root\Office16\WINWORD.EXE,name:MicrosoftWord$app_args"
+          "/app:program:$word_exe,name:MicrosoftWord,cmd:\"$windows_file\""
       fi
 
-      exec "$rdp_bin" \
-        "/u:$username" \
-        "/p:$password" \
-        /v:127.0.0.1 \
-        "/port:$rdp_port" \
-        /cert:ignore \
-        +clipboard \
-        /sound:sys:pulse \
-        /microphone:sys:pulse \
-        /compression \
-        /gdi:sw \
-        +geometry \
-        /mouse:grab:off \
-        -grab-mouse \
-        -toggle-fullscreen \
-        -wallpaper \
-        /size:1400x1000 \
-        /scale-desktop:100 \
-        /wm-class:winboat-MicrosoftWord \
-        '/app:program:C:\Program Files\Microsoft Office\root\Office16\WINWORD.EXE,name:MicrosoftWord'
+      exec "$rdp_bin" "''${common_args[@]}" "''${word_args[@]}" \
+        "/app:program:$word_exe,name:MicrosoftWord"
+    '';
+  };
+  # Full Windows desktop in a single window; more robust than RemoteApp under
+  # a tiling compositor. The WM class deliberately does not match the
+  # floating ^winboat- rule in the Hyprland profile, so it tiles.
+  winboatDesktop = pkgs.writeShellApplication {
+    name = "winboat-desktop";
+    runtimeInputs = with pkgs; [
+      coreutils
+      docker
+      freerdp
+      yq-go
+    ];
+    text = ''
+      ${winboatRdpPrelude}
+
+      exec "$rdp_bin" "''${common_args[@]}" \
+        /dynamic-resolution \
+        "/drive:home,$HOME" \
+        /wm-class:WinBoatDesktop
     '';
   };
 in
@@ -168,6 +180,7 @@ in
       unstable.winboat
       freerdp
       winboatWord
+      winboatDesktop
       nodejs
       unstable.bun
       phpConfigured
@@ -235,6 +248,17 @@ in
 
   xdg = {
     enable = true;
+    desktopEntries.windows-desktop-winboat = {
+      categories = [ "System" ];
+      exec = "${winboatDesktop}/bin/winboat-desktop";
+      icon = "winboat";
+      name = "Windows Desktop (WinBoat)";
+      settings = {
+        StartupWMClass = "WinBoatDesktop";
+      };
+      terminal = false;
+      type = "Application";
+    };
     desktopEntries.microsoft-word-winboat = {
       categories = [
         "Office"

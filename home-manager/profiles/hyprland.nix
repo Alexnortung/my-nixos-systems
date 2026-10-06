@@ -167,10 +167,12 @@ in
 
           "float on, match:class ${winboatRegex}"
           # "size 1400 1000, match:class ${winboatRegex}"
-          "center on, match:class ${winboatRegex}"
           "no_anim on, match:class ${winboatRegex}"
           "no_blur on, match:class ${winboatRegex}"
           "no_shadow on, match:class ${winboatRegex}"
+          # Untitled RemoteApp helper windows (menus, the marker window): don't
+          # focus them, focusing makes xfreerdp resend window geometry.
+          "no_focus on, match:class ${winboatRegex}, match:title ^$"
         ];
       # windowrulev2 = [
       #   # Make the specific Alacritty instance float
