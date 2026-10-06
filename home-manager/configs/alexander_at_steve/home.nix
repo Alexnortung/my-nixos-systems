@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   inputs,
   system,
   ...
@@ -9,17 +10,11 @@ let
   unstable = import inputs.nixpkgs-unstable {
     inherit system;
     config = {
-      permittedInsecurePackages = [
-        "beekeeper-studio-5.1.5"
-        "beekeeper-studio-5.2.12"
-        "beekeeper-studio-5.3.4"
-        "beekeeper-studio-5.5.3"
-        "beekeeper-studio-5.5.5"
-        "beekeeper-studio-6.0.5"
-        "beekeeper-studio-6.1.1"
-      ];
       allowUnfree = true;
-    };
+    } // (import ../../../config/permitted-insecure-packages.nix {
+      inherit lib;
+      permittedInsecurePackages = [ "beekeeper-studio" ];
+    });
   };
 in
 {

@@ -10,9 +10,10 @@ let
       inherit inputs;
     };
 
-    permittedInsecurePackages = [
-      "beekeeper-studio-5.2.12"
-    ];
+    config = import ../../../config/permitted-insecure-packages.nix {
+      lib = inputs.nixos-stable.lib;
+      permittedInsecurePackages = [ "beekeeper-studio" ];
+    };
   };
 in
 inputs.home-manager.lib.homeManagerConfiguration {

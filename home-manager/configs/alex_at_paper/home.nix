@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   inputs,
   system,
   ...
@@ -10,17 +11,13 @@ let
     inherit system;
     config = {
       allowUnfree = true;
+    } // (import ../../../config/permitted-insecure-packages.nix {
+      inherit lib;
       permittedInsecurePackages = [
-        "beekeeper-studio-5.2.12"
-        "beekeeper-studio-5.5.3"
-        "beekeeper-studio-5.3.4"
-        "beekeeper-studio-5.5.5"
-        "beekeeper-studio-5.5.7"
-        "beekeeper-studio-6.0.5"
-        "electron-40.10.5"
-        "electron-39.8.10"
+        "beekeeper-studio"
+        "electron"
       ];
-    };
+    });
   };
   phpConfigured = pkgs.php.buildEnv {
     extraConfig = ''
@@ -134,11 +131,12 @@ let
   };
 in
 {
-  nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.permittedInsecurePackages = [
-    "beekeeper-studio-5.2.12"
-    "beekeeper-studio-6.0.5"
-  ];
+  nixpkgs.config = {
+    allowUnfree = true;
+  } // (import ../../../config/permitted-insecure-packages.nix {
+    inherit lib;
+    permittedInsecurePackages = [ "beekeeper-studio" ];
+  });
   stylix.targets.gnome.enable = false;
   stylix.targets.firefox.profileNames = [ "default" ];
 
@@ -196,6 +194,7 @@ in
       btop
       # unstable.opencode - using profile instead
       bubblewrap
+      unstable.claude-code
     ];
 
     shellAliases = {

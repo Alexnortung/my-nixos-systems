@@ -41,9 +41,10 @@ in
     ../../profiles/nix-ld.nix
   ];
 
-  nixpkgs.config.permittedInsecurePackages = [
-    "electron-39.8.10"
-  ];
+  nixpkgs.config = import ../../config/permitted-insecure-packages.nix {
+    inherit lib;
+    permittedInsecurePackages = [ "electron" ];
+  };
 
   # # Temp fix
   # nixpkgs.overlays = [

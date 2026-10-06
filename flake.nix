@@ -156,15 +156,15 @@
         # allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) (import ./config/allowed-unfree-packages.nix);
         allowUnfreePredicate = (pkg: true);
         allowUnfree = true;
+      } // (import ./config/permitted-insecure-packages.nix {
+        lib = inputs.nixpkgs.lib;
         permittedInsecurePackages = [
-          "electron-24.8.6"
-          "dotnet-sdk-6.0.428"
-          "aspnetcore-runtime-6.0.36"
-          "beekeeper-studio-5.1.5"
-          "beekeeper-studio-5.2.12"
-          "beekeeper-studio-6.0.5"
+          "electron"
+          "dotnet-sdk"
+          "aspnetcore-runtime"
+          "beekeeper-studio"
         ];
-      };
+      });
 
       channels.nixos-stable.overlaysBuilder = channels: [
         # (import ./overlays/default-unstable.nix channels.nixpkgs-unstable)
