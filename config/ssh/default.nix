@@ -2,10 +2,12 @@ rec {
   boat = ./keys/alexander_boat.pub;
   steve = ./keys/alexander_steve.pub;
   spider = ./keys/alexander_spider.pub;
+  paper = ./keys/alexander_paper.pub;
   end = ./keys/end.rsa.pub;
   enderman = ./keys/enderman.rsa.pub;
-  
+
   spider_system = ./keys/spider.rsa.pub;
+  paper_system = ./keys/paper.ed25519.pub;
 
   deployers = [
     boat

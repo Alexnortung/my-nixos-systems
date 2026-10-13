@@ -13,6 +13,7 @@ in
 {
   imports = [
     ./hardware-configuration.nix
+    ./secrets
     ../../config/stylix.nix
     ../../modules/programming-pkgs.nix
     ../../modules/comfort-packages.nix
@@ -218,6 +219,8 @@ in
   };
 
   environment.systemPackages = with pkgs; [
+    inputs.agenix.packages.${system}.agenix
+    wireguard-tools
     seahorse
     solaar
     nodejs
