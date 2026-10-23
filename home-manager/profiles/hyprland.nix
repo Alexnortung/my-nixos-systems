@@ -8,7 +8,19 @@
 
 let
   inherit (lib) mkForce;
-  amixer = "${pkgs.alsa-utils}/bin/amixer";
+  osd = "${pkgs.swayosd}/bin/swayosd-client";
+  thunar = pkgs.thunar.override {
+    thunarPlugins = with pkgs; [
+      thunar-archive-plugin
+      thunar-volman
+    ];
+  };
+  clipboardPicker = pkgs.writeShellScript "clipboard-picker" ''
+    ${pkgs.cliphist}/bin/cliphist list \
+      | rofi -dmenu -p clipboard -display-columns 2 \
+      | ${pkgs.cliphist}/bin/cliphist decode \
+      | ${pkgs.wl-clipboard}/bin/wl-copy
+  '';
   unstable = import inputs.nixpkgs-unstable {
     inherit system;
   };
@@ -44,6 +56,7 @@ in
     package = null;
     portalPackage = null;
     enable = true;
+    configType = "hyprlang";
     settings = {
       "$mod" = "SUPER";
       input = {
@@ -98,8 +111,8 @@ in
       ];
 
       bindl = [
-        ", XF86AudioMute, exec, ${amixer} -q set Master toggle"
-        ", XF86AudioMicMute, exec, ${amixer} -q set Capture toggle"
+        ", XF86AudioMute, exec, ${osd} --output-volume mute-toggle"
+        ", XF86AudioMicMute, exec, ${osd} --input-volume mute-toggle"
         ", XF86AudioPrev, exec, playerctl -p playerctld previous"
         ", XF86AudioNext, exec, playerctl -p playerctld next"
         ", XF86AudioPlay, exec, playerctl -p playerctld play-pause"
@@ -107,10 +120,10 @@ in
       ];
 
       bindle = [
-        ", XF86MonBrightnessDown, exec, brightnessctl set 5%-"
-        ", XF86MonBrightnessUp, exec, brightnessctl set 5%+"
-        ", XF86AudioLowerVolume, exec, ${amixer} -q set Master 3%-"
-        ", XF86AudioRaiseVolume, exec, ${amixer} -q set Master 3%+"
+        ", XF86MonBrightnessDown, exec, ${osd} --brightness -5"
+        ", XF86MonBrightnessUp, exec, ${osd} --brightness +5"
+        ", XF86AudioLowerVolume, exec, ${osd} --output-volume -3"
+        ", XF86AudioRaiseVolume, exec, ${osd} --output-volume +3"
       ];
 
       bind = [
@@ -129,13 +142,26 @@ in
 
         "$mod, Comma, focusmonitor, l"
         "$mod, Period, focusmonitor, r"
+        "$mod, mouse_down, workspace, e+1"
+        "$mod, mouse_up, workspace, e-1"
+
+        # Scratchpad
+        "$mod, S, togglespecialworkspace, scratch"
+        "$mod SHIFT, S, movetoworkspace, special:scratch"
 
         # Programs
         "$mod, F, exec, firefox"
         "$mod SHIFT, Return, exec, alacritty"
+        "$mod, E, exec, thunar"
         ", Print, exec, grimblast --freeze copy area"
+        "SHIFT, Print, exec, grimblast --freeze save area - | satty --filename - --copy-command wl-copy"
+        "$mod, Print, exec, grimblast copy output"
+        "$mod SHIFT, C, exec, hyprpicker --autocopy"
+        "$mod, V, exec, killall rofi || ${clipboardPicker}"
         "$mod ALT, L, exec, hyprlock"
+        "$mod SHIFT, E, exec, wlogout --protocol layer-shell"
         "$mod, Space, exec, killall rofi || rofi -show"
+        "$mod SHIFT, Space, exec, killall rofi || rofi -show window"
         ", code:179, exec, spotify"
       ]
       ++ (
@@ -192,6 +218,103 @@ in
         "SSH_AUTH_SOCK,$XDG_RUNTIME_DIR/gcr/ssh"
       ];
     };
+  };
+
+  # File manager on $mod+E. Thunar, xfconfd (its settings store) and tumblerd
+  # (thumbnails) are D-Bus activated, so their D-Bus and systemd user units
+  # have to be installed too.
+  dbus.packages = [
+    thunar
+    pkgs.xfconf
+    pkgs.tumbler
+  ];
+  systemd.user.packages = [
+    pkgs.xfconf
+    pkgs.tumbler
+  ];
+  # Thunar's bundled unit runs the binary without plugins, so define our own.
+  systemd.user.services.thunar = {
+    Unit.Description = "Thunar file manager";
+    Service = {
+      Type = "dbus";
+      BusName = "org.xfce.FileManager";
+      ExecStart = "${thunar}/bin/Thunar --daemon";
+      KillMode = "process";
+    };
+  };
+
+  # Graphical password prompts (e.g. mounting disks, gparted, pkexec).
+  services.hyprpolkitagent.enable = true;
+
+  # Clipboard history, picked with $mod+V.
+  services.cliphist.enable = true;
+
+  # On-screen display for volume/brightness keys.
+  services.swayosd.enable = true;
+
+  # Automount removable drives, with a tray icon.
+  services.udiskie = {
+    enable = true;
+    tray = "auto";
+  };
+
+  # Night light.
+  services.hyprsunset = {
+    enable = true;
+    settings.profile = [
+      {
+        time = "7:00";
+        identity = true;
+      }
+      {
+        time = "21:00";
+        temperature = 4500;
+      }
+    ];
+  };
+
+  # Power menu on $mod+Shift+E.
+  programs.wlogout = {
+    enable = true;
+    layout = [
+      {
+        label = "lock";
+        action = "loginctl lock-session";
+        text = "Lock";
+        keybind = "l";
+      }
+      {
+        label = "logout";
+        # UWSM sessions should be stopped through uwsm; plain sessions just exit.
+        action = "uwsm stop || hyprctl dispatch exit";
+        text = "Logout";
+        keybind = "e";
+      }
+      {
+        label = "suspend";
+        action = "systemctl suspend";
+        text = "Suspend";
+        keybind = "u";
+      }
+      {
+        label = "reboot";
+        action = "systemctl reboot";
+        text = "Reboot";
+        keybind = "r";
+      }
+      {
+        label = "shutdown";
+        action = "systemctl poweroff";
+        text = "Shutdown";
+        keybind = "s";
+      }
+      {
+        label = "hibernate";
+        action = "systemctl hibernate";
+        text = "Hibernate";
+        keybind = "h";
+      }
+    ];
   };
 
   services.hypridle = {
@@ -409,7 +532,12 @@ in
 
   home.packages = with pkgs; [
     unstable.wifitui
+    thunar
+    file-roller # Backend for thunar-archive-plugin
     grimblast
+    satty
+    hyprpicker
+    wl-clipboard
     killall
     brightnessctl
     # hyprpanel

@@ -153,6 +153,12 @@ in
   };
 
   programs.nm-applet.enable = true;
+
+  # Trash, removable drives, phones (MTP) and network shares for GTK apps
+  # such as Thunar. Needs udev rules and a global GIO module path, so it
+  # lives here rather than in Home Manager.
+  services.gvfs.enable = true;
+
   fonts.packages = with pkgs; [
     fira-code
     font-awesome
@@ -226,7 +232,6 @@ in
     nodejs
     docker-compose
     bashmount
-    pcmanfm
     xev
     wl-clipboard
     brightnessctl # Brightness from terminal

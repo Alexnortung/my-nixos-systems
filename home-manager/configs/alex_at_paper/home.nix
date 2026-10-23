@@ -291,6 +291,16 @@ in
         "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = [
           "microsoft-word-winboat.desktop"
         ];
+        "inode/directory" = [ "thunar.desktop" ];
+        "application/pdf" = [ "org.pwmt.zathura.desktop" ];
+        "image/png" = [ "imv.desktop" ];
+        "image/jpeg" = [ "imv.desktop" ];
+        "image/gif" = [ "imv.desktop" ];
+        "image/webp" = [ "imv.desktop" ];
+        "image/svg+xml" = [ "imv.desktop" ];
+        "video/mp4" = [ "vlc.desktop" ];
+        "video/x-matroska" = [ "vlc.desktop" ];
+        "video/webm" = [ "vlc.desktop" ];
         "text/html" = [ "firefox.desktop" ];
         "application/xhtml+xml" = [ "firefox.desktop" ];
         "x-scheme-handler/http" = [ "firefox.desktop" ];
@@ -327,6 +337,9 @@ in
       user.email = "an@dokumenter.dk";
     };
   };
+
+  programs.imv.enable = true;
+  programs.zathura.enable = true;
 
   programs.yazi = {
     enable = true;
