@@ -11,7 +11,8 @@ let
     inherit system;
     config = {
       allowUnfree = true;
-    } // (import ../../../config/permitted-insecure-packages.nix {
+    }
+    // (import ../../../config/permitted-insecure-packages.nix {
       inherit lib;
       permittedInsecurePackages = [
         "beekeeper-studio"
@@ -145,7 +146,8 @@ in
 {
   nixpkgs.config = {
     allowUnfree = true;
-  } // (import ../../../config/permitted-insecure-packages.nix {
+  }
+  // (import ../../../config/permitted-insecure-packages.nix {
     inherit lib;
     permittedInsecurePackages = [ "beekeeper-studio" ];
   });
@@ -174,6 +176,7 @@ in
     username = "alex";
     homeDirectory = "/home/alex";
     packages = with pkgs; [
+      unstable.age
       unstable.gftp
       unstable.localsend
       unstable.vlc
