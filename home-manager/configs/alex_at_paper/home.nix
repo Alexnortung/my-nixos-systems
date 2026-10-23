@@ -216,6 +216,9 @@ in
     shellAliases = {
       # npm = "pnpm";
     };
+
+    sessionVariables.PNPM_HOME = "${config.xdg.dataHome}/pnpm";
+    sessionPath = [ "${config.xdg.dataHome}/pnpm" ];
   };
 
   # This value determines the Home Manager release that your
@@ -335,8 +338,6 @@ in
     enable = true;
     dotDir = config.home.homeDirectory;
     initContent = ''
-      export PNPM_HOME="/home/alexander/.local/share/pnpm"
-      export PATH="$PATH:$PNPM_HOME"
       export PATH=$PATH:~/mutable_node_modules/bin/
 
       alias dnvim='nix run ~/source/nollevim'
