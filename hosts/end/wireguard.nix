@@ -41,5 +41,20 @@
         }
       ];
     };
+
+    interfaces.end-gate = {
+      address = [ "10.102.0.1/24" ];
+      listenPort = 51821;
+      privateKeyFile = config.age.secrets.wireguard-key.path;
+
+      peers = [
+        {
+          publicKey = "6EdKNMUJrrb99YonjI8z1y7XT2gLdS9oMfrZGYBtTmg=";
+          allowedIPs = [
+            "10.102.0.2/32"
+          ];
+        }
+      ];
+    };
   };
 }

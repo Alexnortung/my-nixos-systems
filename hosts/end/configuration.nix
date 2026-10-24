@@ -101,6 +101,7 @@ in
   ];
   networking.firewall.allowedUDPPorts = [
     51820 # wireguard
+    51821 # wireguard (end-gate)
   ];
 
   system.stateVersion = "22.05";
