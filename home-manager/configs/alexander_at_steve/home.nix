@@ -11,11 +11,36 @@ let
     inherit system;
     config = {
       allowUnfree = true;
-    } // (import ../../../config/permitted-insecure-packages.nix {
+    }
+    // (import ../../../config/permitted-insecure-packages.nix {
       inherit lib;
       permittedInsecurePackages = [ "beekeeper-studio" ];
     });
   };
+
+  # Minecraft 26.x renders through SDL3 with OpenGL/Vulkan backends, which dlopen
+  # libraries the stock wrapper's LD_LIBRARY_PATH doesn't include
+  # ("graphics backend was not found").
+  modrinth-app = unstable.modrinth-app.overrideAttrs (old: {
+    runtimeDependencies =
+      old.runtimeDependencies
+      + ":"
+      + lib.makeLibraryPath (
+        with unstable;
+        [
+          libglvnd
+          vulkan-loader
+          wayland
+          libxkbcommon
+          libdecor
+          libxi
+          libxfixes
+          libxscrnsaver
+          libxtst
+          libxcb
+        ]
+      );
+  });
 in
 {
   # Home Manager needs a bit of information about you and the
@@ -24,6 +49,7 @@ in
     username = "alexander";
     homeDirectory = "/home/alexander";
     packages = with pkgs; [
+      modrinth-app
       unstable.deploy-rs
       unstable.lutris
       unstable.wineWow64Packages.stableFull
