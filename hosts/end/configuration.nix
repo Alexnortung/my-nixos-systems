@@ -23,6 +23,7 @@ in
     ./db.nix
     # ./nextcloud.nix
     ./wireguard.nix
+    ./jannick.nix
     ./nginx.nix
     # ./reverse-proxy.nix
     ./mail-server.nix
