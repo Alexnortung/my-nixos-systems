@@ -399,7 +399,7 @@ in
           }
           {
             label = "󰂯";
-            command = "blueman-manager";
+            command = "alacritty --class bluetui_popup -e bluetui";
           }
           {
             label = "󰝟";

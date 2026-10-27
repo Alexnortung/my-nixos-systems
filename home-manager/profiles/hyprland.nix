@@ -13,6 +13,7 @@ let
   c = config.lib.stylix.colors;
   monoFont = config.stylix.fonts.monospace.name;
   cursor = config.home.pointerCursor;
+  bluetoothPopup = "alacritty --class bluetui_popup -e bluetui";
   osd = "${pkgs.swayosd}/bin/swayosd-client";
   thunar = pkgs.thunar.override {
     thunarPlugins = with pkgs; [
@@ -241,6 +242,7 @@ in
         "$mod, V, exec, killall rofi || ${clipboardPicker}"
         "$mod ALT, L, exec, hyprlock"
         "$mod, N, exec, swaync-client -t -sw"
+        "$mod, B, exec, ${bluetoothPopup}"
         "$mod SHIFT, E, exec, wlogout --protocol layer-shell --buttons-per-row 5 --column-spacing 16 --margin-top 600 --margin-bottom 600 --margin-left 400 --margin-right 400"
         "$mod, Space, exec, killall rofi || rofi -show"
         "$mod SHIFT, Space, exec, killall rofi || rofi -show window"
@@ -272,6 +274,11 @@ in
           "size 600 900, match:class ^(wifitui_popup)$"
           "center on, match:class ^(wifitui_popup)$"
           "dim_around on, match:class ^(wifitui_popup)$"
+
+          "float on, match:class ^(bluetui_popup)$"
+          "size 900 600, match:class ^(bluetui_popup)$"
+          "center on, match:class ^(bluetui_popup)$"
+          "dim_around on, match:class ^(bluetui_popup)$"
 
           "float on, match:class ${winboatRegex}"
           # "size 1400 1000, match:class ${winboatRegex}"
@@ -664,7 +671,8 @@ in
           format-disabled = "󰂲";
           tooltip-format-connected = "{device_enumerate}";
           tooltip-format-enumerate-connected = "{device_alias}";
-          on-click = "blueman-manager";
+          on-click = bluetoothPopup;
+          on-click-right = "blueman-manager";
         };
 
         network = {
@@ -812,6 +820,7 @@ in
 
   home.packages = with pkgs; [
     unstable.wifitui
+    bluetui
     thunar
     file-roller # Backend for thunar-archive-plugin
     grimblast
