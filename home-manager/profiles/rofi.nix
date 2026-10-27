@@ -8,9 +8,17 @@
 let
   inherit (lib) mkForce;
   inherit (config.lib.formats.rasi) mkLiteral;
-  inherit (config.lib.stylix.colors.withHashtag) base00 base05;
+  inherit (config.lib.stylix.colors.withHashtag)
+    base00
+    base01
+    base02
+    base05
+    base0D
+    ;
 in
 {
+  stylix.targets.rofi.alternatePattern = false;
+
   programs.rofi = {
     enable = true;
     cycle = false;
@@ -20,7 +28,7 @@ in
     extraConfig = {
       modi = "drun,filebrowser";
       # font = "Noto Sans CJK JP 12";
-      # show-icons = true;
+      show-icons = true;
       # disable-history = true;
       # hover-select = true;
       # bw = 0;
@@ -34,6 +42,35 @@ in
       # me-select-entry = "";
       # me-accept-entry = "MousePrimary";
       # kb-cancel = "Escape,MouseMiddle";
+    };
+
+    # Shape only; colors come from Stylix.
+    theme = {
+      window = {
+        width = mkLiteral "640px";
+        border = mkLiteral "2px";
+        border-color = mkLiteral base0D;
+        border-radius = mkLiteral "12px";
+        padding = mkLiteral "12px";
+      };
+      mainbox.spacing = mkLiteral "10px";
+      inputbar = {
+        padding = mkLiteral "10px 12px";
+        border-radius = mkLiteral "8px";
+        background-color = mkLiteral base01;
+      };
+      listview = {
+        lines = 8;
+        spacing = mkLiteral "4px";
+        scrollbar = false;
+        border = mkLiteral "0px";
+      };
+      element = {
+        padding = mkLiteral "8px 12px";
+        spacing = mkLiteral "10px";
+        border-radius = mkLiteral "8px";
+      };
+      element-icon.size = mkLiteral "24px";
     };
 
     # Based on Newman Sánchez's Launchpad theme <https://github.com/newmanls/rofi-themes-collection>

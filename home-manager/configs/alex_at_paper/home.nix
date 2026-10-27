@@ -359,27 +359,84 @@ in
 
   programs.kitty.enable = true; # required for the default Hyprland config
 
-  services.dunst = {
+  # Notifications + control center (bell in waybar, or $mod+N).
+  services.swaync = {
     enable = true;
     settings = {
-      global = {
-        frame_width = 1;
-        padding = 16;
-        horizontal_padding = 16;
-        origin = "top-right";
+      positionX = "right";
+      positionY = "top";
+      layer = "overlay";
+      control-center-layer = "top";
+      control-center-margin-top = 8;
+      control-center-margin-right = 8;
+      control-center-margin-bottom = 8;
+      control-center-width = 420;
+      notification-window-width = 400;
+      timeout = 6;
+      timeout-low = 3;
+      timeout-critical = 0;
+      fit-to-screen = true;
+      hide-on-clear = true;
+      widgets = [
+        "title"
+        "dnd"
+        "buttons-grid"
+        "mpris"
+        "notifications"
+      ];
+      widget-config = {
+        title = {
+          text = "Notifications";
+          clear-all-button = true;
+          button-text = "Clear";
+        };
+        dnd.text = "Do not disturb";
+        mpris.image-size = 64;
+        buttons-grid.actions = [
+          {
+            label = "󰤨";
+            command = "alacritty --class wifitui_popup -e wifitui";
+          }
+          {
+            label = "󰂯";
+            command = "blueman-manager";
+          }
+          {
+            label = "󰝟";
+            command = "${pkgs.swayosd}/bin/swayosd-client --output-volume mute-toggle";
+          }
+          {
+            label = "󰍭";
+            command = "${pkgs.swayosd}/bin/swayosd-client --input-volume mute-toggle";
+          }
+          {
+            label = "󰌾";
+            command = "loginctl lock-session";
+          }
+          {
+            label = "󰐥";
+            command = "wlogout --protocol layer-shell --buttons-per-row 5 --column-spacing 16 --margin-top 600 --margin-bottom 600 --margin-left 400 --margin-right 400";
+          }
+        ];
       };
-      # urgency_critical = {
-      #   origin = "center";
-      #   width = 300;
-      #   script = "${./alert.sh}";
-      # };
-
-      # play_sound = {
-      #   stack_tag = "play_sound";
-      #   summary = "";
-      #   script = "${./alert.sh}";
-      # };
     };
+    # Rounded corners on top of Stylix's colors.
+    style = lib.mkAfter ''
+      .notification-row .notification-background .notification,
+      .control-center .notification-row .notification-background {
+        border-radius: 12px;
+      }
+      .control-center {
+        border-radius: 14px;
+        border: 2px solid @base02;
+      }
+      .widget-buttons-grid > flowbox > flowboxchild > button {
+        border-radius: 10px;
+        font-size: 16pt;
+        min-width: 48px;
+        min-height: 40px;
+      }
+    '';
   };
 
   home.sessionVariables = {
