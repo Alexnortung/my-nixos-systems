@@ -228,6 +228,8 @@ in
 
         "$mod, Comma, focusmonitor, l"
         "$mod, Period, focusmonitor, r"
+        "$mod SHIFT, Comma, movecurrentworkspacetomonitor, l"
+        "$mod SHIFT, Period, movecurrentworkspacetomonitor, r"
         "$mod, mouse_down, workspace, e+1"
         "$mod, mouse_up, workspace, e-1"
 
