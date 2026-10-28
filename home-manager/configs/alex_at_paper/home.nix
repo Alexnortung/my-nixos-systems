@@ -415,7 +415,7 @@ in
           }
           {
             label = "󰐥";
-            command = "wlogout --protocol layer-shell --buttons-per-row 5 --column-spacing 16 --margin-top 600 --margin-bottom 600 --margin-left 400 --margin-right 400";
+            command = "power-menu";
           }
         ];
       };

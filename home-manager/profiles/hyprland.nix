@@ -14,6 +14,10 @@ let
   monoFont = config.stylix.fonts.monospace.name;
   cursor = config.home.pointerCursor;
   bluetoothPopup = "alacritty --class bluetui_popup -e bluetui";
+  # Power menu, shared by the keybind, waybar and swaync.
+  powerMenu = pkgs.writeShellScriptBin "power-menu" ''
+    pkill -x wlogout || exec ${pkgs.wlogout}/bin/wlogout --protocol layer-shell --buttons-per-row 3 --column-spacing 16 --row-spacing 16
+  '';
   osd = "${pkgs.swayosd}/bin/swayosd-client";
   thunar = pkgs.thunar.override {
     thunarPlugins = with pkgs; [
@@ -243,7 +247,7 @@ in
         "$mod ALT, L, exec, hyprlock"
         "$mod, N, exec, swaync-client -t -sw"
         "$mod, B, exec, ${bluetoothPopup}"
-        "$mod SHIFT, E, exec, wlogout --protocol layer-shell --buttons-per-row 5 --column-spacing 16 --margin-top 600 --margin-bottom 600 --margin-left 400 --margin-right 400"
+        "$mod SHIFT, E, exec, ${powerMenu}/bin/power-menu"
         "$mod, Space, exec, killall rofi || rofi -show"
         "$mod SHIFT, Space, exec, killall rofi || rofi -show window"
         ", code:179, exec, spotify"
@@ -437,6 +441,7 @@ in
     #suspend { background-image: image(url("${pkgs.wlogout}/share/wlogout/icons/suspend.png")); }
     #reboot { background-image: image(url("${pkgs.wlogout}/share/wlogout/icons/reboot.png")); }
     #shutdown { background-image: image(url("${pkgs.wlogout}/share/wlogout/icons/shutdown.png")); }
+    #hibernate { background-image: image(url("${pkgs.wlogout}/share/wlogout/icons/hibernate.png")); }
   '';
 
   services.swayosd.stylePath = pkgs.writeText "swayosd.css" ''
@@ -729,7 +734,7 @@ in
         "custom/power" = {
           format = "󰐥";
           tooltip = false;
-          on-click = "killall wlogout || wlogout --protocol layer-shell --buttons-per-row 5 --column-spacing 16 --margin-top 600 --margin-bottom 600 --margin-left 400 --margin-right 400";
+          on-click = "${powerMenu}/bin/power-menu";
         };
 
         tray = {
@@ -821,6 +826,7 @@ in
   home.packages = with pkgs; [
     unstable.wifitui
     bluetui
+    powerMenu
     thunar
     file-roller # Backend for thunar-archive-plugin
     grimblast
