@@ -48,9 +48,9 @@ in
     settings = {
       background = mkForce {
         color = "rgba(25, 20, 20, 1.0)";
-        path = "screenshot";
-        blur_passes = 2;
+        blur_passes = 1;
         brightness = 0.5;
+        path = "${config.stylix.image}";
       };
 
       input-field = {
