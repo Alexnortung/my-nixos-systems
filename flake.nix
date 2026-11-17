@@ -191,6 +191,7 @@
           # inputs.block-busters.nixosModules.discord-bot
 
           ./cachix.nix
+          ./profiles/localtoast.nix
         ];
       };
       hosts = (import ./hosts/default.nix).hosts inputs;
