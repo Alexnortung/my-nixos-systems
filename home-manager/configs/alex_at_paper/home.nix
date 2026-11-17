@@ -215,6 +215,7 @@ in
 
     shellAliases = {
       # npm = "pnpm";
+      claude-private = "CLAUDE_CONFIG_DIR=\"$HOME/.claude-private\" claude";
     };
 
     sessionVariables.PNPM_HOME = "${config.xdg.dataHome}/pnpm";
